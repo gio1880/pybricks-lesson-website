@@ -1234,50 +1234,7 @@
       margin-bottom: 1rem;
     }
 
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .quiz-option {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: transparent;
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .quiz-option:hover {
-      border-color: var(--color-secondary);
-      background-color: rgba(6, 182, 212, 0.05);
-    }
-
-    .quiz-option input[type="radio"] {
-      margin-right: 1rem;
-      cursor: pointer;
-      accent-color: var(--color-secondary);
-      width: 18px;
-      height: 18px;
-    }
-
-    .quiz-option.selected {
-      border-color: var(--color-secondary);
-      background-color: rgba(6, 182, 212, 0.1);
-    }
-
-    .quiz-option.correct {
-      border-color: var(--color-success);
-      background-color: rgba(16, 185, 129, 0.1);
-    }
-
-    .quiz-option.incorrect {
-      border-color: var(--color-error);
-      background-color: rgba(239, 68, 68, 0.1);
-    }
+    /* quiz-option styles consolidated below in mc-option/quiz-option block */
 
     /* ============================================
        LESSON NAVIGATION
@@ -1624,6 +1581,17 @@
       cursor: pointer;
       transition: border-color var(--transition-fast), background var(--transition-fast);
       font-size: 0.95rem;
+      user-select: none;
+    }
+
+    /* Hide the actual radio but keep it accessible */
+    .mc-option input[type="radio"],
+    .quiz-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
     }
 
     .mc-option:hover, .quiz-option:hover {
@@ -1636,14 +1604,32 @@
       background: rgba(79, 70, 229, 0.15);
     }
 
+    .mc-option.selected .option-letter,
+    .quiz-option.selected .option-letter {
+      background: var(--color-primary);
+      color: white;
+    }
+
     .mc-option.correct, .quiz-option.correct {
       border-color: var(--color-success);
       background: rgba(16, 185, 129, 0.15);
     }
 
+    .mc-option.correct .option-letter,
+    .quiz-option.correct .option-letter {
+      background: var(--color-success);
+      color: white;
+    }
+
     .mc-option.incorrect, .quiz-option.incorrect {
       border-color: var(--color-error);
       background: rgba(239, 68, 68, 0.1);
+    }
+
+    .mc-option.incorrect .option-letter,
+    .quiz-option.incorrect .option-letter {
+      background: var(--color-error);
+      color: white;
     }
 
     .option-letter {
@@ -2046,9 +2032,201 @@
         page-break-inside: avoid;
       }
     }
+
+    /* ============================================
+       LOGIN OVERLAY
+       ============================================ */
+
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: var(--color-dark-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .login-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .login-container {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2.5rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .login-logo {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .login-subtitle {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .login-field {
+      text-align: left;
+      margin-bottom: 1.25rem;
+    }
+
+    .login-field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .login-field input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--color-dark-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+
+    .login-field input:focus {
+      border-color: var(--color-primary);
+    }
+
+    .login-field input::placeholder {
+      color: var(--color-text-muted);
+      opacity: 0.6;
+    }
+
+    .login-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--color-error);
+      color: var(--color-error);
+      border-radius: var(--radius-md);
+      padding: 0.7rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      font-family: var(--font-sans);
+    }
+
+    .login-btn:hover {
+      background: #6366f1;
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .login-hint {
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       NAV USER DISPLAY
+       ============================================ */
+
+    .nav-right-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    #nav-username {
+      font-weight: 600;
+      color: var(--color-secondary);
+    }
+
+    .nav-logout-btn {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .nav-logout-btn:hover {
+      border-color: var(--color-error);
+      color: var(--color-error);
+    }
+
+    @media (max-width: 768px) {
+      .nav-user {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Login Overlay -->
+  <div id="login-overlay" class="login-overlay">
+    <div class="login-container">
+      <div class="login-logo">🤖 PyLearn</div>
+      <h2 class="login-title">Welcome, Student!</h2>
+      <p class="login-subtitle">Log in to start learning and track your progress.</p>
+      <form id="login-form" onsubmit="Auth.handleLogin(event)">
+        <div class="login-field">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="Enter your username" required autocomplete="username">
+        </div>
+        <div class="login-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
+        <div id="login-error" class="login-error hidden"></div>
+        <button type="submit" class="login-btn" id="login-btn">Log In</button>
+      </form>
+      <p class="login-hint">Ask your teacher for your username and password.</p>
+    </div>
+  </div>
+
   <!-- Navigation -->
   <nav id="main-nav">
     <div class="nav-container">
@@ -2075,8 +2253,14 @@
         <li><a href="#/challenges" class="nav-item">Challenges</a></li>
       </ul>
 
-      <div class="nav-progress" id="progress-button">
-        📊 <span id="progress-percent">0%</span>
+      <div class="nav-right-group">
+        <div class="nav-progress" id="progress-button">
+          📊 <span id="progress-percent">0%</span>
+        </div>
+        <div class="nav-user" id="nav-user">
+          <span id="nav-username"></span>
+          <button class="nav-logout-btn" onclick="Auth.logout()" title="Log out">↩</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -6207,6 +6391,7 @@ if (typeof module !== 'undefined' && module.exports) {
 const Progress = {
   data: {},
   STORAGE_KEY: 'pylearn_progress',
+  _syncTimer: null,
 
   init() {
     try {
@@ -6219,11 +6404,47 @@ const Progress = {
   },
 
   save() {
+    // Always save to localStorage as fallback
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
     } catch (e) {
       console.error('Failed to save progress to localStorage:', e);
     }
+    // If logged in, also sync to server (debounced)
+    if (Auth.currentUser) {
+      clearTimeout(this._syncTimer);
+      this._syncTimer = setTimeout(() => this.syncToServer(), 500);
+    }
+  },
+
+  async syncToServer() {
+    try {
+      await fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ lessonProgress: this.data })
+      });
+    } catch (e) {
+      console.error('Failed to sync progress to server:', e);
+    }
+  },
+
+  async loadFromServer() {
+    try {
+      const resp = await fetch('/api/progress', { credentials: 'same-origin' });
+      if (resp.ok) {
+        const result = await resp.json();
+        this.data = (result.data && result.data.lessonProgress) || {};
+        // Also cache in localStorage
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
+        return;
+      }
+    } catch (e) {
+      console.error('Failed to load progress from server:', e);
+    }
+    // Fallback to localStorage
+    this.init();
   },
 
   markCompleted(lessonId) {
@@ -6232,6 +6453,7 @@ const Progress = {
     }
     this.data[lessonId].completed = true;
     this.save();
+    updateProgressDisplay();
   },
 
   markQuizPassed(lessonId) {
@@ -6241,6 +6463,7 @@ const Progress = {
     this.data[lessonId].quizPassed = true;
     this.data[lessonId].completed = true;
     this.save();
+    updateProgressDisplay();
   },
 
   recordAttempt(lessonId) {
@@ -6334,57 +6557,141 @@ const LessonRegistry = {
 // ============================================================================
 
 const SyntaxHighlighter = {
-  keywords: ['from', 'import', 'if', 'else', 'elif', 'for', 'while', 'def', 'return', 'True', 'False', 'None', 'and', 'or', 'not', 'in', 'is', 'class', 'pass', 'break', 'continue', 'lambda', 'with', 'as', 'try', 'except', 'finally', 'raise', 'assert', 'yield', 'del', 'global', 'nonlocal'],
-  builtins: ['print', 'range', 'len', 'str', 'int', 'float', 'list', 'dict', 'tuple', 'set', 'sum', 'min', 'max', 'abs', 'round', 'sorted', 'map', 'filter', 'enumerate', 'zip', 'open', 'input', 'type', 'isinstance', 'issubclass'],
+  // Token-based Python syntax highlighter.
+  // Walks through raw code character by character to avoid regex-on-HTML bugs.
 
-  escapeHtml(text) {
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    };
-    return text.replace(/[&<>"']/g, m => map[m]);
+  KEYWORDS: new Set(['from', 'import', 'if', 'else', 'elif', 'for', 'while', 'def', 'return',
+    'True', 'False', 'None', 'and', 'or', 'not', 'in', 'is', 'class', 'pass', 'break',
+    'continue', 'lambda', 'with', 'as', 'try', 'except', 'finally', 'raise', 'assert',
+    'yield', 'del', 'global', 'nonlocal']),
+  BUILTINS: new Set(['print', 'range', 'len', 'str', 'int', 'float', 'list', 'dict',
+    'tuple', 'set', 'sum', 'min', 'max', 'abs', 'round', 'sorted', 'map', 'filter',
+    'enumerate', 'zip', 'open', 'input', 'type', 'isinstance', 'issubclass', 'bool',
+    'super', 'object', 'property', 'staticmethod', 'classmethod', 'hasattr', 'getattr',
+    'setattr', 'repr', 'id', 'hex', 'oct', 'bin', 'chr', 'ord', 'any', 'all']),
+
+  esc(ch) {
+    if (ch === '&') return '&amp;';
+    if (ch === '<') return '&lt;';
+    if (ch === '>') return '&gt;';
+    if (ch === '"') return '&quot;';
+    return ch;
+  },
+
+  escStr(s) {
+    let out = '';
+    for (let i = 0; i < s.length; i++) out += this.esc(s[i]);
+    return out;
   },
 
   highlight(code) {
-    let html = this.escapeHtml(code);
+    if (!code || typeof code !== 'string') return '';
 
-    // Comments (# to end of line)
-    html = html.replace(/^([ \t]*)#.*$/gm, '$1<span class="cmt">#$1$2</span>');
-    html = html.replace(/^([ \t]*)#(.*)$/gm, '$1<span class="cmt">#$2</span>');
+    const tokens = [];   // array of { type, text }
+    const src = code;
+    const len = src.length;
+    let i = 0;
 
-    // Strings (double quoted) - must handle escaped quotes
-    html = html.replace(/"([^"\\]|\\.)*"/g, match => `<span class="str">${match}</span>`);
+    while (i < len) {
+      const ch = src[i];
 
-    // Strings (single quoted)
-    html = html.replace(/'([^'\\]|\\.)*'/g, match => `<span class="str">${match}</span>`);
-
-    // Numbers
-    html = html.replace(/\b(\d+\.?\d*|\.\d+)\b/g, match => `<span class="num">${match}</span>`);
-
-    // Keywords (word boundary)
-    this.keywords.forEach(kw => {
-      const regex = new RegExp(`\\b${kw}\\b`, 'g');
-      html = html.replace(regex, `<span class="kw">${kw}</span>`);
-    });
-
-    // Built-in functions
-    this.builtins.forEach(fn => {
-      const regex = new RegExp(`\\b${fn}\\b`, 'g');
-      html = html.replace(regex, `<span class="fn">${fn}</span>`);
-    });
-
-    // Class names (PascalCase)
-    html = html.replace(/\b([A-Z][a-zA-Z0-9]*)\b/g, (match, name) => {
-      // Don't re-highlight if already highlighted
-      if (!match.includes('<span')) {
-        return `<span class="cls">${name}</span>`;
+      // --- Comment: # to end of line ---
+      if (ch === '#') {
+        let start = i;
+        while (i < len && src[i] !== '\n') i++;
+        tokens.push({ type: 'comment', text: src.slice(start, i) });
+        continue;
       }
-      return match;
-    });
 
+      // --- Strings: single or double quoted (including triple-quoted) ---
+      if (ch === '"' || ch === "'") {
+        let start = i;
+        let quote = ch;
+        let triple = false;
+
+        // Check for triple quotes
+        if (i + 2 < len && src[i+1] === ch && src[i+2] === ch) {
+          triple = true;
+          i += 3;
+          while (i < len) {
+            if (src[i] === '\\') { i += 2; continue; }
+            if (src[i] === quote && i + 2 < len && src[i+1] === quote && src[i+2] === quote) {
+              i += 3; break;
+            }
+            i++;
+          }
+        } else {
+          // Single-line string
+          i++; // skip opening quote
+          while (i < len && src[i] !== quote && src[i] !== '\n') {
+            if (src[i] === '\\') { i += 2; continue; }
+            i++;
+          }
+          if (i < len && src[i] === quote) i++; // skip closing quote
+        }
+        tokens.push({ type: 'string', text: src.slice(start, i) });
+        continue;
+      }
+
+      // --- Numbers ---
+      if ((ch >= '0' && ch <= '9') || (ch === '.' && i + 1 < len && src[i+1] >= '0' && src[i+1] <= '9')) {
+        let start = i;
+        while (i < len && ((src[i] >= '0' && src[i] <= '9') || src[i] === '.' || src[i] === '_')) i++;
+        // Check for "e" exponent notation
+        if (i < len && (src[i] === 'e' || src[i] === 'E')) {
+          i++;
+          if (i < len && (src[i] === '+' || src[i] === '-')) i++;
+          while (i < len && src[i] >= '0' && src[i] <= '9') i++;
+        }
+        tokens.push({ type: 'number', text: src.slice(start, i) });
+        continue;
+      }
+
+      // --- Identifiers / keywords ---
+      if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch === '_') {
+        let start = i;
+        while (i < len && ((src[i] >= 'a' && src[i] <= 'z') || (src[i] >= 'A' && src[i] <= 'Z') ||
+               (src[i] >= '0' && src[i] <= '9') || src[i] === '_')) i++;
+        const word = src.slice(start, i);
+        if (this.KEYWORDS.has(word)) {
+          tokens.push({ type: 'keyword', text: word });
+        } else if (this.BUILTINS.has(word)) {
+          tokens.push({ type: 'builtin', text: word });
+        } else if (word[0] >= 'A' && word[0] <= 'Z') {
+          tokens.push({ type: 'classname', text: word });
+        } else {
+          tokens.push({ type: 'ident', text: word });
+        }
+        continue;
+      }
+
+      // --- Operators and punctuation ---
+      if ('=!<>+-*/%&|^~@'.includes(ch)) {
+        tokens.push({ type: 'op', text: ch });
+        i++;
+        continue;
+      }
+
+      // --- Everything else (whitespace, parens, brackets, newlines, etc.) ---
+      tokens.push({ type: 'plain', text: ch });
+      i++;
+    }
+
+    // --- Render tokens to HTML ---
+    let html = '';
+    for (const tok of tokens) {
+      const safe = this.escStr(tok.text);
+      switch (tok.type) {
+        case 'comment':   html += '<span class="cmt">' + safe + '</span>'; break;
+        case 'string':    html += '<span class="str">' + safe + '</span>'; break;
+        case 'number':    html += '<span class="num">' + safe + '</span>'; break;
+        case 'keyword':   html += '<span class="kw">' + safe + '</span>'; break;
+        case 'builtin':   html += '<span class="fn">' + safe + '</span>'; break;
+        case 'classname': html += '<span class="cls">' + safe + '</span>'; break;
+        case 'op':        html += '<span class="op">' + safe + '</span>'; break;
+        default:          html += safe; break;
+      }
+    }
     return html;
   }
 };
@@ -6434,21 +6741,33 @@ function copyCode(button) {
 }
 
 function validateExercise(exercise, userAnswer) {
-  if (exercise.type === 'code' || exercise.type === 'fill-blank') {
-    if (exercise.validation.type === 'contains') {
-      return exercise.validation.patterns.some(p => userAnswer.includes(p));
+  try {
+    if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
+      return parseInt(userAnswer) === exercise.correct;
     }
-    if (exercise.validation.type === 'regex') {
-      try {
-        return new RegExp(exercise.validation.patterns[0]).test(userAnswer);
-      } catch (e) {
-        console.error('Invalid regex pattern:', e);
-        return false;
+    if (exercise.type === 'code' || exercise.type === 'fill-blank') {
+      if (!exercise.validation) return false;
+      const answer = userAnswer.trim();
+      if (exercise.validation.type === 'contains') {
+        // Normalize whitespace for comparison: collapse multiple spaces, trim
+        return exercise.validation.patterns.some(pattern => {
+          const normAnswer = answer.replace(/\s+/g, ' ');
+          const normPattern = pattern.replace(/\s+/g, ' ');
+          // Try exact contains first, then normalized
+          return answer.includes(pattern) || normAnswer.includes(normPattern);
+        });
+      }
+      if (exercise.validation.type === 'regex') {
+        try {
+          return new RegExp(exercise.validation.patterns[0]).test(answer);
+        } catch (e) {
+          console.error('Invalid regex pattern:', e);
+          return false;
+        }
       }
     }
-  }
-  if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
-    return parseInt(userAnswer) === exercise.correct;
+  } catch (e) {
+    console.error('Validation error:', e);
   }
   return false;
 }
@@ -6583,6 +6902,7 @@ const LessonViewer = {
     const contentDiv = document.getElementById('lesson-content');
     if (!contentDiv) return;
 
+    this.currentStep = stepIndex;
     const step = this.steps[stepIndex];
     let html = '';
 
@@ -6597,8 +6917,28 @@ const LessonViewer = {
     }
 
     contentDiv.innerHTML = html;
+
+    // Attach click handlers to MC option labels so clicking them selects and highlights
+    this.initOptionClicks();
     this.updateProgressDots();
     this.updateNavButtons();
+    // Scroll content into view
+    contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+
+  initOptionClicks() {
+    // Make clicking mc-option / quiz-option labels select radio + add visual highlight
+    document.querySelectorAll('.mc-option, .quiz-option').forEach(label => {
+      label.addEventListener('click', function() {
+        const radio = this.querySelector('input[type="radio"]');
+        if (!radio || radio.disabled) return;
+        radio.checked = true;
+        // Clear sibling selections
+        const siblings = this.parentElement.querySelectorAll('.mc-option, .quiz-option');
+        siblings.forEach(s => s.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
   },
 
   renderExplain() {
@@ -6663,56 +7003,52 @@ const LessonViewer = {
 
   renderExercise() {
     const exercise = this.currentLesson.exercise;
-    let html = `
-      <div class="step-exercise">
-        <div class="step-badge">✏️ Practice</div>
-        <h2>${this.escapeHtml(exercise.title)}</h2>
-        <p>${this.escapeHtml(exercise.instructions)}</p>
-    `;
+    let html = '<div class="step-exercise">';
+    html += '<div class="step-badge">✏️ Practice</div>';
+    html += '<h2>' + this.escapeHtml(exercise.title) + '</h2>';
+    html += '<p>' + this.escapeHtml(exercise.instructions) + '</p>';
 
     if (exercise.type === 'code' || exercise.type === 'fill-blank') {
       const starterCode = exercise.starterCode || '';
-      html += `
-        <div class="exercise-area">
-          <textarea id="exercise-input" class="code-input" placeholder="Type your code here...">${this.escapeHtml(starterCode)}</textarea>
-          <div id="exercise-feedback" class="feedback hidden"></div>
-          <div class="exercise-actions">
-            <button onclick="LessonViewer.checkExercise()" class="btn-check">✓ Check Answer</button>
-            <button onclick="LessonViewer.showHint()" class="btn-hint">💡 Hint</button>
-          </div>
-          <div id="hint-box" class="hint-box hidden">${this.escapeHtml(exercise.hint)}</div>
-        </div>
-      `;
-    } else if (exercise.type === 'multiple-choice') {
+      html += '<div class="exercise-area">';
+      html += '<textarea id="exercise-input" class="code-input" rows="6" placeholder="Type your code here...">' + this.escapeHtml(starterCode) + '</textarea>';
+      html += '<div id="exercise-feedback" class="feedback hidden"></div>';
+      html += '<div class="exercise-actions">';
+      html += '<button onclick="LessonViewer.checkExercise()" class="btn-check">✓ Check Answer</button>';
+      html += '<button onclick="LessonViewer.showHint()" class="btn-hint">💡 Hint</button>';
+      html += '</div>';
+      html += '<div id="hint-box" class="hint-box hidden">💡 ' + this.escapeHtml(exercise.hint || '') + '</div>';
+      html += '</div>';
+
+    } else if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
       html += '<div class="mc-options">';
+      const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
       exercise.options.forEach((option, idx) => {
-        html += `
-          <label class="mc-option">
-            <input type="radio" name="exercise-choice" value="${idx}">
-            <span class="option-text">${this.escapeHtml(option)}</span>
-          </label>
-        `;
+        // Handle multiline options (like indentation examples)
+        const isMultiline = option.includes('\n');
+        let displayText;
+        if (isMultiline) {
+          displayText = '<pre style="margin:0;background:transparent;border:none;padding:0;color:inherit;font-size:0.85rem;line-height:1.4;">' + this.escapeHtml(option) + '</pre>';
+        } else {
+          displayText = this.escapeHtml(option);
+        }
+        html += '<label class="mc-option">';
+        html += '<input type="radio" name="exercise-choice" value="' + idx + '" ';
+        html += '<span class="option-letter">' + (letters[idx] || idx) + '</span>';
+        html += '<span class="option-text">' + displayText + '</span>';
+        html += '</label>';
       });
-      html += `
-        </div>
-        <div id="exercise-feedback" class="feedback hidden"></div>
-        <button onclick="LessonViewer.checkExercise()" class="btn-check">✓ Check Answer</button>
-      `;
-    } else if (exercise.type === 'trace') {
-      html += '<div class="trace-options">';
-      exercise.options.forEach((option, idx) => {
-        html += `
-          <label class="trace-option">
-            <input type="radio" name="exercise-choice" value="${idx}">
-            <span class="option-text">${this.escapeHtml(option)}</span>
-          </label>
-        `;
-      });
-      html += `
-        </div>
-        <div id="exercise-feedback" class="feedback hidden"></div>
-        <button onclick="LessonViewer.checkExercise()" class="btn-check">✓ Check Answer</button>
-      `;
+      html += '</div>';
+      html += '<div id="exercise-feedback" class="feedback hidden"></div>';
+      html += '<div class="exercise-actions">';
+      html += '<button onclick="LessonViewer.checkExercise()" class="btn-check">✓ Check Answer</button>';
+      if (exercise.hint) {
+        html += '<button onclick="LessonViewer.showHint()" class="btn-hint">💡 Hint</button>';
+      }
+      html += '</div>';
+      if (exercise.hint) {
+        html += '<div id="hint-box" class="hint-box hidden">💡 ' + this.escapeHtml(exercise.hint) + '</div>';
+      }
     }
 
     html += '</div>';
@@ -6721,43 +7057,35 @@ const LessonViewer = {
 
   renderQuiz() {
     const quiz = this.currentLesson.quiz;
-    let html = `
-      <div class="step-quiz">
-        <div class="step-badge">🧠 Quiz</div>
-        <h2>${this.escapeHtml(quiz.title)}</h2>
-        <p class="quiz-intro">Answer all questions correctly to complete this lesson!</p>
-        <div id="quiz-questions">
-    `;
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    let html = '<div class="step-quiz">';
+    html += '<div class="step-badge">🧠 Quiz</div>';
+    html += '<h2>' + this.escapeHtml(quiz.title) + '</h2>';
+    html += '<p style="color:var(--color-text-muted);margin-bottom:1.5rem;">Answer all questions correctly to complete this lesson!</p>';
+    html += '<div id="quiz-questions">';
 
     quiz.questions.forEach((question, qIdx) => {
-      html += `
-        <div class="quiz-question" data-qid="${this.escapeHtml(question.id)}">
-          <p class="question-text">${this.escapeHtml(question.text)}</p>
-          <div class="quiz-options">
-      `;
+      html += '<div class="quiz-question" data-qid="' + this.escapeHtml(question.id) + '" style="margin-bottom:2rem;padding:1.5rem;background:var(--color-card-bg);border:1px solid var(--color-border);border-radius:var(--radius-lg);">';
+      html += '<p style="font-weight:600;font-size:1.05rem;margin-bottom:1rem;">' + (qIdx + 1) + '. ' + this.escapeHtml(question.text) + '</p>';
+      html += '<div class="quiz-options">';
 
       question.options.forEach((option, optIdx) => {
-        html += `
-          <label class="quiz-option">
-            <input type="radio" name="quiz-${qIdx}" value="${optIdx}" data-index="${optIdx}">
-            <span class="option-text">${this.escapeHtml(option)}</span>
-          </label>
-        `;
+        html += '<label class="quiz-option">';
+        html += '<input type="radio" name="quiz-' + qIdx + '" value="' + optIdx + '" ';
+        html += '<span class="option-letter">' + letters[optIdx] + '</span>';
+        html += '<span class="option-text">' + this.escapeHtml(option) + '</span>';
+        html += '</label>';
       });
 
-      html += `
-          </div>
-          <div class="question-feedback hidden"></div>
-        </div>
-      `;
+      html += '</div>';
+      html += '<div class="question-feedback hidden" style="margin-top:0.75rem;padding:0.75rem 1rem;border-radius:var(--radius-md);font-size:0.9rem;"></div>';
+      html += '</div>';
     });
 
-    html += `
-        </div>
-        <button onclick="LessonViewer.submitQuiz()" class="btn-submit">Submit Quiz</button>
-        <div id="quiz-result" class="quiz-result hidden"></div>
-      </div>
-    `;
+    html += '</div>';
+    html += '<button onclick="LessonViewer.submitQuiz()" class="btn-submit" style="margin-top:1rem;">Submit Quiz</button>';
+    html += '<div id="quiz-result" class="quiz-result hidden"></div>';
+    html += '</div>';
 
     return html;
   },
@@ -6772,12 +7100,13 @@ const LessonViewer = {
       const input = document.getElementById('exercise-input');
       userAnswer = input ? input.value : '';
     } else {
+      // multiple-choice or trace
       const selected = document.querySelector('input[name="exercise-choice"]:checked');
       userAnswer = selected ? selected.value : '';
     }
 
-    if (!userAnswer) {
-      feedbackDiv.textContent = 'Please provide an answer.';
+    if (!userAnswer && userAnswer !== '0') {
+      feedbackDiv.textContent = 'Please select or type an answer first!';
       feedbackDiv.className = 'feedback error';
       feedbackDiv.classList.remove('hidden');
       return;
@@ -6788,20 +7117,51 @@ const LessonViewer = {
 
     const isCorrect = validateExercise(exercise, userAnswer);
 
+    // Safely get success/error messages
+    const successMsg = (exercise.validation && exercise.validation.successMessage)
+      ? exercise.validation.successMessage
+      : '✓ Correct! Great job!';
+    const errorMsg = (exercise.validation && exercise.validation.errorMessage)
+      ? exercise.validation.errorMessage
+      : '✗ Not quite right. Try again!';
+
     if (isCorrect) {
-      feedbackDiv.textContent = exercise.validation.successMessage || '✓ Correct!';
+      feedbackDiv.innerHTML = '<strong>' + this.escapeHtml(successMsg) + '</strong>';
       feedbackDiv.className = 'feedback success';
       feedbackDiv.classList.remove('hidden');
-      Progress.markCompleted(this.currentLesson.id);
-      Toast.show('Exercise completed! Continue to the quiz.', 'success');
+
+      // Highlight the correct option for MC/trace
+      if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
+        const options = document.querySelectorAll('.mc-option, .trace-option');
+        options.forEach((opt, idx) => {
+          if (idx === exercise.correct) opt.classList.add('correct');
+          opt.style.pointerEvents = 'none';
+        });
+      }
+
+      Toast.show('Exercise completed! Moving to quiz...', 'success');
       setTimeout(() => {
         this.nextStep();
       }, 1500);
     } else {
-      feedbackDiv.textContent = exercise.validation.errorMessage || '✗ Not quite right. Try again!';
+      feedbackDiv.innerHTML = this.escapeHtml(errorMsg);
       feedbackDiv.className = 'feedback error';
       feedbackDiv.classList.remove('hidden');
-      Toast.show('Try again!', 'warning');
+
+      // Highlight incorrect MC option
+      if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
+        const options = document.querySelectorAll('.mc-option, .trace-option');
+        const selectedIdx = parseInt(userAnswer);
+        options.forEach((opt, idx) => {
+          opt.classList.remove('incorrect', 'correct');
+          if (idx === selectedIdx) opt.classList.add('incorrect');
+        });
+      }
+
+      if (this.exerciseAttempts >= 2 && exercise.hint) {
+        const hintBox = document.getElementById('hint-box');
+        if (hintBox) hintBox.classList.remove('hidden');
+      }
     }
   },
 
@@ -7257,6 +7617,96 @@ function escapeHtml(text) {
 }
 
 // ============================================================================
+// AUTHENTICATION - Login/logout/session management
+// ============================================================================
+
+const Auth = {
+  currentUser: null,
+
+  // Check if we have an active server session
+  async checkSession() {
+    try {
+      const resp = await fetch('/api/me', { credentials: 'same-origin' });
+      if (resp.ok) {
+        const data = await resp.json();
+        this.currentUser = data.user;
+        return true;
+      }
+    } catch (e) {
+      console.log('No server session, using local mode');
+    }
+    return false;
+  },
+
+  // Handle login form submission
+  async handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errorEl = document.getElementById('login-error');
+    const btn = document.getElementById('login-btn');
+
+    errorEl.classList.add('hidden');
+    errorEl.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Logging in...';
+
+    try {
+      const resp = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await resp.json();
+
+      if (resp.ok) {
+        this.currentUser = data.user;
+        await Progress.loadFromServer();
+        Auth.showApp();
+      } else {
+        errorEl.textContent = data.error || 'Login failed. Check your username and password.';
+        errorEl.classList.remove('hidden');
+      }
+    } catch (e) {
+      errorEl.textContent = 'Cannot connect to server. Please try again.';
+      errorEl.classList.remove('hidden');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Log In';
+  },
+
+  // Log out
+  async logout() {
+    try {
+      await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
+    } catch (e) {
+      // Ignore network errors on logout
+    }
+    this.currentUser = null;
+    Progress.data = {};
+    Progress.save();
+    document.getElementById('login-overlay').classList.remove('hidden');
+    document.getElementById('nav-user').style.display = 'none';
+  },
+
+  // Hide login overlay and show the app
+  showApp() {
+    document.getElementById('login-overlay').classList.add('hidden');
+    const navUser = document.getElementById('nav-user');
+    const navUsername = document.getElementById('nav-username');
+    if (navUser && this.currentUser) {
+      navUsername.textContent = this.currentUser.name || this.currentUser.username;
+      navUser.style.display = 'flex';
+    }
+    initPageLessonGrids();
+    updateProgressDisplay();
+  }
+};
+
+// ============================================================================
 // APPLICATION INITIALIZATION
 // ============================================================================
 
@@ -7272,14 +7722,12 @@ function updateProgressDisplay() {
   }
 }
 
-function initApp() {
-  Progress.init();
+async function initApp() {
   LessonRegistry.init();
   Router.init();
   initPageLessonGrids();
   renderReferencePage();
   renderChallengesPage();
-  updateProgressDisplay();
 
   // Hamburger menu toggle
   const hamburger = document.getElementById('hamburger-menu');
@@ -7288,6 +7736,29 @@ function initApp() {
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('open');
     });
+  }
+
+  // Auth flow: check for server, then session
+  let serverRunning = false;
+  try {
+    const resp = await fetch('/api/me', { credentials: 'same-origin' });
+    serverRunning = true;
+    if (resp.ok) {
+      // Already logged in
+      const data = await resp.json();
+      Auth.currentUser = data.user;
+      await Progress.loadFromServer();
+      Auth.showApp();
+    } else {
+      // Server running but not logged in — show login
+      document.getElementById('login-overlay').classList.remove('hidden');
+    }
+  } catch (e) {
+    // No server running — local-only mode (hide login, use localStorage)
+    serverRunning = false;
+    document.getElementById('login-overlay').classList.add('hidden');
+    Progress.init();
+    updateProgressDisplay();
   }
 }
 

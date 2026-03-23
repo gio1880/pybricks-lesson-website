@@ -567,7 +567,7 @@
     async function init() {
       // Check if already logged in
       try {
-        const response = await fetch(`${API_BASE}/me`);
+        const response = await fetch(`${API_BASE}/me`, { credentials: 'same-origin' });
         if (response.ok) {
           const result = await response.json();
           if (result.success && result.user.role === 'teacher') {
@@ -597,6 +597,7 @@
       try {
         const response = await fetch(`${API_BASE}/login`, {
           method: 'POST',
+          credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
         });
@@ -619,7 +620,7 @@
 
     async function logout() {
       try {
-        await fetch(`${API_BASE}/logout`, { method: 'POST' });
+        await fetch(`${API_BASE}/logout`, { method: 'POST', credentials: 'same-origin' });
         currentUser = null;
         document.getElementById('adminSection').classList.add('hidden');
         document.getElementById('loginSection').classList.remove('hidden');
@@ -641,7 +642,7 @@
 
     async function loadStudents() {
       try {
-        const response = await fetch(`${API_BASE}/admin/students`);
+        const response = await fetch(`${API_BASE}/admin/students`, { credentials: 'same-origin' });
         const result = await response.json();
 
         if (result.success) {
@@ -659,7 +660,7 @@
 
     async function loadProgress() {
       try {
-        const response = await fetch(`${API_BASE}/admin/progress`);
+        const response = await fetch(`${API_BASE}/admin/progress`, { credentials: 'same-origin' });
         const result = await response.json();
 
         if (result.success) {
@@ -771,9 +772,16 @@
       try {
         const response = await fetch(`${API_BASE}/admin/students`, {
           method: 'POST',
+          credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ firstName, lastName })
         });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          showMessage('error', errorData.error || `Server error (${response.status})`);
+          return;
+        }
 
         const result = await response.json();
 
@@ -786,7 +794,7 @@
           showMessage('error', result.error || 'Failed to add student');
         }
       } catch (err) {
-        showMessage('error', 'Network error');
+        showMessage('error', 'Network error: ' + err.message);
         console.error('Add student error:', err);
       }
     });
@@ -807,9 +815,16 @@
       try {
         const response = await fetch(`${API_BASE}/admin/students/bulk`, {
           method: 'POST',
+          credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ students })
         });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          showMessage('error', errorData.error || `Server error (${response.status})`);
+          return;
+        }
 
         const result = await response.json();
 
@@ -819,20 +834,22 @@
           document.getElementById('bulkImportForm').reset();
           await loadStudents();
         } else {
-          const errorCount = result.data.errors.length;
-          const createdCount = result.data.created.length;
-          const errorMsg = result.data.errors.length > 0
-            ? `: ${result.data.errors.map(e => `Line ${e.index + 1}: ${e.error}`).join(', ')}`
+          const errors = (result.data && result.data.errors) || [];
+          const created = (result.data && result.data.created) || [];
+          const errorCount = errors.length;
+          const createdCount = created.length;
+          const errorMsg = errorCount > 0
+            ? `: ${errors.map(e => `Line ${e.index + 1}: ${e.error}`).join(', ')}`
             : '';
-          showMessage('error', `Created ${createdCount}, Failed ${errorCount}${errorMsg}`);
+          showMessage('error', result.error || `Created ${createdCount}, Failed ${errorCount}${errorMsg}`);
           if (createdCount > 0) {
-            currentCredentials = result.data.created;
+            currentCredentials = created;
             showCredentialsModal('Bulk Import (Partial)');
           }
           await loadStudents();
         }
       } catch (err) {
-        showMessage('error', 'Network error');
+        showMessage('error', 'Network error: ' + err.message);
         console.error('Bulk import error:', err);
       }
     });
@@ -945,7 +962,8 @@
 
       try {
         const response = await fetch(`${API_BASE}/admin/students/${id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          credentials: 'same-origin'
         });
 
         const result = await response.json();
@@ -973,6 +991,7 @@
       try {
         const response = await fetch(`${API_BASE}/admin/students/${id}/reset-password`, {
           method: 'POST',
+          credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ password })
         });
@@ -998,7 +1017,8 @@
 
       try {
         const response = await fetch(`${API_BASE}/admin/reset-progress/${id}`, {
-          method: 'POST'
+          method: 'POST',
+          credentials: 'same-origin'
         });
 
         const result = await response.json();

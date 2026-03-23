@@ -6483,6 +6483,10 @@ const Progress = {
   },
 
   isUnlocked(lessonId, allLessons) {
+    // Developers can access all lessons
+    if (Auth.currentUser && Auth.currentUser.role === 'developer') {
+      return true;
+    }
     const lesson = allLessons.find(l => l.id === lessonId);
     if (!lesson || !lesson.prerequisite) {
       return true;
@@ -7051,6 +7055,22 @@ const LessonViewer = {
       }
     }
 
+    // Developer: show correct answer and skip button
+    if (Auth.currentUser && Auth.currentUser.role === 'developer') {
+      html += '<div class="dev-panel" style="margin-top:1.5rem;padding:1rem;background:rgba(139,92,246,0.1);border:1px dashed #8B5CF6;border-radius:8px;">';
+      html += '<div style="font-size:0.8rem;color:#8B5CF6;font-weight:600;margin-bottom:0.5rem;">DEVELOPER REVIEW</div>';
+      if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
+        html += '<p style="color:#C4B5FD;font-size:0.9rem;">Correct answer: <strong>Option ' + (exercise.correct + 1) + ' — ' + this.escapeHtml(exercise.options[exercise.correct]) + '</strong></p>';
+      } else if (exercise.type === 'code' || exercise.type === 'fill-blank') {
+        const valInfo = exercise.validation;
+        if (valInfo && valInfo.contains) {
+          html += '<p style="color:#C4B5FD;font-size:0.9rem;">Must contain: <code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:4px;">' + this.escapeHtml(Array.isArray(valInfo.contains) ? valInfo.contains.join(', ') : valInfo.contains) + '</code></p>';
+        }
+      }
+      html += '<button onclick="LessonViewer.goToStep(LessonViewer.currentStep + 1)" class="btn-check" style="margin-top:0.75rem;background:#8B5CF6;">Skip to Next →</button>';
+      html += '</div>';
+    }
+
     html += '</div>';
     return html;
   },
@@ -7085,6 +7105,20 @@ const LessonViewer = {
     html += '</div>';
     html += '<button onclick="LessonViewer.submitQuiz()" class="btn-submit" style="margin-top:1rem;">Submit Quiz</button>';
     html += '<div id="quiz-result" class="quiz-result hidden"></div>';
+
+    // Developer: show all correct answers and skip button
+    if (Auth.currentUser && Auth.currentUser.role === 'developer') {
+      html += '<div class="dev-panel" style="margin-top:1.5rem;padding:1rem;background:rgba(139,92,246,0.1);border:1px dashed #8B5CF6;border-radius:8px;">';
+      html += '<div style="font-size:0.8rem;color:#8B5CF6;font-weight:600;margin-bottom:0.5rem;">DEVELOPER REVIEW — Answer Key</div>';
+      quiz.questions.forEach((q, qi) => {
+        html += '<p style="color:#C4B5FD;font-size:0.9rem;margin-bottom:0.25rem;">Q' + (qi+1) + ': <strong>' + this.escapeHtml(q.options[q.correct]) + '</strong>';
+        if (q.explanation) html += ' <span style="color:#94A3B8;font-size:0.8rem;">— ' + this.escapeHtml(q.explanation) + '</span>';
+        html += '</p>';
+      });
+      html += '<button onclick="LessonViewer.nextLesson()" class="btn-check" style="margin-top:0.75rem;background:#8B5CF6;">Skip — Complete Lesson →</button>';
+      html += '</div>';
+    }
+
     html += '</div>';
 
     return html;
@@ -7661,9 +7695,20 @@ const Auth = {
 
       const data = await resp.json();
 
-      if (resp.ok) {
+      if (resp.ok && data.success) {
         this.currentUser = data.user;
-        await Progress.loadFromServer();
+        // Teachers go to the admin panel
+        if (data.user.role === 'teacher') {
+          window.location.href = '/admin';
+          return;
+        }
+        // Students and developers enter the app
+        if (data.user.role === 'student') {
+          await Progress.loadFromServer();
+        } else {
+          // Developer — use empty local progress
+          Progress.data = {};
+        }
         Auth.showApp();
       } else {
         errorEl.textContent = data.error || 'Login failed. Check your username and password.';
@@ -7698,8 +7743,15 @@ const Auth = {
     const navUser = document.getElementById('nav-user');
     const navUsername = document.getElementById('nav-username');
     if (navUser && this.currentUser) {
-      navUsername.textContent = this.currentUser.name || this.currentUser.username;
+      const isDev = this.currentUser.role === 'developer';
+      navUsername.textContent = isDev
+        ? '🔧 DEV MODE'
+        : (this.currentUser.name || this.currentUser.username);
       navUser.style.display = 'flex';
+      if (isDev) {
+        navUsername.style.color = '#8B5CF6';
+        navUsername.style.fontWeight = '700';
+      }
     }
     initPageLessonGrids();
     updateProgressDisplay();
@@ -7747,8 +7799,16 @@ async function initApp() {
       // Already logged in
       const data = await resp.json();
       Auth.currentUser = data.user;
-      await Progress.loadFromServer();
-      Auth.showApp();
+      if (data.user.role === 'teacher') {
+        window.location.href = '/admin';
+        return;
+      } else if (data.user.role === 'developer') {
+        Progress.data = {};
+        Auth.showApp();
+      } else {
+        await Progress.loadFromServer();
+        Auth.showApp();
+      }
     } else {
       // Server running but not logged in — show login
       document.getElementById('login-overlay').classList.remove('hidden');

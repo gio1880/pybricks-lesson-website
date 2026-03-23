@@ -40,31 +40,37 @@ STEP 3: Log Into the Admin Panel
    Username: teacher
    Password: pylearn2026
 
-   (You can change this password later)
-
 -----------------------------------------------------
 STEP 4: Add Your Students
 -----------------------------------------------------
 
 OPTION A - Add One Student:
    In the admin panel, fill in:
-   - Display Name (e.g., "Maria Garcia")
-   - Username (e.g., "maria")
-   - Password (e.g., "robot123")
-   Click "Add Student"
+   - First Name (e.g., "Maria")
+   - Last Name (e.g., "Garcia")
+   Click "Add"
+
+   The system auto-generates a username (e.g., "mgarcia")
+   and a kid-friendly password (e.g., "star472").
+
+   A popup will show the credentials with buttons to:
+   - Copy All (copies to clipboard)
+   - Print (opens print dialog)
+   - Export CSV (downloads a spreadsheet file)
 
 OPTION B - Bulk Import (Paste a List):
-   In the "Bulk Import" section, paste student info like this:
+   In the "Bulk Import" section, paste names like:
 
-   Maria Garcia,maria,robot123
-   James Wilson,james,lego456
-   Sofia Chen,sofia,python789
+   Maria Garcia
+   James Wilson
+   Sofia Chen
 
-   Format: Name,Username,Password (one student per line)
+   Or comma-separated: Maria,Garcia
+
    Click "Import Students"
 
-   The system will create all accounts at once and show
-   you the generated login info to give to each student.
+   A popup will show ALL generated usernames and
+   passwords in a table you can copy, print, or export.
 
 -----------------------------------------------------
 STEP 5: Give Students Their Logins
@@ -82,6 +88,21 @@ In the admin panel (http://localhost:3000/admin), you can:
 - Reset a student's password if they forget it
 - Reset a student's progress if needed
 - Delete student accounts
+
+=====================================================
+   DEFAULT ACCOUNTS
+=====================================================
+
+Teacher:    username=teacher     password=pylearn2026
+Developer:  username=developer   password=devreview2026
+
+The developer account is for reviewing lessons. When
+logged in as developer:
+- All lessons are unlocked (no prerequisite gates)
+- Exercises show the correct answer
+- Quizzes show the full answer key
+- "Skip" buttons let you move through quickly
+- No progress is saved (review-only mode)
 
 =====================================================
    TIPS & NOTES
@@ -107,7 +128,17 @@ In the admin panel (http://localhost:3000/admin), you can:
 - To run on a different port:
   PORT=8080 npm start
 
-- The default teacher password is "pylearn2026".
-  To change it, delete the data/students.json file
-  and restart the server (a new one will be generated),
-  OR add a new teacher account through the admin panel.
+=====================================================
+   DEPLOYING TO RENDER (for online access)
+=====================================================
+
+1. Push code to GitHub
+2. Go to render.com, create a Web Service
+3. Connect your GitHub repo
+4. Set:
+   Language: Node
+   Build Command: npm install
+   Start Command: node server.js
+5. Select Free tier and deploy
+6. Your site will be at https://your-app.onrender.com
+   Admin panel at https://your-app.onrender.com/admin

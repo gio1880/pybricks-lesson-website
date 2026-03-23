@@ -2202,6 +2202,250 @@
         display: none;
       }
     }
+
+    /* ===== UNIT TEST STYLES ===== */
+    .unit-test-card {
+      background: linear-gradient(135deg, var(--color-card-bg), rgba(79, 70, 229, 0.15));
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .unit-test-card h3 {
+      color: var(--color-primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .unit-test-card p {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .unit-test-card .btn-start {
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+    }
+    .unit-test-card .test-status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .unit-test-card .test-status.passed {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--color-success);
+    }
+    .unit-test-card .test-status.available {
+      background: rgba(79, 70, 229, 0.2);
+      color: var(--color-primary);
+    }
+    .unit-test-card .test-status.locked {
+      background: rgba(148, 163, 184, 0.2);
+      color: var(--color-text-muted);
+    }
+
+    .ut-progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--color-border);
+      border-radius: 4px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+    .ut-progress-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .ut-question {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .ut-question .q-number {
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .ut-question .q-text {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .ut-result {
+      text-align: center;
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      margin-top: 1.5rem;
+    }
+    .ut-result.pass {
+      background: rgba(16, 185, 129, 0.1);
+      border: 2px solid var(--color-success);
+    }
+    .ut-result.fail {
+      background: rgba(239, 68, 68, 0.1);
+      border: 2px solid var(--color-error);
+    }
+
+    /* ===== CERTIFICATE STYLES ===== */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .cert-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-card.earned {
+      border-color: var(--color-success);
+      background: linear-gradient(135deg, var(--color-card-bg), rgba(16, 185, 129, 0.08));
+    }
+    .cert-card.locked {
+      opacity: 0.6;
+    }
+    .cert-card .cert-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .cert-card .cert-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .cert-card .cert-desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .cert-card .cert-requirements {
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    .cert-card .cert-requirements li {
+      margin-bottom: 0.25rem;
+      list-style: none;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .cert-card .cert-requirements li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-success);
+    }
+    .cert-card .cert-requirements li.incomplete::before {
+      content: "○";
+      color: var(--color-text-muted);
+    }
+    .cert-card .btn-cert {
+      display: inline-block;
+      background: var(--color-success);
+      color: white;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .cert-card .btn-cert:hover {
+      background: #059669;
+    }
+
+    /* Certificate Print View */
+    .cert-print {
+      background: white;
+      color: #1a1a2e;
+      padding: 3rem;
+      border: 3px solid #4F46E5;
+      border-radius: 1rem;
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: center;
+      position: relative;
+    }
+    .cert-print .cert-border {
+      position: absolute;
+      inset: 8px;
+      border: 2px solid #06B6D4;
+      border-radius: 0.75rem;
+      pointer-events: none;
+    }
+    .cert-print h1 {
+      color: #4F46E5;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .cert-print .cert-subtitle {
+      color: #06B6D4;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .cert-print .cert-recipient {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 1.5rem 0;
+      font-style: italic;
+      border-bottom: 2px solid #4F46E5;
+      display: inline-block;
+      padding-bottom: 0.25rem;
+    }
+    .cert-print .cert-body {
+      font-size: 1rem;
+      color: #555;
+      margin: 1rem 0 2rem;
+      line-height: 1.6;
+    }
+    .cert-print .cert-date {
+      color: #777;
+      font-size: 0.9rem;
+    }
+    .cert-print .cert-seal {
+      font-size: 3rem;
+      margin-top: 1rem;
+    }
+    .cert-actions {
+      text-align: center;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .cert-actions button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      .cert-print, .cert-print * { visibility: visible; }
+      .cert-print { position: absolute; left: 0; top: 0; width: 100%; border: 3px solid #4F46E5; }
+      .cert-actions { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -2251,6 +2495,7 @@
         <li><a href="#/practice" class="nav-item">Practice</a></li>
         <li><a href="#/reference" class="nav-item">Reference</a></li>
         <li><a href="#/challenges" class="nav-item">Challenges</a></li>
+        <li><a href="#/certificates" class="nav-item">🏆 Certificates</a></li>
       </ul>
 
       <div class="nav-right-group">
@@ -2481,6 +2726,25 @@
         <p>Take on robot programming missions to put your skills to the test.</p>
       </div>
       <div id="challenges-content"></div>
+    </section>
+
+    <!-- Unit Test Page -->
+    <section id="page-unit-test" class="page">
+      <div id="unit-test-container">
+        <div class="page-header">
+          <h1>📝 Unit Test</h1>
+          <p>Loading...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Page -->
+    <section id="page-certificates" class="page">
+      <div class="page-header">
+        <h1>🏆 Certificates</h1>
+        <p>Earn certificates by completing all lessons and unit tests.</p>
+      </div>
+      <div id="certificates-container"></div>
     </section>
 
     <!-- Dynamic Lesson Viewer -->
@@ -6375,6 +6639,503 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
+// ============================================================
+// UNIT TESTS DATA
+// ============================================================
+
+const UNIT_TESTS = [
+  {
+    id: "unit-test-python",
+    title: "Python Basics Unit Test",
+    category: "python",
+    requiredLessons: ["py-01", "py-02", "py-03", "py-04", "py-05", "py-06", "py-07", "py-08", "py-09", "py-10", "py-11", "py-12", "py-13", "py-14"],
+    passingScore: 80,
+    questions: [
+      {
+        id: "ut-py-q1",
+        text: "Which of the following correctly creates a variable to store a robot's speed value?",
+        type: "multiple-choice",
+        options: [
+          "speed: 300",
+          "speed = 300",
+          "300 = speed",
+          "var speed = 300;"
+        ],
+        correct: 1,
+        explanation: "In Python, you use the = operator to assign a value to a variable. The syntax is: variable_name = value"
+      },
+      {
+        id: "ut-py-q2",
+        text: "What will this code print? x = 5; y = 10; print(x + y)",
+        type: "multiple-choice",
+        options: [
+          "5 + 10",
+          "xy",
+          "15",
+          "x10"
+        ],
+        correct: 2,
+        explanation: "The + operator adds the values of x (5) and y (10), resulting in 15 being printed."
+      },
+      {
+        id: "ut-py-q3",
+        text: "What is the correct syntax for a for loop that runs 5 times?",
+        type: "multiple-choice",
+        options: [
+          "for i = 1 to 5: print(i)",
+          "for i in range(5): print(i)",
+          "for(i=0; i<5; i++) print(i)",
+          "loop 5 times: print(i)"
+        ],
+        correct: 1,
+        explanation: "Python uses 'for' with 'in' and 'range()' to create loops. range(5) creates numbers from 0 to 4."
+      },
+      {
+        id: "ut-py-q4",
+        text: "How do you define a function that takes two parameters and returns their sum?",
+        type: "multiple-choice",
+        options: [
+          "function add(a, b) return a + b",
+          "def add(a, b): return a + b",
+          "add = (a, b) => a + b",
+          "func add(a, b) { return a + b }"
+        ],
+        correct: 1,
+        explanation: "Python functions are defined with 'def', followed by the function name, parameters in parentheses, and a colon. The body is indented."
+      },
+      {
+        id: "ut-py-q5",
+        text: "Which string contains an escape sequence that represents a newline character?",
+        type: "multiple-choice",
+        options: [
+          "'Hello World'",
+          "'Hello\\nWorld'",
+          "'Hello/nWorld'",
+          "'Hello - World'"
+        ],
+        correct: 1,
+        explanation: "The \\n escape sequence creates a newline in Python strings, making text appear on different lines."
+      },
+      {
+        id: "ut-py-q6",
+        text: "What will this code do? if temperature > 70: print('Hot') else: print('Cold')",
+        type: "multiple-choice",
+        options: [
+          "Always prints 'Hot'",
+          "Always prints 'Cold'",
+          "Prints 'Hot' if temperature is greater than 70, otherwise prints 'Cold'",
+          "Prints both 'Hot' and 'Cold'"
+        ],
+        correct: 2,
+        explanation: "The if/else statement executes different code based on whether the condition is true or false."
+      },
+      {
+        id: "ut-py-q7",
+        text: "How do you import a specific function from a module in Python?",
+        type: "multiple-choice",
+        options: [
+          "import math.sqrt",
+          "from math import sqrt",
+          "include sqrt from math",
+          "math->sqrt()"
+        ],
+        correct: 1,
+        explanation: "Use 'from module import function' to import a specific function from a module, then use it directly without the module prefix."
+      },
+      {
+        id: "ut-py-q8",
+        text: "What is a key difference between a list and a string in Python?",
+        type: "multiple-choice",
+        options: [
+          "Lists can contain multiple types; strings can only contain numbers",
+          "Strings are immutable; lists are mutable (can be changed)",
+          "Lists must be shorter than strings",
+          "Strings are always enclosed in double quotes; lists use square brackets"
+        ],
+        correct: 1,
+        explanation: "Strings cannot be modified after creation, while lists can have elements added, removed, or changed. Both use quotes differently: strings in quotes, lists with []."
+      },
+      {
+        id: "ut-py-q9",
+        text: "What does the following code print? my_list = [1, 2, 3]; my_list[0] = 10; print(my_list)",
+        type: "multiple-choice",
+        options: [
+          "[1, 2, 3]",
+          "[10, 2, 3]",
+          "[1, 2, 10]",
+          "Error: cannot modify list"
+        ],
+        correct: 1,
+        explanation: "Lists are mutable, so you can change elements by index. my_list[0] = 10 replaces the first element (index 0) with 10."
+      },
+      {
+        id: "ut-py-q10",
+        text: "A robot program imports the PrimeHub class and creates an instance: hub = PrimeHub(). What can you do with the 'hub' object?",
+        type: "multiple-choice",
+        options: [
+          "Call methods like hub.light.on() or access hub.speaker",
+          "Only print the hub",
+          "Store it but never use it",
+          "Use it as a number in calculations"
+        ],
+        correct: 0,
+        explanation: "Objects created from classes have methods and attributes you can use. PrimeHub objects provide access to the robot's hardware like lights, speaker, and buttons."
+      }
+    ]
+  },
+
+  {
+    id: "unit-test-pybricks",
+    title: "Pybricks Unit Test",
+    category: "pybricks",
+    requiredLessons: ["pb-01", "pb-02", "pb-03", "pb-04", "pb-05", "pb-06", "pb-07", "pb-08", "pb-09", "pb-10"],
+    passingScore: 80,
+    questions: [
+      {
+        id: "ut-pb-q1",
+        text: "What does the PrimeHub represent in a LEGO robot?",
+        type: "multiple-choice",
+        options: [
+          "The robot's wireless antenna",
+          "The main control board and brain of the robot",
+          "A motor that turns the wheels",
+          "The battery charging port"
+        ],
+        correct: 1,
+        explanation: "The PrimeHub is the main control board that runs your Python code and controls all connected motors and sensors."
+      },
+      {
+        id: "ut-pb-q2",
+        text: "In Pybricks, which of these correctly creates a motor and sets its direction to reverse?",
+        type: "multiple-choice",
+        options: [
+          "motor = Motor(Port.A); motor.direction(reverse)",
+          "motor = Motor(Port.A, negative_direction=True)",
+          "motor = Motor(Port.A, direction=True)",
+          "reverse_motor = Motor(Port.A)"
+        ],
+        correct: 1,
+        explanation: "The Motor constructor accepts a 'negative_direction' parameter. Setting it to True reverses the motor's positive direction."
+      },
+      {
+        id: "ut-pb-q3",
+        text: "What is the main advantage of using DriveBase in a robot program compared to controlling motors individually?",
+        type: "multiple-choice",
+        options: [
+          "DriveBase is faster than motors",
+          "DriveBase automatically handles steering and straight-line movement, making it easier to control two motors together",
+          "DriveBase doesn't require importing the Motor class",
+          "DriveBase works with any number of motors automatically"
+        ],
+        correct: 1,
+        explanation: "DriveBase simplifies robot movement by letting you specify straight distances and turn angles instead of managing individual motor speeds."
+      },
+      {
+        id: "ut-pb-q4",
+        text: "Which method tells a robot to move forward 50 centimeters using DriveBase?",
+        type: "multiple-choice",
+        options: [
+          "robot.move(50)",
+          "robot.straight(500)",
+          "robot.forward(50)",
+          "robot.drive(50, 0)"
+        ],
+        correct: 1,
+        explanation: "The 'straight()' method moves the robot forward by a specified number of millimeters. 500mm = 50cm."
+      },
+      {
+        id: "ut-pb-q5",
+        text: "What does the gyro sensor (IMU) measure in a Pybricks robot?",
+        type: "multiple-choice",
+        options: [
+          "The robot's battery voltage",
+          "The robot's heading (rotation angle) and angular velocity",
+          "The distance to nearby obstacles",
+          "The speed of the wheels"
+        ],
+        correct: 1,
+        explanation: "The gyro (Inertial Measurement Unit) tracks how much the robot has rotated and its current heading angle."
+      },
+      {
+        id: "ut-pb-q6",
+        text: "If you want your robot to turn exactly 90 degrees to the right, which code is correct?",
+        type: "multiple-choice",
+        options: [
+          "robot.turn(90)",
+          "robot.turn(-90)",
+          "robot.rotate(90)",
+          "robot.turn_right(90)"
+        ],
+        correct: 1,
+        explanation: "The turn() method rotates the robot. Positive angles turn left, negative angles turn right. -90 = 90 degrees to the right."
+      },
+      {
+        id: "ut-pb-q7",
+        text: "What is the purpose of the settings object in Pybricks (e.g., hub.settings)?",
+        type: "multiple-choice",
+        options: [
+          "To configure robot parameters like wheel circumference and axle track",
+          "To change the robot's color",
+          "To restart the program",
+          "To connect to the internet"
+        ],
+        correct: 0,
+        explanation: "Settings in Pybricks configure physical robot parameters that affect movement calculations, like wheel size and the distance between wheels."
+      },
+      {
+        id: "ut-pb-q8",
+        text: "A robot's motor is spinning at 100 degrees per second. After 2 seconds of wait(), approximately how many degrees has the motor rotated?",
+        type: "multiple-choice",
+        options: [
+          "50 degrees",
+          "100 degrees",
+          "200 degrees",
+          "400 degrees"
+        ],
+        correct: 2,
+        explanation: "Angular velocity is measured in degrees per second. 100 degrees/second × 2 seconds = 200 degrees of rotation."
+      }
+    ]
+  },
+
+  {
+    id: "unit-test-measurements",
+    title: "Measurements Unit Test",
+    category: "measurements",
+    requiredLessons: ["me-01", "me-02", "me-03", "me-04", "me-05"],
+    passingScore: 80,
+    questions: [
+      {
+        id: "ut-me-q1",
+        text: "A robot wheel has a diameter of 5.6 cm. What is its circumference (in mm)?",
+        type: "multiple-choice",
+        options: [
+          "8.8 mm",
+          "17.6 mm",
+          "88 mm",
+          "176 mm"
+        ],
+        correct: 2,
+        explanation: "Circumference = π × diameter ≈ 3.14159 × 56 mm ≈ 176 mm. This is the distance the wheel travels in one full rotation."
+      },
+      {
+        id: "ut-me-q2",
+        text: "If a robot's wheel circumference is 220 mm and you want it to move exactly 1 meter (1000 mm), how many degrees should the motor rotate?",
+        type: "multiple-choice",
+        options: [
+          "220 degrees",
+          "1000 degrees",
+          "1636 degrees",
+          "360 degrees"
+        ],
+        correct: 2,
+        explanation: "Distance needed / Circumference × 360° = 1000 / 220 × 360 ≈ 1636 degrees"
+      },
+      {
+        id: "ut-me-q3",
+        text: "The axle track of a robot is the distance between the two drive wheels. What is its purpose in movement calculations?",
+        type: "multiple-choice",
+        options: [
+          "It determines how fast the robot can move",
+          "It determines how much the robot will rotate when turning",
+          "It measures the robot's height",
+          "It's only needed for straight-line movement"
+        ],
+        correct: 1,
+        explanation: "The axle track determines the robot's turning radius. A wider axle track means less rotation for the same turning distance."
+      },
+      {
+        id: "ut-me-q4",
+        text: "A robot needs to turn 180 degrees (face the opposite direction). If its axle track is 200 mm, approximately how far will each wheel travel on the ground?",
+        type: "multiple-choice",
+        options: [
+          "100 mm",
+          "200 mm",
+          "314 mm",
+          "628 mm"
+        ],
+        correct: 2,
+        explanation: "For a 180° turn, the robot follows a circular arc with radius = axle track / 2 = 100 mm. Arc distance ≈ π × radius ≈ 314 mm per wheel."
+      },
+      {
+        id: "ut-me-q5",
+        text: "A robot program specifies: robot.straight(1000). If the wheel circumference is 220 mm, how many complete wheel rotations occur?",
+        type: "multiple-choice",
+        options: [
+          "Less than 1 rotation",
+          "About 4.5 rotations",
+          "About 1000 rotations",
+          "Exactly 360 rotations"
+        ],
+        correct: 1,
+        explanation: "1000 mm ÷ 220 mm per rotation ≈ 4.5 rotations. The motor rotates about 4.5 times to move 1000 mm."
+      },
+      {
+        id: "ut-me-q6",
+        text: "Why is precision in wheel circumference and axle track measurements critical for autonomous robot navigation?",
+        type: "multiple-choice",
+        options: [
+          "It makes the robot look better",
+          "Small measurement errors compound over time, causing the robot to drift off course",
+          "It doesn't matter; robots always return to the correct position",
+          "It only affects movement speed, not accuracy"
+        ],
+        correct: 1,
+        explanation: "In autonomous navigation, measurement errors compound. Even 1% error in wheel circumference causes noticeable drift over long distances."
+      }
+    ]
+  },
+
+  {
+    id: "unit-test-setup",
+    title: "Setup Unit Test",
+    category: "setup",
+    requiredLessons: ["se-01", "se-02", "se-03", "se-04"],
+    passingScore: 80,
+    questions: [
+      {
+        id: "ut-se-q1",
+        text: "Which import statement is required to use the PrimeHub in Pybricks?",
+        type: "multiple-choice",
+        options: [
+          "import pybricks",
+          "from pybricks.hubs import PrimeHub",
+          "from pybricks import *",
+          "import PrimeHub"
+        ],
+        correct: 1,
+        explanation: "You must use 'from pybricks.hubs import PrimeHub' to access the PrimeHub class for controlling the robot's main board."
+      },
+      {
+        id: "ut-se-q2",
+        text: "After importing necessary classes, what is the first thing a robot program should do?",
+        type: "multiple-choice",
+        options: [
+          "Create the PrimeHub instance and define motors",
+          "Wait for 1 second before starting",
+          "Print a welcome message",
+          "Test each motor individually"
+        ],
+        correct: 0,
+        explanation: "The first step is to initialize the hub and motors. This creates the objects needed to control the robot."
+      },
+      {
+        id: "ut-se-q3",
+        text: "Which code correctly creates a DriveBase for a two-wheel drive robot?",
+        type: "multiple-choice",
+        options: [
+          "drive = DriveBase(Motor(Port.A), Motor(Port.B))",
+          "drive = DriveBase(Motor(Port.A), Motor(Port.B), 220, 180)",
+          "drive = DriveBase(Port.A, Port.B, 220, 180)",
+          "robot = TwoWheelDrive(A, B, 220, 180)"
+        ],
+        correct: 1,
+        explanation: "DriveBase takes two Motor objects, wheel circumference (220 mm), and axle track (180 mm) as parameters."
+      },
+      {
+        id: "ut-se-q4",
+        text: "What setting in a Pybricks robot determines how the motor's positive rotation direction is interpreted?",
+        type: "multiple-choice",
+        options: [
+          "hub.settings.units",
+          "motor.settings.direction",
+          "Motor created with 'negative_direction=True' parameter",
+          "A global direction variable"
+        ],
+        correct: 2,
+        explanation: "When creating a Motor, you can set 'negative_direction=True' to reverse what counts as positive rotation."
+      },
+      {
+        id: "ut-se-q5",
+        text: "Why is it important to configure wheel circumference and axle track in the setup phase?",
+        type: "multiple-choice",
+        options: [
+          "It makes the robot faster",
+          "It's required by Pybricks syntax",
+          "These values are used by movement methods to calculate correct motor rotations for straight lines and turns",
+          "It prevents the robot from overheating"
+        ],
+        correct: 2,
+        explanation: "The wheel circumference and axle track are essential parameters that movement methods (straight, turn) use to calculate accurate distances and angles."
+      }
+    ]
+  },
+
+  {
+    id: "unit-test-filestructure",
+    title: "File Structure Unit Test",
+    category: "filestructure",
+    requiredLessons: ["fs-01", "fs-02", "fs-03", "fs-04"],
+    passingScore: 80,
+    questions: [
+      {
+        id: "ut-fs-q1",
+        text: "What is the main purpose of separating setup code into a separate setup.py file?",
+        type: "multiple-choice",
+        options: [
+          "It makes the program faster",
+          "It allows reusing the same setup in multiple run files without repeating code",
+          "It's required by Python",
+          "It reduces file size"
+        ],
+        correct: 1,
+        explanation: "A setup.py file contains hardware initialization that multiple run files can import, following the DRY (Don't Repeat Yourself) principle."
+      },
+      {
+        id: "ut-fs-q2",
+        text: "In a Pybricks project, which file typically contains the main program logic and robot behavior?",
+        type: "multiple-choice",
+        options: [
+          "setup.py",
+          "A run file (like main.py or run.py)",
+          "config.py",
+          "__init__.py"
+        ],
+        correct: 1,
+        explanation: "Run files contain the main program logic that executes when you press 'Run'. Setup files only contain hardware initialization."
+      },
+      {
+        id: "ut-fs-q3",
+        text: "How do you import the hub and motors from setup.py in your run file?",
+        type: "multiple-choice",
+        options: [
+          "import setup",
+          "from setup import hub, motor_a, motor_b, robot",
+          "#include setup.py",
+          "load setup"
+        ],
+        correct: 1,
+        explanation: "Use 'from setup import' to bring specific objects from the setup module into your run file."
+      },
+      {
+        id: "ut-fs-q4",
+        text: "What should a setup.py file typically NOT contain?",
+        type: "multiple-choice",
+        options: [
+          "Motor definitions",
+          "Hub initialization",
+          "Main program logic and loops",
+          "Wheel circumference settings"
+        ],
+        correct: 2,
+        explanation: "Setup files should only initialize hardware. Main program logic, loops, and behavior belong in run files."
+      },
+      {
+        id: "ut-fs-q5",
+        text: "A robot project has setup.py, main_race.py, and main_demo.py. What does this structure allow?",
+        type: "multiple-choice",
+        options: [
+          "Running multiple programs simultaneously",
+          "Both programs share the same hardware setup but can have different behaviors",
+          "The programs run faster",
+          "One program must delete the other"
+        ],
+        correct: 1,
+        explanation: "This structure allows multiple run files to import the same setup, enabling different behaviors while using the same hardware definitions."
+      }
+    ]
+  }
+];
 
     // ============================================================
     // APPLICATION ENGINE
@@ -6506,6 +7267,28 @@ const Progress = {
     if (lessons.length === 0) return 0;
     const completed = lessons.filter(l => this.isCompleted(l.id)).length;
     return Math.round((completed / lessons.length) * 100);
+  },
+
+  recordUnitTestAttempt(testId, score, passed) {
+    if (!this.data[testId]) {
+      this.data[testId] = { passed: false, bestScore: 0, attempts: 0 };
+    }
+    this.data[testId].attempts = (this.data[testId].attempts || 0) + 1;
+    this.data[testId].bestScore = Math.max(this.data[testId].bestScore || 0, score);
+    if (passed) this.data[testId].passed = true;
+    this.save();
+  },
+
+  isUnitTestPassed(testId) {
+    return this.data[testId]?.passed || false;
+  },
+
+  allUnitTestsPassed() {
+    return UNIT_TESTS.every(t => this.isUnitTestPassed(t.id));
+  },
+
+  allLessonsCompleted() {
+    return LessonRegistry.all.every(l => this.isCompleted(l.id));
   },
 
   reset() {
@@ -6831,6 +7614,37 @@ const LessonCards = {
 
       container.appendChild(card);
     });
+
+    // Render unit test card for this category
+    const unitTest = UNIT_TESTS.find(t => t.category === category);
+    if (unitTest) {
+      const allLessonsDone = unitTest.requiredLessons.every(lid => Progress.isCompleted(lid));
+      const testPassed = Progress.data[unitTest.id]?.passed || false;
+      const isDev = Auth.currentUser && Auth.currentUser.role === 'developer';
+
+      const utCard = document.createElement('div');
+      utCard.className = 'unit-test-card';
+
+      let statusHtml, buttonHtml;
+      if (testPassed) {
+        statusHtml = '<span class="test-status passed">✅ Passed</span>';
+        buttonHtml = '<button class="btn-start" onclick="Router.navigate(\'#page-unit-test/' + unitTest.id + '\')">Review Test</button>';
+      } else if (allLessonsDone || isDev) {
+        statusHtml = '<span class="test-status available">📝 Ready</span>';
+        buttonHtml = '<button class="btn-start" onclick="Router.navigate(\'#page-unit-test/' + unitTest.id + '\')">Take Unit Test</button>';
+      } else {
+        const done = unitTest.requiredLessons.filter(l => Progress.isCompleted(l)).length;
+        statusHtml = '<span class="test-status locked">🔒 ' + done + '/' + unitTest.requiredLessons.length + ' lessons</span>';
+        buttonHtml = '<button class="btn-start disabled" disabled>Complete All Lessons First</button>';
+      }
+
+      utCard.innerHTML = '<h3>📝 ' + this.escapeHtml(unitTest.title) + '</h3>' +
+        statusHtml +
+        '<p>Cumulative test covering all ' + unitTest.requiredLessons.length + ' lessons in this unit. ' + unitTest.passingScore + '% to pass.</p>' +
+        buttonHtml;
+
+      container.appendChild(utCard);
+    }
   },
 
   escapeHtml(text) {
@@ -7380,6 +8194,218 @@ const LessonViewer = {
 };
 
 // ============================================================================
+// UNIT TEST VIEWER - Renders and manages end-of-unit tests
+// ============================================================================
+
+const UnitTestViewer = {
+  currentTest: null,
+  answers: {},
+
+  getTestByCategory(category) {
+    return UNIT_TESTS.find(t => t.category === category);
+  },
+
+  getTestById(id) {
+    return UNIT_TESTS.find(t => t.id === id);
+  },
+
+  isUnlocked(testId) {
+    // Developers can always access
+    if (Auth.currentUser && Auth.currentUser.role === 'developer') return true;
+    const test = this.getTestById(testId);
+    if (!test) return false;
+    // All required lessons must be completed
+    return test.requiredLessons.every(lid => Progress.isCompleted(lid));
+  },
+
+  isPassed(testId) {
+    return Progress.data[testId]?.passed || false;
+  },
+
+  load(testId) {
+    const test = this.getTestById(testId);
+    if (!test) {
+      Toast.show('Unit test not found', 'error');
+      Router.navigate('#page-home');
+      return;
+    }
+
+    if (!this.isUnlocked(testId)) {
+      Toast.show('Complete all unit lessons first!', 'warning');
+      return;
+    }
+
+    this.currentTest = test;
+    this.answers = {};
+    this.render();
+  },
+
+  render() {
+    const test = this.currentTest;
+    const container = document.getElementById('unit-test-container');
+    if (!container) return;
+
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    let html = '<div style="max-width:800px;margin:0 auto;">';
+    html += '<div class="page-header">';
+    html += '<h1>📝 ' + this.escapeHtml(test.title) + '</h1>';
+    html += '<p style="color:var(--color-text-muted);">Answer all questions. You need ' + test.passingScore + '% to pass. You can retry as many times as needed.</p>';
+    html += '</div>';
+
+    // Progress bar
+    const completedLessons = test.requiredLessons.filter(l => Progress.isCompleted(l)).length;
+    html += '<div style="margin-bottom:2rem;">';
+    html += '<div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--color-text-muted);margin-bottom:0.5rem;">';
+    html += '<span>Lessons completed: ' + completedLessons + '/' + test.requiredLessons.length + '</span>';
+    html += '<span>Questions: ' + test.questions.length + ' | Passing: ' + test.passingScore + '%</span>';
+    html += '</div>';
+    html += '</div>';
+
+    // Questions
+    html += '<div id="ut-questions">';
+    test.questions.forEach((q, qIdx) => {
+      html += '<div class="ut-question" data-qid="' + q.id + '">';
+      html += '<div class="q-number">Question ' + (qIdx + 1) + ' of ' + test.questions.length + '</div>';
+      html += '<div class="q-text">' + this.escapeHtml(q.text) + '</div>';
+      html += '<div class="quiz-options">';
+      q.options.forEach((opt, optIdx) => {
+        html += '<label class="quiz-option">';
+        html += '<input type="radio" name="ut-q-' + qIdx + '" value="' + optIdx + '">';
+        html += '<span class="option-letter">' + letters[optIdx] + '</span>';
+        html += '<span class="option-text">' + this.escapeHtml(opt) + '</span>';
+        html += '</label>';
+      });
+      html += '</div>';
+      html += '<div class="question-feedback hidden" style="margin-top:0.75rem;padding:0.75rem 1rem;border-radius:var(--radius-md);font-size:0.9rem;"></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    html += '<button onclick="UnitTestViewer.submit()" class="btn-submit" style="margin-top:1rem;width:100%;padding:1rem;font-size:1.1rem;">Submit Unit Test</button>';
+    html += '<div id="ut-result" class="hidden"></div>';
+
+    // Developer panel
+    if (Auth.currentUser && Auth.currentUser.role === 'developer') {
+      html += '<div class="dev-panel" style="margin-top:1.5rem;padding:1rem;background:rgba(139,92,246,0.1);border:1px dashed #8B5CF6;border-radius:8px;">';
+      html += '<div style="font-size:0.8rem;color:#8B5CF6;font-weight:600;margin-bottom:0.5rem;">DEVELOPER REVIEW — Answer Key</div>';
+      test.questions.forEach((q, qi) => {
+        html += '<p style="color:#C4B5FD;font-size:0.9rem;margin-bottom:0.25rem;">Q' + (qi+1) + ': <strong>' + this.escapeHtml(q.options[q.correct]) + '</strong>';
+        if (q.explanation) html += ' <span style="color:#94A3B8;font-size:0.8rem;"> — ' + this.escapeHtml(q.explanation) + '</span>';
+        html += '</p>';
+      });
+      html += '<button onclick="UnitTestViewer.devPass()" class="btn-check" style="margin-top:0.75rem;background:#8B5CF6;">Skip — Mark as Passed</button>';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    container.innerHTML = html;
+
+    // Attach click handlers
+    document.querySelectorAll('.quiz-option').forEach(label => {
+      label.addEventListener('click', function() {
+        const radio = this.querySelector('input[type="radio"]');
+        if (!radio || radio.disabled) return;
+        radio.checked = true;
+        const siblings = this.parentElement.querySelectorAll('.quiz-option');
+        siblings.forEach(s => s.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+
+  submit() {
+    const test = this.currentTest;
+    if (!test) return;
+
+    let correctCount = 0;
+    let unanswered = false;
+
+    test.questions.forEach((q, qIdx) => {
+      const selected = document.querySelector('input[name="ut-q-' + qIdx + '"]:checked');
+      const userAnswer = selected ? parseInt(selected.value) : -1;
+
+      if (userAnswer === -1) {
+        unanswered = true;
+        return;
+      }
+
+      const isCorrect = userAnswer === q.correct;
+      if (isCorrect) correctCount++;
+
+      // Highlight options
+      const optionEls = document.querySelectorAll('[data-qid="' + q.id + '"] .quiz-option');
+      optionEls.forEach((el, idx) => {
+        el.style.pointerEvents = 'none';
+        if (idx === userAnswer && isCorrect) el.classList.add('correct');
+        else if (idx === userAnswer && !isCorrect) el.classList.add('incorrect');
+        else if (idx === q.correct && !isCorrect) el.classList.add('correct');
+      });
+
+      // Show feedback
+      const feedbackDiv = document.querySelector('[data-qid="' + q.id + '"] .question-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.textContent = isCorrect
+          ? '✓ Correct! ' + q.explanation
+          : '✗ Incorrect. ' + q.explanation;
+        feedbackDiv.className = 'question-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+        feedbackDiv.classList.remove('hidden');
+      }
+    });
+
+    if (unanswered) {
+      Toast.show('Please answer all questions before submitting.', 'warning');
+      return;
+    }
+
+    // Disable submit button
+    const submitBtn = document.querySelector('#ut-result')?.previousElementSibling;
+    if (submitBtn) submitBtn.style.display = 'none';
+
+    const score = Math.round((correctCount / test.questions.length) * 100);
+    const passed = score >= test.passingScore;
+
+    // Record attempt
+    Progress.recordUnitTestAttempt(test.id, score, passed);
+
+    const resultDiv = document.getElementById('ut-result');
+    if (resultDiv) {
+      if (passed) {
+        resultDiv.innerHTML = '<div class="ut-result pass">' +
+          '<h3 style="color:var(--color-success);font-size:1.5rem;">🎉 Passed! ' + score + '%</h3>' +
+          '<p style="color:var(--color-text-muted);margin:0.5rem 0 1rem;">' + correctCount + '/' + test.questions.length + ' correct. Great work!</p>' +
+          '<button class="btn-submit" onclick="Router.navigate(\'#/certificates\')">View Certificates →</button>' +
+          '</div>';
+        Toast.show('Unit test passed! 🎉', 'success');
+      } else {
+        resultDiv.innerHTML = '<div class="ut-result fail">' +
+          '<h3 style="color:var(--color-error);font-size:1.5rem;">Score: ' + score + '%</h3>' +
+          '<p style="color:var(--color-text-muted);margin:0.5rem 0 1rem;">You need ' + test.passingScore + '% to pass. You got ' + correctCount + '/' + test.questions.length + ' correct.</p>' +
+          '<button class="btn-submit" style="background:var(--color-warning);" onclick="UnitTestViewer.load(\'' + test.id + '\')">🔄 Try Again</button>' +
+          '</div>';
+        Toast.show('Not quite — review and try again!', 'error');
+      }
+      resultDiv.classList.remove('hidden');
+    }
+  },
+
+  devPass() {
+    if (this.currentTest) {
+      Progress.recordUnitTestAttempt(this.currentTest.id, 100, true);
+      Toast.show('Unit test marked as passed (dev mode)', 'success');
+      Router.navigate('#/' + this.currentTest.category);
+    }
+  },
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+};
+
+// ============================================================================
 // ROUTER - Hash-based routing
 // ============================================================================
 
@@ -7397,8 +8423,13 @@ const Router = {
     const raw = hash.replace(/^#\/?/, '') || 'home';
     let pageId, param;
 
+    // Handle "#page-unit-test/unit-test-python" format
+    if (raw.startsWith('page-unit-test/')) {
+      pageId = 'page-unit-test';
+      param = raw.replace('page-unit-test/', '');
+    }
     // Handle "#page-lesson/py-01" format
-    if (raw.startsWith('page-lesson/')) {
+    else if (raw.startsWith('page-lesson/')) {
       pageId = 'page-lesson';
       param = raw.replace('page-lesson/', '');
     }
@@ -7420,6 +8451,7 @@ const Router = {
         'practice': 'page-practice',
         'reference': 'page-reference',
         'challenges': 'page-challenges',
+        'certificates': 'page-certificates',
       };
       pageId = pageMap[slug] || 'page-home';
     }
@@ -7449,9 +8481,19 @@ const Router = {
       }
     });
 
+    // Handle unit test route
+    if (pageId === 'page-unit-test' && param) {
+      UnitTestViewer.load(param);
+    }
+
     // Handle lesson route
     if (pageId === 'page-lesson' && param) {
       LessonViewer.load(param);
+    }
+
+    // Render certificates page
+    if (pageId === 'page-certificates') {
+      renderCertificatesPage();
     }
 
     // Re-render lesson grids on page switch (to reflect updated progress)
@@ -7642,6 +8684,101 @@ function renderChallengesPage() {
 
   html += '</div>';
   challengesContainer.innerHTML = html;
+}
+
+function renderCertificatesPage() {
+  const container = document.getElementById('certificates-container');
+  if (!container) return;
+
+  const studentName = (Auth.currentUser && Auth.currentUser.name) || 'Student';
+  const allLessons = Progress.allLessonsCompleted();
+  const allTests = Progress.allUnitTestsPassed();
+  const completionEarned = allLessons;
+  const masteryEarned = allLessons && allTests;
+
+  let html = '<div class="cert-grid">';
+
+  // Certificate of Completion
+  html += '<div class="cert-card ' + (completionEarned ? 'earned' : 'locked') + '">';
+  html += '<div class="cert-icon">' + (completionEarned ? '🎓' : '🔒') + '</div>';
+  html += '<div class="cert-title">Certificate of Completion</div>';
+  html += '<div class="cert-desc">Awarded for completing all ' + LessonRegistry.all.length + ' lessons across every unit.</div>';
+
+  // Requirements checklist
+  html += '<ul class="cert-requirements">';
+  const categories = [
+    { label: 'Python Basics', cat: 'python' },
+    { label: 'Pybricks', cat: 'pybricks' },
+    { label: 'Measurements', cat: 'measurements' },
+    { label: 'Robot Setup', cat: 'setup' },
+    { label: 'File Structure', cat: 'filestructure' }
+  ];
+  categories.forEach(c => {
+    const catLessons = LessonRegistry.getByCategory(c.cat);
+    const done = catLessons.filter(l => Progress.isCompleted(l.id)).length;
+    const complete = done === catLessons.length;
+    html += '<li class="' + (complete ? '' : 'incomplete') + '">' + c.label + ': ' + done + '/' + catLessons.length + '</li>';
+  });
+  html += '</ul>';
+
+  if (completionEarned) {
+    html += '<button class="btn-cert" onclick="showCertificate(\'completion\')">View Certificate</button>';
+  }
+  html += '</div>';
+
+  // Certificate of Mastery
+  html += '<div class="cert-card ' + (masteryEarned ? 'earned' : 'locked') + '">';
+  html += '<div class="cert-icon">' + (masteryEarned ? '🏆' : '🔒') + '</div>';
+  html += '<div class="cert-title">Certificate of Mastery</div>';
+  html += '<div class="cert-desc">Awarded for completing all lessons AND passing all 5 unit tests.</div>';
+
+  html += '<ul class="cert-requirements">';
+  html += '<li class="' + (allLessons ? '' : 'incomplete') + '">All ' + LessonRegistry.all.length + ' lessons completed</li>';
+  UNIT_TESTS.forEach(t => {
+    const passed = Progress.isUnitTestPassed(t.id);
+    html += '<li class="' + (passed ? '' : 'incomplete') + '">' + t.title + (passed ? ' — Passed' : '') + '</li>';
+  });
+  html += '</ul>';
+
+  if (masteryEarned) {
+    html += '<button class="btn-cert" onclick="showCertificate(\'mastery\')">View Certificate</button>';
+  }
+  html += '</div>';
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function showCertificate(type) {
+  const studentName = (Auth.currentUser && Auth.currentUser.name) || 'Student';
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  const isCompletion = type === 'completion';
+  const title = isCompletion ? 'Certificate of Completion' : 'Certificate of Mastery';
+  const subtitle = isCompletion
+    ? 'PyLearn Robotics Programming Course'
+    : 'PyLearn Robotics Programming — Mastery Achievement';
+  const body = isCompletion
+    ? 'has successfully completed all lessons in the PyLearn Robotics Programming curriculum, demonstrating competency in Python basics, Pybricks robot programming, measurements, robot setup, and file organization.'
+    : 'has demonstrated mastery of the PyLearn Robotics Programming curriculum by completing all lessons and passing all unit tests with distinction.';
+  const seal = isCompletion ? '🎓' : '🏆';
+
+  const container = document.getElementById('certificates-container');
+  container.innerHTML =
+    '<div class="cert-print">' +
+      '<div class="cert-border"></div>' +
+      '<h1>' + title + '</h1>' +
+      '<div class="cert-subtitle">' + subtitle + '</div>' +
+      '<p style="color:#777;margin-top:2rem;">This certifies that</p>' +
+      '<div class="cert-recipient">' + escapeHtml(studentName) + '</div>' +
+      '<div class="cert-body">' + body + '</div>' +
+      '<div class="cert-date">Awarded on ' + today + '</div>' +
+      '<div class="cert-seal">' + seal + '</div>' +
+    '</div>' +
+    '<div class="cert-actions">' +
+      '<button onclick="window.print()" style="background:var(--color-primary);color:white;">🖨 Print Certificate</button>' +
+      '<button onclick="renderCertificatesPage()" style="background:var(--color-border);color:var(--color-text-primary);">← Back</button>' +
+    '</div>';
 }
 
 function escapeHtml(text) {

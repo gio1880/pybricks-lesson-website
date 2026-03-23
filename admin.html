@@ -523,14 +523,15 @@
               <tr>
                 <th>Name</th>
                 <th>Username</th>
-                <th>Lessons Completed</th>
-                <th>Total Time (min)</th>
+                <th>Lessons</th>
+                <th>Unit Tests</th>
+                <th>Certificates</th>
                 <th>Last Login</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="progressTableBody">
-              <tr><td colspan="6" style="text-align: center; color: var(--color-text-muted);">Loading...</td></tr>
+              <tr><td colspan="7" style="text-align: center; color: var(--color-text-muted);">Loading...</td></tr>
             </tbody>
           </table>
         </div>
@@ -696,23 +697,46 @@
       });
     }
 
+    const UNIT_TEST_IDS = ['unit-test-python', 'unit-test-pybricks', 'unit-test-measurements', 'unit-test-setup', 'unit-test-filestructure'];
+    const TOTAL_LESSONS = 37;
+
+    function getUnitTestStatus(lessonProgress) {
+      if (!lessonProgress) return { passed: 0, total: 5 };
+      let passed = 0;
+      UNIT_TEST_IDS.forEach(id => {
+        if (lessonProgress[id] && lessonProgress[id].passed) passed++;
+      });
+      return { passed, total: 5 };
+    }
+
+    function getCertStatus(lessonsCompleted, unitTestsPassed) {
+      const allLessons = lessonsCompleted >= TOTAL_LESSONS;
+      const allTests = unitTestsPassed >= 5;
+      if (allLessons && allTests) return '<span style="color:#10B981;">🏆 Mastery</span>';
+      if (allLessons) return '<span style="color:#06B6D4;">🎓 Completion</span>';
+      return '<span style="color:var(--color-text-muted);">—</span>';
+    }
+
     function displayProgress() {
       const tbody = document.getElementById('progressTableBody');
       tbody.innerHTML = '';
 
       if (progressData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--color-text-muted);">No progress data</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--color-text-muted);">No progress data</td></tr>';
         return;
       }
 
       progressData.forEach(progress => {
         const row = document.createElement('tr');
         const lastLogin = progress.lastLogin ? new Date(progress.lastLogin).toLocaleDateString() : 'Never';
+        const utStatus = getUnitTestStatus(progress.lessonProgress);
+        const certHtml = getCertStatus(progress.lessonsCompleted, utStatus.passed);
         row.innerHTML = `
           <td><strong>${escapeHtml(progress.name)}</strong></td>
           <td><code style="background: var(--color-dark-bg); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">${escapeHtml(progress.username)}</code></td>
-          <td>${progress.lessonsCompleted}</td>
-          <td>${progress.totalTime}</td>
+          <td>${progress.lessonsCompleted}/${TOTAL_LESSONS}</td>
+          <td>${utStatus.passed}/5</td>
+          <td>${certHtml}</td>
           <td>${lastLogin}</td>
           <td>
             <button class="btn btn-small btn-danger" onclick="resetProgress('${progress.id}', '${escapeHtml(progress.name)}')">Reset Progress</button>

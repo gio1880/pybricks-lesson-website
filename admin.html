@@ -525,13 +525,14 @@
                 <th>Username</th>
                 <th>Lessons</th>
                 <th>Unit Tests</th>
+                <th>FLL Assessment</th>
                 <th>Certificates</th>
                 <th>Last Login</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="progressTableBody">
-              <tr><td colspan="7" style="text-align: center; color: var(--color-text-muted);">Loading...</td></tr>
+              <tr><td colspan="8" style="text-align: center; color: var(--color-text-muted);">Loading...</td></tr>
             </tbody>
           </table>
         </div>
@@ -709,6 +710,15 @@
       return { passed, total: 5 };
     }
 
+    function getFllStatus(fllResults) {
+      if (!fllResults || !fllResults.length) return '<span style="color:var(--color-text-muted);">—</span>';
+      const latest = fllResults[fllResults.length - 1];
+      const score = latest.overallScore || 0;
+      const placement = latest.placement ? latest.placement.label : 'N/A';
+      const color = score >= 80 ? '#10B981' : score >= 60 ? '#06B6D4' : score >= 40 ? '#F59E0B' : '#EF4444';
+      return '<span style="color:' + color + ';" title="' + placement + '">' + score + '% (' + fllResults.length + ' taken)</span>';
+    }
+
     function getCertStatus(lessonsCompleted, unitTestsPassed) {
       const allLessons = lessonsCompleted >= TOTAL_LESSONS;
       const allTests = unitTestsPassed >= 5;
@@ -722,7 +732,7 @@
       tbody.innerHTML = '';
 
       if (progressData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--color-text-muted);">No progress data</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--color-text-muted);">No progress data</td></tr>';
         return;
       }
 
@@ -731,11 +741,13 @@
         const lastLogin = progress.lastLogin ? new Date(progress.lastLogin).toLocaleDateString() : 'Never';
         const utStatus = getUnitTestStatus(progress.lessonProgress);
         const certHtml = getCertStatus(progress.lessonsCompleted, utStatus.passed);
+        const fllHtml = getFllStatus(progress.fllResults);
         row.innerHTML = `
           <td><strong>${escapeHtml(progress.name)}</strong></td>
           <td><code style="background: var(--color-dark-bg); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">${escapeHtml(progress.username)}</code></td>
           <td>${progress.lessonsCompleted}/${TOTAL_LESSONS}</td>
           <td>${utStatus.passed}/5</td>
+          <td>${fllHtml}</td>
           <td>${certHtml}</td>
           <td>${lastLogin}</td>
           <td>

@@ -2446,6 +2446,253 @@
       .cert-print { position: absolute; left: 0; top: 0; width: 100%; border: 3px solid #4F46E5; }
       .cert-actions { display: none; }
     }
+
+    /* ============================================
+       FLL ASSESSMENT - DARK THEME STYLES
+       ============================================ */
+
+    #fll-app-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .fll-view { display: block; }
+    .fll-hidden { display: none !important; }
+
+    .fll-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .fll-card h2, .fll-card h3 { margin-top: 0; color: var(--color-text-primary); }
+    .fll-card-intro { margin-top: -4px; color: var(--color-text-muted); }
+
+    .fll-banner {
+      border: 1px solid var(--color-primary);
+      background: rgba(79, 70, 229, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem 0.875rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.125rem;
+    }
+    .fll-banner strong { display: block; margin-bottom: 0.25rem; color: var(--color-text-primary); }
+    .fll-banner p { margin: 0; color: var(--color-text-muted); }
+    .fll-banner-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .fll-setup-form {
+      display: grid;
+      gap: 0.875rem;
+      max-width: 560px;
+    }
+    .fll-setup-form label {
+      display: grid;
+      gap: 0.375rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    .fll-setup-form input {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.625rem 0.75rem;
+      font-size: 0.98rem;
+      color: var(--color-text-primary);
+      background: var(--color-dark-bg);
+    }
+    .fll-setup-form input:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 0;
+    }
+
+    .fll-btn {
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.625rem 0.875rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition-fast), background var(--transition-fast);
+    }
+    .fll-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+    .fll-btn:not(:disabled):hover { transform: translateY(-1px); }
+    .fll-btn-primary { background: var(--color-primary); color: #fff; }
+    .fll-btn-primary:not(:disabled):hover { background: #4338CA; }
+    .fll-btn-secondary { background: rgba(79, 70, 229, 0.15); color: #A5B4FC; }
+    .fll-btn-secondary:not(:disabled):hover { background: rgba(79, 70, 229, 0.25); }
+    .fll-btn-ghost { background: var(--color-card-bg); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+
+    .fll-phase-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .fll-phase-step {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      border: 1.5px solid var(--color-border);
+      background: var(--color-dark-bg);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .fll-phase-step.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+    .fll-phase-step.done { background: rgba(16, 185, 129, 0.15); color: var(--color-success); border-color: var(--color-success); }
+    .fll-phase-step-num { font-weight: 800; font-size: 11px; min-width: 14px; text-align: center; }
+    .fll-phase-step-label { font-size: 11px; }
+    .fll-phase-arrow { color: var(--color-text-muted); font-size: 16px; user-select: none; }
+    .fll-phase-detail-label { margin-left: auto; font-size: 11px; color: var(--color-text-muted); font-style: italic; white-space: nowrap; }
+
+    .fll-status-card { padding-bottom: 1rem; }
+    .fll-status-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+    .fll-status-label { margin: 0; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
+    .fll-status-value { margin: 0.25rem 0 0; font-weight: 700; color: var(--color-text-primary); }
+
+    .fll-progress-track { margin-top: 0.875rem; width: 100%; height: 10px; background: var(--color-dark-bg); border-radius: 999px; overflow: hidden; }
+    .fll-progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%); transition: width 0.2s ease; }
+
+    .fll-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.25rem 0.625rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(79, 70, 229, 0.2);
+      color: #A5B4FC;
+    }
+    .fll-pill-muted { background: rgba(148, 163, 184, 0.1); color: var(--color-text-muted); }
+
+    .fll-question-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.375rem; }
+    .fll-question-meta-line { margin: 0.125rem 0 0.5rem; color: var(--color-text-muted); font-size: 0.9rem; }
+    .fll-question-card h2 { font-size: clamp(1.1rem, 1.8vw, 1.45rem); line-height: 1.4; margin-top: 0.375rem; }
+
+    .fll-question-image { margin: 0.875rem 0; padding: 0.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-dark-bg); }
+    .fll-question-image img { width: 100%; border-radius: var(--radius-md); object-fit: contain; }
+    .fll-question-image figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--color-text-muted); }
+
+    .fll-question-code {
+      margin: 0.875rem 0;
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: var(--color-code-bg);
+      overflow: auto;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      color: var(--color-text-primary);
+    }
+
+    .fll-options-list { display: grid; gap: 0.625rem; margin: 1rem 0; }
+    .fll-option-btn {
+      text-align: left;
+      border: 1px solid var(--color-border);
+      background: var(--color-dark-bg);
+      border-radius: var(--radius-md);
+      padding: 0.625rem 0.75rem;
+      color: var(--color-text-primary);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+    .fll-option-btn:hover:not(:disabled) { border-color: var(--color-primary); background: rgba(79, 70, 229, 0.08); }
+    .fll-option-btn.selected { border-color: var(--color-primary); background: rgba(79, 70, 229, 0.15); }
+    .fll-option-btn.option-correct { border-color: var(--color-success); background: rgba(16, 185, 129, 0.15); }
+    .fll-option-btn.option-incorrect { border-color: var(--color-error); background: rgba(239, 68, 68, 0.15); }
+
+    .fll-hint-panel { display: grid; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .fll-hint-text { margin: 0; padding: 0.625rem 0.75rem; border-left: 4px solid var(--color-primary); background: rgba(79, 70, 229, 0.08); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: #A5B4FC; }
+
+    .fll-feedback { margin: 0.625rem 0 0.875rem; padding: 0.688rem 0.75rem; border-radius: var(--radius-md); font-weight: 600; }
+    .fll-feedback.correct { border: 1px solid var(--color-success); background: rgba(16, 185, 129, 0.12); color: #6EE7B7; }
+    .fll-feedback.incorrect { border: 1px solid var(--color-error); background: rgba(239, 68, 68, 0.12); color: #FCA5A5; }
+
+    .fll-question-actions, .fll-result-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .fll-result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 0.5rem; }
+    .fll-strength-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 0.5rem; }
+
+    .fll-big-score { margin: 0.25rem 0 0; font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 800; color: var(--color-secondary); }
+    .fll-placement-label { margin: 0.25rem 0 0; font-weight: 700; color: var(--color-text-primary); }
+    .fll-teacher-summary { margin: 0.75rem 0 1rem; color: var(--color-text-muted); line-height: 1.45; }
+
+    .fll-readiness-list { display: grid; gap: 0.375rem; margin-top: 0.375rem; }
+    .fll-readiness-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      padding: 0.438rem 0.625rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-dark-bg);
+      color: var(--color-text-primary);
+      font-size: 0.9rem;
+    }
+    .fll-readiness-score { font-weight: 700; color: var(--color-secondary); }
+
+    .fll-domain-profiles { display: grid; gap: 0.625rem; }
+    .fll-profile-card { border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.75rem; background: var(--color-dark-bg); }
+    .fll-profile-card h4 { margin: 0; color: var(--color-text-primary); }
+    .fll-profile-stats { margin: 0.375rem 0 0.625rem; color: var(--color-text-muted); }
+    .fll-profile-meter { width: 100%; height: 8px; background: var(--color-border); border-radius: 999px; overflow: hidden; }
+    .fll-profile-meter-fill { height: 100%; background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%); }
+
+    .fll-history-wrap { overflow: auto; }
+    .fll-table { width: 100%; border-collapse: collapse; min-width: 820px; }
+    .fll-table th, .fll-table td { text-align: left; border-bottom: 1px solid var(--color-border); padding: 0.563rem 0.5rem; font-size: 0.9rem; }
+    .fll-table th { color: var(--color-text-muted); background: var(--color-dark-bg); }
+    .fll-table td { color: var(--color-text-primary); }
+
+    .fll-timeout-notice {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid var(--color-warning);
+      border-left: 4px solid var(--color-warning);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 14px;
+      font-weight: 600;
+      color: #FCD34D;
+    }
+
+    .fll-timer-container { text-align: center; }
+    .fll-timer-value { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 18px; letter-spacing: 0.5px; }
+    .fll-timer-warning .fll-timer-value { color: var(--color-warning); }
+    .fll-timer-danger .fll-timer-value { color: var(--color-error); animation: fll-timer-pulse 1s ease-in-out infinite; }
+    @keyframes fll-timer-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+    .fll-previous-result-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--color-dark-bg);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .fll-previous-result-card .fll-result-info { color: var(--color-text-primary); }
+    .fll-previous-result-card .fll-result-score { font-weight: 800; font-size: 1.2rem; color: var(--color-secondary); }
+
+    @media (max-width: 860px) {
+      .fll-status-row, .fll-result-grid, .fll-strength-grid { grid-template-columns: 1fr; }
+      .fll-banner { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -2495,6 +2742,7 @@
         <li><a href="#/practice" class="nav-item">Practice</a></li>
         <li><a href="#/reference" class="nav-item">Reference</a></li>
         <li><a href="#/challenges" class="nav-item">Challenges</a></li>
+        <li><a href="#/fll" class="nav-item">🏁 FLL Assessment</a></li>
         <li><a href="#/certificates" class="nav-item">🏆 Certificates</a></li>
       </ul>
 
@@ -2645,6 +2893,15 @@
           <div class="chip">🐛 Debugging & Testing</div>
         </div>
       </section>
+
+      <!-- FLL Assessment CTA -->
+      <section style="text-align: center; padding: 2rem 0;">
+        <div class="card" style="max-width: 700px; margin: 0 auto; padding: 2rem;">
+          <h2>🏁 FLL Adaptive Assessment</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Ready for competition? Take our adaptive placement assessment covering 15 domains across programming, building, mechanisms, and strategy — to find your skill level and get personalized recommendations.</p>
+          <button class="btn btn-lg" onclick="navigateTo('#/fll')">Take the FLL Assessment →</button>
+        </div>
+      </section>
     </section>
 
     <!-- Foundations Page -->
@@ -2726,6 +2983,216 @@
         <p>Take on robot programming missions to put your skills to the test.</p>
       </div>
       <div id="challenges-content"></div>
+    </section>
+
+    <!-- FLL Assessment Page -->
+    <section id="page-fll" class="page">
+      <div class="page-header">
+        <h1>🏁 FLL Adaptive Assessment</h1>
+        <p>Domain-aware SPIKE Prime and FLL placement tool — covers programming, building, mechanisms, strategy, and prediction readiness.</p>
+      </div>
+
+      <div id="fll-app-shell">
+        <!-- FLL Setup View -->
+        <div id="fll-setup-view" class="fll-view">
+          <div class="fll-card">
+            <h2>Student Setup</h2>
+            <p class="fll-card-intro">Enter student details and begin an adaptive three-phase placement assessment. Questions adjust automatically to each student's level.</p>
+
+            <div id="fll-resume-banner" class="fll-banner fll-hidden">
+              <div>
+                <strong>Previous in-progress session found.</strong>
+                <p>You can resume where you left off or start a new assessment.</p>
+              </div>
+              <div class="fll-banner-actions">
+                <button id="fll-resume-btn" class="fll-btn fll-btn-secondary" type="button">Resume Session</button>
+                <button id="fll-start-new-btn" class="fll-btn fll-btn-ghost" type="button">Start New</button>
+              </div>
+            </div>
+
+            <form id="fll-setup-form" class="fll-setup-form">
+              <label>
+                Student Name
+                <input id="fll-student-name" name="studentName" type="text" required maxlength="80" placeholder="e.g., Maya Chen">
+              </label>
+              <label>
+                Grade
+                <input id="fll-student-grade" name="studentGrade" type="text" maxlength="30" placeholder="e.g., 6">
+              </label>
+              <label>
+                Team / Class
+                <input id="fll-student-team" name="studentTeam" type="text" maxlength="60" placeholder="e.g., Team Neutrinos">
+              </label>
+              <button class="fll-btn fll-btn-primary" type="submit">Start Assessment</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- FLL Assessment View -->
+        <div id="fll-assessment-view" class="fll-view fll-hidden">
+          <div class="fll-phase-indicator" id="fll-phase-indicator">
+            <div class="fll-phase-step active" id="fll-phase-step-1">
+              <span class="fll-phase-step-num">1</span>
+              <span class="fll-phase-step-label">Screener</span>
+            </div>
+            <span class="fll-phase-arrow">›</span>
+            <div class="fll-phase-step" id="fll-phase-step-2">
+              <span class="fll-phase-step-num">2</span>
+              <span class="fll-phase-step-label">Deep Dive</span>
+            </div>
+            <span class="fll-phase-arrow">›</span>
+            <div class="fll-phase-step" id="fll-phase-step-3">
+              <span class="fll-phase-step-num">3</span>
+              <span class="fll-phase-step-label">Mastery Check</span>
+            </div>
+            <span id="fll-phase-detail-label" class="fll-phase-detail-label">0 of 15 domains screened</span>
+          </div>
+
+          <div class="fll-card fll-status-card">
+            <div class="fll-status-row">
+              <div>
+                <p class="fll-status-label">Progress</p>
+                <p id="fll-progress-label" class="fll-status-value">Question 1</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Current Domain</p>
+                <p id="fll-current-domain-label" class="fll-status-value">—</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Domain Difficulty</p>
+                <p id="fll-domain-difficulty-label" class="fll-status-value">Level 2</p>
+              </div>
+              <div id="fll-timer-container" class="fll-timer-container">
+                <p class="fll-status-label">Time Remaining</p>
+                <p id="fll-timer-display" class="fll-status-value fll-timer-value">75:00</p>
+              </div>
+            </div>
+            <div class="fll-progress-track">
+              <div id="fll-progress-fill" class="fll-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="fll-card fll-question-card">
+            <div class="fll-question-head">
+              <span id="fll-question-type-pill" class="fll-pill">MCQ</span>
+              <span id="fll-question-track-pill" class="fll-pill fll-pill-muted">Track: General</span>
+              <span id="fll-question-level-pill" class="fll-pill fll-pill-muted">Level 2</span>
+            </div>
+            <p id="fll-question-meta-line" class="fll-question-meta-line">Domain: — • Subtopic: —</p>
+            <h2 id="fll-question-prompt">Question prompt appears here.</h2>
+
+            <figure id="fll-question-image-wrap" class="fll-question-image fll-hidden">
+              <img id="fll-question-image" alt="">
+              <figcaption id="fll-question-image-caption"></figcaption>
+            </figure>
+
+            <pre id="fll-question-code-wrap" class="fll-question-code fll-hidden"><code id="fll-question-code"></code></pre>
+
+            <div id="fll-options-list" class="fll-options-list" role="listbox"></div>
+
+            <div class="fll-hint-panel">
+              <button id="fll-hint-toggle-btn" class="fll-btn fll-btn-ghost" type="button">Show Hint</button>
+              <p id="fll-hint-text" class="fll-hint-text fll-hidden"></p>
+            </div>
+
+            <div id="fll-feedback-panel" class="fll-feedback fll-hidden"></div>
+
+            <div class="fll-question-actions">
+              <button id="fll-submit-answer-btn" class="fll-btn fll-btn-primary" type="button" disabled>Submit Answer</button>
+              <button id="fll-next-question-btn" class="fll-btn fll-btn-secondary fll-hidden" type="button">Next Question</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLL Results View -->
+        <div id="fll-results-view" class="fll-view fll-hidden">
+          <div id="fll-timeout-notice" class="fll-timeout-notice fll-hidden">
+            ⏱️ Time's up! The 75-minute limit was reached — your results are based on questions answered so far.
+          </div>
+          <div class="fll-card">
+            <h2>Placement Results</h2>
+            <div class="fll-result-grid">
+              <div>
+                <p class="fll-status-label">Student</p>
+                <p id="fll-result-student-name" class="fll-placement-label">-</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Date Completed</p>
+                <p id="fll-result-date-completed" class="fll-placement-label">-</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Focus Track</p>
+                <p id="fll-result-track" class="fll-placement-label">General</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Overall Score</p>
+                <p id="fll-overall-score" class="fll-big-score">0%</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Placement</p>
+                <p id="fll-placement-recommendation" class="fll-placement-label">—</p>
+              </div>
+            </div>
+            <div class="fll-strength-grid">
+              <div>
+                <p class="fll-status-label">Strongest Domains</p>
+                <p id="fll-strongest-domains" class="fll-placement-label">-</p>
+              </div>
+              <div>
+                <p class="fll-status-label">Weakest Domains</p>
+                <p id="fll-weakest-domains" class="fll-placement-label">-</p>
+              </div>
+            </div>
+            <div>
+              <p class="fll-status-label">Domains Needing Practice</p>
+              <p id="fll-domains-needing-practice" class="fll-placement-label">-</p>
+            </div>
+            <div>
+              <p class="fll-status-label">Track Readiness</p>
+              <div id="fll-track-readiness-list" class="fll-readiness-list"></div>
+            </div>
+            <p id="fll-teacher-summary" class="fll-teacher-summary"></p>
+            <div class="fll-result-actions">
+              <button id="fll-html-report-btn" class="fll-btn fll-btn-primary" type="button">📄 View Full Report</button>
+              <button id="fll-export-json-btn" class="fll-btn fll-btn-secondary" type="button">Export JSON</button>
+              <button id="fll-export-csv-btn" class="fll-btn fll-btn-secondary" type="button">Export CSV</button>
+              <button id="fll-restart-btn" class="fll-btn fll-btn-ghost" type="button">Start New Assessment</button>
+            </div>
+          </div>
+
+          <div class="fll-card">
+            <h3>Domain Performance Profiles</h3>
+            <div id="fll-domain-profiles" class="fll-domain-profiles"></div>
+          </div>
+
+          <div class="fll-card">
+            <h3>Question History</h3>
+            <div class="fll-history-wrap">
+              <table class="fll-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Domain</th>
+                    <th>Subtopic</th>
+                    <th>Difficulty</th>
+                    <th>Track</th>
+                    <th>Result</th>
+                    <th>Student Answer</th>
+                    <th>Correct Answer</th>
+                  </tr>
+                </thead>
+                <tbody id="fll-history-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLL Previous Results (logged in students) -->
+        <div id="fll-previous-results" class="fll-card" style="margin-top: 1rem; display: none;">
+          <h3>Your Previous FLL Assessment Results</h3>
+          <div id="fll-previous-results-list"></div>
+        </div>
+      </div>
     </section>
 
     <!-- Unit Test Page -->
@@ -7291,6 +7758,50 @@ const Progress = {
     return LessonRegistry.all.every(l => this.isCompleted(l.id));
   },
 
+  // FLL Assessment results
+  saveFllResult(result) {
+    if (!this.data._fllResults) {
+      this.data._fllResults = [];
+    }
+    // Check for duplicate sessionIds
+    const existing = this.data._fllResults.findIndex(r => r.sessionId === result.sessionId);
+    if (existing >= 0) {
+      this.data._fllResults[existing] = result;
+    } else {
+      this.data._fllResults.push(result);
+    }
+    // Keep only 20 most recent
+    if (this.data._fllResults.length > 20) {
+      this.data._fllResults = this.data._fllResults.slice(-20);
+    }
+    this.save();
+    // Also sync FLL results to server separately
+    this.syncFllToServer(result);
+  },
+
+  getFllResults() {
+    return this.data._fllResults || [];
+  },
+
+  getLatestFllResult() {
+    const results = this.getFllResults();
+    return results.length ? results[results.length - 1] : null;
+  },
+
+  async syncFllToServer(result) {
+    if (!Auth.currentUser) return;
+    try {
+      await fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ fllResults: result })
+      });
+    } catch (e) {
+      console.error('Failed to sync FLL results to server:', e);
+    }
+  },
+
   reset() {
     this.data = {};
     this.save();
@@ -8451,6 +8962,7 @@ const Router = {
         'practice': 'page-practice',
         'reference': 'page-reference',
         'challenges': 'page-challenges',
+        'fll': 'page-fll',
         'certificates': 'page-certificates',
       };
       pageId = pageMap[slug] || 'page-home';
@@ -8494,6 +9006,13 @@ const Router = {
     // Render certificates page
     if (pageId === 'page-certificates') {
       renderCertificatesPage();
+    }
+
+    // Initialize FLL assessment when navigating to FLL page
+    if (pageId === 'page-fll') {
+      if (typeof FLLAssessment !== 'undefined') {
+        FLLAssessment.init();
+      }
     }
 
     // Re-render lesson grids on page switch (to reflect updated progress)
@@ -8961,7 +9480,871 @@ async function initApp() {
 
 document.addEventListener('DOMContentLoaded', initApp);
 
+  </script>
 
+  <!-- FLL Assessment Questions Data -->
+  <script src="progressive fll test/questions.js"></script>
+
+  <!-- FLL Assessment Engine (adapted for SPA integration) -->
+  <script>
+const FLLAssessment = (() => {
+  "use strict";
+
+  const STORAGE_KEY = "fllPlacementAssessment.v3";
+  const APP_CONFIG = window.FLL_ASSESSMENT_CONFIG || {};
+  const RAW_QUESTIONS = Array.isArray(window.FLL_QUESTIONS) ? window.FLL_QUESTIONS : [];
+  const DOMAINS = Array.isArray(APP_CONFIG.domains) ? APP_CONFIG.domains : [];
+  const TRACKS = APP_CONFIG.tracks || ["general", "spike-block", "pybricks", "fll"];
+  const LEVELS = APP_CONFIG.levels || {
+    1: "Level 1 Early Foundations",
+    2: "Level 2 Developing Builder",
+    3: "Level 3 Independent Problem Solver",
+    4: "Level 4 Competition Ready"
+  };
+
+  const numericLevels = Object.keys(LEVELS).map(k => Number(k)).filter(v => Number.isFinite(v));
+  const MAX_DIFFICULTY = numericLevels.length ? Math.max(...numericLevels) : 4;
+
+  let QUESTIONS = [];
+  const questionById = new Map();
+  const questionsByDomain = new Map();
+  const ui = {};
+
+  const ASSESSMENT_TIME_LIMIT_MS = 75 * 60 * 1000;
+
+  const runtime = { session: null, activeQuestion: null, selectedOptionIndex: null, questionLocked: false, timerInterval: null };
+
+  let _initialized = false;
+
+  const domainCoachingNotes = {
+    "Programming Fundamentals": "Strengthen sequencing, loops, and variable-based tuning through short repeatable tasks.",
+    "SPIKE Prime Block Coding": "Practice motor/sensor block calibration and reusable My Blocks for reliable match code.",
+    "Pybricks / Python Coding": "Build confidence with Pybricks syntax, functions, and sensor-driven control loops.",
+    "Debugging & Code Analysis": "Use one-variable-at-a-time debugging logs and targeted reproducibility checks.",
+    "Robot Building Fundamentals": "Improve chassis stability, center of gravity, and bracing for repeatable runs.",
+    "SPIKE Prime Hardware & Sensors": "Build familiarity with hub ports, sensor modes, gyro readings, motor encoders, and firmware updates.",
+    "Attachments": "Use keyed quick-swap mounts with alignment guides for faster and more reliable transitions.",
+    "Drivetrain & Wheels": "Focus on drift diagnosis, traction tuning, and wheel calibration consistency.",
+    "Gears & Mechanisms": "Develop stronger understanding of ratio selection, torque tradeoffs, and reliable power transfer.",
+    "Engineering Process & GitHub": "Keep structured test logs, use version control for code, and tie iteration evidence to measurable outcomes.",
+    "FLL Competition Strategy": "Prioritize reliable run plans, risk-aware mission grouping, and time-managed execution.",
+    "Robot Behavior Prediction": "Practice predicting path, sensor behavior, and mission outcomes from code before testing.",
+    "Teamwork & Innovation Project": "Strengthen collaboration skills, practice presenting ideas, and follow the Innovation Project cycle.",
+    "Robotics Math": "Apply gear ratio calculations, distance and circumference formulas, and proportional thinking.",
+    "Safety & Kit Care": "Build habits around proper battery care, cable handling, kit organization, and safe workspace practices."
+  };
+
+  const TRACK_READINESS_MODELS = {
+    general: { label: "General Robotics", domains: { "Programming Fundamentals": 1.15, "Debugging & Code Analysis": 1.1, "Robot Building Fundamentals": 1, "SPIKE Prime Hardware & Sensors": 1.05, "Robot Behavior Prediction": 0.95, "Engineering Process & GitHub": 1, "Robotics Math": 0.9, "Safety & Kit Care": 0.8 } },
+    "spike-block": { label: "SPIKE Prime Block Coding", domains: { "Programming Fundamentals": 1.1, "SPIKE Prime Block Coding": 1.45, "Debugging & Code Analysis": 1.2, "SPIKE Prime Hardware & Sensors": 1.1, "Robot Behavior Prediction": 0.95 } },
+    pybricks: { label: "Pybricks / Python", domains: { "Programming Fundamentals": 1.05, "Pybricks / Python Coding": 1.55, "Debugging & Code Analysis": 1.2, "Robot Behavior Prediction": 1, "SPIKE Prime Hardware & Sensors": 0.9 } },
+    fll: { label: "FLL Competition", domains: { "Attachments": 1.15, "Drivetrain & Wheels": 1.1, "Gears & Mechanisms": 1.1, "Engineering Process & GitHub": 1, "FLL Competition Strategy": 1.2, "Robot Building Fundamentals": 1, "Teamwork & Innovation Project": 1.1 } }
+  };
+
+  const DOMAIN_COVERAGE_BANDS = {
+    programming: ["Programming Fundamentals", "SPIKE Prime Block Coding", "Pybricks / Python Coding", "Debugging & Code Analysis", "Robot Behavior Prediction", "Robotics Math"],
+    mechanical: ["Robot Building Fundamentals", "SPIKE Prime Hardware & Sensors", "Attachments", "Drivetrain & Wheels", "Gears & Mechanisms", "Safety & Kit Care"],
+    competition: ["Engineering Process & GitHub", "FLL Competition Strategy", "Teamwork & Innovation Project"]
+  };
+
+  const PHASE = Object.freeze({ SCREENER: "screener", DEEP_DIVE: "deep-dive", MASTERY: "mastery", COMPLETE: "complete" });
+  const SCREENER_DIFFICULTY = 2, DEEP_DIVE_MAX = 5, DEEP_DIVE_CORRECT_STOP = 3, DEEP_DIVE_WRONG_STOP = -3, MASTERY_DIFFICULTY = 4, MASTERY_MAX = 3;
+
+  // ── Public init ───────────────────────────────────────────────────────────
+  function init() {
+    QUESTIONS = normalizeQuestionBank(RAW_QUESTIONS);
+    if (!validateQuestionBank()) {
+      console.error("FLL question bank invalid");
+      return;
+    }
+    buildQuestionIndexes();
+    cacheUi();
+    if (!_initialized) {
+      bindEvents();
+      _initialized = true;
+    }
+
+    // Auto-fill from Auth
+    if (typeof Auth !== 'undefined' && Auth.currentUser) {
+      const u = Auth.currentUser;
+      if (ui.studentName) ui.studentName.value = u.name || '';
+    }
+
+    // Check for saved session
+    const savedSession = loadSession();
+    if (savedSession && savedSession.status === "in-progress") {
+      runtime.session = ensurePhaseState(savedSession);
+      hydrateSetupForm(savedSession.student);
+      toggleResumeBanner(true);
+    } else {
+      toggleResumeBanner(false);
+    }
+
+    showView("setup");
+    renderPreviousResults();
+  }
+
+  function cacheUi() {
+    ui.views = {
+      setup: document.getElementById("fll-setup-view"),
+      assessment: document.getElementById("fll-assessment-view"),
+      results: document.getElementById("fll-results-view")
+    };
+    ui.setupForm = document.getElementById("fll-setup-form");
+    ui.studentName = document.getElementById("fll-student-name");
+    ui.studentGrade = document.getElementById("fll-student-grade");
+    ui.studentTeam = document.getElementById("fll-student-team");
+    ui.resumeBanner = document.getElementById("fll-resume-banner");
+    ui.resumeButton = document.getElementById("fll-resume-btn");
+    ui.startNewButton = document.getElementById("fll-start-new-btn");
+    ui.progressLabel = document.getElementById("fll-progress-label");
+    ui.timerDisplay = document.getElementById("fll-timer-display");
+    ui.timerContainer = document.getElementById("fll-timer-container");
+    ui.currentDomainLabel = document.getElementById("fll-current-domain-label");
+    ui.domainDifficultyLabel = document.getElementById("fll-domain-difficulty-label");
+    ui.progressFill = document.getElementById("fll-progress-fill");
+    ui.questionTypePill = document.getElementById("fll-question-type-pill");
+    ui.questionTrackPill = document.getElementById("fll-question-track-pill");
+    ui.questionLevelPill = document.getElementById("fll-question-level-pill");
+    ui.questionMetaLine = document.getElementById("fll-question-meta-line");
+    ui.questionPrompt = document.getElementById("fll-question-prompt");
+    ui.questionImageWrap = document.getElementById("fll-question-image-wrap");
+    ui.questionImage = document.getElementById("fll-question-image");
+    ui.questionImageCaption = document.getElementById("fll-question-image-caption");
+    ui.questionCodeWrap = document.getElementById("fll-question-code-wrap");
+    ui.questionCode = document.getElementById("fll-question-code");
+    ui.optionsList = document.getElementById("fll-options-list");
+    ui.hintToggleButton = document.getElementById("fll-hint-toggle-btn");
+    ui.hintText = document.getElementById("fll-hint-text");
+    ui.feedbackPanel = document.getElementById("fll-feedback-panel");
+    ui.submitButton = document.getElementById("fll-submit-answer-btn");
+    ui.nextButton = document.getElementById("fll-next-question-btn");
+    ui.resultStudentName = document.getElementById("fll-result-student-name");
+    ui.resultDateCompleted = document.getElementById("fll-result-date-completed");
+    ui.resultTrack = document.getElementById("fll-result-track");
+    ui.overallScore = document.getElementById("fll-overall-score");
+    ui.placementRecommendation = document.getElementById("fll-placement-recommendation");
+    ui.strongestDomains = document.getElementById("fll-strongest-domains");
+    ui.weakestDomains = document.getElementById("fll-weakest-domains");
+    ui.domainsNeedingPractice = document.getElementById("fll-domains-needing-practice");
+    ui.trackReadinessList = document.getElementById("fll-track-readiness-list");
+    ui.teacherSummary = document.getElementById("fll-teacher-summary");
+    ui.domainProfiles = document.getElementById("fll-domain-profiles");
+    ui.historyBody = document.getElementById("fll-history-body");
+    ui.htmlReportButton = document.getElementById("fll-html-report-btn");
+    ui.exportJsonButton = document.getElementById("fll-export-json-btn");
+    ui.exportCsvButton = document.getElementById("fll-export-csv-btn");
+    ui.restartButton = document.getElementById("fll-restart-btn");
+    ui.phaseStep1 = document.getElementById("fll-phase-step-1");
+    ui.phaseStep2 = document.getElementById("fll-phase-step-2");
+    ui.phaseStep3 = document.getElementById("fll-phase-step-3");
+    ui.phaseDetailLabel = document.getElementById("fll-phase-detail-label");
+  }
+
+  function bindEvents() {
+    ui.setupForm.addEventListener("submit", handleSetupSubmit);
+    ui.resumeButton.addEventListener("click", resumeSession);
+    ui.startNewButton.addEventListener("click", startFreshFromBanner);
+    ui.optionsList.addEventListener("click", handleOptionSelection);
+    ui.hintToggleButton.addEventListener("click", toggleHint);
+    ui.submitButton.addEventListener("click", submitCurrentAnswer);
+    ui.nextButton.addEventListener("click", advanceToNextQuestion);
+    if (ui.htmlReportButton) ui.htmlReportButton.addEventListener("click", handleHtmlReport);
+    if (ui.exportJsonButton) ui.exportJsonButton.addEventListener("click", exportJson);
+    if (ui.exportCsvButton) ui.exportCsvButton.addEventListener("click", exportCsv);
+    if (ui.restartButton) ui.restartButton.addEventListener("click", resetToSetup);
+  }
+
+  // ── Question normalization ────────────────────────────────────────────────
+  function normalizeQuestionBank(raw) {
+    if (!Array.isArray(raw)) return [];
+    return raw.map(e => normalizeQuestion(e)).filter(Boolean);
+  }
+
+  function normalizeQuestion(entry) {
+    if (!entry || typeof entry !== "object") return null;
+    const domain = normalizeDomain(entry.domain || mapLegacy(entry.category));
+    if (!domain) return null;
+    const choices = Array.isArray(entry.choices) ? entry.choices : (Array.isArray(entry.options) ? entry.options : []);
+    const correctAnswer = typeof entry.correctAnswer === "number" ? entry.correctAnswer : entry.answerIndex;
+    const imagePath = typeof entry.image === "string" ? entry.image : (entry.image && typeof entry.image.src === "string" ? entry.image.src : "");
+    const imageAlt = entry.imageAlt || (entry.image && entry.image.alt) || "";
+    const difficulty = Number(entry.difficulty);
+    return {
+      id: String(entry.id || "").trim(), domain, subtopic: String(entry.subtopic || "general").trim(),
+      difficulty: Number.isFinite(difficulty) ? difficulty : 2, track: normalizeTrack(entry.track),
+      type: String(entry.type || "mcq").trim(), question: String(entry.question || entry.prompt || "").trim(),
+      code: String(entry.code || ""), choices: choices.map(c => String(c)), correctAnswer: Number(correctAnswer),
+      hint: String(entry.hint || "").trim(), explanation: String(entry.explanation || "").trim(),
+      image: imagePath, imageAlt: String(imageAlt), tags: Array.isArray(entry.tags) ? entry.tags.map(t => String(t)) : []
+    };
+  }
+
+  function mapLegacy(cat) {
+    const map = { coding: "Programming Fundamentals", debugging: "Debugging & Code Analysis", building: "Robot Building Fundamentals", mechanisms: "Gears & Mechanisms", "problem-solving": "Engineering Process & GitHub", strategy: "FLL Competition Strategy" };
+    return map[cat] || "";
+  }
+
+  function normalizeDomain(domain) {
+    if (!domain || typeof domain !== "string") return "";
+    const exact = DOMAINS.find(d => d === domain);
+    if (exact) return exact;
+    const low = domain.trim().toLowerCase();
+    return DOMAINS.find(d => d.toLowerCase() === low) || "";
+  }
+
+  function normalizeTrack(track) {
+    if (!track || typeof track !== "string") return "general";
+    const t = track.trim().toLowerCase();
+    return TRACKS.includes(t) ? t : "general";
+  }
+
+  function validateQuestionBank() {
+    if (!QUESTIONS.length || !DOMAINS.length) return false;
+    const ids = new Set();
+    const domainCounts = {};
+    for (const d of DOMAINS) domainCounts[d] = 0;
+    for (const q of QUESTIONS) {
+      if (!q.id || ids.has(q.id)) return false;
+      ids.add(q.id);
+      if (!DOMAINS.includes(q.domain)) return false;
+      domainCounts[q.domain] += 1;
+      if (!Array.isArray(q.choices) || q.choices.length < 2) return false;
+      if (!Number.isInteger(q.correctAnswer) || q.correctAnswer < 0 || q.correctAnswer >= q.choices.length) return false;
+      if (!Number.isInteger(q.difficulty) || q.difficulty < 1 || q.difficulty > MAX_DIFFICULTY) return false;
+      if (!TRACKS.includes(q.track)) return false;
+      if (!q.question || !q.hint || !q.explanation || !q.subtopic) return false;
+    }
+    return DOMAINS.every(d => domainCounts[d] >= 2);
+  }
+
+  function buildQuestionIndexes() {
+    questionById.clear();
+    questionsByDomain.clear();
+    for (const d of DOMAINS) questionsByDomain.set(d, []);
+    for (const q of QUESTIONS) {
+      questionById.set(q.id, q);
+      questionsByDomain.get(q.domain).push(q);
+    }
+    for (const d of DOMAINS) {
+      const dq = questionsByDomain.get(d) || [];
+      dq.sort((a, b) => a.difficulty - b.difficulty);
+    }
+  }
+
+  // ── Session management ────────────────────────────────────────────────────
+  function loadSession() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+  function saveSession(s) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch (e) {} }
+  function clearSession() { localStorage.removeItem(STORAGE_KEY); }
+
+  function createNewSession(student) {
+    const ds = {}, dp = {}, dpa = {}, dpc = {};
+    for (const d of DOMAINS) {
+      ds[d] = { difficulty: Math.min(2, MAX_DIFFICULTY), asked: 0, correct: 0, streak: 0, lastOutcome: null, lastAskedTurn: -1 };
+      dp[d] = PHASE.SCREENER; dpa[d] = 0; dpc[d] = 0;
+    }
+    return {
+      schemaVersion: 3, sessionId: "session-" + Date.now(), status: "in-progress",
+      startedAt: new Date().toISOString(), completedAt: null, student,
+      targetQuestionCount: APP_CONFIG.targetQuestionCount || 24,
+      currentQuestionId: null, questionStartedAt: null, askedIds: [], history: [],
+      domainState: ds, domainPhase: dp, domainPhaseAsked: dpa, domainPhaseCorrect: dpc,
+      bandCoverage: { programming: { asked: 0, correct: 0 }, mechanical: { asked: 0, correct: 0 }, competition: { asked: 0, correct: 0 } },
+      analytics: null
+    };
+  }
+
+  function ensurePhaseState(session) {
+    if (!session.domainPhase) {
+      session.domainPhase = Object.fromEntries(DOMAINS.map(d => [d, PHASE.SCREENER]));
+      session.domainPhaseAsked = Object.fromEntries(DOMAINS.map(d => [d, 0]));
+      session.domainPhaseCorrect = Object.fromEntries(DOMAINS.map(d => [d, 0]));
+      for (const d of DOMAINS) {
+        const ds = session.domainState[d];
+        if (ds && ds.asked >= 1) {
+          session.domainPhase[d] = PHASE.DEEP_DIVE;
+          session.domainPhaseAsked[d] = Math.max(0, ds.asked - 1);
+          session.domainPhaseCorrect[d] = ds.correct || 0;
+        }
+      }
+    }
+    if (!session.domainPhaseCorrect) session.domainPhaseCorrect = Object.fromEntries(DOMAINS.map(d => [d, 0]));
+    return session;
+  }
+
+  // ── Phase engine ──────────────────────────────────────────────────────────
+  function updateDomainPhase(session, domain) {
+    const state = session.domainState[domain];
+    const phase = session.domainPhase[domain];
+    const phaseAsked = session.domainPhaseAsked[domain] || 0;
+    const isCorrect = state.lastOutcome;
+    if (phase === PHASE.SCREENER) { session.domainPhase[domain] = PHASE.DEEP_DIVE; session.domainPhaseAsked[domain] = 0; session.domainPhaseCorrect[domain] = 0; return; }
+    if (phase === PHASE.DEEP_DIVE) {
+      const next = phaseAsked + 1; session.domainPhaseAsked[domain] = next;
+      if (isCorrect) session.domainPhaseCorrect[domain] = (session.domainPhaseCorrect[domain] || 0) + 1;
+      const pc = session.domainPhaseCorrect[domain] || 0;
+      if (next >= 2 && pc >= DEEP_DIVE_CORRECT_STOP && state.difficulty >= 3) { session.domainPhase[domain] = PHASE.MASTERY; session.domainPhaseAsked[domain] = 0; session.domainPhaseCorrect[domain] = 0; return; }
+      if (next >= DEEP_DIVE_MAX || state.streak <= DEEP_DIVE_WRONG_STOP) { session.domainPhase[domain] = PHASE.COMPLETE; }
+      return;
+    }
+    if (phase === PHASE.MASTERY) {
+      const next = phaseAsked + 1; session.domainPhaseAsked[domain] = next;
+      if (next >= MASTERY_MAX) session.domainPhase[domain] = PHASE.COMPLETE;
+    }
+  }
+
+  function getAssessmentPhase(s) {
+    const p = Object.values(s.domainPhase || {});
+    if (p.some(x => x === PHASE.SCREENER)) return PHASE.SCREENER;
+    if (p.some(x => x === PHASE.DEEP_DIVE)) return PHASE.DEEP_DIVE;
+    if (p.some(x => x === PHASE.MASTERY)) return PHASE.MASTERY;
+    return PHASE.COMPLETE;
+  }
+
+  function isAssessmentComplete(s) { return DOMAINS.every(d => s.domainPhase[d] === PHASE.COMPLETE); }
+
+  function chooseDomainForPhase(session, phase) {
+    const asked = new Set(session.askedIds);
+    const eligible = DOMAINS.filter(d => session.domainPhase[d] === phase && (questionsByDomain.get(d) || []).some(q => !asked.has(q.id)));
+    if (!eligible.length) return null;
+    const oldest = Math.min(...eligible.map(d => session.domainState[d].lastAskedTurn));
+    const candidates = eligible.filter(d => session.domainState[d].lastAskedTurn === oldest);
+    return pickRandom(candidates);
+  }
+
+  function getDomainCoverageBand(domain) {
+    for (const [band, domains] of Object.entries(DOMAIN_COVERAGE_BANDS)) { if (domains.includes(domain)) return band; }
+    return null;
+  }
+
+  // ── View helpers ──────────────────────────────────────────────────────────
+  function showView(name) {
+    Object.values(ui.views).forEach(v => { if (v) v.classList.add("fll-hidden"); });
+    const target = ui.views[name];
+    if (target) target.classList.remove("fll-hidden");
+  }
+
+  function toggleResumeBanner(show) { if (ui.resumeBanner) ui.resumeBanner.classList.toggle("fll-hidden", !show); }
+
+  function hydrateSetupForm(student) {
+    if (student.name && ui.studentName) ui.studentName.value = student.name;
+    if (student.grade && ui.studentGrade) ui.studentGrade.value = student.grade;
+    if (student.team && ui.studentTeam) ui.studentTeam.value = student.team;
+  }
+
+  // ── Timer ─────────────────────────────────────────────────────────────────
+  function startTimer(session) {
+    stopTimer();
+    updateTimerDisplay(getRemainingMs(session));
+    runtime.timerInterval = setInterval(() => {
+      const remaining = getRemainingMs(session);
+      updateTimerDisplay(remaining);
+      if (remaining <= 0) { stopTimer(); session.timedOut = true; completeAssessment(); }
+    }, 1000);
+  }
+  function stopTimer() { if (runtime.timerInterval !== null) { clearInterval(runtime.timerInterval); runtime.timerInterval = null; } }
+  function getRemainingMs(s) { return Math.max(0, ASSESSMENT_TIME_LIMIT_MS - (Date.now() - new Date(s.startedAt).getTime())); }
+  function updateTimerDisplay(ms) {
+    if (!ui.timerDisplay || !ui.timerContainer) return;
+    const sec = Math.ceil(ms / 1000); const m = Math.floor(sec / 60); const s = sec % 60;
+    ui.timerDisplay.textContent = m + ":" + String(s).padStart(2, "0");
+    ui.timerContainer.classList.remove("fll-timer-warning", "fll-timer-danger");
+    if (ms <= 5 * 60 * 1000) ui.timerContainer.classList.add("fll-timer-danger");
+    else if (ms <= 10 * 60 * 1000) ui.timerContainer.classList.add("fll-timer-warning");
+  }
+
+  // ── Setup & session flow ──────────────────────────────────────────────────
+  function handleSetupSubmit(e) {
+    e.preventDefault();
+    const student = { name: ui.studentName.value.trim(), grade: ui.studentGrade.value.trim(), team: ui.studentTeam.value.trim(), track: "general" };
+    if (!student.name) { ui.studentName.focus(); return; }
+    runtime.session = createNewSession(student);
+    saveSession(runtime.session);
+    toggleResumeBanner(false);
+    startSessionFlow();
+  }
+
+  function startFreshFromBanner() {
+    clearSession(); runtime.session = null; runtime.activeQuestion = null;
+    runtime.selectedOptionIndex = null; runtime.questionLocked = false;
+    toggleResumeBanner(false);
+  }
+
+  function resumeSession() { if (runtime.session) startSessionFlow(true); }
+
+  function startSessionFlow(isResume) {
+    showView("assessment");
+    startTimer(runtime.session);
+    if (isResume && runtime.session.currentQuestionId) {
+      const pq = questionById.get(runtime.session.currentQuestionId);
+      if (pq && !runtime.session.askedIds.includes(pq.id)) { renderQuestion(pq); return; }
+    }
+    advanceToNextQuestion();
+  }
+
+  function advanceToNextQuestion() {
+    const s = runtime.session;
+    if (!s) return;
+    if (isAssessmentComplete(s) || !hasUnasked(s)) { completeAssessment(); return; }
+    const next = chooseNextQuestion(s);
+    if (!next) { completeAssessment(); return; }
+    renderQuestion(next);
+  }
+
+  function hasUnasked(s) { const asked = new Set(s.askedIds); return QUESTIONS.some(q => !asked.has(q.id)); }
+
+  function chooseNextQuestion(session) {
+    const asked = new Set(session.askedIds);
+    const track = normalizeTrack(session.student.track);
+    for (const d of DOMAINS) {
+      if (session.domainPhase[d] !== PHASE.COMPLETE) {
+        const avail = (questionsByDomain.get(d) || []).filter(q => !asked.has(q.id));
+        if (!avail.length) session.domainPhase[d] = PHASE.COMPLETE;
+      }
+    }
+    if (isAssessmentComplete(session)) return null;
+    for (const phase of [PHASE.SCREENER, PHASE.DEEP_DIVE, PHASE.MASTERY]) {
+      const domain = chooseDomainForPhase(session, phase);
+      if (!domain) continue;
+      const dm = session.domainState[domain];
+      let td, lo;
+      if (phase === PHASE.SCREENER) { td = SCREENER_DIFFICULTY; lo = null; }
+      else if (phase === PHASE.MASTERY) { td = MASTERY_DIFFICULTY; lo = dm.lastOutcome; }
+      else { td = dm.difficulty; lo = dm.lastOutcome; }
+      const q = selectFromDomain(domain, td, lo, asked, track);
+      if (q) return q;
+    }
+    return null;
+  }
+
+  function selectFromDomain(domain, targetDiff, lastOut, asked, track) {
+    const pool = (questionsByDomain.get(domain) || []).filter(q => !asked.has(q.id));
+    if (!pool.length) return null;
+    const prio = buildDiffPriority(targetDiff, lastOut);
+    for (const lev of prio) {
+      const cands = pool.filter(q => q.difficulty === lev);
+      if (cands.length) return pickWeighted(cands, track);
+    }
+    return pool.sort((a, b) => trackScore(b.track, track) - trackScore(a.track, track))[0] || null;
+  }
+
+  function buildDiffPriority(td, lo) {
+    const offsets = lo === true ? [0,1,-1,2,-2,3,-3] : (lo === false ? [0,-1,1,-2,2,-3,3] : [0,-1,1,-2,2]);
+    const ordered = [];
+    for (const o of offsets) { const c = td + o; if (c >= 1 && c <= MAX_DIFFICULTY && !ordered.includes(c)) ordered.push(c); }
+    if (!ordered.length) ordered.push(Math.max(1, Math.min(MAX_DIFFICULTY, td || 2)));
+    return ordered;
+  }
+
+  function trackScore(qt, st) {
+    if (st === "general") return 0.2;
+    if (qt === st) return 0.45;
+    if (qt === "general") return 0.2;
+    return 0;
+  }
+
+  function pickWeighted(cands, track) {
+    if (!cands.length) return null;
+    const w = cands.map(q => ({ q, w: 1 + trackScore(q.track, track) }));
+    const total = w.reduce((s, i) => s + i.w, 0);
+    let roll = Math.random() * total;
+    for (const item of w) { roll -= item.w; if (roll <= 0) return item.q; }
+    return w[w.length - 1].q;
+  }
+
+  // ── Question rendering ────────────────────────────────────────────────────
+  function renderQuestion(question) {
+    const s = runtime.session;
+    runtime.activeQuestion = question; runtime.selectedOptionIndex = null; runtime.questionLocked = false;
+    s.currentQuestionId = question.id; s.questionStartedAt = Date.now(); saveSession(s);
+    ui.questionPrompt.textContent = question.question;
+    ui.questionTypePill.textContent = (question.type || "mcq").toUpperCase();
+    ui.questionTrackPill.textContent = "Track: " + formatTrack(question.track);
+    ui.questionLevelPill.textContent = LEVELS[question.difficulty] || ("Level " + question.difficulty);
+    ui.questionMetaLine.textContent = "Domain: " + question.domain + " \u2022 Subtopic: " + humanize(question.subtopic);
+    updateStatus(question.domain, s.domainState[question.domain].difficulty);
+
+    // Image
+    if (question.image) {
+      // Fix image paths: prefix with /fll-assets/ if relative
+      let imgSrc = question.image;
+      if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('/')) {
+        imgSrc = '/fll-assets/' + imgSrc.replace(/^assets\//, '');
+      }
+      ui.questionImage.src = imgSrc;
+      ui.questionImage.alt = question.imageAlt || "Question illustration";
+      ui.questionImageCaption.textContent = question.domain + " \u2022 " + humanize(question.subtopic);
+      ui.questionImageWrap.classList.remove("fll-hidden");
+    } else {
+      ui.questionImage.src = ""; ui.questionImageWrap.classList.add("fll-hidden");
+    }
+
+    // Code
+    if (question.code) { ui.questionCode.textContent = question.code; ui.questionCodeWrap.classList.remove("fll-hidden"); }
+    else { ui.questionCode.textContent = ""; ui.questionCodeWrap.classList.add("fll-hidden"); }
+
+    // Options
+    ui.optionsList.innerHTML = "";
+    question.choices.forEach((choice, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button"; btn.className = "fll-option-btn"; btn.dataset.optionIndex = String(i);
+      btn.setAttribute("role", "option"); btn.setAttribute("aria-selected", "false");
+      btn.textContent = String.fromCharCode(65 + i) + ". " + choice;
+      ui.optionsList.appendChild(btn);
+    });
+
+    ui.hintText.textContent = question.hint; ui.hintText.classList.add("fll-hidden");
+    ui.hintToggleButton.textContent = "Show Hint";
+    ui.feedbackPanel.classList.add("fll-hidden"); ui.feedbackPanel.classList.remove("correct", "incorrect");
+    ui.feedbackPanel.textContent = "";
+    ui.submitButton.disabled = true; ui.nextButton.classList.add("fll-hidden");
+  }
+
+  function updateStatus(domain, diff) {
+    const s = runtime.session;
+    const phase = getAssessmentPhase(s);
+    const phaseLabel = phase === PHASE.SCREENER ? "Screener" : phase === PHASE.DEEP_DIVE ? "Deep Dive" : phase === PHASE.MASTERY ? "Mastery Check" : "Finishing";
+    ui.progressLabel.textContent = "Question " + (s.history.length + 1) + " \u2022 " + phaseLabel;
+    ui.currentDomainLabel.textContent = domain;
+    ui.domainDifficultyLabel.textContent = "Level " + diff;
+    const screenerDone = DOMAINS.every(d => s.domainPhase[d] !== PHASE.SCREENER);
+    const deepDiveDone = DOMAINS.every(d => s.domainPhase[d] === PHASE.MASTERY || s.domainPhase[d] === PHASE.COMPLETE);
+    const domainsComplete = DOMAINS.filter(d => s.domainPhase[d] === PHASE.COMPLETE).length;
+    let pct;
+    if (!screenerDone) pct = (DOMAINS.filter(d => s.domainState[d].asked >= 1).length / DOMAINS.length) * 33;
+    else if (!deepDiveDone) pct = 33 + (domainsComplete / DOMAINS.length) * 33;
+    else pct = 66 + (domainsComplete / DOMAINS.length) * 34;
+    ui.progressFill.style.width = Math.min(Math.round(pct), 98) + "%";
+    updatePhaseIndicator(s);
+  }
+
+  function updatePhaseIndicator(s) {
+    if (!ui.phaseStep1) return;
+    const phase = getAssessmentPhase(s);
+    const sd = DOMAINS.every(d => s.domainPhase[d] !== PHASE.SCREENER);
+    const dd = DOMAINS.every(d => s.domainPhase[d] === PHASE.MASTERY || s.domainPhase[d] === PHASE.COMPLETE);
+    ui.phaseStep1.className = "fll-phase-step" + (phase === PHASE.SCREENER ? " active" : sd ? " done" : "");
+    ui.phaseStep2.className = "fll-phase-step" + (phase === PHASE.DEEP_DIVE ? " active" : dd ? " done" : "");
+    ui.phaseStep3.className = "fll-phase-step" + (phase === PHASE.MASTERY ? " active" : "");
+    if (ui.phaseDetailLabel) {
+      if (phase === PHASE.SCREENER) { const n = DOMAINS.filter(d => s.domainState[d].asked >= 1).length; ui.phaseDetailLabel.textContent = n + " of " + DOMAINS.length + " domains screened"; }
+      else if (phase === PHASE.DEEP_DIVE) { const n = DOMAINS.filter(d => s.domainPhase[d] === PHASE.DEEP_DIVE).length; ui.phaseDetailLabel.textContent = n + " domain" + (n !== 1 ? "s" : "") + " left"; }
+      else if (phase === PHASE.MASTERY) { const n = DOMAINS.filter(d => s.domainPhase[d] === PHASE.MASTERY).length; ui.phaseDetailLabel.textContent = n + " mastery check" + (n !== 1 ? "s" : "") + " left"; }
+      else ui.phaseDetailLabel.textContent = "Wrapping up\u2026";
+    }
+  }
+
+  // ── Answer handling ───────────────────────────────────────────────────────
+  function handleOptionSelection(e) {
+    const btn = e.target.closest(".fll-option-btn");
+    if (!btn || runtime.questionLocked) return;
+    runtime.selectedOptionIndex = Number(btn.dataset.optionIndex);
+    ui.optionsList.querySelectorAll(".fll-option-btn").forEach(b => {
+      const sel = Number(b.dataset.optionIndex) === runtime.selectedOptionIndex;
+      b.classList.toggle("selected", sel); b.setAttribute("aria-selected", sel ? "true" : "false");
+    });
+    ui.submitButton.disabled = false;
+  }
+
+  function toggleHint() {
+    const hidden = ui.hintText.classList.contains("fll-hidden");
+    ui.hintText.classList.toggle("fll-hidden", !hidden);
+    ui.hintToggleButton.textContent = hidden ? "Hide Hint" : "Show Hint";
+  }
+
+  function submitCurrentAnswer() {
+    const s = runtime.session, q = runtime.activeQuestion;
+    if (!s || !q || runtime.selectedOptionIndex === null || runtime.questionLocked) return;
+    runtime.questionLocked = true;
+    const timeSpent = s.questionStartedAt ? Math.max(1, Math.round((Date.now() - s.questionStartedAt) / 1000)) : null;
+    const response = applyAnswer(s, q, runtime.selectedOptionIndex, { timeSpentSec: timeSpent, answeredAt: new Date().toISOString() });
+    saveSession(s);
+    renderFeedback(q, response);
+    ui.submitButton.disabled = true; ui.nextButton.classList.remove("fll-hidden");
+    if (isAssessmentComplete(s) || !hasUnasked(s)) ui.nextButton.textContent = "Finish Assessment";
+    else ui.nextButton.textContent = "Next Question";
+    updateStatus(q.domain, s.domainState[q.domain].difficulty);
+  }
+
+  function applyAnswer(session, question, selIdx, meta) {
+    const isCorrect = selIdx === question.correctAnswer;
+    const ds = session.domainState[question.domain];
+    ds.asked += 1; ds.correct += isCorrect ? 1 : 0; ds.lastOutcome = isCorrect;
+    ds.lastAskedTurn = session.history.length;
+    adaptDifficulty(ds, isCorrect);
+    const band = getDomainCoverageBand(question.domain);
+    if (band) {
+      if (!session.bandCoverage) session.bandCoverage = { programming: { asked: 0, correct: 0 }, mechanical: { asked: 0, correct: 0 }, competition: { asked: 0, correct: 0 } };
+      session.bandCoverage[band].asked += 1;
+      session.bandCoverage[band].correct += isCorrect ? 1 : 0;
+    }
+    const response = {
+      questionId: question.id, domain: question.domain, subtopic: question.subtopic, track: question.track,
+      tags: question.tags.join("|"), difficulty: question.difficulty, questionType: question.type,
+      questionText: question.question, domainBand: band, selectedIndex: selIdx,
+      selectedText: question.choices[selIdx], correctIndex: question.correctAnswer,
+      correctText: question.choices[question.correctAnswer], isCorrect,
+      timeSpentSec: meta.timeSpentSec, answeredAt: meta.answeredAt
+    };
+    session.history.push(response); session.askedIds.push(question.id);
+    session.currentQuestionId = null; session.questionStartedAt = null;
+    updateDomainPhase(session, question.domain);
+    return response;
+  }
+
+  function adaptDifficulty(ds, correct) {
+    if (correct) { ds.streak = ds.streak >= 0 ? ds.streak + 1 : 1; if (ds.streak >= 2 && ds.difficulty < MAX_DIFFICULTY) { ds.difficulty += 1; ds.streak = 0; } }
+    else { ds.streak = ds.streak <= 0 ? ds.streak - 1 : -1; if (ds.streak <= -2 && ds.difficulty > 1) { ds.difficulty -= 1; ds.streak = 0; } }
+  }
+
+  function renderFeedback(q, r) {
+    ui.feedbackPanel.classList.remove("fll-hidden", "correct", "incorrect");
+    ui.feedbackPanel.classList.add(r.isCorrect ? "correct" : "incorrect");
+    ui.feedbackPanel.textContent = (r.isCorrect ? "Correct" : "Not yet") + ". " + q.explanation;
+    ui.optionsList.querySelectorAll(".fll-option-btn").forEach(btn => {
+      const idx = Number(btn.dataset.optionIndex);
+      btn.disabled = true;
+      if (idx === q.correctAnswer) btn.classList.add("option-correct");
+      if (!r.isCorrect && idx === r.selectedIndex) btn.classList.add("option-incorrect");
+    });
+  }
+
+  // ── Complete assessment ───────────────────────────────────────────────────
+  function completeAssessment() {
+    const s = runtime.session;
+    if (!s) return;
+    stopTimer();
+    s.status = "complete"; s.completedAt = new Date().toISOString();
+    s.analytics = buildAnalytics(s);
+    saveSession(s);
+    showResults(s.analytics);
+    showView("results");
+
+    // Show timeout notice
+    const notice = document.getElementById("fll-timeout-notice");
+    if (notice) notice.classList.toggle("fll-hidden", !s.timedOut);
+
+    // Save to Progress system for server sync
+    if (typeof Progress !== 'undefined') {
+      Progress.saveFllResult({
+        sessionId: s.sessionId,
+        studentName: s.student.name,
+        completedAt: s.completedAt,
+        overallScore: s.analytics.overallScore,
+        placement: s.analytics.placement,
+        trackReadiness: s.analytics.trackReadiness,
+        strongestDomains: s.analytics.strongestDomains,
+        weakestDomains: s.analytics.weakestDomains,
+        domainsNeedingPractice: s.analytics.domainsNeedingPractice,
+        teacherSummary: s.analytics.teacherSummary,
+        answeredCount: s.analytics.answeredCount
+      });
+    }
+  }
+
+  function buildAnalytics(session) {
+    const qw = d => 1 + (d - 1) * 0.35;
+    let we = 0, wp = 0;
+    const profiles = DOMAINS.map(domain => {
+      const resp = session.history.filter(e => e.domain === domain);
+      const wdp = resp.reduce((s, e) => s + qw(e.difficulty), 0);
+      const wde = resp.reduce((s, e) => s + (e.isCorrect ? qw(e.difficulty) : 0), 0);
+      const sp = wdp > 0 ? Math.round((wde / wdp) * 100) : 0;
+      we += wde; wp += wdp;
+      return { domain, answered: resp.length, correct: resp.filter(e => e.isCorrect).length, scorePercent: sp, currentDifficulty: session.domainState[domain].difficulty };
+    });
+    const overall = wp > 0 ? Math.round((we / wp) * 100) : 0;
+    const answered = profiles.filter(p => p.answered > 0).sort((a, b) => b.scorePercent - a.scorePercent);
+    const strongest = answered.slice(0, 3).map(p => p.domain);
+    const weakest = [...answered].reverse().slice(0, 3).map(p => p.domain);
+    const needPractice = answered.filter(p => p.scorePercent < 58).map(p => p.domain);
+    const practice = needPractice.length ? needPractice : weakest.slice(0, 2);
+    const placement = determinePlacement(overall, profiles);
+    const trackReadiness = buildTrackReadiness(profiles, session.targetQuestionCount);
+    const teacherSummary = genTeacherSummary(session, overall, placement, profiles, strongest, weakest, trackReadiness);
+    return { overallScore: overall, placement, domainProfiles: profiles, strongestDomains: strongest, weakestDomains: weakest, domainsNeedingPractice: practice, trackReadiness, teacherSummary, answeredCount: session.history.length, generatedAt: new Date().toISOString() };
+  }
+
+  function determinePlacement(score, profiles) {
+    const scores = profiles.map(p => p.scorePercent);
+    const min = Math.min(...scores);
+    const below40 = scores.filter(s => s < 40).length;
+    let level = score >= 92 && LEVELS[5] ? 5 : score >= 82 ? 4 : score >= 66 ? 3 : score >= 46 ? 2 : 1;
+    if (below40 >= 3) level = Math.min(level, 2);
+    if (min < 25) level = 1;
+    if (level === 5) {
+      const pb = profiles.find(p => p.domain === "Pybricks / Python Coding");
+      const pf = profiles.find(p => p.domain === "Programming Fundamentals");
+      if ((pb ? pb.scorePercent : 0) < 70 || (pf ? pf.scorePercent : 0) < 70) level = 4;
+    }
+    const rationale = level === 5 ? "Advanced coding depth with Pybricks readiness." : level === 4 ? "Strong cross-domain consistency and competition-ready reliability." : level === 3 ? "Independent problem-solving with specific domains to strengthen." : level === 2 ? "Developing builder; benefits from structured coaching." : "Needs foundational support and scaffolded practice.";
+    return { level, label: LEVELS[level] || ("Level " + level), rationale };
+  }
+
+  function buildTrackReadiness(profiles, target) {
+    const map = new Map(profiles.map(p => [p.domain, p]));
+    const perDomain = target / Math.max(1, DOMAINS.length);
+    const readiness = {};
+    Object.entries(TRACK_READINESS_MODELS).forEach(([key, model]) => {
+      const ws = Object.entries(model.domains).map(([d, w]) => ({ d, w, s: (map.get(d) || {}).scorePercent || 0, a: (map.get(d) || {}).answered || 0 }));
+      const wt = ws.reduce((s, e) => s + (e.s * e.w), 0);
+      const tw = ws.reduce((s, e) => s + e.w, 0) || 1;
+      const base = wt / tw;
+      const expEv = ws.length * perDomain;
+      const ansEv = ws.reduce((s, e) => s + e.a, 0);
+      const er = expEv > 0 ? clamp(ansEv / expEv, 0.62, 1) : 1;
+      const adj = Math.round(base * er * 10) / 10;
+      readiness[key] = { key, label: model.label, score: adj, band: adj >= 82 ? "Advanced" : adj >= 68 ? "Ready" : adj >= 50 ? "Developing" : "Emerging", evidenceRatio: Math.round(er * 100), contributingDomains: ws.map(e => e.d) };
+    });
+    return readiness;
+  }
+
+  function genTeacherSummary(session, score, placement, profiles, strong, weak, readiness) {
+    const st = strong.slice(0, 2).join(" and ") || "no clear strengths yet";
+    const wt = weak.slice(0, 2).join(" and ") || "no clear support areas yet";
+    const cn = weak.slice(0, 2).map(d => domainCoachingNotes[d]).filter(Boolean).join(" ");
+    const rh = [readiness.general, readiness["spike-block"], readiness.pybricks, readiness.fll].filter(Boolean).map(r => r.label + " readiness is " + r.band.toLowerCase() + " (" + r.score + "%).").join(" ");
+    const label = session.student.name ? (session.student.name + (session.student.grade ? " (Grade " + session.student.grade + ")" : "")) : "This student";
+    return (label + " completed " + session.history.length + " adaptive questions with an overall weighted score of " + score + "%. Recommended placement: " + placement.label + ". Strongest: " + st + ". Developing: " + wt + ". " + rh + " " + cn).trim();
+  }
+
+  // ── Results rendering ─────────────────────────────────────────────────────
+  function showResults(a) {
+    const s = runtime.session;
+    const date = s.completedAt || a.generatedAt;
+    ui.resultStudentName.textContent = s.student.name ? (s.student.name + (s.student.grade ? " \u2022 Grade " + s.student.grade : "") + (s.student.team ? " \u2022 " + s.student.team : "")) : "-";
+    ui.resultDateCompleted.textContent = formatDate(date);
+    ui.resultTrack.textContent = formatTrack(s.student.track);
+    ui.overallScore.textContent = a.overallScore + "%";
+    ui.placementRecommendation.textContent = a.placement.label + " \u2014 " + a.placement.rationale;
+    ui.strongestDomains.textContent = (a.strongestDomains || []).join(", ") || "-";
+    ui.weakestDomains.textContent = (a.weakestDomains || []).join(", ") || "-";
+    ui.domainsNeedingPractice.textContent = (a.domainsNeedingPractice || []).join(", ") || "-";
+    ui.teacherSummary.textContent = a.teacherSummary;
+    renderReadiness(ui.trackReadinessList, a.trackReadiness);
+    renderProfiles(a.domainProfiles);
+    renderHistory(s.history);
+  }
+
+  function renderReadiness(el, tr) {
+    if (!el) return; el.innerHTML = "";
+    Object.values(tr || {}).sort((a, b) => b.score - a.score).forEach(item => {
+      const row = document.createElement("div"); row.className = "fll-readiness-item";
+      const label = document.createElement("span"); label.textContent = item.label + ": " + item.band;
+      const score = document.createElement("span"); score.className = "fll-readiness-score"; score.textContent = item.score + "%";
+      row.appendChild(label); row.appendChild(score); el.appendChild(row);
+    });
+  }
+
+  function renderProfiles(profiles) {
+    ui.domainProfiles.innerHTML = "";
+    for (const p of profiles) {
+      const card = document.createElement("div"); card.className = "fll-profile-card";
+      const h = document.createElement("h4"); h.textContent = p.domain;
+      const stat = document.createElement("p"); stat.className = "fll-profile-stats";
+      stat.textContent = p.scorePercent + "% \u2022 " + p.correct + "/" + p.answered + " correct \u2022 adaptive level " + p.currentDifficulty;
+      const meter = document.createElement("div"); meter.className = "fll-profile-meter";
+      const fill = document.createElement("div"); fill.className = "fll-profile-meter-fill"; fill.style.width = p.scorePercent + "%";
+      meter.appendChild(fill); card.appendChild(h); card.appendChild(stat); card.appendChild(meter);
+      ui.domainProfiles.appendChild(card);
+    }
+  }
+
+  function renderHistory(history) {
+    ui.historyBody.innerHTML = "";
+    history.forEach((e, i) => {
+      const row = document.createElement("tr");
+      [String(i + 1), e.domain, humanize(e.subtopic), "Level " + e.difficulty, formatTrack(e.track), e.isCorrect ? "Correct" : "Needs Review", e.selectedText, e.correctText].forEach(v => {
+        const td = document.createElement("td"); td.textContent = v; row.appendChild(td);
+      });
+      ui.historyBody.appendChild(row);
+    });
+  }
+
+  function renderPreviousResults() {
+    const container = document.getElementById("fll-previous-results");
+    const list = document.getElementById("fll-previous-results-list");
+    if (!container || !list) return;
+    if (typeof Progress === 'undefined') { container.style.display = "none"; return; }
+    const results = Progress.getFllResults();
+    if (!results.length) { container.style.display = "none"; return; }
+    container.style.display = "block";
+    list.innerHTML = "";
+    results.slice().reverse().forEach(r => {
+      const card = document.createElement("div"); card.className = "fll-previous-result-card";
+      const info = document.createElement("div"); info.className = "fll-result-info";
+      info.innerHTML = "<strong>" + (r.studentName || "Student") + "</strong><br>" + formatDate(r.completedAt) + " \u2022 " + (r.placement ? r.placement.label : "N/A") + " \u2022 " + (r.answeredCount || 0) + " questions";
+      const score = document.createElement("div"); score.className = "fll-result-score";
+      score.textContent = (r.overallScore || 0) + "%";
+      card.appendChild(info); card.appendChild(score); list.appendChild(card);
+    });
+  }
+
+  // ── Export functions ───────────────────────────────────────────────────────
+  function handleHtmlReport() {
+    const s = runtime.session;
+    if (!s || !s.analytics) return;
+    // Open the standalone report in a new window
+    const win = window.open("", "_blank");
+    if (!win) { alert("Please allow pop-ups for this page."); return; }
+    win.document.write("<html><head><title>FLL Report - " + (s.student.name || "Student") + "</title></head><body style='font-family:sans-serif;max-width:900px;margin:2rem auto;padding:1rem'>");
+    win.document.write("<h1>FLL Placement Report</h1>");
+    win.document.write("<p><strong>Student:</strong> " + (s.student.name || "-") + " | <strong>Score:</strong> " + s.analytics.overallScore + "% | <strong>Placement:</strong> " + s.analytics.placement.label + "</p>");
+    win.document.write("<p><strong>Teacher Summary:</strong> " + s.analytics.teacherSummary + "</p>");
+    win.document.write("<h2>Domain Profiles</h2><table border='1' cellpadding='6' style='border-collapse:collapse;width:100%'><tr><th>Domain</th><th>Score</th><th>Correct</th><th>Level</th></tr>");
+    s.analytics.domainProfiles.forEach(p => {
+      win.document.write("<tr><td>" + p.domain + "</td><td>" + p.scorePercent + "%</td><td>" + p.correct + "/" + p.answered + "</td><td>" + p.currentDifficulty + "</td></tr>");
+    });
+    win.document.write("</table>");
+    win.document.write("<h2>Question History</h2><table border='1' cellpadding='6' style='border-collapse:collapse;width:100%'><tr><th>#</th><th>Domain</th><th>Result</th><th>Answer</th><th>Correct</th></tr>");
+    s.history.forEach((h, i) => {
+      win.document.write("<tr style='background:" + (h.isCorrect ? "#f0fff4" : "#fff5f5") + "'><td>" + (i+1) + "</td><td>" + h.domain + "</td><td>" + (h.isCorrect ? "✓" : "✗") + "</td><td>" + h.selectedText + "</td><td>" + h.correctText + "</td></tr>");
+    });
+    win.document.write("</table><p style='margin-top:2rem;color:#888;text-align:center'>Generated " + new Date().toLocaleDateString() + "</p>");
+    win.document.write("<button onclick='window.print()' style='display:block;margin:1rem auto;padding:0.5rem 2rem;font-size:1rem'>Print Report</button>");
+    win.document.write("</body></html>");
+    win.document.close();
+  }
+
+  function exportJson() {
+    const s = runtime.session;
+    if (!s) return;
+    const a = s.analytics || buildAnalytics(s);
+    const payload = { student: s.student, completedAt: s.completedAt, placement: a.placement, overallScore: a.overallScore, trackReadiness: a.trackReadiness, strongestDomains: a.strongestDomains, weakestDomains: a.weakestDomains, domainProfiles: a.domainProfiles, teacherSummary: a.teacherSummary, history: s.history };
+    downloadFile("fll-results-" + (s.student.name || "student").replace(/\s+/g, "-") + ".json", "application/json", JSON.stringify(payload, null, 2));
+  }
+
+  function exportCsv() {
+    const s = runtime.session;
+    if (!s) return;
+    const header = ["#", "domain", "subtopic", "difficulty", "track", "result", "student_answer", "correct_answer", "time_sec"];
+    const rows = s.history.map((h, i) => [i + 1, h.domain, h.subtopic, h.difficulty, h.track, h.isCorrect ? "correct" : "incorrect", '"' + (h.selectedText || "").replace(/"/g, '""') + '"', '"' + (h.correctText || "").replace(/"/g, '""') + '"', h.timeSpentSec || ""].join(","));
+    downloadFile("fll-results-" + (s.student.name || "student").replace(/\s+/g, "-") + ".csv", "text/csv", [header.join(","), ...rows].join("\n"));
+  }
+
+  function resetToSetup() {
+    stopTimer(); clearSession();
+    runtime.session = null; runtime.activeQuestion = null;
+    runtime.selectedOptionIndex = null; runtime.questionLocked = false;
+    showView("setup"); toggleResumeBanner(false);
+    renderPreviousResults();
+  }
+
+  // ── Utilities ─────────────────────────────────────────────────────────────
+  function formatTrack(t) { return ({ general: "General", "spike-block": "SPIKE Prime Block", pybricks: "Pybricks / Python", fll: "FLL Competition" })[t] || t; }
+  function humanize(s) { return String(s || "general").replace(/[_-]/g, " ").split(" ").filter(Boolean).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" "); }
+  function formatDate(v) { if (!v) return "-"; const d = new Date(v); return isNaN(d.getTime()) ? "-" : d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }); }
+  function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function downloadFile(name, type, content) { const blob = new Blob([content], { type }); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
+
+  return { init };
+})();
   </script>
 </body>
 </html>

@@ -233,6 +233,9 @@ function getOrCreateProgress(studentId) {
 app.use(express.json());
 app.use(express.static(__dirname));
 
+// Serve FLL assessment assets (SVG diagrams)
+app.use('/fll-assets', express.static(path.join(__dirname, 'progressive fll test', 'assets')));
+
 // Session configuration
 app.use(session({
   secret: SESSION_SECRET,
@@ -393,7 +396,7 @@ app.post('/api/progress', requireAuth, async (req, res) => {
       return res.status(403).json({ success: false, error: 'Student access required' });
     }
 
-    const { lessonProgress, totalTime } = req.body;
+    const { lessonProgress, totalTime, fllResults } = req.body;
     const progress = readProgress();
     const studentProgress = getOrCreateProgress(req.session.user.id);
 
@@ -403,6 +406,28 @@ app.post('/api/progress', requireAuth, async (req, res) => {
         ...studentProgress.lessonProgress,
         ...lessonProgress
       };
+    }
+
+    // Merge FLL assessment results
+    if (fllResults) {
+      if (!studentProgress.fllResults) {
+        studentProgress.fllResults = [];
+      }
+      // fllResults can be a single result object or array
+      const results = Array.isArray(fllResults) ? fllResults : [fllResults];
+      for (const result of results) {
+        // Check for duplicate sessionIds
+        const existing = studentProgress.fllResults.findIndex(r => r.sessionId === result.sessionId);
+        if (existing >= 0) {
+          studentProgress.fllResults[existing] = result; // update
+        } else {
+          studentProgress.fllResults.push(result);
+        }
+      }
+      // Keep only the most recent 20 FLL results
+      if (studentProgress.fllResults.length > 20) {
+        studentProgress.fllResults = studentProgress.fllResults.slice(-20);
+      }
     }
 
     // Update total time if provided
@@ -695,7 +720,7 @@ app.get('/api/admin/progress', requireAuth, requireTeacher, (req, res) => {
     const progressData = students
       .filter(s => s.role === 'student')
       .map(s => {
-        const studentProgress = progress[s.id] || { lessonProgress: {}, lastLogin: null, totalTime: 0 };
+        const studentProgress = progress[s.id] || { lessonProgress: {}, lastLogin: null, totalTime: 0, fllResults: [] };
         return {
           id: s.id,
           name: s.name,
@@ -703,7 +728,8 @@ app.get('/api/admin/progress', requireAuth, requireTeacher, (req, res) => {
           lessonsCompleted: Object.keys(studentProgress.lessonProgress || {}).length,
           lastLogin: studentProgress.lastLogin,
           totalTime: studentProgress.totalTime || 0,
-          lessonProgress: studentProgress.lessonProgress
+          lessonProgress: studentProgress.lessonProgress,
+          fllResults: studentProgress.fllResults || []
         };
       });
 
@@ -729,6 +755,7 @@ app.post('/api/admin/reset-progress/:id', requireAuth, requireTeacher, async (re
 
     progress[id] = {
       lessonProgress: {},
+      fllResults: [],
       lastLogin: progress[id].lastLogin,
       totalTime: 0
     };

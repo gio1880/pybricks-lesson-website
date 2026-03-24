@@ -230,6 +230,11 @@ function getOrCreateProgress(studentId) {
 // MIDDLEWARE
 // ============================================
 
+// Trust reverse proxy (required for Render, Heroku, etc. so secure cookies work)
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 app.use(express.json());
 app.use(express.static(__dirname));
 
@@ -244,6 +249,7 @@ app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
+    sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));

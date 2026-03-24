@@ -8038,6 +8038,15 @@ function copyCode(button) {
   });
 }
 
+// Normalize smart/curly quotes to straight quotes (fixes iPhone/iPad auto-replace)
+function normalizeQuotes(str) {
+  return str
+    .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"')  // smart double quotes → "
+    .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'")   // smart single quotes → '
+    .replace(/[\u2013\u2014]/g, '-')                             // en/em dash → hyphen
+    .replace(/\u2026/g, '...');                                  // ellipsis → three dots
+}
+
 function validateExercise(exercise, userAnswer) {
   try {
     if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
@@ -8045,14 +8054,15 @@ function validateExercise(exercise, userAnswer) {
     }
     if (exercise.type === 'code' || exercise.type === 'fill-blank') {
       if (!exercise.validation) return false;
-      const answer = userAnswer.trim();
+      // Normalize smart quotes from mobile keyboards before comparing
+      const answer = normalizeQuotes(userAnswer.trim());
       if (exercise.validation.type === 'contains') {
         // Normalize whitespace for comparison: collapse multiple spaces, trim
         return exercise.validation.patterns.some(pattern => {
           const normAnswer = answer.replace(/\s+/g, ' ');
-          const normPattern = pattern.replace(/\s+/g, ' ');
+          const normPattern = normalizeQuotes(pattern).replace(/\s+/g, ' ');
           // Try exact contains first, then normalized
-          return answer.includes(pattern) || normAnswer.includes(normPattern);
+          return answer.includes(normPattern) || normAnswer.includes(normPattern);
         });
       }
       if (exercise.validation.type === 'regex') {

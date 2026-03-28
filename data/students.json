@@ -150,5 +150,13 @@
     "password_hash": "4af78e0feab0db910af354e5592cd70d:e4d3d903c3dd4c20bc04e93fe110da9c46712d45dad59d6ad06e21f51603837e193156fb966cd68d0da0a6f52a9e7c8ad85e00c8079d3a3177e36bde59c2da96",
     "role": "student",
     "created_at": "2026-03-28T04:20:00.318Z"
+  },
+  {
+    "id": "student-1774726903978-1grvvb",
+    "name": "Melvin Lin",
+    "username": "mlin",
+    "password_hash": "a806c5cd0f95b6b057f9e057eab98aa8:5d97763acaeb9499f58c95f0ee2fb68045f0b3636b6da96f7a99fc536e583d5e4248dfd17f31367f651938e645df1d5ef8127b82feded5324fcd41a1f3196e89",
+    "role": "student",
+    "created_at": "2026-03-28T12:00:00.000Z"
   }
 ]

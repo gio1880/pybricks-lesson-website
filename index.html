@@ -4864,9 +4864,10 @@ I am Alex`
       hint: "First line: robot_name = \"your name here\". Second line: print(robot_name)",
       validation: {
         type: "contains",
+        requireAll: true,
         patterns: ['robot_name = ', 'print(robot_name)'],
         successMessage: "Excellent! You created and used your first variable! 🎉",
-        errorMessage: "Not quite. Make sure you create a variable called robot_name and then print it."
+        errorMessage: "Not quite. Make sure you have both: robot_name = \"something\" AND print(robot_name) on separate lines."
       }
     },
 
@@ -4967,9 +4968,10 @@ Speed is 400 millimeters per second`
       hint: "Example: my_int = 100, my_float = 3.5, my_string = \"Python\", then print each one.",
       validation: {
         type: "contains",
-        patterns: ['=', '=', '=', 'print'],
+        requireAll: true,
+        patterns: ['=', '.', 'print('],
         successMessage: "Perfect! You created and printed different data types! 🎉",
-        errorMessage: "Not quite. Make sure you create one integer, one float, and one string, then print them."
+        errorMessage: "Not quite. Make sure you create a variable with a decimal (float like 3.5), at least one more variable, and use print() for each."
       }
     },
 
@@ -5066,9 +5068,10 @@ False`
       hint: "motor_running = True (with capital T), then print(motor_running)",
       validation: {
         type: "contains",
+        requireAll: true,
         patterns: ['motor_running = True', 'print(motor_running)'],
         successMessage: "Great! You created a boolean variable! 🎉",
-        errorMessage: "Not quite. Make sure motor_running = True (capital T) and then print it."
+        errorMessage: "Not quite. You need BOTH lines: motor_running = True (capital T) AND print(motor_running) on the next line."
       }
     },
 
@@ -5162,9 +5165,10 @@ print(robot_speed)`,
       hint: "Write a comment with # first, then on the next line create a variable like robot_name = \"Sparky\"",
       validation: {
         type: "contains",
+        requireAll: true,
         patterns: ['#', '='],
         successMessage: "Perfect! You wrote a comment and code! 🎉",
-        errorMessage: "Make sure you include a # comment and a variable assignment on the next line."
+        errorMessage: "Make sure you include BOTH: a # comment (line starting with #) AND a variable assignment (name = value) below it."
       }
     },
 
@@ -5374,9 +5378,10 @@ Different distance`
       hint: "if distance > 100: then print one thing, else: print something else. Don't forget indentation!",
       validation: {
         type: "contains",
-        patterns: ['if distance > 100:', 'else:', 'print'],
+        requireAll: true,
+        patterns: ['if distance > 100:', 'else:', 'print('],
         successMessage: "Perfect! You wrote an if/else decision! 🎉",
-        errorMessage: "Make sure you have if distance > 100:, then else:, with correct indentation for the print lines inside."
+        errorMessage: "You need all three parts: if distance > 100: (colon required), else: (colon required), and print() inside each branch — indented with 4 spaces."
       }
     },
 
@@ -5487,9 +5492,10 @@ Count is 2`
       hint: "Use for i in range(1, 6): then print(i) indented inside the loop.",
       validation: {
         type: "contains",
-        patterns: ['for', 'range', 'print'],
+        requireAll: true,
+        patterns: ['for ', 'range(', 'print('],
         successMessage: "Excellent! You wrote a loop that repeats! 🎉",
-        errorMessage: "Not quite. Use for i in range(1, 6): and then print(i) indented inside."
+        errorMessage: "You need all three parts: for (the loop keyword), range( (to define the range), and print( (indented inside the loop with 4 spaces)."
       }
     },
 
@@ -5596,9 +5602,10 @@ Great job!`
       hint: "Use def start_robot(): then indent the print lines. Then on a new line (not indented), write start_robot()",
       validation: {
         type: "contains",
-        patterns: ['def start_robot():', 'print', 'start_robot()'],
+        requireAll: true,
+        patterns: ['def start_robot():', 'print(', 'start_robot()'],
         successMessage: "Perfect! You created and called your first function! 🎉",
-        errorMessage: "Make sure you define the function with def start_robot():, add print lines indented inside, then call it with start_robot()"
+        errorMessage: "You need all three parts: def start_robot(): (to define it), print( indented inside the function body, and start_robot() at the bottom to call it."
       }
     },
 
@@ -5704,9 +5711,10 @@ Moving at 400 speed in backward direction`
       hint: "def print_message(message): then print(message) indented. Then call it with different strings: print_message('hello')",
       validation: {
         type: "contains",
-        patterns: ['def ', '(', '):', 'print'],
+        requireAll: true,
+        patterns: ['def ', '):', 'print('],
         successMessage: "Great! You created a function with parameters! 🎉",
-        errorMessage: "Make sure you define a function with a parameter (e.g., def print_message(message):), use print inside it, then call it with different values."
+        errorMessage: "You need all three parts: def yourFunction(parameter): (with a parameter inside the parens), print( indented inside to use it, and at least one call below like yourFunction(\"hello\")."
       }
     },
 
@@ -5815,9 +5823,10 @@ Is 100 fast? False`
       hint: "def double_speed(speed): return speed * 2. Then result = double_speed(200) and print(result)",
       validation: {
         type: "contains",
-        patterns: ['def', 'return', '* 2'],
+        requireAll: true,
+        patterns: ['def ', 'return ', '* 2', 'print('],
         successMessage: "Excellent! You created a function that returns a value! 🎉",
-        errorMessage: "Make sure you define a function with return that multiplies the parameter by 2, then call it and print the result."
+        errorMessage: "You need all four parts: def yourFunction(speed): to define it, return speed * 2 inside, then call it and wrap it in print() to display the result."
       }
     },
 
@@ -6130,14 +6139,14 @@ else:
 
     exercise: {
       title: "Your Turn!",
-      instructions: "Trace through this code and fill in what gets printed:\nspeed = 300\nif speed > 400:\n    print('Fast')\nelse:\n    print('Slow')",
-      type: "fill-blank",
+      instructions: "Trace through this code and choose what gets printed:\nspeed = 300\nif speed > 400:\n    print('Fast')\nelse:\n    print('Slow')",
+      type: "trace",
       options: ["Fast", "Slow", "Error", "Nothing"],
       correct: 1,
-      hint: "Check the condition: is 300 > 400? No, so the else block runs.",
+      hint: "Check the condition: is 300 > 400? No, so the else block runs and prints 'Slow'.",
       validation: {
         successMessage: "Perfect! You traced the code correctly! 🎉",
-        errorMessage: "Not quite. Check the condition: is 300 > 400? No, so else runs."
+        errorMessage: "Not quite. Check the condition: is 300 > 400? No (300 is less than 400), so the else block runs."
       }
     },
 
@@ -9485,11 +9494,13 @@ function validateExercise(exercise, userAnswer) {
       // Normalize smart quotes from mobile keyboards before comparing
       const answer = normalizeQuotes(userAnswer.trim());
       if (exercise.validation.type === 'contains') {
-        // Normalize whitespace for comparison: collapse multiple spaces, trim
-        return exercise.validation.patterns.some(pattern => {
+        // requireAll: true  → ALL patterns must appear (AND — student must include everything)
+        // requireAll: false/absent → ANY pattern passes (OR — for alternatives like single/double quotes)
+        const useEvery = exercise.validation.requireAll === true;
+        const checker = useEvery ? 'every' : 'some';
+        return exercise.validation.patterns[checker](pattern => {
           const normAnswer = answer.replace(/\s+/g, ' ');
           const normPattern = normalizeQuotes(pattern).replace(/\s+/g, ' ');
-          // Try exact contains first, then normalized
           return answer.includes(normPattern) || normAnswer.includes(normPattern);
         });
       }

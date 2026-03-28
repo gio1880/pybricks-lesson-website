@@ -1,0 +1,355 @@
+{
+  "id": "python-basics-checkpoint",
+  "title": "Python Basics Checkpoint",
+  "description": "Comprehensive assessment of Python fundamentals covering variables, data types, operations, and basic control flow.",
+  "path": "python-micropython",
+  "level": "level-1",
+  "duration": 45,
+  "passingScore": 70,
+  "categories": {
+    "variables": 25,
+    "data-types": 20,
+    "operations": 25,
+    "logic": 30
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "category": "variables",
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "Which of the following is a valid variable name in Python?",
+      "options": [
+        {
+          "text": "my_robot_speed",
+          "correct": true,
+          "explanation": "This follows Python naming conventions: lowercase with underscores"
+        },
+        {
+          "text": "2robot_speed",
+          "correct": false,
+          "explanation": "Variable names cannot start with a number"
+        },
+        {
+          "text": "my-robot-speed",
+          "correct": false,
+          "explanation": "Variable names cannot contain hyphens; use underscores instead"
+        },
+        {
+          "text": "my robot speed",
+          "correct": false,
+          "explanation": "Variable names cannot contain spaces"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "category": "variables",
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "What will be printed by this code?\nx = 5\nx = 10\nx = x + 3\nprint(x)",
+      "options": [
+        {
+          "text": "5",
+          "correct": false
+        },
+        {
+          "text": "10",
+          "correct": false
+        },
+        {
+          "text": "13",
+          "correct": true,
+          "explanation": "x starts at 5, becomes 10, then x + 3 = 13"
+        },
+        {
+          "text": "18",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "category": "variables",
+      "type": "code",
+      "difficulty": "medium",
+      "question": "Create a variable named 'motor_speed' with value 75, then create another variable 'final_speed' that increases motor_speed by 15. Print final_speed.",
+      "prompt": "# Write your code here\n",
+      "validation": {
+        "type": "code_check",
+        "requirements": [
+          "motor_speed variable created with value 75",
+          "final_speed variable created",
+          "final_speed equals 90",
+          "print statement outputs 90"
+        ]
+      },
+      "explanation": "This tests understanding of variable creation, reassignment, and arithmetic operations."
+    },
+    {
+      "id": "q4",
+      "category": "data-types",
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "What is the difference between 5 and 5.0 in Python?",
+      "options": [
+        {
+          "text": "They are identical",
+          "correct": false
+        },
+        {
+          "text": "5 is an integer (int), 5.0 is a float",
+          "correct": true,
+          "explanation": "5 is stored as int, 5.0 is stored as float; they have equal value but different types"
+        },
+        {
+          "text": "5.0 is an integer, 5 is a float",
+          "correct": false
+        },
+        {
+          "text": "5.0 is not valid in Python",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "category": "data-types",
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "What is the type of the result when you calculate 10 / 2 in Python 3?",
+      "options": [
+        {
+          "text": "int (integer)",
+          "correct": false,
+          "explanation": "In Python 3, / always returns a float, even for whole number division"
+        },
+        {
+          "text": "float",
+          "correct": true,
+          "explanation": "The / operator performs floating-point division and returns a float"
+        },
+        {
+          "text": "str (string)",
+          "correct": false
+        },
+        {
+          "text": "Depends on the Python version",
+          "correct": false,
+          "explanation": "In Python 3, / always returns float. Use // for integer division"
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "category": "data-types",
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "Which of these is a string?",
+      "options": [
+        {
+          "text": "42",
+          "correct": false,
+          "explanation": "This is an integer"
+        },
+        {
+          "text": "\"42\"",
+          "correct": true,
+          "explanation": "The quotes make it a string of the characters 4 and 2"
+        },
+        {
+          "text": "[42]",
+          "correct": false,
+          "explanation": "This is a list"
+        },
+        {
+          "text": "42.0",
+          "correct": false,
+          "explanation": "This is a float"
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "category": "operations",
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "What is the result of 10 + 5 * 2?",
+      "options": [
+        {
+          "text": "30",
+          "correct": false,
+          "explanation": "This would only be correct if operations were evaluated left-to-right without precedence"
+        },
+        {
+          "text": "20",
+          "correct": true,
+          "explanation": "Multiplication has higher precedence: 5 * 2 = 10, then 10 + 10 = 20"
+        },
+        {
+          "text": "15",
+          "correct": false
+        },
+        {
+          "text": "25",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "category": "operations",
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "What is the result of 'Hello' + ' ' + 'Robot'?",
+      "options": [
+        {
+          "text": "'Hello Robot'",
+          "correct": true,
+          "explanation": "String concatenation combines strings: 'Hello' + ' ' + 'Robot' = 'Hello Robot'"
+        },
+        {
+          "text": "'HelloRobot'",
+          "correct": false,
+          "explanation": "The space character ' ' is included in the concatenation"
+        },
+        {
+          "text": "An error",
+          "correct": false,
+          "explanation": "String concatenation is valid in Python"
+        },
+        {
+          "text": "0",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "category": "operations",
+      "type": "code",
+      "difficulty": "medium",
+      "question": "Create variables for robot battery status. Create 'battery_percent' with 85, 'voltage' with 7.4, then print an f-string: 'Battery: {battery_percent}% ({voltage}V)'",
+      "prompt": "# Write your code here\n",
+      "validation": {
+        "type": "code_check",
+        "requirements": [
+          "battery_percent variable set to 85",
+          "voltage variable set to 7.4",
+          "f-string created with correct format",
+          "output contains 'Battery: 85% (7.4V)'"
+        ]
+      },
+      "explanation": "This assesses ability to work with mixed data types and f-string formatting."
+    },
+    {
+      "id": "q10",
+      "category": "logic",
+      "type": "multiple-choice",
+      "difficulty": "easy",
+      "question": "What will this code print?\nif 10 > 5:\n    print(\"True\")\nelse:\n    print(\"False\")",
+      "options": [
+        {
+          "text": "True",
+          "correct": true,
+          "explanation": "10 is greater than 5, so the condition is true and 'True' is printed"
+        },
+        {
+          "text": "False",
+          "correct": false
+        },
+        {
+          "text": "Nothing",
+          "correct": false
+        },
+        {
+          "text": "An error",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "category": "logic",
+      "type": "multiple-choice",
+      "difficulty": "medium",
+      "question": "What will this code print?\nspeed = 50\nif speed > 75:\n    print(\"Fast\")\nelif speed > 25:\n    print(\"Medium\")\nelse:\n    print(\"Slow\")",
+      "options": [
+        {
+          "text": "Fast",
+          "correct": false
+        },
+        {
+          "text": "Medium",
+          "correct": true,
+          "explanation": "50 is not > 75, but it IS > 25, so 'Medium' is printed"
+        },
+        {
+          "text": "Slow",
+          "correct": false
+        },
+        {
+          "text": "Fast Medium",
+          "correct": false,
+          "explanation": "Only one branch of the if/elif/else executes"
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "category": "logic",
+      "type": "code",
+      "difficulty": "medium",
+      "question": "Write code that:\n1. Creates a variable 'battery_level' with value 45\n2. Uses an if/elif/else statement to print:\n   - 'Battery critical' if battery < 20\n   - 'Battery low' if battery < 50\n   - 'Battery good' otherwise",
+      "prompt": "# Write your code here\nbattery_level = 45\n\n",
+      "validation": {
+        "type": "code_check",
+        "requirements": [
+          "battery_level equals 45",
+          "if/elif/else structure used",
+          "output is 'Battery low'"
+        ]
+      },
+      "explanation": "This tests understanding of conditional logic with multiple branches."
+    }
+  ],
+  "summary": {
+    "totalPoints": 100,
+    "breakdown": [
+      {
+        "category": "Variables",
+        "points": 25,
+        "description": "Creating, naming, and reassigning variables"
+      },
+      {
+        "category": "Data Types",
+        "points": 20,
+        "description": "Understanding int, float, and string types"
+      },
+      {
+        "category": "Operations",
+        "points": 25,
+        "description": "Math, string concatenation, and operators"
+      },
+      {
+        "category": "Logic",
+        "points": 30,
+        "description": "Conditional statements and decision making"
+      }
+    ]
+  },
+  "feedback": {
+    "excellent": {
+      "minScore": 90,
+      "message": "Excellent work! You have a strong grasp of Python fundamentals. You're ready to move on to more advanced topics."
+    },
+    "good": {
+      "minScore": 70,
+      "message": "Good job! You understand the core concepts. Review the areas where you had difficulty and practice before moving forward."
+    },
+    "needsWork": {
+      "minScore": 0,
+      "message": "You need more practice with Python basics. Review the lessons and try the exercises again. Don't hesitate to ask for help!"
+    }
+  }
+}

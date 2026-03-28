@@ -1,0 +1,352 @@
+{
+  "id": "variables-and-types",
+  "title": "Variables and Data Types",
+  "path": "python-micropython",
+  "level": "level-1",
+  "module": "mod-1-2",
+  "order": 2,
+  "lessons": [
+    {
+      "id": "what-are-variables",
+      "title": "What Are Variables?",
+      "type": "lesson",
+      "duration": 15,
+      "explain": {
+        "title": "Understanding Variables",
+        "content": "A variable is like a labeled container that holds a value. When you create a variable, you give it a name and assign it a value. The computer then remembers that value whenever you use the variable's name.\n\nThink of variables like mail boxes. Each mailbox has a label (the variable name) and contains something inside (the value). When you want to know what's in the mailbox, you just look at the label and retrieve what's inside.\n\nVariables are essential in programming because they let you:\n- Store information to use later\n- Perform calculations on stored values\n- Keep track of changing information\n- Make your code more readable and maintainable",
+        "keyPoints": [
+          "Variables are containers that store values",
+          "Variables have names that describe what they contain",
+          "You can change the value of a variable at any time",
+          "Variable names should be descriptive and meaningful",
+          "In Python, you create a variable by assigning a value to it"
+        ]
+      },
+      "example": {
+        "title": "Creating and Using Variables",
+        "code": "# Creating variables\nstudent_name = \"Alex\"\nstudent_age = 14\nfavorite_number = 42\n\n# Using variables\nprint(student_name)\nprint(student_age)\nprint(favorite_number)\n\n# Changing a variable\nstudent_age = 15\nprint(student_age)  # Now prints 15",
+        "annotations": [
+          {
+            "line": 1,
+            "note": "This line creates a variable named 'student_name' with the value 'Alex'"
+          },
+          {
+            "line": 2,
+            "note": "This creates a variable with a number value"
+          },
+          {
+            "line": 6,
+            "note": "print() displays the value of the variable"
+          },
+          {
+            "line": 9,
+            "note": "Variables can be reassigned to new values"
+          }
+        ],
+        "output": "Alex\n14\n42\n15"
+      },
+      "exercise": {
+        "title": "Create Your First Variables",
+        "instructions": "Create three variables:\n1. A variable named 'robot_name' with a name for your robot (e.g., 'Speedster')\n2. A variable named 'battery_level' with a number between 0 and 100\n3. A variable named 'is_moving' with the value True or False\n\nThen print all three variables to verify they were created correctly.",
+        "type": "code",
+        "initialCode": "# Create your variables here\n\n\n# Print them here\nprint(robot_name)\nprint(battery_level)\nprint(is_moving)",
+        "solution": "robot_name = \"Speedster\"\nbattery_level = 85\nis_moving = True\n\nprint(robot_name)\nprint(battery_level)\nprint(is_moving)",
+        "validation": {
+          "type": "output_contains",
+          "contains": ["Speedster", "85", "True"]
+        }
+      },
+      "quiz": {
+        "questions": [
+          {
+            "id": "q1",
+            "question": "What is a variable?",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "A container that stores a value",
+                "correct": true
+              },
+              {
+                "text": "A type of robot motor",
+                "correct": false
+              },
+              {
+                "text": "A Python library",
+                "correct": false
+              },
+              {
+                "text": "A sensor on the robot",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "Which of these is a valid variable name?",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "my_robot_speed",
+                "correct": true
+              },
+              {
+                "text": "my-robot-speed",
+                "correct": false,
+                "explanation": "Variable names cannot contain hyphens"
+              },
+              {
+                "text": "123_speed",
+                "correct": false,
+                "explanation": "Variable names cannot start with a number"
+              },
+              {
+                "text": "my robot speed",
+                "correct": false,
+                "explanation": "Variable names cannot contain spaces"
+              }
+            ]
+          },
+          {
+            "id": "q3",
+            "question": "After running these lines, what is the value of x?\nx = 10\nx = 20\nx = x + 5",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "10",
+                "correct": false
+              },
+              {
+                "text": "20",
+                "correct": false
+              },
+              {
+                "text": "25",
+                "correct": true
+              },
+              {
+                "text": "35",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "numbers-integers-and-floats",
+      "title": "Numbers: Integers and Floats",
+      "type": "lesson",
+      "duration": 20,
+      "explain": {
+        "title": "Integer and Float Data Types",
+        "content": "Numbers in Python come in two main types:\n\nIntegers: Whole numbers without decimal points (e.g., 5, -10, 0, 100). Integers are used for counting, indexing, and any situation where you need whole number values.\n\nFloats: Numbers with decimal points (e.g., 3.14, -0.5, 2.0). Floats are used for measurements, calculations, and any situation where you need fractional values.\n\nWhy does this matter? Python treats integers and floats slightly differently. Operations between them might produce floats. Understanding this helps you write code that works correctly and predictably.\n\nFor robotics, you'll use integers for things like:\n- Motor speeds (0-100 for percentage)\n- Sensor readings (distance in cm)\n- Loop counters\n- Time in milliseconds\n\nYou'll use floats for:\n- Precise measurements (wheel diameter in cm)\n- Angle calculations\n- Calibration values\n- PID control constants",
+        "keyPoints": [
+          "Integers are whole numbers without decimals",
+          "Floats are numbers with decimal points",
+          "3 and 3.0 are technically different types (int vs float)",
+          "You can mix integers and floats in calculations",
+          "Python will automatically convert integers to floats when needed",
+          "Use integers for counting and indexing, floats for measurements"
+        ]
+      },
+      "example": {
+        "title": "Working with Numbers",
+        "code": "# Integer variables\nmotor_speed = 75\nsensor_reading = 42\nmission_number = 1\n\n# Float variables\nwheel_diameter = 5.6\ncalibration_factor = 1.05\ndistance_traveled = 123.45\n\n# Mixed calculations\ntotal_distance = 100 + distance_traveled\naverage_speed = motor_speed / 2.0\n\nprint(\"Motor speed:\", motor_speed)\nprint(\"Wheel diameter:\", wheel_diameter)\nprint(\"Total distance:\", total_distance)\nprint(\"Average speed:\", average_speed)\nprint(\"Type of motor_speed:\", type(motor_speed))\nprint(\"Type of wheel_diameter:\", type(wheel_diameter))",
+        "annotations": [
+          {
+            "line": 1,
+            "note": "Integer values - whole numbers without decimal points"
+          },
+          {
+            "line": 5,
+            "note": "Float values - numbers with decimal points"
+          },
+          {
+            "line": 9,
+            "note": "Result will be a float because distance_traveled is a float"
+          },
+          {
+            "line": 10,
+            "note": "Dividing by 2.0 (a float) produces a float result"
+          },
+          {
+            "line": 14,
+            "note": "type() shows whether a value is an int or float"
+          }
+        ],
+        "output": "Motor speed: 75\nWheel diameter: 5.6\nTotal distance: 223.45\nAverage speed: 37.5\nType of motor_speed: <class 'int'>\nType of wheel_diameter: <class 'float'>"
+      },
+      "exercise": {
+        "title": "Robot Configuration Variables",
+        "instructions": "Create variables for a robot's configuration:\n1. Create an integer variable 'robot_id' with value 7\n2. Create a float variable 'wheel_diameter' with value 5.6 (centimeters)\n3. Create an integer variable 'max_motor_power' with value 100\n4. Create a float variable 'battery_voltage' with value 7.4\n5. Calculate and print the robot's identifier string: 'Robot [robot_id] - Max Power: [max_motor_power]%'\n6. Calculate and print the wheel circumference using the formula: circumference = 3.14159 * wheel_diameter",
+        "type": "code",
+        "initialCode": "# Create your variables here\n\n\n\n# Print the information\nprint(\"Robot\", robot_id, \"- Max Power:\", max_motor_power, \"%\")\ncircumference = 3.14159 * wheel_diameter\nprint(\"Wheel circumference:\", circumference)",
+        "solution": "robot_id = 7\nwheel_diameter = 5.6\nmax_motor_power = 100\nbattery_voltage = 7.4\n\nprint(\"Robot\", robot_id, \"- Max Power:\", max_motor_power, \"%\")\ncircumference = 3.14159 * wheel_diameter\nprint(\"Wheel circumference:\", circumference)",
+        "validation": {
+          "type": "output_contains",
+          "contains": ["Robot 7", "Max Power: 100", "circumference"]
+        }
+      },
+      "quiz": {
+        "questions": [
+          {
+            "id": "q1",
+            "question": "What is the difference between 5 and 5.0 in Python?",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "They are exactly the same",
+                "correct": false
+              },
+              {
+                "text": "5 is an integer, 5.0 is a float",
+                "correct": true
+              },
+              {
+                "text": "5.0 is an integer, 5 is a float",
+                "correct": false
+              },
+              {
+                "text": "5.0 is not a valid number in Python",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What will be the type of the result of 10 / 2 in Python?",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "integer (int)",
+                "correct": false,
+                "explanation": "In Python 3, division always returns a float"
+              },
+              {
+                "text": "float",
+                "correct": true,
+                "explanation": "The / operator always performs floating-point division"
+              },
+              {
+                "text": "string",
+                "correct": false
+              },
+              {
+                "text": "undefined",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "strings-and-text",
+      "title": "Strings and Text",
+      "type": "lesson",
+      "duration": 18,
+      "explain": {
+        "title": "Working with Text in Python",
+        "content": "A string is a sequence of characters - letters, numbers, symbols, and spaces. Strings are enclosed in either single quotes (') or double quotes (\"). They're used to store text information like names, messages, and labels.\n\nStrings are powerful because you can:\n- Store text information\n- Display messages to users\n- Process and manipulate text\n- Convert numbers to text for display\n- Work with robot names, file names, and other text data\n\nYou can combine strings together (called concatenation) using the + operator. You can also use f-strings (formatted string literals) to include variable values directly in text, which is cleaner and more readable.\n\nFor robotics applications, you'll use strings for:\n- Robot names and identifiers\n- Status messages\n- Log output and debugging\n- Configuration file names\n- Sensor descriptions",
+        "keyPoints": [
+          "Strings are sequences of characters enclosed in quotes",
+          "You can use single or double quotes for strings",
+          "Strings can contain letters, numbers, symbols, and spaces",
+          "Use + to concatenate (combine) strings",
+          "F-strings let you embed variables in strings using {variable_name}",
+          "len() gives you the length of a string",
+          "Strings are immutable - you can't change individual characters"
+        ]
+      },
+      "example": {
+        "title": "String Operations",
+        "code": "# Creating strings\nrobot_name = \"EV3-Alpha\"\nstatus_message = \"Robot is ready\"\nmission_description = 'Complete the FLL challenge'\n\n# String concatenation\ngreeting = \"Hello, \" + robot_name\nprint(greeting)\n\n# String length\nname_length = len(robot_name)\nprint(\"Robot name length:\", name_length)\n\n# F-strings (formatted strings)\nspeed = 75\npower = 100\nstatus = f\"Robot {robot_name} running at {speed}% speed with {power}W power\"\nprint(status)\n\n# String methods\nuppercase_name = robot_name.upper()\nlowercase_name = robot_name.lower()\nprint(uppercase_name)\nprint(lowercase_name)",
+        "annotations": [
+          {
+            "line": 1,
+            "note": "Strings can contain letters, numbers, and symbols"
+          },
+          {
+            "line": 6,
+            "note": "Concatenation combines strings with +"
+          },
+          {
+            "line": 9,
+            "note": "len() counts characters in a string"
+          },
+          {
+            "line": 12,
+            "note": "F-strings allow embedding variables in text"
+          },
+          {
+            "line": 16,
+            "note": "Methods like .upper() and .lower() modify string appearance"
+          }
+        ],
+        "output": "Hello, EV3-Alpha\nRobot name length: 9\nRobot EV3-Alpha running at 75% speed with 100W power\nEV3-ALPHA\nev3-alpha"
+      },
+      "exercise": {
+        "title": "Create Robot Status Messages",
+        "instructions": "Create variables and messages for your robot:\n1. Create a string variable 'team_name' with your team's name\n2. Create a string variable 'robot_name' with 'MissionBot-v2'\n3. Create an integer variable 'mission_number' with 3\n4. Create an f-string that says: '[team_name]'s [robot_name] is starting Mission [mission_number]'\n5. Create another string that shows the robot name in uppercase\n6. Print both strings",
+        "type": "code",
+        "initialCode": "# Create your variables here\n\n\n\n# Create the f-string message\nmission_message = \n\n# Create uppercase version\nupper_robot_name = \n\n# Print the messages\nprint(mission_message)\nprint(\"Robot name (uppercase):\", upper_robot_name)",
+        "solution": "team_name = \"The Robo Ninjas\"\nrobot_name = \"MissionBot-v2\"\nmission_number = 3\n\nmission_message = f\"{team_name}'s {robot_name} is starting Mission {mission_number}\"\nupper_robot_name = robot_name.upper()\n\nprint(mission_message)\nprint(\"Robot name (uppercase):\", upper_robot_name)",
+        "validation": {
+          "type": "output_contains",
+          "contains": ["MissionBot-v2", "Mission", "MISSIONBOT"]
+        }
+      },
+      "quiz": {
+        "questions": [
+          {
+            "id": "q1",
+            "question": "How do you create a string in Python?",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "str(\"text\")",
+                "correct": false
+              },
+              {
+                "text": "\"text\" or 'text'",
+                "correct": true
+              },
+              {
+                "text": "string(\"text\")",
+                "correct": false
+              },
+              {
+                "text": "[text]",
+                "correct": false
+              }
+            ]
+          },
+          {
+            "id": "q2",
+            "question": "What is the result of 'Hello' + ' ' + 'World'?",
+            "type": "multiple-choice",
+            "options": [
+              {
+                "text": "'Hello World'",
+                "correct": true
+              },
+              {
+                "text": "'HelloWorld'",
+                "correct": false
+              },
+              {
+                "text": "an error",
+                "correct": false
+              },
+              {
+                "text": "'Hello' 'World'",
+                "correct": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

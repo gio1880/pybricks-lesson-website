@@ -1,0 +1,1371 @@
+[
+  {
+    "id": "robotics-foundations",
+    "number": 1,
+    "title": "Robotics Foundations",
+    "subtitle": "Understanding the Building Blocks of Every Robot",
+    "description": "Master the fundamental concepts that power every robot. From mechanical components to control systems, learn what makes robots move, think, and interact with the world.",
+    "difficulty": "beginner",
+    "category": "engineering",
+    "icon": "robot-icon",
+    "color": "#06B6D4",
+    "prerequisites": [],
+    "duration": "6-8 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "What is a Robot?",
+        "subtitle": "Building blocks and basic concepts",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Introduction to Robotics",
+            "description": "Explore what defines a robot and how they're used in the real world",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "What Makes a Robot", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Parts of a Robot", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Robots in the Real World", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Knowledge Check", "type": "assessment" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Mechanical Systems",
+        "subtitle": "How robots move and interact",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Motors and Motion",
+            "description": "Understanding how motors create movement",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Types of Motors", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Torque and Speed", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Motor Control Basics", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Motor Knowledge Test", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Gears and Wheels",
+            "description": "Transmitting power and creating movement",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Gear Ratios Explained", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Speed and Torque Trade-offs", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Wheel Selection and Traction", "type": "lesson" },
+              { "id": "checkpoint-2-2", "title": "Gears Quiz", "type": "assessment" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Sensing and Input",
+        "subtitle": "How robots perceive their environment",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Types of Sensors",
+            "description": "Introduction to robot sensors and their applications",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Touch Sensors", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Color and Light Sensors", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Distance and Ultrasonic Sensors", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Gyro and Movement Sensors", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Sensors Assessment", "type": "assessment" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Control and Logic",
+        "subtitle": "Making decisions and controlling behavior",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Basic Control Concepts",
+            "description": "Logic and decision-making in robots",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "If-Then Logic", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Loops and Repetition", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Sensor-Based Control", "type": "lesson" },
+              { "id": "checkpoint-4-1", "title": "Control Logic Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Program Structure",
+            "description": "Organizing robot control programs",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Program Flow", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Event Handling", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "State Management", "type": "lesson" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "block-coding",
+    "number": 2,
+    "title": "Block Coding",
+    "subtitle": "Visual Programming for Robotics",
+    "description": "Learn to program robots using visual block-based languages. Master sequences, loops, conditionals, and events with hands-on SPIKE or Scratch projects.",
+    "difficulty": "beginner",
+    "category": "programming",
+    "icon": "blocks-icon",
+    "color": "#F59E0B",
+    "prerequisites": ["robotics-foundations"],
+    "duration": "6-8 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "Getting Started with Blocks",
+        "subtitle": "First steps in visual programming",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Block Basics",
+            "description": "Introduction to block-based programming interfaces",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "Meet the Block Editor", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Running Your First Program", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Connecting to Your Robot", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Setup Checklist", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Simple Sequences",
+            "description": "Building programs that do one thing after another",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Moving Forward", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Turning and Spinning", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Making Sounds", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Your First Robot Dance", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Loops and Repetition",
+        "subtitle": "Making robots repeat actions",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Loop Fundamentals",
+            "description": "Understanding and using loop blocks",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Repeat Loops", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Forever Loops", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Loop Counter Patterns", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Loop Understanding Test", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Practical Loop Applications",
+            "description": "Using loops to solve real problems",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Line Following with Loops", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Obstacle Course Patterns", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Repetitive Behaviors", "type": "lesson" },
+              { "id": "project-2-2", "title": "Square Navigation", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Conditionals and Decisions",
+        "subtitle": "Making robots think and choose",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "If-Then Statements",
+            "description": "Basic conditional logic in programs",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "If-Then Basics", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "If-Then-Else Logic", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Comparing Values", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Conditional Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Sensor-Based Decisions",
+            "description": "Using sensors to control program flow",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Touch Sensor Conditionals", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Color Detection Logic", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Distance-Based Decisions", "type": "lesson" },
+              { "id": "project-3-2", "title": "Obstacle Avoider", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Events and Triggers",
+        "subtitle": "Responding to changes in the environment",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Event-Driven Programming",
+            "description": "Programs that respond to events",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "What are Events?", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Button Press Events", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Sensor Events", "type": "lesson" },
+              { "id": "lesson-4-1-4", "title": "Multiple Event Handlers", "type": "lesson" },
+              { "id": "project-4-1", "title": "Interactive Robot", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "python-micropython",
+    "number": 3,
+    "title": "Python & MicroPython",
+    "subtitle": "Real Programming for Real Robots",
+    "description": "Graduate to real programming with Python. Learn variables, functions, and data structures while controlling actual hardware with MicroPython on robot platforms.",
+    "difficulty": "beginner-to-intermediate",
+    "category": "programming",
+    "icon": "python-icon",
+    "color": "#3B82F6",
+    "prerequisites": ["robotics-foundations", "block-coding"],
+    "duration": "10-12 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "Python Fundamentals",
+        "subtitle": "Core language concepts",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Getting Started with Python",
+            "description": "Setting up Python and writing your first programs",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "Python Setup and Installation", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Your First Python Program", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Using the Interactive Shell", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Setup Verification", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Variables and Data Types",
+            "description": "Storing and manipulating information",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "What Are Variables?", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Numbers: Integers and Floats", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Strings and Text", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Booleans and Logic", "type": "lesson" },
+              { "id": "checkpoint-1-2", "title": "Data Types Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-3",
+            "title": "Basic Operations",
+            "description": "Math, comparisons, and logic",
+            "order": 3,
+            "lessons": [
+              { "id": "lesson-1-3-1", "title": "Math Operations", "type": "lesson" },
+              { "id": "lesson-1-3-2", "title": "String Operations", "type": "lesson" },
+              { "id": "lesson-1-3-3", "title": "Comparison Operators", "type": "lesson" },
+              { "id": "lesson-1-3-4", "title": "Logical Operators", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Control Flow",
+        "subtitle": "Making decisions and repeating actions",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Conditionals",
+            "description": "If statements and control flow",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "If Statements", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "If-Else Conditions", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Elif and Multiple Conditions", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Nested Conditionals", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Conditionals Test", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Loops",
+            "description": "For and while loops",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "While Loops", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "For Loops and Ranges", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Break and Continue", "type": "lesson" },
+              { "id": "lesson-2-2-4", "title": "Nested Loops", "type": "lesson" },
+              { "id": "checkpoint-2-2", "title": "Loops Quiz", "type": "assessment" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Functions and Data Structures",
+        "subtitle": "Organizing code and managing data",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Functions",
+            "description": "Writing reusable code",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Function Basics", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Parameters and Arguments", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Return Values", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Scope and Variables", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Functions Assessment", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Lists and Collections",
+            "description": "Managing groups of data",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Lists and Indexing", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "List Methods", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Tuples and Dictionaries", "type": "lesson" },
+              { "id": "lesson-3-2-4", "title": "Iterating Collections", "type": "lesson" },
+              { "id": "checkpoint-3-2", "title": "Data Structures Quiz", "type": "assessment" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "MicroPython and Hardware",
+        "subtitle": "Controlling robots with Python",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "MicroPython Basics",
+            "description": "Introduction to MicroPython on robot platforms",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "What is MicroPython?", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Setting Up MicroPython", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Your First MicroPython Program", "type": "lesson" },
+              { "id": "checkpoint-4-1", "title": "MicroPython Setup", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Motor and Sensor Control",
+            "description": "Controlling hardware with Python",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Controlling Motors", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Reading Sensors", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "Motor Tuning and Calibration", "type": "lesson" },
+              { "id": "lesson-4-2-4", "title": "Creating Robot Functions", "type": "lesson" },
+              { "id": "project-4-2", "title": "Autonomous Robot", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pybricks-fll",
+    "number": 4,
+    "title": "Pybricks for FLL",
+    "subtitle": "First LEGO League Programming Excellence",
+    "description": "Master Pybricks programming specifically for FLL competitions. Learn precise motor control, sensor-based navigation, and autonomous mission programming.",
+    "difficulty": "intermediate",
+    "category": "competition",
+    "icon": "fll-icon",
+    "color": "#EF4444",
+    "prerequisites": ["python-micropython"],
+    "duration": "12-16 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "Pybricks Essentials",
+        "subtitle": "Getting started with the FLL programming framework",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Pybricks Fundamentals",
+            "description": "Introduction to the Pybricks library and EV3",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "Introduction to Pybricks", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Setting Up Pybricks", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Understanding the EV3 Hub", "type": "lesson" },
+              { "id": "lesson-1-1-4", "title": "Your First Pybricks Program", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Setup and Basics Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Motor Control",
+            "description": "Precise control of motors for FLL",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Basic Motor Commands", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Speed and Power", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Stopping Methods", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Motor Synchronization", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Sensor Programming",
+        "subtitle": "Using sensors for autonomous navigation",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Sensor Integration",
+            "description": "Reading and using sensor data in Pybricks",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Sensor Types in Pybricks", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Color Sensor Configuration", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Touch Sensor Events", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Gyro for Rotation", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Sensor Knowledge Test", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Line Following and Navigation",
+            "description": "Autonomous movement with sensors",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Line Following Basics", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "PID Control Introduction", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Gyro-Based Turning", "type": "lesson" },
+              { "id": "lesson-2-2-4", "title": "Navigation Strategies", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Mission Programming",
+        "subtitle": "Building complete autonomous missions",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Mission Architecture",
+            "description": "Structuring mission code effectively",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Mission Structure and Organization", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "State Machines in Missions", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Error Handling and Recovery", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Debugging Missions", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Architecture Assessment", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Advanced Mission Techniques",
+            "description": "Building reliable, precise missions",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Precision Movement", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Attachment Control", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Multi-Objective Missions", "type": "lesson" },
+              { "id": "project-3-2", "title": "Complete FLL Mission", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Competition Optimization",
+        "subtitle": "Preparing for FLL competition",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Performance Tuning",
+            "description": "Optimizing speed, reliability, and accuracy",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "Speed vs. Reliability", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Calibration Techniques", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Handling Environmental Variation", "type": "lesson" },
+              { "id": "lesson-4-1-4", "title": "Testing Strategies", "type": "lesson" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Team Programming Best Practices",
+            "description": "Collaboration and code management",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Code Organization for Teams", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Documentation Practices", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "Version Control Basics", "type": "lesson" },
+              { "id": "project-4-2", "title": "Team Competition Simulation", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ftc-java",
+    "number": 5,
+    "title": "FTC Java",
+    "subtitle": "FIRST Tech Challenge Advanced Programming",
+    "description": "Enter the world of advanced robotics with FTC. Learn Java, FTC Blocks, OnBot Java, and Android Studio to build sophisticated teleop and autonomous programs.",
+    "difficulty": "intermediate-to-advanced",
+    "category": "competition",
+    "icon": "ftc-icon",
+    "color": "#8B5CF6",
+    "prerequisites": ["python-micropython"],
+    "duration": "14-18 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "FTC Fundamentals",
+        "subtitle": "Introduction to FTC and the SDK",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "FTC Overview",
+            "description": "Understanding FIRST Tech Challenge and the hardware ecosystem",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "What is FTC?", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "FTC Hardware Stack", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Setting Up Your Development Environment", "type": "lesson" },
+              { "id": "lesson-1-1-4", "title": "The FTC SDK", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "FTC Setup Verification", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "FTC Blocks Introduction",
+            "description": "Block-based programming in FTC",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Accessing FTC Blocks", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Your First FTC Program", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Motor and Servo Control", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Sensor Reading", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Java Basics for FTC",
+        "subtitle": "Learning Java for robot programming",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Java Fundamentals",
+            "description": "Essential Java concepts for FTC",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Java Syntax Basics", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Variables and Data Types", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Control Flow in Java", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Methods and Functions", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Java Basics Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Object-Oriented Programming",
+            "description": "OOP concepts for FTC programs",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Classes and Objects", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Inheritance and Interfaces", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Encapsulation", "type": "lesson" },
+              { "id": "lesson-2-2-4", "title": "ArrayLists and Collections", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "OnBot Java and Android Studio",
+        "subtitle": "Advanced programming environments",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "OnBot Java",
+            "description": "Web-based Java programming for FTC",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "OnBot Java Setup", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Writing OnBot Java Programs", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "FTC Hardware Abstraction", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Debugging OnBot Programs", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "OnBot Java Assessment", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Android Studio Development",
+            "description": "Professional FTC development environment",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Android Studio Setup", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Project Structure and Organization", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Building and Deploying", "type": "lesson" },
+              { "id": "lesson-3-2-4", "title": "Advanced Debugging", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Teleop and Autonomous",
+        "subtitle": "Building competition-ready programs",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Teleop Programming",
+            "description": "Driver-controlled programs",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "Gamepad Input Handling", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Mecanum Drive Control", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Multi-Subsystem Management", "type": "lesson" },
+              { "id": "lesson-4-1-4", "title": "Driver Feedback Systems", "type": "lesson" },
+              { "id": "project-4-1", "title": "Competition Teleop Program", "type": "project" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Autonomous Programming",
+            "description": "Self-driving robot programs",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Autonomous Program Structure", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Vision-Based Object Detection", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "IMU and Odometry", "type": "lesson" },
+              { "id": "lesson-4-2-4", "title": "Building Complex Autonomous Routines", "type": "lesson" },
+              { "id": "project-4-2", "title": "Autonomous Mission", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cad-3d-design",
+    "number": 6,
+    "title": "CAD & 3D Design",
+    "subtitle": "Digital Design for Robots",
+    "description": "Master digital design tools like Tinkercad, BrickLink Studio, and Onshape. Design robot parts, visualize assemblies, and prepare designs for 3D printing.",
+    "difficulty": "beginner-to-intermediate",
+    "category": "design",
+    "icon": "cad-icon",
+    "color": "#10B981",
+    "prerequisites": ["robotics-foundations"],
+    "duration": "8-10 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "3D Design Fundamentals",
+        "subtitle": "Basic concepts and tools",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Introduction to CAD",
+            "description": "Understanding 3D design and CAD software",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "What is CAD?", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "3D Design Concepts", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "CAD Software Overview", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "CAD Basics", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Tinkercad Essentials",
+            "description": "Getting started with Tinkercad for simple designs",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Tinkercad Interface", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Basic Shapes and Primitives", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Grouping and Alignment", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Your First Design", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "BrickLink Studio",
+        "subtitle": "Designing with LEGO in 3D",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "BrickLink Basics",
+            "description": "Building with digital LEGO bricks",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Getting Started with BrickLink Studio", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "The Brick Library", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Placing and Connecting Bricks", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Assembly Views", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "BrickLink Navigation", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Robot Building in BrickLink",
+            "description": "Designing robots digitally",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Planning Your Build", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Building Robot Chassis", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Mechanical Attachments", "type": "lesson" },
+              { "id": "project-2-2", "title": "Design Your Robot", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Onshape Professional Design",
+        "subtitle": "Advanced 3D modeling",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Onshape Fundamentals",
+            "description": "Professional 3D CAD in the cloud",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Onshape Interface and Workflow", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Sketching and 2D Design", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Extrude and Basic Features", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Assemblies and Parts", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Onshape Basics Test", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Advanced Modeling",
+            "description": "Complex designs and precision parts",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Advanced Features and Operations", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Design for 3D Printing", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Parametric Design", "type": "lesson" },
+              { "id": "project-3-2", "title": "Custom Robot Part", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "robotics-engineering",
+    "number": 7,
+    "title": "Robotics Engineering",
+    "subtitle": "Mechanical Design and Optimization",
+    "description": "Learn the engineering principles behind robot design. Study drivetrains, gearing systems, mechanical advantage, and the design process for optimal performance.",
+    "difficulty": "intermediate",
+    "category": "engineering",
+    "icon": "engineering-icon",
+    "color": "#F97316",
+    "prerequisites": ["robotics-foundations", "cad-3d-design"],
+    "duration": "10-12 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "Mechanical Fundamentals",
+        "subtitle": "Core engineering concepts",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Forces and Motion",
+            "description": "Physics principles in robotics",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "Newton's Laws and Robots", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Torque and Force", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Friction and Traction", "type": "lesson" },
+              { "id": "lesson-1-1-4", "title": "Work, Power, and Energy", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Physics in Robotics", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Gearing and Mechanical Advantage",
+            "description": "Understanding gears and power transmission",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Gear Types and Ratios", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Calculating Gear Ratios", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Gear Train Design", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Pulley Systems", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Drivetrain Design",
+        "subtitle": "Building effective robot movement systems",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Drivetrain Types",
+            "description": "Different ways to move a robot",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Tank Drive (Differential Drive)", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Mecanum Wheels and Holonomic Drive", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Swerve Drive Systems", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Comparing Drivetrain Types", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Drivetrain Knowledge", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Chassis and Frame Design",
+            "description": "Building strong, efficient robot bodies",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Chassis Geometry", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Weight Distribution", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Center of Gravity", "type": "lesson" },
+              { "id": "lesson-2-2-4", "title": "Structural Integrity", "type": "lesson" },
+              { "id": "project-2-2", "title": "Chassis Design", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Mechanisms and Attachments",
+        "subtitle": "Robot subsystems and special mechanisms",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Common Mechanisms",
+            "description": "Building blocks for robot functionality",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Linkages and Four-Bar Systems", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Intake Systems", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Shooter and Launch Mechanisms", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Clamping and Grabbing", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Mechanisms Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Subsystem Integration",
+            "description": "Combining mechanisms into working systems",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Motion Transmission", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Load Distribution", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Reliable Attachment Points", "type": "lesson" },
+              { "id": "project-3-2", "title": "Complex Mechanism Design", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Engineering Process and Optimization",
+        "subtitle": "Designing and improving robots systematically",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Design Process",
+            "description": "Systematic approach to robot design",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "Problem Definition and Requirements", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Brainstorming and Ideation", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Prototyping and Testing", "type": "lesson" },
+              { "id": "lesson-4-1-4", "title": "Iteration and Refinement", "type": "lesson" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Performance Analysis",
+            "description": "Measuring and improving robot performance",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Speed and Acceleration", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Power and Efficiency", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "Reliability and Durability", "type": "lesson" },
+              { "id": "project-4-2", "title": "Engineering Design Project", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "simulation-lab",
+    "number": 8,
+    "title": "Simulation Lab",
+    "subtitle": "Virtual Robotics and Testing",
+    "description": "Test and debug programs without physical robots. Use virtual SPIKE hub simulation, simulated movement, and challenge maps to practice before competition.",
+    "difficulty": "beginner-to-intermediate",
+    "category": "tools",
+    "icon": "simulation-icon",
+    "color": "#EC4899",
+    "prerequisites": ["block-coding"],
+    "duration": "6-8 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "Simulation Basics",
+        "subtitle": "Getting started with virtual robots",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "Introduction to Simulation",
+            "description": "Benefits and tools for virtual testing",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "Why Simulate?", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Simulation Tools Overview", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Virtual SPIKE Hub", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Simulation Introduction", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Basic Virtual Testing",
+            "description": "Running programs in simulation",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Setting Up Simulation", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Running Block Programs Virtually", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Interpreting Simulation Output", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Your First Virtual Robot", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Simulated Movement and Environments",
+        "subtitle": "Testing navigation in virtual worlds",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Movement Simulation",
+            "description": "How robots move in simulation",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Motor Simulation Models", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Sensor Simulation", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Physics in Simulation", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Tuning Simulation Parameters", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Movement Simulation", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Challenge Maps",
+            "description": "Practice with virtual game fields",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Available Challenge Maps", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Line Following in Simulation", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Object Detection Practice", "type": "lesson" },
+              { "id": "project-2-2", "title": "Virtual Challenge Navigation", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Advanced Simulation Scenarios",
+        "subtitle": "Complex testing and troubleshooting",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Debugging in Simulation",
+            "description": "Finding and fixing problems virtually",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Step-by-Step Execution", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Breakpoints and Logging", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Variable Inspection", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Common Issues and Solutions", "type": "lesson" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Realistic Scenarios",
+            "description": "Advanced simulation challenges",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Multi-Robot Scenarios", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Environmental Variation", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Sensor Noise and Inaccuracy", "type": "lesson" },
+              { "id": "project-3-2", "title": "Complex Simulation Mission", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3d-printing-fabrication",
+    "number": 9,
+    "title": "3D Printing & Fabrication",
+    "subtitle": "From Design to Physical Parts",
+    "description": "Master the process of preparing designs for 3D printing. Learn about materials, slicer settings, tolerances, print preparation, and post-processing.",
+    "difficulty": "intermediate",
+    "category": "fabrication",
+    "icon": "printer-icon",
+    "color": "#06B6D4",
+    "prerequisites": ["cad-3d-design"],
+    "duration": "8-10 weeks",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "3D Printing Fundamentals",
+        "subtitle": "Technologies and materials",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "3D Printing Technologies",
+            "description": "Overview of different 3D printing methods",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "What is 3D Printing?", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "FDM/FFF Printing", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Resin and Other Technologies", "type": "lesson" },
+              { "id": "lesson-1-1-4", "title": "Choosing the Right Technology", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Printing Technologies", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Materials for Robotics",
+            "description": "Selecting appropriate printing materials",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Common 3D Printing Filaments", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Material Properties", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Strength vs. Weight Trade-offs", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Material Selection for Robot Parts", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Design Preparation",
+        "subtitle": "Getting designs ready for printing",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Design for 3D Printing",
+            "description": "Modifying CAD models for successful prints",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Wall Thickness and Strength", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Support Structures", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Overhangs and Bridges", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Model Orientation", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Design Rules Quiz", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Export and Slicing",
+            "description": "Converting CAD to printable files",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Exporting to STL Format", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Introduction to Slicing Software", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Basic Slicer Settings", "type": "lesson" },
+              { "id": "lesson-2-2-4", "title": "Preview and Validation", "type": "lesson" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Advanced Slicing and Settings",
+        "subtitle": "Optimizing prints for quality and speed",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Slicer Mastery",
+            "description": "Advanced slicer configuration",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Layer Height and Resolution", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Infill Patterns and Density", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Print Speed Optimization", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Temperature and Cooling", "type": "lesson" },
+              { "id": "checkpoint-3-1", "title": "Slicer Settings Test", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Tolerances and Precision",
+            "description": "Printing accurate, functional parts",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Dimensional Tolerances", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Fit and Assembly", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Calibration for Accuracy", "type": "lesson" },
+              { "id": "project-3-2", "title": "Precision Part Printing", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Post-Processing and Quality",
+        "subtitle": "Finishing printed parts",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Post-Processing Techniques",
+            "description": "Finishing and improving prints",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "Support Removal", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Sanding and Finishing", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Painting and Coating", "type": "lesson" },
+              { "id": "lesson-4-1-4", "title": "Assembly and Integration", "type": "lesson" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Troubleshooting and Quality Control",
+            "description": "Diagnosing and fixing print problems",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Common Print Failures", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Warping and Adhesion Issues", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "Quality Inspection", "type": "lesson" },
+              { "id": "project-4-2", "title": "Complete Print Workflow", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "portfolio-engineering-notebook",
+    "number": 10,
+    "title": "Portfolio & Engineering Notebook",
+    "subtitle": "Documentation and Reflection Across All Levels",
+    "description": "Document your learning journey and projects. Master engineering notebook practices, portfolio building, and reflective practices that prepare you for competitions and college.",
+    "difficulty": "all-levels",
+    "category": "professional-development",
+    "icon": "portfolio-icon",
+    "color": "#A855F7",
+    "prerequisites": [],
+    "duration": "ongoing",
+    "levels": [
+      {
+        "id": "level-1",
+        "title": "Engineering Notebook Basics",
+        "subtitle": "Starting your documentation practice",
+        "order": 1,
+        "modules": [
+          {
+            "id": "mod-1-1",
+            "title": "What is an Engineering Notebook?",
+            "description": "Purpose and benefits of documentation",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-1-1-1", "title": "Engineering Notebook Purpose", "type": "lesson" },
+              { "id": "lesson-1-1-2", "title": "Digital vs. Physical Notebooks", "type": "lesson" },
+              { "id": "lesson-1-1-3", "title": "Getting Started", "type": "lesson" },
+              { "id": "checkpoint-1-1", "title": "Notebook Setup", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-1-2",
+            "title": "Basic Documentation",
+            "description": "Recording ideas and progress",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-1-2-1", "title": "Date and Project Tracking", "type": "lesson" },
+              { "id": "lesson-1-2-2", "title": "Writing Clear Descriptions", "type": "lesson" },
+              { "id": "lesson-1-2-3", "title": "Sketches and Diagrams", "type": "lesson" },
+              { "id": "lesson-1-2-4", "title": "Your First Entry", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-2",
+        "title": "Project Documentation",
+        "subtitle": "Recording complete projects",
+        "order": 2,
+        "modules": [
+          {
+            "id": "mod-2-1",
+            "title": "Documenting the Design Process",
+            "description": "From concept to completion",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-2-1-1", "title": "Problem Definition", "type": "lesson" },
+              { "id": "lesson-2-1-2", "title": "Brainstorming Documentation", "type": "lesson" },
+              { "id": "lesson-2-1-3", "title": "Design Iterations", "type": "lesson" },
+              { "id": "lesson-2-1-4", "title": "Testing and Results", "type": "lesson" },
+              { "id": "checkpoint-2-1", "title": "Design Process Documentation", "type": "assessment" }
+            ]
+          },
+          {
+            "id": "mod-2-2",
+            "title": "Technical Documentation",
+            "description": "Code, hardware, and system documentation",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-2-2-1", "title": "Code Documentation", "type": "lesson" },
+              { "id": "lesson-2-2-2", "title": "Hardware Schematics", "type": "lesson" },
+              { "id": "lesson-2-2-3", "title": "Assembly Instructions", "type": "lesson" },
+              { "id": "project-2-2", "title": "Complete Project Documentation", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-3",
+        "title": "Reflection and Analysis",
+        "subtitle": "Learning from your work",
+        "order": 3,
+        "modules": [
+          {
+            "id": "mod-3-1",
+            "title": "Reflective Practices",
+            "description": "Analyzing what you learned",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-3-1-1", "title": "Why Reflect?", "type": "lesson" },
+              { "id": "lesson-3-1-2", "title": "Effective Reflection Questions", "type": "lesson" },
+              { "id": "lesson-3-1-3", "title": "Identifying Lessons Learned", "type": "lesson" },
+              { "id": "lesson-3-1-4", "title": "Future Improvements", "type": "lesson" }
+            ]
+          },
+          {
+            "id": "mod-3-2",
+            "title": "Challenges and Solutions",
+            "description": "Problem-solving narrative",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-3-2-1", "title": "Recording Challenges", "type": "lesson" },
+              { "id": "lesson-3-2-2", "title": "Solution Development", "type": "lesson" },
+              { "id": "lesson-3-2-3", "title": "Lessons from Failure", "type": "lesson" },
+              { "id": "project-3-2", "title": "Challenge Documentation", "type": "project" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "level-4",
+        "title": "Portfolio Building",
+        "subtitle": "Showcasing your expertise",
+        "order": 4,
+        "modules": [
+          {
+            "id": "mod-4-1",
+            "title": "Portfolio Development",
+            "description": "Creating a compelling portfolio",
+            "order": 1,
+            "lessons": [
+              { "id": "lesson-4-1-1", "title": "What Goes in a Portfolio?", "type": "lesson" },
+              { "id": "lesson-4-1-2", "title": "Curating Your Best Work", "type": "lesson" },
+              { "id": "lesson-4-1-3", "title": "Project Summaries", "type": "lesson" },
+              { "id": "lesson-4-1-4", "title": "Visual Presentation", "type": "lesson" }
+            ]
+          },
+          {
+            "id": "mod-4-2",
+            "title": "Competition and College Preparation",
+            "description": "Preparing for next steps",
+            "order": 2,
+            "lessons": [
+              { "id": "lesson-4-2-1", "title": "Competition Judging Criteria", "type": "lesson" },
+              { "id": "lesson-4-2-2", "title": "Speaking About Your Work", "type": "lesson" },
+              { "id": "lesson-4-2-3", "title": "College Applications", "type": "lesson" },
+              { "id": "lesson-4-2-4", "title": "Building Your Professional Brand", "type": "lesson" },
+              { "id": "project-4-2", "title": "Complete Professional Portfolio", "type": "project" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

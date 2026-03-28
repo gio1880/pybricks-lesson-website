@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPIKE Prime Hub Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1a1f3a 100%);
+            color: #F1F5F9;
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4F46E5, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #4F46E5;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-link {
+            color: #06B6D4;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-link:hover {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: #06B6D4;
+        }
+
+        /* Main Container */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hub Visualization */
+        .hub-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hub-section {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .hub-label {
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94A3B8;
+            margin-bottom: 1.5rem;
+        }
+
+        .hub-device {
+            background: #E5E7EB;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            width: 280px;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #1F2937;
+        }
+
+        .hub-top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        .hub-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #9CA3AF;
+            background: #D1D5DB;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #374151;
+            user-select: none;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:hover:not(.pressed) {
+            background: #E5E7EB;
+            transform: scale(1.05);
+        }
+
+        .button.pressed {
+            background: #9CA3AF;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: scale(0.95);
+        }
+
+        .button-left, .button-right {
+            width: 32px;
+            height: 32px;
+            font-size: 0.6rem;
+        }
+
+        .matrix-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+        }
+
+        .matrix-row {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+        }
+
+        .pixel {
+            width: 24px;
+            height: 24px;
+            border-radius: 0.25rem;
+            background: #6B7280;
+            transition: all 0.1s ease;
+            cursor: pointer;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .pixel:hover {
+            transform: scale(1.1);
+        }
+
+        .pixel.brightness-1 {
+            background: #9CA3AF;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .pixel.brightness-2 {
+            background: #B4BCC4;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .pixel.brightness-3 {
+            background: #CBD5E1;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .pixel.brightness-4 {
+            background: #E2E8F0;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .pixel.brightness-5 {
+            background: #F0F4F8;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+        }
+
+        .pixel.brightness-6,
+        .pixel.brightness-7,
+        .pixel.brightness-8,
+        .pixel.brightness-9 {
+            background: #FFF9E6;
+            box-shadow: 0 0 8px rgba(255, 240, 100, 0.6);
+        }
+
+        .hub-bottom {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .button-center {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #9CA3AF;
+            background: #D1D5DB;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #374151;
+            user-select: none;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-center:hover:not(.pressed) {
+            background: #E5E7EB;
+            transform: scale(1.08);
+        }
+
+        .button-center.pressed {
+            background: #9CA3AF;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+            transform: scale(0.93);
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .editor-card {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .editor-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94A3B8;
+        }
+
+        .example-select {
+            background: #0F172A;
+            border: 1px solid #334155;
+            color: #F1F5F9;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            font-family: monospace;
+        }
+
+        .example-select:hover {
+            border-color: #4F46E5;
+        }
+
+        .code-editor {
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #E2E8F0;
+            resize: none;
+            flex: 1;
+            min-height: 280px;
+        }
+
+        .code-editor:focus {
+            outline: none;
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4F46E5, #3B41D3);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: #F1F5F9;
+            border: 1px solid #475569;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #475569;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .console-panel {
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            max-height: 280px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .console-output {
+            color: #E2E8F0;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .console-output.error {
+            color: #FCA5A5;
+        }
+
+        .console-output.success {
+            color: #86EFAC;
+        }
+
+        .console-output.info {
+            color: #93C5FD;
+        }
+
+        .console-empty {
+            color: #64748B;
+            font-style: italic;
+        }
+
+        /* Scrollbar Styling */
+        .console-panel::-webkit-scrollbar,
+        .code-editor::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .console-panel::-webkit-scrollbar-track,
+        .code-editor::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+
+        .console-panel::-webkit-scrollbar-thumb,
+        .code-editor::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        .console-panel::-webkit-scrollbar-thumb:hover,
+        .code-editor::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hub-section {
+                max-width: 100%;
+            }
+
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-title">
+            <h1>SPIKE Prime Hub Simulator</h1>
+            <span class="badge">Dev Preview</span>
+        </div>
+        <div class="header-nav">
+            <a href="../../" class="btn-link">← Back to Platform</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left: Hub Visualization -->
+        <div class="hub-panel">
+            <div class="hub-section">
+                <div class="hub-label">Hub Display</div>
+                <div class="hub-device">
+                    <div class="hub-top">
+                        <div class="hub-buttons">
+                            <button class="button button-left" id="leftBtn" title="Left Button">L</button>
+                        </div>
+                        <div style="flex: 1;"></div>
+                        <div class="hub-buttons">
+                            <button class="button button-right" id="rightBtn" title="Right Button">R</button>
+                        </div>
+                    </div>
+
+                    <div class="matrix-container">
+                        <div id="matrix"></div>
+                    </div>
+
+                    <div class="hub-bottom">
+                        <button class="button-center" id="centerBtn" title="Center/Power Button">⦿</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Editor & Controls -->
+        <div class="editor-panel">
+            <!-- Code Editor -->
+            <div class="editor-card" style="flex: 2;">
+                <div class="editor-header">
+                    <span class="editor-label">Code Editor</span>
+                    <select id="exampleSelect" class="example-select">
+                        <option value="">Choose an example...</option>
+                        <option value="hello">Hello World (Happy Face)</option>
+                        <option value="pixel">Pixel Art (Manual Drawing)</option>
+                        <option value="button">Button React (Interactive)</option>
+                        <option value="animation">Animation (Loop)</option>
+                    </select>
+                </div>
+                <textarea id="codeEditor" class="code-editor" spellcheck="false">print("Hello, SPIKE!")
+hub.light_matrix.show("HAPPY")</textarea>
+                <div class="controls">
+                    <button id="runBtn" class="btn btn-primary">▶ Run</button>
+                    <button id="stopBtn" class="btn btn-secondary" disabled>⏹ Stop</button>
+                    <button id="resetBtn" class="btn btn-secondary">↺ Reset</button>
+                </div>
+            </div>
+
+            <!-- Console Output -->
+            <div class="editor-card" style="flex: 1;">
+                <span class="editor-label">Console Output</span>
+                <div class="console-panel" id="console">
+                    <div class="console-empty">Run code to see output...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // SPIKE Prime Hub Simulator
+        // ============================================================================
+
+        // Predefined patterns for light matrix
+        // Each pattern is exactly 25 chars (5x5 grid, row by row, brightness 0-9)
+        const PATTERNS = {
+            //        Row0  Row1  Row2  Row3  Row4
+            HAPPY:   '09090' + '09090' + '00000' + '90009' + '09990',  // :)
+            SAD:     '09090' + '09090' + '00000' + '09990' + '90009',  // :(
+            HEART:   '09090' + '99999' + '99999' + '09990' + '00900',  // <3
+            ARROW_N: '00900' + '09990' + '90909' + '00900' + '00900',  // ↑
+            ARROW_E: '00900' + '00090' + '99999' + '00090' + '00900',  // →
+            ARROW_S: '00900' + '00900' + '90909' + '09990' + '00900',  // ↓
+            ARROW_W: '00900' + '09000' + '99999' + '09000' + '00900',  // ←
+            YES:     '00000' + '00009' + '00090' + '90900' + '09000',  // ✓
+            NO:      '90009' + '09090' + '00900' + '09090' + '90009',  // ✗
+            SQUARE:  '99999' + '90009' + '90009' + '90009' + '99999',  // □
+            DIAMOND: '00900' + '09090' + '90009' + '09090' + '00900',  // ◇
+            BLANK:   '00000' + '00000' + '00000' + '00000' + '00000'   // off
+        };
+
+        // Convert pattern string to 5x5 array
+        function patternTo25Array(patternStr) {
+            if (!patternStr) return Array(25).fill(0);
+            const normalized = patternStr.replace(/\D/g, '').padEnd(25, '0');
+            return normalized.split('').map(c => parseInt(c, 10));
+        }
+
+        /**
+         * HubSimulator - Manages the simulated hub state and UI updates
+         */
+        class HubSimulator {
+            constructor() {
+                this.matrix = Array(25).fill(0);
+                this.buttons = {
+                    left: false,
+                    right: false,
+                    center: false
+                };
+                this.initDOM();
+                this.setupButtonListeners();
+            }
+
+            initDOM() {
+                // Create 5x5 matrix in DOM
+                const matrixContainer = document.getElementById('matrix');
+                matrixContainer.innerHTML = '';
+                for (let row = 0; row < 5; row++) {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'matrix-row';
+                    for (let col = 0; col < 5; col++) {
+                        const pixel = document.createElement('div');
+                        pixel.className = 'pixel';
+                        pixel.dataset.index = row * 5 + col;
+                        pixel.addEventListener('click', () => this.togglePixel(pixel.dataset.index));
+                        rowDiv.appendChild(pixel);
+                    }
+                    matrixContainer.appendChild(rowDiv);
+                }
+                this.updateDisplay();
+            }
+
+            setupButtonListeners() {
+                ['leftBtn', 'rightBtn', 'centerBtn'].forEach(id => {
+                    const btn = document.getElementById(id);
+                    btn.addEventListener('mousedown', () => this.pressButton(id));
+                    btn.addEventListener('mouseup', () => this.releaseButton(id));
+                    btn.addEventListener('mouseleave', () => this.releaseButton(id));
+                });
+            }
+
+            pressButton(id) {
+                if (id === 'leftBtn') this.buttons.left = true;
+                else if (id === 'rightBtn') this.buttons.right = true;
+                else if (id === 'centerBtn') this.buttons.center = true;
+                this.updateButtonDisplay();
+            }
+
+            releaseButton(id) {
+                if (id === 'leftBtn') this.buttons.left = false;
+                else if (id === 'rightBtn') this.buttons.right = false;
+                else if (id === 'centerBtn') this.buttons.center = false;
+                this.updateButtonDisplay();
+            }
+
+            updateButtonDisplay() {
+                document.getElementById('leftBtn').classList.toggle('pressed', this.buttons.left);
+                document.getElementById('rightBtn').classList.toggle('pressed', this.buttons.right);
+                document.getElementById('centerBtn').classList.toggle('pressed', this.buttons.center);
+            }
+
+            setPixel(x, y, brightness) {
+                if (x >= 0 && x < 5 && y >= 0 && y < 5) {
+                    this.matrix[y * 5 + x] = Math.min(9, Math.max(0, Math.floor(brightness)));
+                    this.updateDisplay();
+                }
+            }
+
+            togglePixel(index) {
+                this.matrix[index] = this.matrix[index] > 0 ? 0 : 9;
+                this.updateDisplay();
+            }
+
+            showPattern(patternName) {
+                const pattern = PATTERNS[patternName] || PATTERNS.BLANK;
+                this.matrix = patternTo25Array(pattern);
+                this.updateDisplay();
+            }
+
+            clearMatrix() {
+                this.matrix = Array(25).fill(0);
+                this.updateDisplay();
+            }
+
+            updateDisplay() {
+                const pixels = document.querySelectorAll('.pixel');
+                pixels.forEach((pixel, idx) => {
+                    const brightness = this.matrix[idx];
+                    pixel.className = 'pixel';
+                    if (brightness > 0) {
+                        pixel.classList.add(`brightness-${brightness}`);
+                    }
+                });
+            }
+
+            reset() {
+                this.clearMatrix();
+                this.buttons = { left: false, right: false, center: false };
+                this.updateButtonDisplay();
+            }
+        }
+
+        /**
+         * CodeRunner - Executes simulated Python code
+         */
+        class CodeRunner {
+            constructor(hub, outputCallback) {
+                this.hub = hub;
+                this.outputCallback = outputCallback;
+                this.running = false;
+                this.stopRequested = false;
+            }
+
+            async run(code) {
+                this.running = true;
+                this.stopRequested = false;
+                this.outputCallback({ type: 'clear' });
+
+                try {
+                    await this.executeCode(code);
+                    this.outputCallback({ type: 'success', message: 'Program completed successfully.' });
+                } catch (error) {
+                    this.outputCallback({ type: 'error', message: `Error: ${error.message}` });
+                }
+
+                this.running = false;
+            }
+
+            async executeCode(code) {
+                const lines = code.split('\n');
+                let i = 0;
+
+                while (i < lines.length && !this.stopRequested) {
+                    const line = lines[i].trim();
+                    i++;
+
+                    // Skip empty lines and comments
+                    if (!line || line.startsWith('#')) continue;
+
+                    // Handle for loops
+                    if (line.startsWith('for ')) {
+                        const match = line.match(/for\s+(\w+)\s+in\s+range\((\d+)\)/);
+                        if (match) {
+                            const varName = match[1];
+                            const count = parseInt(match[2]);
+                            const blockLines = this.getIndentedBlock(lines, i);
+
+                            for (let iter = 0; iter < count && !this.stopRequested; iter++) {
+                                const varMap = { [varName]: iter };
+                                await this.executeBlock(blockLines, varMap);
+                            }
+                            i += blockLines.length;
+                        }
+                        continue;
+                    }
+
+                    // Handle while loops
+                    if (line.startsWith('while ')) {
+                        const blockLines = this.getIndentedBlock(lines, i);
+                        let iterations = 0;
+                        const maxIterations = 1000;
+
+                        while (iterations < maxIterations && !this.stopRequested) {
+                            const condition = line.match(/while\s+(.+):/)?.[1];
+                            if (!condition || !this.evaluateCondition(condition)) break;
+                            await this.executeBlock(blockLines);
+                            iterations++;
+                        }
+
+                        if (iterations >= maxIterations) {
+                            this.outputCallback({ type: 'error', message: 'While loop exceeded max iterations (1000)' });
+                        }
+                        i += blockLines.length;
+                        continue;
+                    }
+
+                    // Handle if statements
+                    if (line.startsWith('if ')) {
+                        const condition = line.match(/if\s+(.+):/)?.[1];
+                        const blockLines = this.getIndentedBlock(lines, i);
+
+                        if (condition && this.evaluateCondition(condition)) {
+                            await this.executeBlock(blockLines);
+                        }
+                        i += blockLines.length;
+                        continue;
+                    }
+
+                    // Execute single line
+                    await this.executeLine(line);
+                }
+            }
+
+            getIndentedBlock(lines, startIndex) {
+                const block = [];
+                for (let i = startIndex; i < lines.length; i++) {
+                    const line = lines[i];
+                    if (line.length === 0 || line[0] === '#') continue;
+                    if (line[0] !== ' ' && line[0] !== '\t') break;
+                    block.push(line.trim());
+                }
+                return block;
+            }
+
+            async executeBlock(blockLines, varMap = {}) {
+                for (const line of blockLines) {
+                    if (this.stopRequested) break;
+                    await this.executeLine(line, varMap);
+                }
+            }
+
+            // Replace variable references with their values
+            resolveVars(line, varMap) {
+                let resolved = line;
+                for (const [name, val] of Object.entries(varMap)) {
+                    // Replace standalone variable names (not inside quotes)
+                    resolved = resolved.replace(new RegExp('\\b' + name + '\\b', 'g'), val);
+                }
+                return resolved;
+            }
+
+            async executeLine(line, varMap = {}) {
+                if (this.stopRequested) return;
+
+                // Variable assignment
+                if (line.includes('=') && !line.includes('==')) {
+                    const eqIdx = line.indexOf('=');
+                    const varName = line.substring(0, eqIdx).trim();
+                    let value = line.substring(eqIdx + 1).trim();
+                    value = this.resolveVars(value, varMap);
+                    try { varMap[varName] = eval(value); } catch(e) { varMap[varName] = value; }
+                    return;
+                }
+
+                // Resolve variables for command matching
+                const resolved = this.resolveVars(line, varMap);
+
+                // hub.light_matrix.show(pattern)
+                if (resolved.includes('hub.light_matrix.show(')) {
+                    const match = resolved.match(/hub\.light_matrix\.show\(['"]?(\w+)['"]?\)/);
+                    if (match) {
+                        this.hub.showPattern(match[1]);
+                        await this.sleep(100);
+                    }
+                    return;
+                }
+
+                // hub.light_matrix.set_pixel(x, y, brightness)
+                if (resolved.includes('hub.light_matrix.set_pixel(')) {
+                    const match = resolved.match(/hub\.light_matrix\.set_pixel\((\d+),\s*(\d+),\s*(\d+)\)/);
+                    if (match) {
+                        this.hub.setPixel(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
+                        await this.sleep(50);
+                    }
+                    return;
+                }
+
+                // hub.light_matrix.off()
+                if (resolved.includes('hub.light_matrix.off()')) {
+                    this.hub.clearMatrix();
+                    return;
+                }
+
+                // print()
+                if (resolved.startsWith('print(')) {
+                    const match = resolved.match(/print\(['"](.+?)['"]\)/);
+                    if (match) {
+                        this.outputCallback({ type: 'log', message: match[1] });
+                    }
+                    return;
+                }
+
+                // time.sleep()
+                if (resolved.includes('time.sleep(')) {
+                    const match = resolved.match(/time\.sleep\((.+?)\)/);
+                    if (match) {
+                        const seconds = parseFloat(match[1]);
+                        await this.sleep(seconds * 1000);
+                    }
+                    return;
+                }
+            }
+
+            evaluateCondition(condition) {
+                // Simple button state checks
+                if (condition.includes('hub.left_button.is_pressed()')) {
+                    return this.hub.buttons.left;
+                }
+                if (condition.includes('hub.right_button.is_pressed()')) {
+                    return this.hub.buttons.right;
+                }
+                if (condition.includes('hub.center_button.is_pressed()')) {
+                    return this.hub.buttons.center;
+                }
+                return false;
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            stop() {
+                this.stopRequested = true;
+            }
+        }
+
+        // ============================================================================
+        // UI Setup & Event Handlers
+        // ============================================================================
+
+        const hub = new HubSimulator();
+        let runner = null;
+
+        const codeEditor = document.getElementById('codeEditor');
+        const runBtn = document.getElementById('runBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const exampleSelect = document.getElementById('exampleSelect');
+        const consoleOutput = document.getElementById('console');
+
+        const examples = {
+            hello: `print("Welcome to SPIKE Prime!")
+hub.light_matrix.show("HAPPY")
+print("Hub is ready!")`,
+
+            pixel: `# Draw a pattern pixel by pixel
+hub.light_matrix.off()
+for i in range(5):
+    hub.light_matrix.set_pixel(i, 2, 9)
+    time.sleep(0.2)
+print("Pattern complete!")`,
+
+            button: `print("Press the left or right button!")
+if hub.left_button.is_pressed():
+    hub.light_matrix.show("HAPPY")
+    print("Left button pressed!")
+if hub.right_button.is_pressed():
+    hub.light_matrix.show("SAD")
+    print("Right button pressed!")`,
+
+            animation: `# Cycle through patterns
+hub.light_matrix.show("HAPPY")
+time.sleep(0.5)
+hub.light_matrix.show("HEART")
+time.sleep(0.5)
+hub.light_matrix.show("YES")
+time.sleep(0.5)
+hub.light_matrix.show("NO")
+time.sleep(0.5)
+hub.light_matrix.show("DIAMOND")
+time.sleep(0.5)
+hub.light_matrix.off()
+print("Animation complete!")`
+        };
+
+        function outputLog(data) {
+            if (data.type === 'clear') {
+                consoleOutput.innerHTML = '';
+                return;
+            }
+
+            const line = document.createElement('div');
+            line.className = 'console-output';
+
+            if (data.type === 'error') {
+                line.classList.add('error');
+            } else if (data.type === 'success') {
+                line.classList.add('success');
+            } else if (data.type === 'log') {
+                line.classList.add('info');
+            }
+
+            line.textContent = data.message;
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        exampleSelect.addEventListener('change', (e) => {
+            if (e.target.value && examples[e.target.value]) {
+                codeEditor.value = examples[e.target.value];
+                e.target.value = '';
+            }
+        });
+
+        runBtn.addEventListener('click', async () => {
+            runBtn.disabled = true;
+            stopBtn.disabled = false;
+            runner = new CodeRunner(hub, outputLog);
+            await runner.run(codeEditor.value);
+            runBtn.disabled = false;
+            stopBtn.disabled = true;
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (runner) runner.stop();
+            stopBtn.disabled = true;
+            runBtn.disabled = false;
+        });
+
+        resetBtn.addEventListener('click', () => {
+            hub.reset();
+            consoleOutput.innerHTML = '<div class="console-empty">Run code to see output...</div>';
+            runBtn.disabled = false;
+            stopBtn.disabled = true;
+        });
+
+        // Load initial greeting
+        window.addEventListener('load', () => {
+            outputLog({ type: 'log', message: 'SPIKE Prime Hub Simulator loaded. Choose an example or write code!' });
+        });
+    </script>
+</body>
+</html>

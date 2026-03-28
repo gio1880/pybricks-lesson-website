@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPIKE Prime Robot Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0F172A;
+            color: #F1F5F9;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: #1E293B;
+            border-bottom: 1px solid #334155;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .badge {
+            background: #4F46E5;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .back-link {
+            color: #06B6D4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #22D3EE;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .canvas-container {
+            background: #0a0f1a;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 1px solid #334155;
+            background: #0a0f1a;
+            border-radius: 0.375rem;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .info-panel {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-family: 'Courier New', monospace;
+            color: #06B6D4;
+            font-weight: 600;
+        }
+
+        .right-panel {
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+        }
+
+        .section {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #94A3B8;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .code-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        textarea {
+            background: #0F172A;
+            color: #F1F5F9;
+            border: 1px solid #334155;
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            resize: none;
+            height: 200px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        button {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #4F46E5;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4338CA;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: #F1F5F9;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .btn-success {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: #EF4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #DC2626;
+        }
+
+        .btn-danger:disabled {
+            background: #6B7280;
+            cursor: not-allowed;
+        }
+
+        select {
+            background: #0F172A;
+            color: #F1F5F9;
+            border: 1px solid #334155;
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4F46E5;
+        }
+
+        .console {
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            height: 120px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .console-line {
+            padding: 0.25rem 0;
+            word-break: break-word;
+        }
+
+        .console-line.error {
+            color: #EF4444;
+        }
+
+        .console-line.success {
+            color: #10B981;
+        }
+
+        .console-line.info {
+            color: #06B6D4;
+        }
+
+        .settings-toggle {
+            background: #334155;
+            color: #F1F5F9;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem;
+        }
+
+        .settings-content {
+            display: none;
+            padding: 1rem 0;
+            border-top: 1px solid #334155;
+            margin-top: 0.75rem;
+        }
+
+        .settings-content.open {
+            display: block;
+        }
+
+        .setting-item {
+            margin-bottom: 1rem;
+        }
+
+        .setting-label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 0.375rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        .setting-input {
+            width: 100%;
+            padding: 0.5rem;
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 0.375rem;
+            color: #F1F5F9;
+            font-size: 0.875rem;
+        }
+
+        .reset-button {
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .right-panel {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .right-panel {
+                width: 100%;
+                max-height: 300px;
+            }
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .control-buttons button {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-title">
+                <h1>SPIKE Prime Robot Simulator</h1>
+                <span class="badge">Dev Preview</span>
+            </div>
+            <a href="../index.html" class="back-link">← Back to Simulators</a>
+        </header>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="canvas-container">
+                    <canvas id="simulationCanvas"></canvas>
+                </div>
+                <div class="info-panel">
+                    <div class="info-item">
+                        <span class="info-label">Position X</span>
+                        <span class="info-value" id="posX">0 mm</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Position Y</span>
+                        <span class="info-value" id="posY">0 mm</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Heading</span>
+                        <span class="info-value" id="heading">0°</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status</span>
+                        <span class="info-value" id="status">Idle</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="section code-editor">
+                    <div class="section-title">Examples</div>
+                    <select id="exampleSelect">
+                        <option value="">Select an example...</option>
+                        <option value="square">Square Path</option>
+                        <option value="triangle">Triangle Path</option>
+                        <option value="spiral">Spiral</option>
+                        <option value="zigzag">Zigzag</option>
+                    </select>
+                    <div class="section-title" style="margin-top: 1rem;">Code Editor</div>
+                    <textarea id="codeEditor" placeholder="Write your Python code here..."></textarea>
+                    <div class="control-buttons">
+                        <button class="btn-primary" id="runBtn">▶ Run</button>
+                        <button class="btn-danger" id="stopBtn" disabled>⏹ Stop</button>
+                        <button class="btn-secondary" id="resetBtn">↻ Reset</button>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Console Output</div>
+                    <div class="console" id="console"></div>
+                    <button class="btn-secondary" style="width: 100%; margin-top: 0.75rem;" onclick="document.getElementById('console').innerHTML = ''">Clear Console</button>
+                </div>
+
+                <div class="section">
+                    <button class="settings-toggle" onclick="toggleSettings()">⚙️ Robot Settings</button>
+                    <div class="settings-content" id="settingsContent">
+                        <div class="setting-item">
+                            <label class="setting-label">Wheel Diameter (mm)</label>
+                            <input type="number" class="setting-input" id="wheelDiameter" value="56" min="20" max="200">
+                        </div>
+                        <div class="setting-item">
+                            <label class="setting-label">Axle Track (mm)</label>
+                            <input type="number" class="setting-input" id="axleTrack" value="110" min="50" max="300">
+                        </div>
+                        <div class="setting-item">
+                            <label class="setting-label">Robot Color</label>
+                            <input type="color" class="setting-input" id="robotColor" value="#4F46E5">
+                        </div>
+                        <button class="btn-secondary reset-button" onclick="resetRobotSettings()">Reset to Defaults</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // ROBOT SIMULATOR - Core Physics and State
+        // ============================================================================
+
+        class RobotSimulator {
+            constructor(config = {}) {
+                this.x = config.x || 300;
+                this.y = config.y || 300;
+                this.heading = config.heading || 0;
+                this.wheelDiameter = config.wheelDiameter || 56;
+                this.axleTrack = config.axleTrack || 110;
+                this.speed = config.speed || 100;
+                this.running = false;
+                this.commandQueue = [];
+                this.pathTrail = [];
+                this.isAnimating = false;
+                this.animationStartTime = 0;
+                this.animationDuration = 0;
+                this.animationStartX = this.x;
+                this.animationStartY = this.y;
+                this.animationStartHeading = this.heading;
+            }
+
+            addCommand(command) {
+                this.commandQueue.push(command);
+            }
+
+            reset() {
+                this.x = 300;
+                this.y = 300;
+                this.heading = 0;
+                this.pathTrail = [];
+                this.commandQueue = [];
+                this.isAnimating = false;
+            }
+
+            stop() {
+                this.commandQueue = [];
+                this.isAnimating = false;
+            }
+
+            straight(distance) {
+                const durationMs = Math.abs(distance / this.speed) * 1000;
+                const targetX = this.x + Math.sin((this.heading * Math.PI) / 180) * distance;
+                const targetY = this.y - Math.cos((this.heading * Math.PI) / 180) * distance;
+
+                this.addCommand({
+                    type: 'straight',
+                    targetX,
+                    targetY,
+                    duration: durationMs,
+                });
+            }
+
+            turn(angle) {
+                const durationMs = Math.abs(angle / 180) * 500;
+                const targetHeading = (this.heading + angle) % 360;
+
+                this.addCommand({
+                    type: 'turn',
+                    targetHeading: targetHeading < 0 ? targetHeading + 360 : targetHeading,
+                    duration: durationMs,
+                });
+            }
+
+            update(deltaTime) {
+                if (this.commandQueue.length === 0) {
+                    this.isAnimating = false;
+                    return false;
+                }
+
+                if (!this.isAnimating) {
+                    const nextCommand = this.commandQueue.shift();
+                    this.startAnimation(nextCommand);
+                }
+
+                if (this.isAnimating) {
+                    this.updateAnimation(deltaTime);
+                }
+
+                return this.commandQueue.length > 0 || this.isAnimating;
+            }
+
+            startAnimation(command) {
+                this.isAnimating = true;
+                this.animationStartTime = performance.now();
+                this.animationDuration = command.duration;
+                this.animationStartX = this.x;
+                this.animationStartY = this.y;
+                this.animationStartHeading = this.heading;
+                this.currentCommand = command;
+            }
+
+            updateAnimation(currentTime) {
+                const elapsed = currentTime - this.animationStartTime;
+                const progress = Math.min(elapsed / this.animationDuration, 1);
+
+                if (this.currentCommand.type === 'straight') {
+                    this.x = this.animationStartX + (this.currentCommand.targetX - this.animationStartX) * progress;
+                    this.y = this.animationStartY + (this.currentCommand.targetY - this.animationStartY) * progress;
+
+                    if (progress > 0) {
+                        this.pathTrail.push({ x: this.x, y: this.y, age: 0 });
+                    }
+                } else if (this.currentCommand.type === 'turn') {
+                    let startH = this.animationStartHeading;
+                    let endH = this.currentCommand.targetHeading;
+
+                    let diff = endH - startH;
+                    if (diff > 180) diff -= 360;
+                    if (diff < -180) diff += 360;
+
+                    this.heading = (startH + diff * progress) % 360;
+                    if (this.heading < 0) this.heading += 360;
+                }
+
+                if (progress >= 1) {
+                    if (this.currentCommand.type === 'straight') {
+                        this.x = this.currentCommand.targetX;
+                        this.y = this.currentCommand.targetY;
+                    } else if (this.currentCommand.type === 'turn') {
+                        this.heading = this.currentCommand.targetHeading;
+                    }
+                    this.isAnimating = false;
+                }
+            }
+
+            updatePathTrail() {
+                this.pathTrail = this.pathTrail.map(point => ({ ...point, age: point.age + 1 }))
+                    .filter(point => point.age < 50);
+            }
+        }
+
+        // ============================================================================
+        // ROBOT RENDERER - Canvas Drawing
+        // ============================================================================
+
+        class RobotRenderer {
+            constructor(canvasId, robot) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.robot = robot;
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+            }
+
+            resizeCanvas() {
+                const container = this.canvas.parentElement;
+                this.canvas.width = Math.min(600, container.clientWidth - 20);
+                this.canvas.height = Math.min(600, container.clientHeight - 20);
+            }
+
+            draw() {
+                this.drawField();
+                this.drawPathTrail();
+                this.drawRobot();
+            }
+
+            drawField() {
+                const { width, height } = this.canvas;
+                this.ctx.fillStyle = '#0a0f1a';
+                this.ctx.fillRect(0, 0, width, height);
+
+                this.ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)';
+                this.ctx.lineWidth = 1;
+
+                const gridSize = 50;
+                for (let x = 0; x <= width; x += gridSize) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(x, 0);
+                    this.ctx.lineTo(x, height);
+                    this.ctx.stroke();
+                }
+
+                for (let y = 0; y <= height; y += gridSize) {
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, y);
+                    this.ctx.lineTo(width, y);
+                    this.ctx.stroke();
+                }
+
+                this.ctx.strokeStyle = '#334155';
+                this.ctx.lineWidth = 2;
+                this.ctx.strokeRect(0, 0, width, height);
+
+                const gridLabels = [0, 5, 10, 15, 20, 25];
+                this.ctx.fillStyle = '#94A3B8';
+                this.ctx.font = '12px monospace';
+                this.ctx.textAlign = 'center';
+
+                gridLabels.forEach(i => {
+                    const x = (i / 25) * width;
+                    this.ctx.fillText(i * 10 + 'cm', x, height - 8);
+                });
+
+                this.ctx.textAlign = 'right';
+                gridLabels.forEach(i => {
+                    const y = (i / 25) * height;
+                    this.ctx.fillText(i * 10 + 'cm', 20, y + 4);
+                });
+            }
+
+            drawPathTrail() {
+                this.robot.pathTrail.forEach((point, index) => {
+                    const opacity = 1 - point.age / 50;
+                    const radius = 2 * opacity;
+                    this.ctx.fillStyle = `rgba(6, 182, 212, ${opacity * 0.6})`;
+                    this.ctx.beginPath();
+                    this.ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+            }
+
+            drawRobot() {
+                const { x, y, heading } = this.robot;
+                const robotWidth = 40;
+                const robotHeight = 50;
+
+                this.ctx.save();
+                this.ctx.translate(x, y);
+                this.ctx.rotate((heading * Math.PI) / 180);
+
+                this.ctx.fillStyle = document.getElementById('robotColor').value;
+                this.ctx.shadowColor = 'rgba(79, 70, 229, 0.5)';
+                this.ctx.shadowBlur = 10;
+
+                this.ctx.beginPath();
+                this.ctx.moveTo(-robotWidth / 2, -robotHeight / 2 + 5);
+                this.ctx.quadraticCurveTo(-robotWidth / 2, -robotHeight / 2, -robotWidth / 2 + 5, -robotHeight / 2);
+                this.ctx.lineTo(robotWidth / 2 - 5, -robotHeight / 2);
+                this.ctx.quadraticCurveTo(robotWidth / 2, -robotHeight / 2, robotWidth / 2, -robotHeight / 2 + 5);
+                this.ctx.lineTo(robotWidth / 2, robotHeight / 2 - 5);
+                this.ctx.quadraticCurveTo(robotWidth / 2, robotHeight / 2, robotWidth / 2 - 5, robotHeight / 2);
+                this.ctx.lineTo(-robotWidth / 2 + 5, robotHeight / 2);
+                this.ctx.quadraticCurveTo(-robotWidth / 2, robotHeight / 2, -robotWidth / 2, robotHeight / 2 - 5);
+                this.ctx.closePath();
+                this.ctx.fill();
+
+                this.ctx.shadowColor = 'transparent';
+                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                this.ctx.fillRect(-robotWidth / 2, -robotHeight / 2, robotWidth, 8);
+
+                this.ctx.fillStyle = '#06B6D4';
+                this.ctx.beginPath();
+                this.ctx.moveTo(0, -robotHeight / 2 - 8);
+                this.ctx.lineTo(-6, -robotHeight / 2);
+                this.ctx.lineTo(6, -robotHeight / 2);
+                this.ctx.closePath();
+                this.ctx.fill();
+
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                this.ctx.fillRect(-robotWidth / 2 - 3, -robotHeight / 2 + 10, 3, 12);
+                this.ctx.fillRect(robotWidth / 2, -robotHeight / 2 + 10, 3, 12);
+
+                this.ctx.restore();
+
+                this.ctx.fillStyle = '#06B6D4';
+                this.ctx.font = 'bold 14px monospace';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText(`${heading.toFixed(0)}°`, x, y + 80);
+            }
+        }
+
+        // ============================================================================
+        // CODE RUNNER - Python-like Parser and Executor
+        // ============================================================================
+
+        class CodeRunner {
+            constructor(robot, consoleFn) {
+                this.robot = robot;
+                this.consoleFn = consoleFn;
+                this.variables = {};
+                this.importedModules = {};
+                this.isRunning = false;
+                this.currentLineIndex = 0;
+                this.loopStack = [];
+                this.lines = [];
+            }
+
+            log(message, type = 'info') {
+                this.consoleFn(message, type);
+            }
+
+            async run(code) {
+                this.isRunning = true;
+                this.robot.running = true;
+                this.variables = {};
+                this.importedModules = {};
+                this.lines = code.split('\n');
+
+                try {
+                    await this.executeLines(0, this.lines.length);
+                    this.log('Program completed successfully', 'success');
+                } catch (error) {
+                    this.log(`Error: ${error.message}`, 'error');
+                    console.error(error);
+                }
+
+                this.isRunning = false;
+                this.robot.running = false;
+            }
+
+            async executeLines(startIdx, endIdx) {
+                this.currentLineIndex = startIdx;
+
+                while (this.currentLineIndex < endIdx && this.isRunning) {
+                    const line = this.lines[this.currentLineIndex].trim();
+                    this.currentLineIndex++;
+
+                    if (!line || line.startsWith('#')) continue;
+
+                    if (line.startsWith('from ') || line.startsWith('import ')) {
+                        this.parseImport(line);
+                        continue;
+                    }
+
+                    if (line.includes('=') && !line.includes('==') && !line.includes('!=') && !line.includes('<=') && !line.includes('>=')) {
+                        this.parseAssignment(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('hub =') || line.startsWith('left_motor =') || line.startsWith('right_motor =') || line.startsWith('robot =')) {
+                        this.parseObjectCreation(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('robot.')) {
+                        await this.parseRobotCommand(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('print(')) {
+                        this.parsePrint(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('time.sleep(')) {
+                        await this.parseSleep(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('for ')) {
+                        await this.parseFor(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('while ')) {
+                        await this.parseWhile(line);
+                        continue;
+                    }
+
+                    if (line.startsWith('if ')) {
+                        await this.parseIf(line);
+                        continue;
+                    }
+                }
+            }
+
+            parseImport(line) {
+                if (line.includes('pybricks')) {
+                    this.importedModules.pybricks = true;
+                }
+            }
+
+            parseObjectCreation(line) {
+                if (line.startsWith('hub =')) {
+                    this.variables.hub = { type: 'PrimeHub' };
+                } else if (line.startsWith('robot =')) {
+                    const match = line.match(/DriveBase\((.*?)\)/);
+                    this.variables.robot = { type: 'DriveBase' };
+                } else if (line.startsWith('left_motor =')) {
+                    this.variables.left_motor = { type: 'Motor' };
+                } else if (line.startsWith('right_motor =')) {
+                    this.variables.right_motor = { type: 'Motor' };
+                }
+            }
+
+            // Resolve variable references in a string
+            resolveVarsInLine(line) {
+                let resolved = line;
+                for (const [name, val] of Object.entries(this.variables)) {
+                    if (typeof val === 'number' || typeof val === 'string') {
+                        resolved = resolved.replace(new RegExp('\\b' + name + '\\b', 'g'), val);
+                    }
+                }
+                return resolved;
+            }
+
+            async parseRobotCommand(line) {
+                // Resolve variables first so robot.straight(distance) works
+                const resolved = this.resolveVarsInLine(line);
+
+                const straightMatch = resolved.match(/robot\.straight\(([-\d.]+)\)/);
+                if (straightMatch) {
+                    const distance = parseInt(straightMatch[1]);
+                    this.robot.straight(distance);
+                    await this.waitForAnimation();
+                    return;
+                }
+
+                const turnMatch = resolved.match(/robot\.turn\(([-\d.]+)\)/);
+                if (turnMatch) {
+                    const angle = parseInt(turnMatch[1]);
+                    this.robot.turn(angle);
+                    await this.waitForAnimation();
+                    return;
+                }
+
+                if (resolved.includes('robot.stop()')) {
+                    this.robot.stop();
+                    return;
+                }
+            }
+
+            waitForAnimation() {
+                return new Promise(resolve => {
+                    const checkInterval = setInterval(() => {
+                        if (!this.robot.isAnimating && this.robot.commandQueue.length === 0) {
+                            clearInterval(checkInterval);
+                            resolve();
+                        }
+                    }, 10);
+                });
+            }
+
+            parseAssignment(line) {
+                const match = line.match(/(\w+)\s*=\s*(.+)/);
+                if (match) {
+                    const varName = match[1];
+                    let value = match[2].trim();
+
+                    // Resolve variables in the expression first
+                    let resolved = this.resolveVarsInLine(value);
+
+                    // Try evaluating as a numeric expression
+                    try {
+                        const result = eval(resolved);
+                        if (typeof result === 'number') {
+                            this.variables[varName] = result;
+                        } else {
+                            this.variables[varName] = resolved;
+                        }
+                    } catch (e) {
+                        if (!isNaN(resolved)) {
+                            this.variables[varName] = parseFloat(resolved);
+                        } else {
+                            this.variables[varName] = resolved;
+                        }
+                    }
+                }
+            }
+
+            parsePrint(line) {
+                const match = line.match(/print\((.*)\)/);
+                if (match) {
+                    let content = match[1].trim();
+
+                    if (content.startsWith('"') || content.startsWith("'")) {
+                        content = content.slice(1, -1);
+                        // Handle f-string-like {var} replacements inside strings
+                        Object.keys(this.variables).forEach(varName => {
+                            content = content.replace(new RegExp('\\{' + varName + '\\}', 'g'), this.variables[varName]);
+                        });
+                    } else {
+                        // Bare variable or expression
+                        content = this.resolveVarsInLine(content);
+                    }
+
+                    this.log(content);
+                }
+            }
+
+            async parseSleep(line) {
+                const resolved = this.resolveVarsInLine(line);
+                const match = resolved.match(/time\.sleep\(([\d.]+)\)/);
+                if (match) {
+                    const seconds = parseFloat(match[1]);
+                    await new Promise(resolve => setTimeout(resolve, seconds * 1000));
+                }
+            }
+
+            getIndentLevel(line) {
+                const match = line.match(/^(\s*)/);
+                return match ? match[1].length : 0;
+            }
+
+            async parseFor(line) {
+                const match = line.match(/for\s+(\w+)\s+in\s+range\((\d+)\):/);
+                if (!match) return;
+
+                const varName = match[1];
+                const count = parseInt(match[2]);
+                const baseIndent = this.getIndentLevel(this.lines[this.currentLineIndex - 1]);
+
+                for (let i = 0; i < count; i++) {
+                    this.variables[varName] = i;
+                    const forEndIdx = this.findBlockEnd(this.currentLineIndex, baseIndent + 1);
+                    await this.executeLines(this.currentLineIndex, forEndIdx);
+                }
+
+                this.currentLineIndex = this.findBlockEnd(this.currentLineIndex - 1, baseIndent + 1);
+            }
+
+            async parseWhile(line) {
+                const match = line.match(/while\s+(.+?):/);
+                if (!match) return;
+
+                const condition = match[1].trim();
+                const baseIndent = this.getIndentLevel(this.lines[this.currentLineIndex - 1]);
+                const blockEndIdx = this.findBlockEnd(this.currentLineIndex, baseIndent + 1);
+                let iterations = 0;
+                const maxIterations = 1000;
+
+                while (this.evaluateCondition(condition) && iterations < maxIterations && this.isRunning) {
+                    const currentIdx = this.currentLineIndex;
+                    await this.executeLines(this.currentLineIndex, blockEndIdx);
+                    this.currentLineIndex = currentIdx;
+                    iterations++;
+                }
+
+                if (iterations >= maxIterations) {
+                    this.log('Warning: Loop exceeded maximum iterations (1000)', 'error');
+                }
+
+                this.currentLineIndex = blockEndIdx;
+            }
+
+            async parseIf(line) {
+                const match = line.match(/if\s+(.+?):/);
+                if (!match) return;
+
+                const condition = match[1].trim();
+                const baseIndent = this.getIndentLevel(this.lines[this.currentLineIndex - 1]);
+                const blockEndIdx = this.findBlockEnd(this.currentLineIndex, baseIndent + 1);
+                const conditionResult = this.evaluateCondition(condition);
+
+                if (conditionResult) {
+                    await this.executeLines(this.currentLineIndex, blockEndIdx);
+                }
+
+                this.currentLineIndex = blockEndIdx;
+
+                // Check for else clause
+                if (this.currentLineIndex < this.lines.length) {
+                    const nextLine = this.lines[this.currentLineIndex].trim();
+                    if (nextLine === 'else:') {
+                        this.currentLineIndex++; // skip "else:"
+                        const elseEndIdx = this.findBlockEnd(this.currentLineIndex, baseIndent + 1);
+                        if (!conditionResult) {
+                            await this.executeLines(this.currentLineIndex, elseEndIdx);
+                        }
+                        this.currentLineIndex = elseEndIdx;
+                    }
+                }
+            }
+
+            findBlockEnd(startIdx, minIndent) {
+                for (let i = startIdx; i < this.lines.length; i++) {
+                    const line = this.lines[i];
+                    if (line.trim() === '') continue;
+                    const indent = this.getIndentLevel(line);
+                    if (indent < minIndent) return i;
+                }
+                return this.lines.length;
+            }
+
+            evaluateCondition(condition) {
+                let result = condition;
+                Object.keys(this.variables).forEach(varName => {
+                    result = result.replace(new RegExp(varName, 'g'), this.variables[varName]);
+                });
+
+                try {
+                    return eval(result);
+                } catch (e) {
+                    return false;
+                }
+            }
+        }
+
+        // ============================================================================
+        // APPLICATION STATE AND UI
+        // ============================================================================
+
+        let robot;
+        let renderer;
+        let codeRunner;
+        let animationFrameId;
+        let lastFrameTime = 0;
+        let isCodeRunning = false;
+
+        const examplePrograms = {
+            square: `# Square path - 200mm sides
+robot.straight(200)
+robot.turn(90)
+robot.straight(200)
+robot.turn(90)
+robot.straight(200)
+robot.turn(90)
+robot.straight(200)
+robot.turn(90)`,
+
+            triangle: `# Triangle path
+robot.straight(250)
+robot.turn(120)
+robot.straight(250)
+robot.turn(120)
+robot.straight(250)
+robot.turn(120)`,
+
+            spiral: `# Spiral pattern
+for i in range(5):
+    distance = 100 + (i * 50)
+    robot.straight(distance)
+    robot.turn(90)`,
+
+            zigzag: `# Zigzag pattern
+for i in range(6):
+    robot.straight(150)
+    if i % 2 == 0:
+        robot.turn(45)
+    else:
+        robot.turn(-45)`,
+        };
+
+        function initializeSimulator() {
+            robot = new RobotSimulator({
+                x: 300,
+                y: 300,
+                heading: 0,
+                wheelDiameter: parseInt(document.getElementById('wheelDiameter').value),
+                axleTrack: parseInt(document.getElementById('axleTrack').value),
+            });
+
+            renderer = new RobotRenderer('simulationCanvas', robot);
+
+            codeRunner = new CodeRunner(robot, (message, type) => {
+                addConsoleOutput(message, type);
+            });
+
+            startAnimation();
+        }
+
+        function addConsoleOutput(message, type = 'info') {
+            const console_ = document.getElementById('console');
+            const line = document.createElement('div');
+            line.className = `console-line ${type}`;
+            line.textContent = `> ${message}`;
+            console_.appendChild(line);
+            console_.scrollTop = console_.scrollHeight;
+        }
+
+        function startAnimation() {
+            const animate = (currentTime) => {
+                const deltaTime = currentTime - lastFrameTime;
+                lastFrameTime = currentTime;
+
+                if (robot.isAnimating || robot.commandQueue.length > 0) {
+                    robot.update(currentTime);
+                }
+                robot.updatePathTrail();
+
+                updateInfoPanel();
+                renderer.draw();
+
+                if (isCodeRunning || robot.isAnimating || robot.commandQueue.length > 0) {
+                    animationFrameId = requestAnimationFrame(animate);
+                } else {
+                    animationFrameId = requestAnimationFrame(animate);
+                }
+            };
+
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        function updateInfoPanel() {
+            document.getElementById('posX').textContent = robot.x.toFixed(0) + ' mm';
+            document.getElementById('posY').textContent = robot.y.toFixed(0) + ' mm';
+            document.getElementById('heading').textContent = robot.heading.toFixed(0) + '°';
+
+            let status = 'Idle';
+            if (isCodeRunning) status = 'Running';
+            else if (robot.isAnimating || robot.commandQueue.length > 0) status = 'Animating';
+            document.getElementById('status').textContent = status;
+        }
+
+        async function runCode() {
+            if (isCodeRunning) return;
+
+            const code = document.getElementById('codeEditor').value;
+            if (!code.trim()) {
+                addConsoleOutput('No code to run!', 'error');
+                return;
+            }
+
+            document.getElementById('runBtn').disabled = true;
+            document.getElementById('stopBtn').disabled = false;
+
+            robot.reset();
+            document.getElementById('console').innerHTML = '';
+            addConsoleOutput('Starting execution...', 'info');
+
+            isCodeRunning = true;
+            await codeRunner.run(code);
+            isCodeRunning = false;
+
+            document.getElementById('runBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+        }
+
+        function stopCode() {
+            isCodeRunning = false;
+            codeRunner.isRunning = false;
+            robot.stop();
+            document.getElementById('runBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+            addConsoleOutput('Execution stopped', 'info');
+        }
+
+        function resetRobot() {
+            stopCode();
+            robot.reset();
+            updateInfoPanel();
+            addConsoleOutput('Robot reset to starting position', 'info');
+        }
+
+        function toggleSettings() {
+            const content = document.getElementById('settingsContent');
+            content.classList.toggle('open');
+        }
+
+        function resetRobotSettings() {
+            document.getElementById('wheelDiameter').value = '56';
+            document.getElementById('axleTrack').value = '110';
+            document.getElementById('robotColor').value = '#4F46E5';
+            robot.wheelDiameter = 56;
+            robot.axleTrack = 110;
+            addConsoleOutput('Robot settings reset to defaults', 'info');
+        }
+
+        // Event listeners
+        document.getElementById('runBtn').addEventListener('click', runCode);
+        document.getElementById('stopBtn').addEventListener('click', stopCode);
+        document.getElementById('resetBtn').addEventListener('click', resetRobot);
+
+        document.getElementById('exampleSelect').addEventListener('change', (e) => {
+            const example = examplePrograms[e.target.value];
+            if (example) {
+                document.getElementById('codeEditor').value = example;
+                e.target.value = '';
+            }
+        });
+
+        document.getElementById('wheelDiameter').addEventListener('change', (e) => {
+            robot.wheelDiameter = parseInt(e.target.value);
+        });
+
+        document.getElementById('axleTrack').addEventListener('change', (e) => {
+            robot.axleTrack = parseInt(e.target.value);
+        });
+
+        document.getElementById('robotColor').addEventListener('change', (e) => {
+            renderer.draw();
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeSimulator();
+            addConsoleOutput('SPIKE Prime Robot Simulator initialized', 'success');
+            addConsoleOutput('Select an example or write your own code', 'info');
+        });
+    </script>
+</body>
+</html>

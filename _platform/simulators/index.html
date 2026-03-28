@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPIKE Prime Simulators — STEM Platform</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0F172A; color: #F1F5F9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+    }
+    .banner {
+      background: rgba(239,68,68,0.1); border-bottom: 1px solid rgba(239,68,68,0.3);
+      padding: 0.5rem 1rem; text-align: center; font-size: 0.75rem; color: #FCA5A5;
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+    }
+    header {
+      padding: 1.5rem 2rem; border-bottom: 1px solid #334155;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    header h1 { font-size: 1.35rem; }
+    header a { color: #06B6D4; text-decoration: none; font-size: 0.9rem; }
+    header a:hover { color: #67E8F9; }
+    .container {
+      max-width: 800px; margin: 0 auto; padding: 4rem 1.5rem;
+    }
+    .intro {
+      text-align: center; margin-bottom: 3.5rem;
+    }
+    .intro h2 { font-size: 2rem; margin-bottom: 0.75rem; }
+    .intro p { color: #94A3B8; font-size: 1.05rem; max-width: 550px; margin: 0 auto; line-height: 1.6; }
+    .sim-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    @media (max-width: 640px) { .sim-cards { grid-template-columns: 1fr; } }
+    .sim-card {
+      background: #1E293B; border: 1px solid #334155; border-radius: 0.75rem;
+      padding: 2.5rem 2rem; text-align: center; cursor: pointer;
+      transition: border-color 150ms, box-shadow 150ms, transform 150ms;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .sim-card:hover {
+      border-color: #06B6D4; transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(6,182,212,0.12);
+    }
+    .sim-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .sim-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #F1F5F9; }
+    .sim-card p { font-size: 0.9rem; color: #94A3B8; line-height: 1.5; }
+    .sim-badge {
+      display: inline-block; margin-top: 1rem; padding: 0.25rem 0.75rem;
+      background: rgba(79,70,229,0.15); color: #A5B4FC; border-radius: 999px;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .roadmap {
+      margin-top: 3.5rem; padding: 2rem; background: #1E293B;
+      border: 1px solid #334155; border-radius: 0.75rem;
+    }
+    .roadmap h3 { font-size: 1rem; color: #06B6D4; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; }
+    .roadmap-items { display: grid; gap: 0.75rem; }
+    .roadmap-item {
+      display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem;
+    }
+    .roadmap-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .done { background: #10B981; }
+    .current { background: #F59E0B; }
+    .future { background: #334155; }
+    .roadmap-label { color: #94A3B8; }
+    .roadmap-label.active { color: #F1F5F9; }
+  </style>
+</head>
+<body>
+  <div class="banner">Internal Development Preview — Simulation Lab</div>
+  <header>
+    <h1>Simulation Lab</h1>
+    <a href="../index.html">← Back to Platform</a>
+  </header>
+
+  <div class="container">
+    <div class="intro">
+      <h2>SPIKE Prime Simulators</h2>
+      <p>Interactive simulations for learning robot programming — code against a virtual hub and watch your robot move in real time.</p>
+    </div>
+
+    <div class="sim-cards">
+      <a href="hub/index.html" class="sim-card">
+        <div class="sim-icon">💡</div>
+        <h3>Hub Simulator</h3>
+        <p>Program the 5x5 light matrix, buttons, and hub display with Python-like commands.</p>
+        <span class="sim-badge">MVP Ready</span>
+      </a>
+
+      <a href="robot/index.html" class="sim-card">
+        <div class="sim-icon">🤖</div>
+        <h3>Robot Simulator</h3>
+        <p>Drive a virtual robot on a 2D field — straight, turn, and trace paths with Pybricks commands.</p>
+        <span class="sim-badge">MVP Ready</span>
+      </a>
+    </div>
+
+    <div class="roadmap">
+      <h3>Simulation Roadmap</h3>
+      <div class="roadmap-items">
+        <div class="roadmap-item"><div class="roadmap-dot done"></div><span class="roadmap-label active">Hub simulator with 5x5 matrix and buttons</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot done"></div><span class="roadmap-label active">Robot simulator with 2D movement and trail</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot done"></div><span class="roadmap-label active">Python-like code runner for both simulators</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot current"></div><span class="roadmap-label active">Sensor simulation (color, distance, gyro)</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot future"></div><span class="roadmap-label">Motor port simulation</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot future"></div><span class="roadmap-label">Challenge maps and mission tasks</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot future"></div><span class="roadmap-label">Block-based coding interface</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot future"></div><span class="roadmap-label">Student exercises and assessments</span></div>
+        <div class="roadmap-item"><div class="roadmap-dot future"></div><span class="roadmap-label">Combined hub + robot simulation</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

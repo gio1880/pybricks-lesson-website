@@ -537,6 +537,15 @@
           </table>
         </div>
       </div>
+
+      <!-- Student Tickets / Issue Reports -->
+      <div class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <h2 style="margin-bottom:0;">Student Reports</h2>
+          <button class="btn btn-secondary" onclick="loadTickets()" style="padding:0.4rem 1rem;font-size:0.85rem;">Refresh</button>
+        </div>
+        <div id="ticketsContainer" style="color:var(--color-text-muted);text-align:center;padding:1rem;">Loading tickets...</div>
+      </div>
     </div>
   </div>
 
@@ -1090,7 +1099,93 @@
       return text.replace(/[&<>"']/g, m => map[m]);
     }
 
+    // ============================================
+    // TICKET SYSTEM
+    // ============================================
+
+    async function loadTickets() {
+      const container = document.getElementById('ticketsContainer');
+      if (!container) return;
+
+      try {
+        const response = await fetch(API_BASE + '/admin/tickets', { credentials: 'same-origin' });
+        if (!response.ok) {
+          container.innerHTML = '<p style="color:var(--color-text-muted);">Could not load tickets.</p>';
+          return;
+        }
+        const result = await response.json();
+        const tickets = result.data || [];
+
+        if (tickets.length === 0) {
+          container.innerHTML = '<p style="color:var(--color-text-muted);text-align:center;padding:1rem;">No reports yet. Students can submit issues using the help button.</p>';
+          return;
+        }
+
+        const typeLabels = { bug: 'Bug', answer: 'Answer Issue', confusing: 'Confusing', other: 'Other' };
+        const typeColors = { bug: 'var(--color-error)', answer: 'var(--color-warning)', confusing: 'var(--color-secondary)', other: 'var(--color-text-muted)' };
+
+        let html = '<div style="display:flex;flex-direction:column;gap:0.75rem;">';
+        tickets.forEach(t => {
+          const statusBadge = t.status === 'open'
+            ? '<span style="background:rgba(239,68,68,0.15);color:var(--color-error);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;">Open</span>'
+            : t.status === 'resolved'
+            ? '<span style="background:rgba(16,185,129,0.15);color:var(--color-success);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;">Resolved</span>'
+            : '<span style="background:rgba(148,163,184,0.15);color:var(--color-text-muted);padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;">Dismissed</span>';
+
+          const date = new Date(t.created_at);
+          const timeStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+          const isIPad = (t.userAgent || '').includes('iPad') || (t.userAgent || '').includes('iPhone');
+          const deviceBadge = isIPad ? ' (iPad/iPhone)' : '';
+
+          html += '<div style="background:var(--color-dark-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:1rem;">';
+          html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">';
+          html += '<div style="display:flex;align-items:center;gap:0.5rem;">';
+          html += '<span style="color:' + (typeColors[t.type] || 'var(--color-text-muted)') + ';font-weight:600;font-size:0.85rem;">' + escapeHtml(typeLabels[t.type] || t.type) + '</span>';
+          html += statusBadge;
+          html += '</div>';
+          html += '<span style="font-size:0.75rem;color:var(--color-text-muted);">' + timeStr + '</span>';
+          html += '</div>';
+          html += '<p style="margin-bottom:0.5rem;font-size:0.9rem;line-height:1.5;">' + escapeHtml(t.description) + '</p>';
+          html += '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--color-text-muted);">';
+          html += '<span>' + escapeHtml(t.student || 'anonymous') + deviceBadge + ' &middot; ' + escapeHtml(t.page || '') + '</span>';
+          if (t.status === 'open') {
+            html += '<div style="display:flex;gap:0.5rem;">';
+            html += '<button onclick="updateTicketStatus(\'' + t.id + '\',\'resolved\')" style="background:var(--color-success);color:white;border:none;padding:0.3rem 0.6rem;border-radius:4px;cursor:pointer;font-size:0.75rem;">Resolve</button>';
+            html += '<button onclick="updateTicketStatus(\'' + t.id + '\',\'dismissed\')" style="background:var(--color-border);color:var(--color-text-primary);border:none;padding:0.3rem 0.6rem;border-radius:4px;cursor:pointer;font-size:0.75rem;">Dismiss</button>';
+            html += '</div>';
+          }
+          html += '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
+      } catch (err) {
+        container.innerHTML = '<p style="color:var(--color-text-muted);">Could not load tickets.</p>';
+      }
+    }
+
+    async function updateTicketStatus(ticketId, status) {
+      try {
+        const response = await fetch(API_BASE + '/admin/tickets/' + ticketId + '/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ status })
+        });
+        if (response.ok) {
+          loadTickets(); // Refresh
+        }
+      } catch (err) {
+        console.error('Failed to update ticket:', err);
+      }
+    }
+
     // Initialize on page load
     init();
+
+    // Also load tickets when admin dashboard loads
+    setTimeout(() => {
+      if (currentUser) loadTickets();
+    }, 1500);
   </script>
 </html>

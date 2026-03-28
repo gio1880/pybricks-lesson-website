@@ -1,0 +1,306 @@
+{
+  "id": "fll-autonomous-mission",
+  "title": "FLL Autonomous Mission Challenge",
+  "subtitle": "Master autonomous programming for First LEGO League",
+  "description": "Design and program an autonomous robot that can complete multiple FLL mission objectives. This project integrates motor control, sensor reading, navigation, and mission sequencing to create a reliable autonomous routine.",
+  "path": "pybricks-fll",
+  "level": "level-3",
+  "difficulty": "intermediate",
+  "duration": "4-6 weeks",
+  "prerequisites": [
+    "pybricks-fll/level-1",
+    "pybricks-fll/level-2"
+  ],
+  "learningObjectives": [
+    "Develop autonomous programs using Pybricks",
+    "Implement precise motor control and sensor integration",
+    "Create reliable navigation systems",
+    "Program complex mission sequences",
+    "Debug and optimize autonomous routines",
+    "Document and present technical solutions"
+  ],
+  "overview": {
+    "context": "In FLL competitions, autonomous missions are worth points and demonstrate your robot's ability to operate independently. A well-programmed autonomous routine can complete multiple objectives in 30 seconds. This project challenges you to create an efficient, reliable mission program.",
+    "challenges": [
+      "Precise navigation in a defined field",
+      "Completing multiple objectives in sequence",
+      "Handling sensor input accurately",
+      "Managing time effectively",
+      "Recovering from errors gracefully"
+    ]
+  },
+  "requirements": {
+    "hardware": [
+      "EV3 Intelligent Brick",
+      "2-3 Large Motors",
+      "Color Sensor",
+      "Ultrasonic Sensor",
+      "Gyro Sensor",
+      "Mechanical attachments for mission objectives"
+    ],
+    "software": [
+      "Pybricks library",
+      "Python 3.8+",
+      "MicroPython for EV3",
+      "Code editor (VS Code recommended)"
+    ],
+    "knowledge": [
+      "Pybricks fundamentals",
+      "Motor control and synchronization",
+      "Sensor reading and calibration",
+      "Python control flow",
+      "Debugging techniques"
+    ]
+  },
+  "phases": [
+    {
+      "id": "phase-1",
+      "title": "Planning and Design",
+      "duration": "3-4 days",
+      "description": "Analyze the mission objectives and design your approach",
+      "tasks": [
+        {
+          "id": "task-1-1",
+          "title": "Study Mission Objectives",
+          "description": "Review the FLL game manual and identify all mission objectives, their locations, point values, and success criteria. Create a prioritized list based on difficulty and point value.",
+          "resources": [
+            "FLL Game Manual (current season)",
+            "Official game field dimensions and layout",
+            "Video walkthroughs of successful autonomous routines"
+          ],
+          "deliverable": "Mission priority list and field diagram with annotations"
+        },
+        {
+          "id": "task-1-2",
+          "title": "Develop Robot Strategy",
+          "description": "Design a robot movement strategy that efficiently completes high-value missions. Consider field layout, movement efficiency, and mission sequencing. Sketch your planned paths.",
+          "resources": [
+            "Field templates and 3D models",
+            "Strategy examples from other teams",
+            "Mechanical feasibility checklist"
+          ],
+          "deliverable": "Detailed strategy document with path diagrams and timing estimates"
+        },
+        {
+          "id": "task-1-3",
+          "title": "Calibrate Your Robot",
+          "description": "Test and calibrate all sensors and motors. Establish baseline values for distance, rotation, color thresholds, and motor speeds that you'll use in programming.",
+          "resources": [
+            "Calibration worksheet",
+            "Test field for measurement",
+            "Sample calibration code"
+          ],
+          "deliverable": "Calibration data document with all sensor thresholds and motor profiles"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "title": "Foundation Programming",
+      "duration": "4-5 days",
+      "description": "Build reusable movement functions and basic navigation",
+      "tasks": [
+        {
+          "id": "task-2-1",
+          "title": "Implement Drive Functions",
+          "description": "Create functions for basic movement: move forward a specific distance, turn a specific angle, and move with precision using encoder feedback.",
+          "codeTemplate": "from pybricks.hubs import EV3Brick\nfrom pybricks.ev3devices import Motor, ColorSensor, UltrasonicSensor\nfrom pybricks.parameters import Port, Stop, Direction\nfrom pybricks.robotics import DriveBase\n\n# Initialize\nev3 = EV3Brick()\nleft_motor = Motor(Port.B, positive_direction=Direction.COUNTERCLOCKWISE)\nright_motor = Motor(Port.C)\ngyro = GyroSensor(Port.2)\n\n# Define your drive functions\ndef move_forward(distance_cm):\n    # Your implementation\n    pass\n\ndef turn(angle_degrees):\n    # Your implementation\n    pass\n\ndef move_to_position(x, y):\n    # Your implementation\n    pass",
+          "deliverable": "Working movement functions tested on the actual field"
+        },
+        {
+          "id": "task-2-2",
+          "title": "Develop Line Following",
+          "description": "Implement accurate line following using the color sensor. Calibrate color thresholds and implement a PID-like controller for smooth tracking.",
+          "codeTemplate": "def follow_line(target_color=50, distance_mm=500, speed=300):\n    \"\"\"Follow a line for a specified distance\"\"\"\n    # Implement proportional control\n    # error = target_color - color_sensor.reflection()\n    # adjust motor speeds based on error\n    pass",
+          "deliverable": "Line following function that reliably tracks lines on the field"
+        },
+        {
+          "id": "task-2-3",
+          "title": "Create Navigation Helpers",
+          "description": "Build utility functions for common navigation tasks: move to a colored region, stop at a distance, detect obstacles, etc.",
+          "deliverable": "Set of reusable navigation utility functions"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "title": "Mission Implementation",
+      "duration": "5-7 days",
+      "description": "Program individual missions and test thoroughly",
+      "tasks": [
+        {
+          "id": "task-3-1",
+          "title": "Program Mission Sequence",
+          "description": "Implement code for your prioritized mission list. Test each mission individually, then in sequence. Handle failures gracefully with error recovery.",
+          "codeTemplate": "def mission_1():\n    \"\"\"First priority mission\"\"\"\n    # Navigate to mission\n    # Execute mission objective\n    # Verify success\n    # Return to start/next position\n    pass\n\ndef mission_2():\n    \"\"\"Second priority mission\"\"\"\n    pass\n\ndef autonomous_main():\n    \"\"\"Complete autonomous routine\"\"\"\n    try:\n        if mission_1():\n            if mission_2():\n                # Continue with remaining missions\n                pass\n    except Exception as e:\n        # Handle errors\n        ev3.speaker.beep(1000, 100)  # Signal failure\n    finally:\n        # Safe shutdown\n        pass",
+          "deliverable": "Functional autonomous program that completes multiple missions"
+        },
+        {
+          "id": "task-3-2",
+          "title": "Test and Refine",
+          "description": "Run your autonomous routine 10+ times on the actual competition field. Record success/failure and time for each run. Refine based on results.",
+          "resources": [
+            "Test log template",
+            "Debugging checklist",
+            "Performance optimization guide"
+          ],
+          "deliverable": "Test results log showing reliability and performance metrics"
+        },
+        {
+          "id": "task-3-3",
+          "title": "Implement Error Recovery",
+          "description": "Add error detection and recovery strategies. For example: detect if a mission failed and attempt alternative approach or skip to next mission.",
+          "deliverable": "Autonomous program with robust error handling"
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "title": "Optimization and Competition Prep",
+      "duration": "3-4 days",
+      "description": "Maximize points and ensure reliability",
+      "tasks": [
+        {
+          "id": "task-4-1",
+          "title": "Optimize for Points",
+          "description": "Analyze mission point values and adjust sequence to maximize total points. Consider time constraints and mission interdependencies.",
+          "deliverable": "Optimized mission sequence with time allocation"
+        },
+        {
+          "id": "task-4-2",
+          "title": "Test Reliability",
+          "description": "Run your complete autonomous routine 20+ times, tracking success rate. Achieve 90%+ reliability before competition.",
+          "deliverable": "Reliability report showing consistent performance"
+        },
+        {
+          "id": "task-4-3",
+          "title": "Final Calibration",
+          "description": "Make final tweaks to motor speeds, sensor thresholds, and timings. Ensure your robot performs consistently across different environmental conditions.",
+          "deliverable": "Final calibration settings and performance report"
+        }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "title": "Documentation and Presentation",
+      "duration": "2-3 days",
+      "description": "Document your work for competition judging",
+      "tasks": [
+        {
+          "id": "task-5-1",
+          "title": "Create Engineering Notebook",
+          "description": "Document your design process, decisions, challenges, and solutions. Include diagrams, code snippets, and photos of your robot.",
+          "deliverable": "Complete engineering notebook with all phases documented"
+        },
+        {
+          "id": "task-5-2",
+          "title": "Code Documentation",
+          "description": "Add comprehensive comments to your code. Explain the purpose of each function, parameters, and key algorithm steps.",
+          "deliverable": "Well-documented, commented source code"
+        },
+        {
+          "id": "task-5-3",
+          "title": "Prepare Presentation",
+          "description": "Create a presentation explaining your autonomous strategy, technical implementation, and results. Be prepared to discuss decisions and answer questions.",
+          "deliverable": "Presentation slides and talking points"
+        }
+      ]
+    }
+  ],
+  "resources": {
+    "tutorials": [
+      {
+        "title": "Pybricks Motor Control",
+        "url": "https://pybricks.com/learn/motors/",
+        "description": "Official guide to motor control in Pybricks"
+      },
+      {
+        "title": "Sensor Integration",
+        "url": "https://pybricks.com/learn/sensors/",
+        "description": "How to read and use different sensor types"
+      }
+    ],
+    "templates": [
+      {
+        "id": "movement-functions",
+        "title": "Starter Movement Functions",
+        "description": "Basic forward, turn, and drive functions to build upon"
+      },
+      {
+        "id": "mission-structure",
+        "title": "Mission Program Structure",
+        "description": "Template for organizing mission code with error handling"
+      }
+    ],
+    "tools": [
+      "Pybricks documentation",
+      "EV3 system image",
+      "VS Code with Pybricks extension",
+      "Field layout diagram"
+    ]
+  },
+  "successCriteria": [
+    {
+      "criterion": "Autonomous Operation",
+      "description": "Robot operates independently for 30 seconds without human intervention",
+      "evidence": "Video of successful autonomous run"
+    },
+    {
+      "criterion": "Mission Completion",
+      "description": "Successfully completes at least 3 different mission objectives",
+      "evidence": "Scoring log showing mission points"
+    },
+    {
+      "criterion": "Code Quality",
+      "description": "Clean, well-organized, commented code with reusable functions",
+      "evidence": "Source code review"
+    },
+    {
+      "criterion": "Reliability",
+      "description": "Achieves 80%+ success rate across multiple test runs",
+      "evidence": "Test results log"
+    },
+    {
+      "criterion": "Documentation",
+      "description": "Complete engineering notebook and code documentation",
+      "evidence": "Engineering notebook and inline code comments"
+    }
+  ],
+  "rubric": {
+    "autonomousFunctionality": {
+      "excellent": "Robot completes 5+ missions reliably; operates smoothly with minimal failures",
+      "good": "Robot completes 3-4 missions; operates reliably with occasional failures",
+      "satisfactory": "Robot completes 2-3 missions; operation is inconsistent but functional",
+      "needsImprovement": "Robot completes 1 or fewer missions; significant reliability issues"
+    },
+    "codeQuality": {
+      "excellent": "Well-organized, modular, well-commented; uses functions and error handling effectively",
+      "good": "Organized with good function use; most sections well-commented",
+      "satisfactory": "Functional code; some organization and documentation",
+      "needsImprovement": "Disorganized, difficult to follow; minimal documentation"
+    },
+    "engineering": {
+      "excellent": "Clear strategy, proper calibration, thorough testing; design decisions well-justified",
+      "good": "Good strategy with calibration and testing; most decisions explained",
+      "satisfactory": "Basic strategy and testing; limited explanation of decisions",
+      "needsImprovement": "Minimal planning or testing; decisions not documented"
+    },
+    "documentation": {
+      "excellent": "Comprehensive notebook with detailed explanations and technical diagrams",
+      "good": "Good documentation covering main aspects",
+      "satisfactory": "Basic documentation present",
+      "needsImprovement": "Minimal or missing documentation"
+    }
+  },
+  "timeline": {
+    "estimatedHours": 40,
+    "breakdown": {
+      "planning": 8,
+      "foundationProgramming": 12,
+      "missionImplementation": 14,
+      "optimization": 8,
+      "documentation": 6
+    }
+  },
+  "notes": "This is a substantial project that mirrors real FLL competition demands. Work incrementally, test thoroughly, and don't hesitate to iterate. The engineering notebook is as important as the code - document your thinking and decision-making process."
+}

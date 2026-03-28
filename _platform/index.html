@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Learning Platform - Internal Preview</title>
+    <style>
+        /* ========== CSS Custom Properties / Theme ========== */
+        :root {
+            --color-bg-primary: #0f172a;
+            --color-bg-secondary: #1e293b;
+            --color-bg-tertiary: #334155;
+            --color-text-primary: #e2e8f0;
+            --color-text-secondary: #cbd5e1;
+            --color-text-muted: #94a3b8;
+            --color-primary: #06B6D4;
+            --color-primary-hover: #0891b2;
+            --color-secondary: #F59E0B;
+            --color-secondary-hover: #d97706;
+            --color-accent-success: #10b981;
+            --color-accent-warning: #f59e0b;
+            --color-accent-error: #ef4444;
+            --color-border: #475569;
+            --color-border-light: #334155;
+
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ========== Global Styles ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== Alert Banner ========== */
+        .dev-banner {
+            background: linear-gradient(90deg, #991b1b, #7c2d12);
+            border-bottom: 2px solid var(--color-secondary);
+            padding: var(--spacing-md) var(--spacing-lg);
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            color: #fef3c7;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ========== Top Bar ========== */
+        .top-bar {
+            background-color: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+
+        .top-bar-title {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .platform-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .platform-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .back-link {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--color-bg-tertiary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text-primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .back-link:hover {
+            background-color: var(--color-bg-secondary);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* ========== Main Layout ========== */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ========== Sidebar ========== */
+        .sidebar {
+            width: 260px;
+            background-color: var(--color-bg-secondary);
+            border-right: 1px solid var(--color-border);
+            overflow-y: auto;
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-normal);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            height: 100%;
+            border-right: none;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: absolute;
+            top: var(--spacing-lg);
+            left: var(--spacing-lg);
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .sidebar-header {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            letter-spacing: 0.1em;
+            padding: var(--spacing-md) var(--spacing-sm);
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-section-title:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-section-toggle {
+            font-size: 0.875rem;
+            transition: transform var(--transition-fast);
+        }
+
+        .nav-section.expanded .nav-section-toggle {
+            transform: rotate(180deg);
+        }
+
+        .nav-items {
+            display: none;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .nav-section.expanded .nav-items {
+            display: flex;
+        }
+
+        .nav-item {
+            padding: var(--spacing-md) var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+
+        .nav-item:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-primary);
+        }
+
+        .nav-item.active {
+            background-color: var(--color-primary);
+            color: var(--color-bg-primary);
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            font-size: 1.125rem;
+            width: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ========== Content Area ========== */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-xl);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn var(--transition-normal);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== Grid Layouts ========== */
+        .grid {
+            display: grid;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }
+
+        /* ========== Cards ========== */
+        .card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            align-items: flex-start;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-bg-tertiary);
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .card-subtitle {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-description {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background-color: var(--color-bg-tertiary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-secondary);
+        }
+
+        .badge-primary {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .badge-secondary {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--color-secondary);
+            border-color: var(--color-secondary);
+        }
+
+        .badge-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--color-accent-success);
+            border-color: var(--color-accent-success);
+        }
+
+        /* ========== Headings & Text ========== */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-primary);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-primary);
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-secondary);
+        }
+
+        /* ========== Buttons ========== */
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            user-select: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-bg-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-bg-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-secondary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-bg-tertiary);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* ========== Status & Progress ========== */
+        .status-section {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: var(--radius-md);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 0.5rem;
+            background-color: var(--color-bg-tertiary);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin: var(--spacing-md) 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transition: width var(--transition-normal);
+        }
+
+        /* ========== Tree/Hierarchy ========== */
+        .tree-item {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .tree-toggle {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: var(--spacing-sm);
+            margin-right: var(--spacing-sm);
+            transition: transform var(--transition-fast);
+        }
+
+        .tree-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .tree-content {
+            padding-left: var(--spacing-lg);
+            border-left: 2px solid var(--color-border);
+            margin-left: 0.5rem;
+        }
+
+        .tree-content.hidden {
+            display: none;
+        }
+
+        .tree-label {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md);
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .tree-label:hover {
+            background-color: var(--color-bg-tertiary);
+            border-color: var(--color-primary);
+        }
+
+        .tree-label-text {
+            flex: 1;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .tree-label-level {
+            font-size: 0.75rem;
+            background-color: var(--color-bg-tertiary);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            color: var(--color-text-muted);
+        }
+
+        /* ========== Breadcrumb ========== */
+        .breadcrumb {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb-item {
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--color-primary);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            color: var(--color-text-muted);
+        }
+
+        /* ========== Lesson Content ========== */
+        .lesson-section {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .lesson-section-title {
+            color: var(--color-primary);
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .code-block {
+            background-color: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            color: var(--color-primary);
+        }
+
+        .quiz-question {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .quiz-option {
+            padding: var(--spacing-md);
+            margin: var(--spacing-sm) 0;
+            background-color: var(--color-bg-tertiary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--color-primary);
+            background-color: var(--color-bg-secondary);
+        }
+
+        .quiz-option input {
+            margin-right: var(--spacing-md);
+            cursor: pointer;
+        }
+
+        /* ========== Assessment ========== */
+        .assessment-question {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .question-text {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+
+        textarea {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text-primary);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        /* ========== Challenge/Project ========== */
+        .project-brief {
+            background-color: var(--color-bg-secondary);
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .checklist {
+            list-style: none;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .checklist-item:hover {
+            background-color: var(--color-bg-tertiary);
+        }
+
+        .checklist-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checklist-label {
+            flex: 1;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+        }
+
+        .checklist-item input:checked ~ .checklist-label {
+            color: var(--color-accent-success);
+            text-decoration: line-through;
+        }
+
+        /* ========== Dashboard ========== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: var(--spacing-md);
+            border-left: 3px solid var(--color-primary);
+            background-color: var(--color-bg-tertiary);
+            margin-bottom: var(--spacing-md);
+            border-radius: var(--radius-sm);
+        }
+
+        .activity-time {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .activity-text {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* ========== Filters ========== */
+        .filter-bar {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--color-bg-secondary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .filter-btn.active {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--color-bg-primary);
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                width: 260px;
+                z-index: 99;
+                border-right: 1px solid var(--color-border);
+            }
+
+            .sidebar.collapsed {
+                transform: translateX(-100%);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .content {
+                padding: var(--spacing-lg);
+            }
+
+            .grid-cols-2,
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .platform-name {
+                font-size: 1.25rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Development Banner -->
+    <div class="dev-banner">
+        🚀 INTERNAL DEVELOPMENT PREVIEW — Not connected to live platform
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-title">
+            <div class="platform-name">STEM Learning Platform</div>
+            <div class="platform-subtitle">Internal Development Preview</div>
+        </div>
+        <div class="top-bar-actions">
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+            <a href="../index.html" class="back-link">← Back to PyLearn</a>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">Navigation</div>
+
+            <div class="nav-section expanded" id="mainNav">
+                <div class="nav-section-title" onclick="toggleNavSection(this)">
+                    Main
+                    <span class="nav-section-toggle">▼</span>
+                </div>
+                <div class="nav-items">
+                    <a href="#/" class="nav-item" onclick="setActive(this)">
+                        <span class="nav-icon">🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="#/paths" class="nav-item" onclick="setActive(this)">
+                        <span class="nav-icon">📚</span>
+                        <span>Learning Paths</span>
+                    </a>
+                    <a href="#/dashboard" class="nav-item" onclick="setActive(this)">
+                        <span class="nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section expanded" id="pathsNav">
+                <div class="nav-section-title" onclick="toggleNavSection(this)">
+                    Paths
+                    <span class="nav-section-toggle">▼</span>
+                </div>
+                <div class="nav-items" id="pathsList">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <div class="nav-section" id="adminNav">
+                <div class="nav-section-title" onclick="toggleNavSection(this)">
+                    Admin
+                    <span class="nav-section-toggle">▼</span>
+                </div>
+                <div class="nav-items">
+                    <a href="#/admin" class="nav-item" onclick="setActive(this)">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Admin Tools</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content">
+
+            <!-- ========== HOME PAGE ========== -->
+            <div id="page-home" class="page active">
+                <h1>Welcome to the STEM Learning Platform</h1>
+                <p>A comprehensive curriculum for robotics, coding, and engineering design. This internal preview showcases the platform structure and learning pathways.</p>
+
+                <div class="status-section">
+                    <div class="status-badge">Platform Status: Development Preview</div>
+                    <p>This is an internal development version. Features are subject to change. Student data is not persisted.</p>
+                </div>
+
+                <h2>Featured Learning Paths</h2>
+                <div class="grid grid-cols-3" id="homePaths">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <div class="status-section">
+                    <h3>Platform Features</h3>
+                    <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary);">
+                        <li>10 comprehensive learning paths covering robotics, coding, and engineering</li>
+                        <li>Structured curriculum: Levels → Modules → Lessons</li>
+                        <li>Interactive lesson content with code examples and quizzes</li>
+                        <li>Project-based challenges and assessments</li>
+                        <li>Progress tracking and student dashboards</li>
+                        <li>Dark-themed, responsive design</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ========== LEARNING PATHS PAGE ========== -->
+            <div id="page-paths" class="page">
+                <h1>Learning Paths</h1>
+                <p>Explore our complete curriculum of 10 structured learning paths.</p>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterPaths('all')">All Paths</button>
+                    <button class="filter-btn" onclick="filterPaths('beginner')">Beginner</button>
+                    <button class="filter-btn" onclick="filterPaths('intermediate')">Intermediate</button>
+                    <button class="filter-btn" onclick="filterPaths('advanced')">Advanced</button>
+                </div>
+
+                <div class="grid grid-cols-2" id="allPaths">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- ========== PATH OVERVIEW PAGE ========== -->
+            <div id="page-path" class="page">
+                <div id="pathOverviewContent">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- ========== LESSON PAGE ========== -->
+            <div id="page-lesson" class="page">
+                <div id="lessonContent">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- ========== CHALLENGE/PROJECT PAGE ========== -->
+            <div id="page-challenge" class="page">
+                <div id="challengeContent">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- ========== ASSESSMENT PAGE ========== -->
+            <div id="page-assessment" class="page">
+                <div id="assessmentContent">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- ========== DASHBOARD PAGE ========== -->
+            <div id="page-dashboard" class="page">
+                <h1>Student Dashboard</h1>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Progress</div>
+                        <div class="stat-value">24%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 24%;"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Paths Started</div>
+                        <div class="stat-value">3</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Lessons Completed</div>
+                        <div class="stat-value">12</div>
+                    </div>
+                </div>
+
+                <h2>Progress by Path</h2>
+                <div class="grid grid-cols-2">
+                    <div class="stat-card">
+                        <div class="stat-label">Robotics Foundations</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                        <p style="font-size: 0.875rem; margin: 0;">45% — 9/20 lessons</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Python & MicroPython</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                        <p style="font-size: 0.875rem; margin: 0;">20% — 3/15 lessons</p>
+                    </div>
+                </div>
+
+                <h2>Recent Activity</h2>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-time">2 hours ago</div>
+                        <div class="activity-text">Completed: Introduction to Python Variables</div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-time">Yesterday</div>
+                        <div class="activity-text">Completed: Robotics Foundations Level 1</div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-time">3 days ago</div>
+                        <div class="activity-text">Started: Block Coding Fundamentals</div>
+                    </li>
+                </ul>
+
+                <h2>Badges & Certificates</h2>
+                <div class="status-section">
+                    <p>Badges and certificates will appear here as you complete learning paths and challenges.</p>
+                </div>
+            </div>
+
+            <!-- ========== ADMIN PAGE ========== -->
+            <div id="page-admin" class="page">
+                <h1>Admin Tools</h1>
+                <div class="status-section">
+                    <p>Admin functionality is coming soon. This section will include:</p>
+                    <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary);">
+                        <li>User management</li>
+                        <li>Course creation and editing</li>
+                        <li>Assessment creation</li>
+                        <li>Analytics and reporting</li>
+                        <li>System configuration</li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        /* ========== DATA: Curriculum Structure ========== */
+        const learningPaths = [
+            {
+                id: 'robotics-foundations',
+                title: 'Robotics Foundations',
+                subtitle: 'Introduction to Robotics',
+                icon: '🤖',
+                difficulty: 'Beginner',
+                category: 'Engineering',
+                description: 'Learn the fundamentals of robotics, including mechanics, sensors, and basic programming for robot control.',
+                lessons: 20,
+                levels: [
+                    {
+                        id: 'level-1',
+                        title: 'Level 1: Basic Mechanics',
+                        modules: [
+                            {
+                                id: 'module-1',
+                                title: 'Module 1: Robot Structure',
+                                lessons: [
+                                    { id: 'lesson-1', title: 'Introduction to Robots' },
+                                    { id: 'lesson-2', title: 'Chassis and Motors' }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'block-coding',
+                title: 'Block Coding',
+                subtitle: 'Visual Programming for Beginners',
+                icon: '🧩',
+                difficulty: 'Beginner',
+                category: 'Coding',
+                description: 'Master visual block-based programming with MIT Appinventor and similar tools. Perfect for learning programming logic.',
+                lessons: 15
+            },
+            {
+                id: 'python-micropython',
+                title: 'Python & MicroPython',
+                subtitle: 'From Basics to Embedded Systems',
+                icon: '🐍',
+                difficulty: 'Intermediate',
+                category: 'Coding',
+                description: 'Learn Python from fundamentals and advance to MicroPython for microcontroller programming.',
+                lessons: 25
+            },
+            {
+                id: 'pybricks-fll',
+                title: 'Pybricks for FLL',
+                subtitle: 'Python Robotics with LEGO Mindstorms',
+                icon: '🟡',
+                difficulty: 'Intermediate',
+                category: 'Robotics',
+                description: 'Use Pybricks to program LEGO Mindstorms robots in FLL competitions with Python.',
+                lessons: 18
+            },
+            {
+                id: 'ftc-java',
+                title: 'FTC Java',
+                subtitle: 'Java Programming for FTC',
+                icon: '☕',
+                difficulty: 'Advanced',
+                category: 'Coding',
+                description: 'Advanced Java programming for FTC robot control systems and competition strategies.',
+                lessons: 30
+            },
+            {
+                id: 'cad-design',
+                title: 'CAD & 3D Design',
+                subtitle: 'Digital Design Fundamentals',
+                icon: '🎨',
+                difficulty: 'Intermediate',
+                category: 'Design',
+                description: 'Learn CAD design principles and tools for creating robot parts and mechanical designs.',
+                lessons: 20
+            },
+            {
+                id: 'robotics-engineering',
+                title: 'Robotics Engineering',
+                subtitle: 'Advanced Mechanical Design',
+                icon: '⚙️',
+                difficulty: 'Advanced',
+                category: 'Engineering',
+                description: 'Deep dive into mechanical engineering principles, optimization, and advanced robot design.',
+                lessons: 28
+            },
+            {
+                id: 'simulation-lab',
+                title: 'Simulation Lab',
+                subtitle: 'Virtual Robotics Testing',
+                icon: '🖥️',
+                difficulty: 'Advanced',
+                category: 'Engineering',
+                description: 'Test robot designs and algorithms in simulation before physical implementation.',
+                lessons: 16
+            },
+            {
+                id: '3d-printing',
+                title: '3D Printing & Fabrication',
+                subtitle: 'From Design to Physical Parts',
+                icon: '🖨️',
+                difficulty: 'Intermediate',
+                category: 'Design',
+                description: 'Master 3D printing technology and fabrication techniques for custom robot components.',
+                lessons: 14
+            },
+            {
+                id: 'portfolio',
+                title: 'Portfolio & Engineering Notebook',
+                subtitle: 'Document Your Work',
+                icon: '📖',
+                difficulty: 'Beginner',
+                category: 'Meta-Skills',
+                description: 'Learn to document projects, maintain engineering notebooks, and build your professional portfolio.',
+                lessons: 12
+            }
+        ];
+
+        /* ========== UI STATE ========== */
+        let currentPage = 'home';
+        let currentPath = null;
+        let currentFilter = 'all';
+
+        /* ========== ROUTING ========== */
+        window.addEventListener('hashchange', handleRoute);
+
+        function handleRoute() {
+            const hash = window.location.hash.slice(1) || '/';
+            const parts = hash.split('/').filter(p => p);
+
+            hideAllPages();
+
+            if (parts.length === 0 || parts[0] === '') {
+                showPage('home');
+                currentPage = 'home';
+            } else if (parts[0] === 'paths') {
+                showPage('paths');
+                currentPage = 'paths';
+                populateAllPaths();
+            } else if (parts[0] === 'path' && parts[1]) {
+                showPage('path');
+                currentPage = 'path';
+                currentPath = parts[1];
+                showPathOverview(parts[1]);
+            } else if (parts[0] === 'lesson') {
+                showPage('lesson');
+                currentPage = 'lesson';
+                showLesson(parts[1], parts[2], parts[3], parts[4]);
+            } else if (parts[0] === 'challenge' && parts[1]) {
+                showPage('challenge');
+                currentPage = 'challenge';
+                showChallenge(parts[1]);
+            } else if (parts[0] === 'assessment' && parts[1]) {
+                showPage('assessment');
+                currentPage = 'assessment';
+                showAssessment(parts[1]);
+            } else if (parts[0] === 'dashboard') {
+                showPage('dashboard');
+                currentPage = 'dashboard';
+            } else if (parts[0] === 'admin') {
+                showPage('admin');
+                currentPage = 'admin';
+            } else {
+                showPage('home');
+                currentPage = 'home';
+            }
+
+            closeSidebarOnMobile();
+        }
+
+        function hideAllPages() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        }
+
+        function showPage(pageName) {
+            const page = document.getElementById(`page-${pageName}`);
+            if (page) {
+                page.classList.add('active');
+            }
+        }
+
+        /* ========== SIDEBAR NAVIGATION ========== */
+        function toggleNavSection(element) {
+            const section = element.parentElement;
+            section.classList.toggle('expanded');
+        }
+
+        function setActive(element) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+            closeSidebarOnMobile();
+        }
+
+        function closeSidebarOnMobile() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.add('collapsed');
+            }
+        }
+
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+
+        /* ========== POPULATE PATHS IN SIDEBAR ========== */
+        function populateSidebarPaths() {
+            const pathsList = document.getElementById('pathsList');
+            pathsList.innerHTML = learningPaths.map(path =>
+                `<a href="#/path/${path.id}" class="nav-item" onclick="setActive(this)">
+                    <span class="nav-icon">${path.icon}</span>
+                    <span>${path.title}</span>
+                </a>`
+            ).join('');
+        }
+
+        /* ========== HOME PAGE: Featured Paths ========== */
+        function populateHomePaths() {
+            const container = document.getElementById('homePaths');
+            container.innerHTML = learningPaths.slice(0, 6).map(path =>
+                createPathCard(path)
+            ).join('');
+
+            document.querySelectorAll('#homePaths .card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const pathId = e.currentTarget.dataset.pathId;
+                    window.location.hash = `#/path/${pathId}`;
+                });
+            });
+        }
+
+        /* ========== PATHS PAGE: All Paths with Filter ========== */
+        function populateAllPaths() {
+            const container = document.getElementById('allPaths');
+            let pathsToShow = learningPaths;
+
+            if (currentFilter !== 'all') {
+                pathsToShow = learningPaths.filter(p =>
+                    p.difficulty.toLowerCase() === currentFilter
+                );
+            }
+
+            container.innerHTML = pathsToShow.map(path =>
+                createPathCard(path)
+            ).join('');
+
+            document.querySelectorAll('#allPaths .card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const pathId = e.currentTarget.dataset.pathId;
+                    window.location.hash = `#/path/${pathId}`;
+                });
+            });
+        }
+
+        function filterPaths(difficulty) {
+            currentFilter = difficulty;
+
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            populateAllPaths();
+        }
+
+        /* ========== CREATE PATH CARD HTML ========== */
+        function createPathCard(path) {
+            const difficultyColor = {
+                'Beginner': 'badge-success',
+                'Intermediate': 'badge-secondary',
+                'Advanced': 'badge-primary'
+            };
+
+            return `
+                <div class="card" data-path-id="${path.id}">
+                    <div class="card-header">
+                        <div class="card-icon">${path.icon}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${path.title}</div>
+                            <div class="card-subtitle">${path.subtitle}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${path.description}</div>
+                    <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+                        <span class="badge ${difficultyColor[path.difficulty]}">${path.difficulty}</span>
+                        <span class="badge">${path.category}</span>
+                        <span class="badge">${path.lessons} Lessons</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========== PATH OVERVIEW PAGE ========== */
+        function showPathOverview(pathId) {
+            const path = learningPaths.find(p => p.id === pathId);
+            if (!path) return;
+
+            const difficultyColor = {
+                'Beginner': 'badge-success',
+                'Intermediate': 'badge-secondary',
+                'Advanced': 'badge-primary'
+            };
+
+            let html = `
+                <div style="margin-bottom: var(--spacing-xl);">
+                    <a href="#/paths" style="color: var(--color-text-muted); text-decoration: none; margin-bottom: var(--spacing-lg); display: inline-block;">← Back to Paths</a>
+                </div>
+
+                <div style="display: flex; gap: var(--spacing-xl); margin-bottom: var(--spacing-xl);">
+                    <div style="font-size: 4rem;">${path.icon}</div>
+                    <div style="flex: 1;">
+                        <h1>${path.title}</h1>
+                        <p style="font-size: 1.1rem; margin-bottom: var(--spacing-md);">${path.subtitle}</p>
+                        <div style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                            <span class="badge ${difficultyColor[path.difficulty]}">${path.difficulty}</span>
+                            <span class="badge">${path.category}</span>
+                            <span class="badge">${path.lessons} Lessons</span>
+                        </div>
+                        <p>${path.description}</p>
+                    </div>
+                </div>
+
+                <h2>Curriculum Structure</h2>
+                <div class="status-section">
+                    <p style="margin-bottom: var(--spacing-lg);">This learning path is organized into levels, modules, and lessons for progressive learning.</p>
+                    <div class="tree-item">
+                        <button class="tree-toggle" onclick="toggleTree(this)">▼</button>
+                        <label class="tree-label" style="cursor: default; margin-bottom: var(--spacing-md);">
+                            <span class="tree-label-text">${path.title}</span>
+                            <span class="tree-label-level">${path.lessons} Lessons</span>
+                        </label>
+                        <div class="tree-content">
+                            ${generateTreeHierarchy(path)}
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Get Started</h2>
+                <button class="btn btn-primary" onclick="window.location.hash = '#/lesson/${path.id}/level-1/module-1/lesson-1'">
+                    Start First Lesson →
+                </button>
+            `;
+
+            document.getElementById('pathOverviewContent').innerHTML = html;
+        }
+
+        function generateTreeHierarchy(path) {
+            if (!path.levels || path.levels.length === 0) {
+                return `
+                    <div class="tree-item" style="padding-left: var(--spacing-lg);">
+                        <p style="color: var(--color-text-muted); font-size: 0.875rem;">Curriculum structure coming soon...</p>
+                    </div>
+                `;
+            }
+
+            return path.levels.map((level, levelIdx) => `
+                <div class="tree-item">
+                    <button class="tree-toggle" onclick="toggleTree(this)">▼</button>
+                    <label class="tree-label">
+                        <span class="tree-label-text">${level.title}</span>
+                    </label>
+                    <div class="tree-content">
+                        ${level.modules ? level.modules.map(module => `
+                            <div class="tree-item">
+                                <button class="tree-toggle" onclick="toggleTree(this)">▼</button>
+                                <label class="tree-label">
+                                    <span class="tree-label-text">${module.title}</span>
+                                    <span class="tree-label-level">${module.lessons ? module.lessons.length : 0} Lessons</span>
+                                </label>
+                                <div class="tree-content">
+                                    ${module.lessons ? module.lessons.map(lesson => `
+                                        <div class="tree-item">
+                                            <label class="tree-label" style="cursor: pointer; margin-bottom: var(--spacing-sm);" onclick="window.location.hash = '#/lesson/${path.id}/${level.id}/${module.id}/${lesson.id}'">
+                                                <span class="tree-label-text">📝 ${lesson.title}</span>
+                                            </label>
+                                        </div>
+                                    `).join('') : ''}
+                                </div>
+                            </div>
+                        `).join('') : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleTree(button) {
+            const content = button.nextElementSibling.nextElementSibling;
+            if (content && content.classList.contains('tree-content')) {
+                content.classList.toggle('hidden');
+                button.classList.toggle('collapsed');
+            }
+        }
+
+        /* ========== LESSON PAGE ========== */
+        function showLesson(pathId, levelId, moduleId, lessonId) {
+            const path = learningPaths.find(p => p.id === pathId);
+            if (!path) return;
+
+            const html = `
+                <div class="breadcrumb">
+                    <a href="#/" class="breadcrumb-item">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="#/paths" class="breadcrumb-item">Paths</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="#/path/${pathId}" class="breadcrumb-item">${path.title}</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-item active">${lessonId}</span>
+                </div>
+
+                <h1>${path.title} - Lesson</h1>
+
+                <div style="display: flex; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
+                    <div style="flex: 1;">
+                        <div class="lesson-section">
+                            <div class="lesson-section-title">📚 Lesson Overview</div>
+                            <p>This is a lesson template showing the structure for teaching content. Each lesson includes multiple sections to support different learning styles.</p>
+                        </div>
+
+                        <div class="lesson-section">
+                            <div class="lesson-section-title">🎯 Learning Objectives</div>
+                            <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary);">
+                                <li>Understand core concepts related to this topic</li>
+                                <li>Apply knowledge in practical scenarios</li>
+                                <li>Complete hands-on exercises</li>
+                                <li>Demonstrate mastery through assessment</li>
+                            </ul>
+                        </div>
+
+                        <div class="lesson-section">
+                            <div class="lesson-section-title">💡 Explanation</div>
+                            <p>This section contains detailed explanations of the core concepts. Instructional content, diagrams, and examples would appear here to help students understand the material.</p>
+                            <div class="code-block">print("Hello, STEM Learning Platform!")</div>
+                            <p>The above is an example of instructional content that might appear in a lesson.</p>
+                        </div>
+
+                        <div class="lesson-section">
+                            <div class="lesson-section-title">🔍 Example</div>
+                            <p>Worked examples demonstrate how to apply concepts in practice:</p>
+                            <div class="code-block">def greet(name):
+    return f"Hello, {name}!"
+
+result = greet("Student")
+print(result)</div>
+                        </div>
+
+                        <div class="lesson-section">
+                            <div class="lesson-section-title">✏️ Exercise</div>
+                            <p>Complete the following exercise to practice what you've learned:</p>
+                            <p><strong>Task:</strong> Write your solution below and click Submit when ready.</p>
+                            <textarea placeholder="# Write your code or answer here..."></textarea>
+                            <button class="btn btn-secondary" style="margin-top: var(--spacing-md);">Submit Exercise</button>
+                        </div>
+
+                        <div class="lesson-section">
+                            <div class="lesson-section-title">❓ Quick Quiz</div>
+                            <div class="quiz-question">
+                                <p><strong>Question 1:</strong> What is the primary goal of this lesson?</p>
+                                <label class="quiz-option">
+                                    <input type="radio" name="q1">
+                                    <span>To introduce core concepts</span>
+                                </label>
+                                <label class="quiz-option">
+                                    <input type="radio" name="q1">
+                                    <span>To test your knowledge</span>
+                                </label>
+                                <label class="quiz-option">
+                                    <input type="radio" name="q1">
+                                    <span>To demonstrate practical application</span>
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: var(--spacing-md);">Check Answers</button>
+                        </div>
+                    </div>
+
+                    <aside style="width: 280px;">
+                        <div class="status-section">
+                            <div class="stat-label">Progress</div>
+                            <div class="progress-bar" style="margin-bottom: var(--spacing-md);">
+                                <div class="progress-fill" style="width: 35%;"></div>
+                            </div>
+                            <p style="font-size: 0.875rem; margin: 0; color: var(--color-text-muted);">35% Complete</p>
+                        </div>
+
+                        <div class="status-section">
+                            <h3 style="margin-top: 0;">Navigation</h3>
+                            <button class="btn btn-outline" style="width: 100%; margin-bottom: var(--spacing-md);" onclick="alert('Previous lesson')">← Previous Lesson</button>
+                            <button class="btn btn-primary" style="width: 100%;" onclick="alert('Next lesson')">Next Lesson →</button>
+                        </div>
+
+                        <div class="status-section">
+                            <h3 style="margin-top: 0;">Resources</h3>
+                            <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary); font-size: 0.875rem;">
+                                <li><a href="#" style="color: var(--color-primary);">Download Slides</a></li>
+                                <li><a href="#" style="color: var(--color-primary);">View Documentation</a></li>
+                                <li><a href="#" style="color: var(--color-primary);">Related Links</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            `;
+
+            document.getElementById('lessonContent').innerHTML = html;
+        }
+
+        /* ========== CHALLENGE/PROJECT PAGE ========== */
+        function showChallenge(challengeId) {
+            const html = `
+                <a href="#/" style="color: var(--color-text-muted); text-decoration: none; margin-bottom: var(--spacing-lg); display: inline-block;">← Back to Home</a>
+
+                <h1>Project Challenge: ${challengeId}</h1>
+
+                <div class="project-brief">
+                    <h2 style="margin-top: 0; color: var(--color-text-primary);">Project Brief</h2>
+                    <p>This challenge requires you to apply your skills in a real-world scenario. You will work through the project requirements, document your design process, and submit your solution.</p>
+                </div>
+
+                <h2>Requirements</h2>
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-checkbox">
+                        <label class="checklist-label">Understand the problem statement and objectives</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-checkbox">
+                        <label class="checklist-label">Design a solution approach</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-checkbox">
+                        <label class="checklist-label">Implement the solution</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-checkbox">
+                        <label class="checklist-label">Test and validate your work</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-checkbox">
+                        <label class="checklist-label">Document your process</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-checkbox">
+                        <label class="checklist-label">Submit your project</label>
+                    </li>
+                </ul>
+
+                <div style="display: flex; gap: var(--spacing-xl);">
+                    <div style="flex: 1;">
+                        <h2>Submission Area</h2>
+                        <div class="lesson-section">
+                            <p><strong>Project Description:</strong></p>
+                            <textarea placeholder="Describe your approach and solution..."></textarea>
+                            <p style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-sm);"><strong>Attachments (photos, files, links):</strong></p>
+                            <textarea placeholder="Paste links or describe files..."></textarea>
+                            <button class="btn btn-secondary" style="margin-top: var(--spacing-lg);">Submit Project</button>
+                        </div>
+                    </div>
+
+                    <aside style="width: 300px;">
+                        <div class="lesson-section">
+                            <h3 style="margin-top: 0;">Rubric</h3>
+                            <div style="font-size: 0.875rem; color: var(--color-text-secondary);">
+                                <p><strong>Understanding (25%):</strong> How well you understood the requirements</p>
+                                <p><strong>Design (25%):</strong> Quality of your design approach</p>
+                                <p><strong>Implementation (25%):</strong> Correctness and completeness of your solution</p>
+                                <p><strong>Documentation (25%):</strong> Clarity of your explanation and process</p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            `;
+
+            document.getElementById('challengeContent').innerHTML = html;
+        }
+
+        /* ========== ASSESSMENT PAGE ========== */
+        function showAssessment(assessmentId) {
+            const html = `
+                <a href="#/" style="color: var(--color-text-muted); text-decoration: none; margin-bottom: var(--spacing-lg); display: inline-block;">← Back to Home</a>
+
+                <h1>Assessment: ${assessmentId}</h1>
+
+                <div style="display: flex; gap: var(--spacing-xl);">
+                    <div style="flex: 1;">
+                        <div class="assessment-question">
+                            <div class="question-number">Question 1 of 5</div>
+                            <div class="question-text">Which of the following best describes the core principle?</div>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1">
+                                <span>Option A: First choice</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1">
+                                <span>Option B: Second choice</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1">
+                                <span>Option C: Third choice</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1">
+                                <span>Option D: Fourth choice</span>
+                            </label>
+                        </div>
+
+                        <div class="assessment-question">
+                            <div class="question-number">Question 2 of 5</div>
+                            <div class="question-text">Write a code snippet that demonstrates the concept:</div>
+                            <textarea placeholder="# Write your code here..."></textarea>
+                        </div>
+
+                        <div class="assessment-question">
+                            <div class="question-number">Question 3 of 5</div>
+                            <div class="question-text">Multiple correct answers: Which of these are true?</div>
+                            <label style="display: flex; gap: var(--spacing-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background-color: var(--color-bg-secondary); border-radius: var(--radius-md); cursor: pointer;">
+                                <input type="checkbox" style="cursor: pointer;">
+                                <span style="color: var(--color-text-secondary);">Statement A is correct</span>
+                            </label>
+                            <label style="display: flex; gap: var(--spacing-md); padding: var(--spacing-md); margin-bottom: var(--spacing-sm); background-color: var(--color-bg-secondary); border-radius: var(--radius-md); cursor: pointer;">
+                                <input type="checkbox" style="cursor: pointer;">
+                                <span style="color: var(--color-text-secondary);">Statement B is correct</span>
+                            </label>
+                        </div>
+
+                        <div style="margin-top: var(--spacing-xl);">
+                            <button class="btn btn-secondary" style="margin-right: var(--spacing-md);">Save Progress</button>
+                            <button class="btn btn-primary">Submit Assessment</button>
+                        </div>
+                    </div>
+
+                    <aside style="width: 280px;">
+                        <div class="lesson-section">
+                            <div class="stat-label">Assessment Progress</div>
+                            <div class="progress-bar" style="margin-bottom: var(--spacing-md);">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <p style="font-size: 0.875rem; margin: 0; color: var(--color-text-muted);">Question 3 of 5</p>
+                            <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--spacing-md) 0;">
+                            <h3 style="margin-top: 0;">Time Remaining</h3>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-secondary); margin: 0;">18:45</p>
+                        </div>
+                    </aside>
+                </div>
+            `;
+
+            document.getElementById('assessmentContent').innerHTML = html;
+        }
+
+        /* ========== INITIALIZATION ========== */
+        document.addEventListener('DOMContentLoaded', () => {
+            populateSidebarPaths();
+            populateHomePaths();
+            handleRoute();
+        });
+
+        // Handle window resize for responsive sidebar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.getElementById('sidebar').classList.remove('collapsed');
+            }
+        });
+    </script>
+</body>
+</html>

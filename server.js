@@ -71,6 +71,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET || 'pylearn-dev-secret-key-cha
 const DATA_DIR = path.join(__dirname, 'data');
 const STUDENTS_FILE = path.join(DATA_DIR, 'students.json');
 const PROGRESS_FILE = path.join(DATA_DIR, 'progress.json');
+const TICKETS_FILE = path.join(DATA_DIR, 'tickets.json');
 
 // Write lock for preventing race conditions
 let writeLocks = {};
@@ -117,6 +118,11 @@ function initializeDataFiles() {
   // Initialize progress.json as empty object
   if (!fs.existsSync(PROGRESS_FILE)) {
     fs.writeFileSync(PROGRESS_FILE, JSON.stringify({}, null, 2));
+  }
+
+  // Initialize tickets.json as empty array
+  if (!fs.existsSync(TICKETS_FILE)) {
+    fs.writeFileSync(TICKETS_FILE, JSON.stringify([], null, 2));
   }
 }
 
@@ -777,6 +783,105 @@ app.post('/api/admin/reset-progress/:id', requireAuth, requireTeacher, async (re
 // ============================================
 // ADMIN PANEL ROUTE
 // ============================================
+// TICKET / ISSUE REPORTING API
+// ============================================
+
+// Submit a ticket (any authenticated student or anonymous)
+app.post('/api/tickets', async (req, res) => {
+  try {
+    const { type, description, page, student, userAgent } = req.body;
+
+    if (!type || !description) {
+      return res.status(400).json({ success: false, error: 'Type and description are required' });
+    }
+
+    await acquireLock('tickets');
+    try {
+      let tickets = [];
+      if (fs.existsSync(TICKETS_FILE)) {
+        tickets = JSON.parse(fs.readFileSync(TICKETS_FILE, 'utf8'));
+      }
+
+      const ticket = {
+        id: 'ticket-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6),
+        type: type,
+        description: description.substring(0, 1000), // limit length
+        page: page || 'unknown',
+        student: student || (req.session && req.session.user ? req.session.user.username : 'anonymous'),
+        userAgent: (userAgent || '').substring(0, 200),
+        status: 'open',
+        created_at: new Date().toISOString()
+      };
+
+      tickets.push(ticket);
+      fs.writeFileSync(TICKETS_FILE, JSON.stringify(tickets, null, 2));
+      releaseLock('tickets');
+
+      res.json({ success: true, ticketId: ticket.id });
+    } catch (err) {
+      releaseLock('tickets');
+      throw err;
+    }
+  } catch (error) {
+    console.error('Error creating ticket:', error);
+    res.status(500).json({ success: false, error: 'Failed to create ticket' });
+  }
+});
+
+// Get all tickets (teacher only)
+app.get('/api/admin/tickets', requireAuth, requireTeacher, (req, res) => {
+  try {
+    let tickets = [];
+    if (fs.existsSync(TICKETS_FILE)) {
+      tickets = JSON.parse(fs.readFileSync(TICKETS_FILE, 'utf8'));
+    }
+    // Return newest first
+    tickets.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    res.json({ success: true, data: tickets });
+  } catch (error) {
+    console.error('Error reading tickets:', error);
+    res.status(500).json({ success: false, error: 'Failed to read tickets' });
+  }
+});
+
+// Update ticket status (teacher only)
+app.post('/api/admin/tickets/:id/status', requireAuth, requireTeacher, async (req, res) => {
+  try {
+    const { status } = req.body;
+    if (!['open', 'resolved', 'dismissed'].includes(status)) {
+      return res.status(400).json({ success: false, error: 'Invalid status' });
+    }
+
+    await acquireLock('tickets');
+    try {
+      let tickets = [];
+      if (fs.existsSync(TICKETS_FILE)) {
+        tickets = JSON.parse(fs.readFileSync(TICKETS_FILE, 'utf8'));
+      }
+
+      const ticket = tickets.find(t => t.id === req.params.id);
+      if (!ticket) {
+        releaseLock('tickets');
+        return res.status(404).json({ success: false, error: 'Ticket not found' });
+      }
+
+      ticket.status = status;
+      ticket.updated_at = new Date().toISOString();
+      fs.writeFileSync(TICKETS_FILE, JSON.stringify(tickets, null, 2));
+      releaseLock('tickets');
+
+      res.json({ success: true });
+    } catch (err) {
+      releaseLock('tickets');
+      throw err;
+    }
+  } catch (error) {
+    console.error('Error updating ticket:', error);
+    res.status(500).json({ success: false, error: 'Failed to update ticket' });
+  }
+});
+
+// ============================================
 
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'admin.html'));
@@ -793,6 +898,18 @@ app.get('/admin', (req, res) => {
 // Serve index.html as fallback for root routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// ============================================
+// HIDDEN DEVELOPMENT PLATFORM (not linked from public site)
+// Access at /dev — requires teacher auth
+// ============================================
+app.use('/dev', requireAuth, requireTeacher, express.static(path.join(__dirname, '_platform')));
+app.get('/dev', requireAuth, requireTeacher, (req, res) => {
+  res.sendFile(path.join(__dirname, '_platform', 'index.html'));
+});
+app.get('/dev/*', requireAuth, requireTeacher, (req, res) => {
+  res.sendFile(path.join(__dirname, '_platform', 'index.html'));
 });
 
 // ============================================

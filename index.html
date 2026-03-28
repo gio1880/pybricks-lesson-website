@@ -2798,8 +2798,8 @@
       font-size: 0.9rem;
     }
 
-    .btn-check {
-      background: var(--color-success);
+    .btn-run {
+      background: linear-gradient(135deg, #0EA5E9, #22D3EE);
       color: white;
       border: none;
       padding: 0.75rem 1.5rem;
@@ -2807,23 +2807,150 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity var(--transition-fast);
+      transition: all var(--transition-normal);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      min-height: 44px;
     }
 
-    .btn-check:hover { opacity: 0.9; }
+    .btn-run:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(34, 211, 238, 0.35);
+    }
+
+    .btn-run:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-check {
+      background: linear-gradient(135deg, #059669, #34D399);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      min-height: 44px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .btn-check:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(52, 211, 153, 0.35);
+      opacity: 1;
+    }
 
     .btn-hint {
       background: transparent;
       color: var(--color-warning);
-      border: 1px solid var(--color-warning);
+      border: 1px solid rgba(251, 191, 36, 0.4);
       padding: 0.75rem 1.5rem;
       border-radius: var(--radius-md);
       font-size: 1rem;
       cursor: pointer;
-      transition: background var(--transition-fast);
+      transition: all var(--transition-fast);
+      min-height: 44px;
     }
 
-    .btn-hint:hover { background: rgba(245, 158, 11, 0.1); }
+    .btn-hint:hover {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: var(--color-warning);
+      transform: translateY(-1px);
+    }
+
+    /* Run Code output panel */
+    .run-output {
+      margin: 0.75rem 0;
+      background: rgba(6, 8, 15, 0.8);
+      border: 1px solid rgba(34, 211, 238, 0.15);
+      border-left: 3px solid var(--color-secondary);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .run-output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: rgba(34, 211, 238, 0.06);
+      border-bottom: 1px solid rgba(34, 211, 238, 0.08);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-clear-output {
+      background: transparent;
+      border: none;
+      color: var(--color-text-dim);
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0 0.25rem;
+      min-height: auto;
+      text-shadow: none;
+      transition: color var(--transition-fast);
+    }
+
+    .btn-clear-output:hover { color: var(--color-text-muted); transform: none; box-shadow: none; }
+    .btn-clear-output::after { display: none; }
+
+    .run-output pre {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-success);
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: transparent;
+      border: none;
+    }
+
+    /* Loading indicator for Pyodide */
+    .pyodide-loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--color-secondary);
+      padding: 0.4rem 0.75rem;
+      background: rgba(34, 211, 238, 0.06);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(34, 211, 238, 0.12);
+    }
+
+    /* code-input (textarea) upgrade */
+    .code-input {
+      width: 100%;
+      background: var(--color-code-bg);
+      border: 1px solid rgba(99, 102, 241, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      resize: vertical;
+      outline: none;
+      transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+      tab-size: 4;
+      -webkit-text-fill-color: var(--color-text-primary);
+    }
+
+    .code-input:focus {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+    }
 
     .btn-submit {
       background: var(--color-primary);
@@ -9484,6 +9611,87 @@ function normalizeQuotes(str) {
     .replace(/\u2026/g, '...');                                  // ellipsis → three dots
 }
 
+// ============================================================================
+// PYODIDE PYTHON RUNNER — runs real Python in the browser via WebAssembly
+// ============================================================================
+
+const PyRunner = {
+  pyodide: null,
+  loading: false,
+  loaded: false,
+
+  async init() {
+    if (this.loaded) return;
+    if (this.loading) {
+      // Wait for already-in-progress load
+      await new Promise(resolve => {
+        const check = setInterval(() => {
+          if (this.loaded) { clearInterval(check); resolve(); }
+        }, 100);
+      });
+      return;
+    }
+
+    this.loading = true;
+    Toast.show('Loading Python engine... (~5MB, one-time download)', 'info');
+
+    try {
+      // Dynamically load Pyodide from CDN
+      if (!window.loadPyodide) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js';
+          script.onload = resolve;
+          script.onerror = () => reject(new Error('Failed to load Pyodide script'));
+          document.head.appendChild(script);
+        });
+      }
+
+      this.pyodide = await window.loadPyodide({
+        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/'
+      });
+
+      this.loaded = true;
+      this.loading = false;
+      Toast.show('Python ready! ✅', 'success');
+    } catch (e) {
+      this.loading = false;
+      throw new Error('Could not load Python engine: ' + e.message);
+    }
+  },
+
+  async run(code) {
+    if (!this.loaded) throw new Error('Pyodide not ready');
+
+    // Capture stdout and stderr
+    let output = '';
+    let errorText = '';
+
+    this.pyodide.setStdout({ batched: (text) => { output += text + '\n'; } });
+    this.pyodide.setStderr({ batched: (text) => { errorText += text + '\n'; } });
+
+    try {
+      await this.pyodide.runPythonAsync(code);
+    } catch (e) {
+      // Python runtime error — extract just the useful part
+      const msg = e.message || String(e);
+      const lines = msg.split('\n');
+      // Trim Pyodide internal traceback noise, keep user-facing lines
+      const userLines = lines.filter(l =>
+        !l.includes('at pyodide') &&
+        !l.includes('PythonError') &&
+        !l.includes('pyodide.js') &&
+        l.trim() !== ''
+      );
+      errorText = userLines.join('\n') || msg;
+    }
+
+    const finalOutput = (output + errorText).trim();
+    const isError = errorText.trim().length > 0;
+    return { output: finalOutput || '(no output)', error: isError };
+  }
+};
+
 function validateExercise(exercise, userAnswer) {
   try {
     if (exercise.type === 'multiple-choice' || exercise.type === 'trace') {
@@ -9700,6 +9908,24 @@ const LessonViewer = {
     this.initOptionClicks();
     this.updateProgressDots();
     this.updateNavButtons();
+
+    // Live smart-quote normalization for code textarea (critical for iPad)
+    const textarea = document.getElementById('exercise-input');
+    if (textarea) {
+      textarea.addEventListener('input', function() {
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        const normalized = normalizeQuotes(this.value);
+        if (normalized !== this.value) {
+          this.value = normalized;
+          // Restore cursor position
+          try { this.setSelectionRange(start, end); } catch(e) {}
+        }
+      });
+      // Focus the textarea so students can start typing right away on desktop
+      if (!('ontouchstart' in window)) textarea.focus();
+    }
+
     // Scroll content into view
     contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
   },
@@ -9789,9 +10015,11 @@ const LessonViewer = {
     if (exercise.type === 'code' || exercise.type === 'fill-blank') {
       const starterCode = exercise.starterCode || '';
       html += '<div class="exercise-area">';
-      html += '<textarea id="exercise-input" class="code-input" rows="6" placeholder="Type your code here...">' + this.escapeHtml(starterCode) + '</textarea>';
+      html += '<textarea id="exercise-input" class="code-input" rows="8" placeholder="Type your code here..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="none">' + this.escapeHtml(starterCode) + '</textarea>';
+      html += '<div id="run-output" class="run-output hidden"><div class="run-output-header"><span>▶ Output</span><button class="btn-clear-output" onclick="document.getElementById(\'run-output\').classList.add(\'hidden\')">✕</button></div><pre id="run-output-text"></pre></div>';
       html += '<div id="exercise-feedback" class="feedback hidden"></div>';
       html += '<div class="exercise-actions">';
+      html += '<button onclick="LessonViewer.runCode()" class="btn-run" id="btn-run-code">▶ Run Code</button>';
       html += '<button onclick="LessonViewer.checkExercise()" class="btn-check">✓ Check Answer</button>';
       html += '<button onclick="LessonViewer.showHint()" class="btn-hint">💡 Hint</button>';
       html += '</div>';
@@ -9978,6 +10206,40 @@ const LessonViewer = {
     if (hintBox) {
       hintBox.classList.toggle('hidden');
     }
+  },
+
+  // ─── Pyodide Python Runner ───────────────────────────────────────────────
+  async runCode() {
+    const textarea = document.getElementById('exercise-input');
+    if (!textarea) return;
+    const code = normalizeQuotes(textarea.value.trim());
+    if (!code) {
+      this._showRunOutput('⚠️ Please write some code first!', true);
+      return;
+    }
+
+    const btn = document.getElementById('btn-run-code');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Running...'; }
+
+    try {
+      await PyRunner.init();
+      const result = await PyRunner.run(code);
+      this._showRunOutput(result.output, result.error);
+    } catch (e) {
+      this._showRunOutput('❌ Could not run Python: ' + e.message, true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '▶ Run Code'; }
+    }
+  },
+
+  _showRunOutput(text, isError = false) {
+    const panel = document.getElementById('run-output');
+    const pre = document.getElementById('run-output-text');
+    if (!panel || !pre) return;
+    pre.textContent = text || '(no output)';
+    pre.style.color = isError ? 'var(--color-error)' : 'var(--color-success)';
+    panel.classList.remove('hidden');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   },
 
   retryQuiz() {

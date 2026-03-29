@@ -661,7 +661,8 @@
                 <th>Name</th>
                 <th>Username</th>
                 <th>Lessons</th>
-                <th>Unit Tests</th>
+                <th>Python Unit Test</th>
+                <th>Other Unit Tests</th>
                 <th>FLL Assessment</th>
                 <th>Certificates</th>
                 <th>Last Login</th>
@@ -669,7 +670,7 @@
               </tr>
             </thead>
             <tbody id="progressTableBody">
-              <tr><td colspan="8" style="text-align: center; color: var(--color-text-muted);">Loading...</td></tr>
+              <tr><td colspan="9" style="text-align: center; color: var(--color-text-muted);">Loading...</td></tr>
             </tbody>
           </table>
         </div>
@@ -852,12 +853,32 @@
     const TOTAL_LESSONS = 37;
 
     function getUnitTestStatus(lessonProgress) {
-      if (!lessonProgress) return { passed: 0, total: 5 };
+      if (!lessonProgress) return { passed: 0, total: 5, details: {} };
       let passed = 0;
+      const details = {};
       UNIT_TEST_IDS.forEach(id => {
-        if (lessonProgress[id] && lessonProgress[id].passed) passed++;
+        const d = lessonProgress[id];
+        if (d && d.passed) passed++;
+        if (d && (d.attempts > 0 || d.bestScore > 0)) {
+          details[id] = {
+            passed: d.passed || false,
+            bestScore: d.bestScore || d.score || 0,
+            attempts: d.attempts || 1
+          };
+        }
       });
-      return { passed, total: 5 };
+      return { passed, total: 5, details };
+    }
+
+    function getPythonTestHtml(details) {
+      const d = details['unit-test-python'];
+      if (!d) return '<span style="color:var(--color-text-muted);">Not taken</span>';
+      const scoreColor = d.bestScore >= 80 ? 'var(--color-success)' : d.bestScore >= 60 ? 'var(--color-warning)' : 'var(--color-error)';
+      const passedBadge = d.passed
+        ? '<span style="background:rgba(16,185,129,0.15);color:var(--color-success);padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;margin-left:0.4rem;">PASSED</span>'
+        : '';
+      return '<span style="color:' + scoreColor + ';font-weight:600;">' + d.bestScore + '%</span>' + passedBadge +
+             '<span style="color:var(--color-text-muted);font-size:0.8rem;margin-left:0.4rem;">(' + d.attempts + ' ' + (d.attempts === 1 ? 'try' : 'tries') + ')</span>';
     }
 
     function getFllStatus(fllResults) {
@@ -882,7 +903,7 @@
       tbody.innerHTML = '';
 
       if (progressData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--color-text-muted);">No progress data</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; color: var(--color-text-muted);">No progress data</td></tr>';
         return;
       }
 
@@ -892,11 +913,15 @@
         const utStatus = getUnitTestStatus(progress.lessonProgress);
         const certHtml = getCertStatus(progress.lessonsCompleted, utStatus.passed);
         const fllHtml = getFllStatus(progress.fllResults);
+        const pyTestHtml = getPythonTestHtml(utStatus.details);
+        const otherTestsPassed = utStatus.passed - (utStatus.details['unit-test-python']?.passed ? 1 : 0);
+        const otherTestsTotal = 4;
         row.innerHTML = `
           <td><strong>${escapeHtml(progress.name)}</strong></td>
           <td><code style="background: var(--color-dark-bg); padding: 0.25rem 0.5rem; border-radius: 0.25rem;">${escapeHtml(progress.username)}</code></td>
           <td>${progress.lessonsCompleted}/${TOTAL_LESSONS}</td>
-          <td>${utStatus.passed}/5</td>
+          <td>${pyTestHtml}</td>
+          <td style="color:var(--color-text-muted);">${otherTestsPassed}/${otherTestsTotal}</td>
           <td>${fllHtml}</td>
           <td>${certHtml}</td>
           <td>${lastLogin}</td>

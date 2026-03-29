@@ -2626,40 +2626,313 @@
       font-weight: bold;
     }
 
-    .annotations {
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+    /* ============================================
+       CONCEPT VIEWER v2 — Interactive mini-lessons
+       ============================================ */
 
-    .annotation {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      background: rgba(14, 18, 37, 0.5);
-      border: 1px solid rgba(99, 102, 241, 0.08);
-      border-radius: var(--radius-lg);
-      padding: 0.85rem 1.1rem;
-      transition: border-color var(--transition-fast);
-    }
-
-    .annotation:hover {
-      border-color: rgba(99, 102, 241, 0.15);
-    }
-
-    .anno-number {
-      background: var(--color-primary);
-      color: white;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
+    /* Progress bar — only shows when >1 concept */
+    .concept-progress-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .concept-progress-row.single-concept { display: none; }
+
+    .concept-progress-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .concept-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+      border-radius: 999px;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .concept-counter-label {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+    }
+
+    /* Dot indicators — hidden for single concept */
+    .concept-dots {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .concept-dots.single-concept { display: none; }
+
+    .concept-dot-btn {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.25s;
       flex-shrink: 0;
+    }
+    .concept-dot-btn.active {
+      background: var(--color-primary);
+      transform: scale(1.35);
+      box-shadow: 0 0 6px rgba(79, 70, 229, 0.45);
+    }
+    .concept-dot-btn:hover:not(.active) {
+      background: rgba(79, 70, 229, 0.5);
+      transform: scale(1.15);
+    }
+
+    /* Card wrapper */
+    .concept-card-wrap {
+      min-height: 120px;
+    }
+
+    /* Card inner — the main concept card */
+    .concept-card-inner {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.25rem;
+      animation: conceptAppear 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes conceptAppear {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Concept title — "What you're learning" */
+    .concept-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin: 0 0 0.35rem 0;
+      line-height: 1.3;
+    }
+
+    .concept-step-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      background: rgba(79,70,229,0.1);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    /* Explanation text */
+    .concept-explanation-text {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    /* Code snippet area */
+    .concept-code-snippet {
+      background: rgba(6, 8, 15, 0.75);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .concept-code-label {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(79, 70, 229, 0.08);
+      border-bottom: 1px solid rgba(79, 70, 229, 0.12);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .concept-code-block {
+      margin: 0;
+      padding: 0.75rem 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.65;
+      overflow-x: auto;
+    }
+
+    /* Run button + output inside concept card */
+    .concept-run-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    .btn-concept-run {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--color-success), #0ea5e9);
+      color: white;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-concept-run:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 12px rgba(52, 211, 153, 0.35);
+    }
+    .btn-concept-run:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .concept-output {
+      background: rgba(6, 8, 15, 0.7);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 0.75rem;
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--color-success);
+      max-height: 120px;
+      overflow-y: auto;
+      animation: conceptAppear 0.25s ease both;
+    }
+    .concept-output.has-error {
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+    .concept-output pre {
+      margin: 0;
+      padding: 0;
+      font-family: inherit;
+      font-size: inherit;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* "Try changing this" prompt */
+    .concept-try-prompt {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      padding: 0.45rem 0.65rem;
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.15);
+      border-radius: var(--radius-md);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #fbbf24;
+    }
+    .concept-try-prompt .try-icon {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+
+    /* Navigation */
+    .concept-nav {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+    .concept-nav.single-concept { display: none; }
+
+    .btn-concept-prev {
+      flex: 0 0 auto;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      transition: all 0.2s;
+      min-height: 40px;
+    }
+    .btn-concept-prev:not(:disabled):hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background: rgba(79,70,229,0.08);
+    }
+    .btn-concept-prev:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .btn-concept-next {
+      flex: 1;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--color-primary), #6366f1);
+      border: none;
+      color: white;
+      transition: all 0.2s;
+      min-height: 40px;
+    }
+    .btn-concept-next:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+    }
+    .btn-concept-next.is-last {
+      background: linear-gradient(135deg, var(--color-success), #0ea5e9);
+    }
+
+    /* Full code panel */
+    .full-code-toggle {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn-full-code {
+      width: 100%;
+      background: transparent;
+      border: 1px dashed rgba(255,255,255,0.12);
+      color: var(--color-text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-full-code:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background: rgba(79,70,229,0.05);
+    }
+
+    .full-code-panel {
+      margin-top: 0.75rem;
+      animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     .output-block {
@@ -4884,7 +5157,7 @@
       description: "Here's a simple Python program:",
       code: `print("Hello, World!")`,
       annotations: [
-        { line: 1, note: "print() is a command that displays text on the screen. The text to display goes inside the parentheses and quotes." }
+        { line: 1, note: "print() is a command that displays text on the screen. The text to display goes inside the parentheses and quotes.", conceptTitle: "The print() command", tryPrompt: "Change the text inside the quotes to your own message and run it again!" }
       ],
       output: `Hello, World!`
     },
@@ -4972,11 +5245,11 @@ print(name)
 print(age)
 print("I am", name)`,
       annotations: [
-        { line: 1, note: "Create a variable called 'name' and store the text 'Alex' in it" },
-        { line: 2, note: "Create a variable called 'age' and store the number 12 in it" },
-        { line: 3, note: "Display the value stored in the 'name' variable" },
-        { line: 4, note: "Display the value stored in the 'age' variable" },
-        { line: 5, note: "You can use multiple variables in one print command" }
+        { line: 1, note: "Create a variable called 'name' and store the text 'Alex' in it.", conceptTitle: "Storing text in a variable", tryPrompt: "Change 'Alex' to your own name and run it!" },
+        { line: 2, note: "Create a variable called 'age' and store the number 12 in it.", conceptTitle: "Storing a number in a variable", tryPrompt: "Try changing 12 to your age!" },
+        { line: 3, note: "Display the value stored in the 'name' variable.", conceptTitle: "Using a variable with print()" },
+        { line: 4, note: "Display the value stored in the 'age' variable.", conceptTitle: "Printing a number variable" },
+        { line: 5, note: "You can use multiple variables in one print command, separated by commas.", conceptTitle: "Combining text and variables", tryPrompt: "Try adding more text or another variable to the print()!" }
       ],
       output: `Alex
 12
@@ -5073,13 +5346,13 @@ print(distance)
 print(message)
 print("Speed is", speed, "millimeters per second")`,
       annotations: [
-        { line: 1, note: "speed is an integer (whole number)" },
-        { line: 2, note: "distance is a float (has a decimal)" },
-        { line: 3, note: "message is a string (text in quotes)" },
-        { line: 4, note: "Print the integer" },
-        { line: 5, note: "Print the float" },
-        { line: 6, note: "Print the string" },
-        { line: 7, note: "You can mix strings and other types in print()" }
+        { line: 1, note: "speed is an integer — a whole number with no decimal point.", conceptTitle: "Integers (whole numbers)", tryPrompt: "Change 400 to a different number and run it!" },
+        { line: 2, note: "distance is a float — a number that has a decimal point.", conceptTitle: "Floats (decimal numbers)" },
+        { line: 3, note: "message is a string — text wrapped in quotes.", conceptTitle: "Strings (text)", tryPrompt: "Change the text inside the quotes!" },
+        { line: 4, note: "Print the integer value stored in speed.", conceptTitle: "Printing an integer" },
+        { line: 5, note: "Print the float value stored in distance.", conceptTitle: "Printing a float" },
+        { line: 6, note: "Print the string value stored in message.", conceptTitle: "Printing a string" },
+        { line: 7, note: "You can mix strings and other types in one print() by separating them with commas.", conceptTitle: "Mixing types in print()", tryPrompt: "Add another variable to the print statement!" }
       ],
       output: `400
 56.5
@@ -5173,13 +5446,13 @@ print(has_obstacle)
 print(5 > 3)
 print(10 == 5)`,
       annotations: [
-        { line: 1, note: "Create a boolean variable is_ready set to True" },
-        { line: 2, note: "Create a boolean variable has_obstacle set to False" },
-        { line: 3, note: "Create a boolean variable motor_running set to True" },
-        { line: 4, note: "Print True" },
-        { line: 5, note: "Print False" },
-        { line: 6, note: "Comparison: Is 5 greater than 3? True" },
-        { line: 7, note: "Comparison: Is 10 equal to 5? False" }
+        { line: 1, note: "Create a boolean variable is_ready and set it to True (capital T).", conceptTitle: "Creating a True boolean" },
+        { line: 2, note: "Create a boolean variable has_obstacle and set it to False (capital F).", conceptTitle: "Creating a False boolean", tryPrompt: "Change False to True and see what prints!" },
+        { line: 3, note: "Another boolean — motor_running is True.", conceptTitle: "Booleans describe on/off states" },
+        { line: 4, note: "Print the value of is_ready — shows True.", conceptTitle: "Printing a boolean" },
+        { line: 5, note: "Print the value of has_obstacle — shows False.", conceptTitle: "Printing another boolean" },
+        { line: 6, note: "Python can compare numbers. 5 > 3 gives True because 5 IS greater than 3.", conceptTitle: "Comparisons produce booleans", tryPrompt: "Try changing 5 > 3 to 2 > 10 — what happens?" },
+        { line: 7, note: "10 == 5 gives False because 10 does NOT equal 5. Note the double equals ==.", conceptTitle: "The == comparison operator" }
       ],
       output: `True
 False
@@ -5275,11 +5548,11 @@ robot_straight = 500
 # speed * time = distance
 print(robot_speed)`,
       annotations: [
-        { line: 1, note: "Full-line comment explaining the code" },
-        { line: 2, note: "Inline comment explaining what the value means" },
-        { line: 4, note: "Comment on its own line" },
-        { line: 5, note: "Another comment explaining the WHY" },
-        { line: 9, note: "Comment explaining the logic" }
+        { line: 1, note: "A full-line comment starts with # and Python ignores the entire line.", conceptTitle: "Full-line comments" },
+        { line: 2, note: "An inline comment comes after code on the same line. It explains what the value means.", conceptTitle: "Inline comments", tryPrompt: "Add your own comment after the number!" },
+        { line: 4, note: "This comment explains what the NEXT section of code does.", conceptTitle: "Section header comments" },
+        { line: 5, note: "Good comments explain WHY, not just WHAT. This helps other programmers.", conceptTitle: "Explain the why, not the what" },
+        { line: 9, note: "Another comment block explaining the logic below.", conceptTitle: "Logic explanation comments" }
       ],
       output: `400`
     },
@@ -5372,10 +5645,10 @@ print("Not indented - outside the if")
 # if True:
 # print("Not indented - ERROR!")`,
       annotations: [
-        { line: 2, note: "The if statement on the left edge" },
-        { line: 3, note: "Indented 4 spaces - this runs if condition is True" },
-        { line: 4, note: "Also indented 4 spaces - still inside the if" },
-        { line: 5, note: "Back to the left edge - outside the if" }
+        { line: 2, note: "The if statement starts at the left edge — no spaces before it.", conceptTitle: "The if statement starts a block" },
+        { line: 3, note: "This line is indented 4 spaces. It runs only if the condition is True.", conceptTitle: "Indented code = inside the block", tryPrompt: "What happens if you remove the spaces before print?" },
+        { line: 4, note: "Also indented 4 spaces — still part of the same if block.", conceptTitle: "Same indentation = same block" },
+        { line: 5, note: "Back to the left edge — this is OUTSIDE the if block and always runs.", conceptTitle: "Unindented = outside the block" }
       ],
       output: `This is indented
 Also indented
@@ -5486,12 +5759,12 @@ if distance == 500:
 else:
     print("Different distance")`,
       annotations: [
-        { line: 3, note: "if statement - checks if speed > 300" },
-        { line: 4, note: "This runs because 400 IS greater than 300" },
-        { line: 5, note: "else - only runs if the condition is False" },
-        { line: 6, note: "This would only print if speed was NOT > 300" },
-        { line: 9, note: "Check if distance equals exactly 500" },
-        { line: 10, note: "This runs because condition is True" }
+        { line: 3, note: "The if statement checks: is speed greater than 300? Since speed is 400, the answer is True.", conceptTitle: "Writing an if condition", tryPrompt: "Change speed to 200 on line 1 — which message prints now?" },
+        { line: 4, note: "This runs because 400 IS greater than 300. The condition was True!", conceptTitle: "Code runs when condition is True" },
+        { line: 5, note: "else means: if the condition was False, run THIS code instead.", conceptTitle: "The else branch" },
+        { line: 6, note: "This would only print if speed was 300 or less.", conceptTitle: "The False path" },
+        { line: 9, note: "A second if: checks if distance equals exactly 500. The == operator means 'is equal to'.", conceptTitle: "The == equality check" },
+        { line: 10, note: "100 does NOT equal 500, so this block is skipped. The else block runs instead.", conceptTitle: "When the condition is False" }
       ],
       output: `Robot is going fast!
 Different distance`
@@ -5590,13 +5863,13 @@ while count < 3:
     print("Count is", count)
     count = count + 1`,
       annotations: [
-        { line: 2, note: "for loop runs 3 times (i = 0, 1, 2)" },
-        { line: 3, note: "This prints 3 times" },
-        { line: 6, note: "range(1, 6) gives 1, 2, 3, 4, 5" },
-        { line: 7, note: "Prints 1, then 2, then 3, then 4, then 5" },
-        { line: 10, note: "while loop starts - will repeat while count < 3" },
-        { line: 11, note: "Print the current value of count" },
-        { line: 12, note: "Increase count by 1" }
+        { line: 2, note: "for loop: runs 3 times. range(3) gives values 0, 1, 2.", conceptTitle: "The for loop with range()", tryPrompt: "Change range(3) to range(5) — how many times does it print?" },
+        { line: 3, note: "This indented line runs once for each value. It prints 'Go!' three times.", conceptTitle: "Code inside the loop repeats" },
+        { line: 6, note: "range(1, 6) starts at 1 and stops before 6, giving: 1, 2, 3, 4, 5.", conceptTitle: "range() with start and stop", tryPrompt: "Try range(1, 11) to print 1 through 10!" },
+        { line: 7, note: "Each time the loop runs, i has the next value. Prints 1, then 2, then 3, 4, 5.", conceptTitle: "The loop variable changes each time" },
+        { line: 10, note: "A while loop repeats AS LONG AS the condition is True. Here: while count < 3.", conceptTitle: "The while loop", tryPrompt: "Change count < 3 to count < 5 — what happens?" },
+        { line: 11, note: "Print the current value of count each time through the loop.", conceptTitle: "Using the counter variable" },
+        { line: 12, note: "IMPORTANT: count = count + 1 increases count. Without this, the loop would run forever!", conceptTitle: "Updating the counter" }
       ],
       output: `Go!
 Go!
@@ -5705,12 +5978,12 @@ def celebrate():
 
 celebrate()`,
       annotations: [
-        { line: 2, note: "def keyword starts the function definition" },
-        { line: 3, note: "First line of the function (indented)" },
-        { line: 4, note: "Second line of the function (indented)" },
-        { line: 7, note: "Call greet() - runs the function once" },
-        { line: 8, note: "Call again - runs the function a second time" },
-        { line: 9, note: "Call again - runs the function a third time" }
+        { line: 2, note: "def starts a function definition. greet is the name, and () means it takes no inputs.", conceptTitle: "Defining a function with def" },
+        { line: 3, note: "This indented line is INSIDE the function. It only runs when the function is called.", conceptTitle: "Function body (indented code)", tryPrompt: "Add a third print line inside the function!" },
+        { line: 4, note: "Still inside the function — same indentation level.", conceptTitle: "Multiple lines in a function" },
+        { line: 7, note: "greet() CALLS the function — Python jumps up and runs lines 3-4.", conceptTitle: "Calling a function" },
+        { line: 8, note: "Calling it again runs the same code a second time. Functions are reusable!", conceptTitle: "Functions are reusable" },
+        { line: 9, note: "Third call — same output again. Write once, use many times!", conceptTitle: "Call as many times as you want" }
       ],
       output: `Hello, robot!
 Welcome!
@@ -5815,13 +6088,13 @@ def move(speed, direction):
 move(300, "forward")
 move(400, "backward")`,
       annotations: [
-        { line: 2, note: "distance is a parameter" },
-        { line: 3, note: "Use the parameter inside the function" },
-        { line: 6, note: "Call with 500 - distance becomes 500 inside" },
-        { line: 7, note: "Call with 200 - distance becomes 200 inside" },
-        { line: 8, note: "Call with 1000 - distance becomes 1000 inside" },
-        { line: 11, note: "Function with two parameters" },
-        { line: 14, note: "Pass two values: speed=300, direction=forward" }
+        { line: 2, note: "distance is a parameter — a placeholder that gets filled in when you call the function.", conceptTitle: "Defining a parameter" },
+        { line: 3, note: "Inside the function, use the parameter name just like a variable.", conceptTitle: "Using a parameter inside the function" },
+        { line: 6, note: "Call drive(500) — distance becomes 500 inside the function.", conceptTitle: "Passing a value to a function", tryPrompt: "Try calling drive(999) and see what prints!" },
+        { line: 7, note: "Call drive(200) — now distance becomes 200. Same function, different value!", conceptTitle: "Same function, different input" },
+        { line: 8, note: "Call drive(1000) — distance becomes 1000. The function adapts to whatever you give it.", conceptTitle: "Parameters make functions flexible" },
+        { line: 11, note: "Functions can take MULTIPLE parameters, separated by commas.", conceptTitle: "Multiple parameters", tryPrompt: "Try calling move() with your own speed and direction!" },
+        { line: 14, note: "Pass two values: speed gets 300, direction gets 'forward'. Order matters!", conceptTitle: "Passing multiple arguments" }
       ],
       output: `Driving 500 millimeters
 Driving 200 millimeters
@@ -5929,13 +6202,13 @@ print("Is 400 fast?", fast)
 slow = is_fast(100)
 print("Is 100 fast?", slow)`,
       annotations: [
-        { line: 2, note: "Function that returns a value" },
-        { line: 3, note: "return sends the sum back to the caller" },
-        { line: 6, note: "Function that returns a boolean" },
-        { line: 7, note: "if speed > 300, return True" },
-        { line: 9, note: "Otherwise, return False" },
-        { line: 12, note: "Call add and store the result" },
-        { line: 15, note: "Call is_fast and store the result" }
+        { line: 2, note: "This function takes two parameters a and b.", conceptTitle: "Function with two parameters" },
+        { line: 3, note: "return sends a + b back to wherever the function was called. The function stops here.", conceptTitle: "The return statement", tryPrompt: "Change a + b to a * b — what does 10 * 5 give?" },
+        { line: 6, note: "This function returns a boolean (True or False) based on the speed.", conceptTitle: "Returning True or False" },
+        { line: 7, note: "If speed > 300, the function returns True and stops.", conceptTitle: "Conditional return" },
+        { line: 9, note: "Otherwise, return False. Every path through the function should return something.", conceptTitle: "The else return path" },
+        { line: 12, note: "Call add(10, 5) and store the returned value (15) in a variable called result.", conceptTitle: "Storing a return value", tryPrompt: "Try add(100, 200) — what do you get?" },
+        { line: 15, note: "Call is_fast(400). Since 400 > 300, it returns True, which gets stored in fast.", conceptTitle: "Using the returned boolean" }
       ],
       output: `10 + 5 = 15
 Is 400 fast? True
@@ -6032,11 +6305,11 @@ left_motor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
 # Use the objects we created
 print("Hub and motor are ready!")`,
       annotations: [
-        { line: 2, note: "Import the PrimeHub class from pybricks.hubs library" },
-        { line: 3, note: "Import the Motor class from pybricks.pupdevices library" },
-        { line: 4, note: "Import Port and Direction from pybricks.parameters" },
-        { line: 7, note: "Now we can create a hub object" },
-        { line: 8, note: "Now we can create a motor object" }
+        { line: 2, note: "Import the PrimeHub class from the pybricks.hubs library. 'from X import Y' means: get Y from library X.", conceptTitle: "The import statement" },
+        { line: 3, note: "Import Motor from a different library. Each library provides different tools.", conceptTitle: "Importing from different libraries" },
+        { line: 4, note: "You can import multiple things from one library: Port AND Direction.", conceptTitle: "Importing multiple items" },
+        { line: 7, note: "After importing, you can create objects. hub = PrimeHub() creates a hub we can control.", conceptTitle: "Creating objects from imports" },
+        { line: 8, note: "Create a Motor object. Port.A tells it which port the motor is plugged into.", conceptTitle: "Using imported classes with parameters" }
       ],
       output: `Hub and motor are ready!`
     },
@@ -6137,10 +6410,10 @@ left_motor.run_time(500, 1000)
 # Methods take parameters
 print("Motor running at 500 speed for 1000 milliseconds")`,
       annotations: [
-        { line: 5, note: "hub is an object (a PrimeHub)" },
-        { line: 6, note: "left_motor is an object (a Motor)" },
-        { line: 9, note: "reset_heading() is a method of hub.imu" },
-        { line: 10, note: "run_time() is a method of left_motor, takes two parameters" }
+        { line: 5, note: "hub is an object — a specific PrimeHub you can interact with.", conceptTitle: "Creating an object" },
+        { line: 6, note: "left_motor is another object — a Motor connected to Port A.", conceptTitle: "Another object with a parameter" },
+        { line: 9, note: "reset_heading(0) is a METHOD call. The pattern is: object.method(). hub.imu is a sub-object.", conceptTitle: "Calling a method on an object" },
+        { line: 10, note: "run_time(500, 1000) is a method that takes two parameters: speed and time.", conceptTitle: "Methods with parameters" }
       ],
       output: `Motor running at 500 speed for 1000 milliseconds`
     },
@@ -6253,13 +6526,13 @@ if distance > 400:
 else:
     print("Short move")`,
       annotations: [
-        { line: 5, note: "Create a PrimeHub object called hub" },
-        { line: 6, note: "Create a Motor object called left_motor" },
-        { line: 9, note: "Call reset_heading method on hub.imu" },
-        { line: 12, note: "Call run_time method on left_motor" },
-        { line: 15, note: "distance is now 500" },
-        { line: 16, note: "Check: Is 500 > 400? Yes, True!" },
-        { line: 17, note: "This runs because condition is True" }
+        { line: 5, note: "First, create the objects you need — hub and motor.", conceptTitle: "Step 1: Set up your objects" },
+        { line: 6, note: "left_motor is connected to Port.A.", conceptTitle: "Connecting hardware to code" },
+        { line: 9, note: "Call a method on hub.imu to reset the heading sensor.", conceptTitle: "Step 2: Initialize sensors" },
+        { line: 12, note: "Tell the motor to run at speed 500 for 1000 milliseconds.", conceptTitle: "Step 3: Move the robot" },
+        { line: 15, note: "Create a variable to store the distance value.", conceptTitle: "Step 4: Store data in variables" },
+        { line: 16, note: "Use an if statement to check: Is 500 > 400? Yes — True!", conceptTitle: "Step 5: Make a decision", tryPrompt: "Change distance to 300 — which message prints now?" },
+        { line: 17, note: "Because the condition was True, this indented line runs.", conceptTitle: "The True branch executes" }
       ],
       output: `Moving far!`
     },
@@ -8693,7 +8966,8 @@ const UNIT_TESTS = [
           "var speed = 300;"
         ],
         correct: 1,
-        explanation: "In Python, you use the = operator to assign a value to a variable. The syntax is: variable_name = value"
+        explanation: "In Python, you use the = operator to assign a value to a variable. The syntax is: variable_name = value",
+        reviewLessons: ["py-02"]
       },
       {
         id: "ut-py-q2",
@@ -8706,7 +8980,8 @@ const UNIT_TESTS = [
           "x10"
         ],
         correct: 2,
-        explanation: "The + operator adds the values of x (5) and y (10), resulting in 15 being printed."
+        explanation: "The + operator adds the values of x (5) and y (10), resulting in 15 being printed.",
+        reviewLessons: ["py-02", "py-03"]
       },
       {
         id: "ut-py-q3",
@@ -8719,7 +8994,8 @@ const UNIT_TESTS = [
           "loop 5 times: print(i)"
         ],
         correct: 1,
-        explanation: "Python uses 'for' with 'in' and 'range()' to create loops. range(5) creates numbers from 0 to 4."
+        explanation: "Python uses 'for' with 'in' and 'range()' to create loops. range(5) creates numbers from 0 to 4.",
+        reviewLessons: ["py-08"]
       },
       {
         id: "ut-py-q4",
@@ -8732,7 +9008,8 @@ const UNIT_TESTS = [
           "func add(a, b) { return a + b }"
         ],
         correct: 1,
-        explanation: "Python functions are defined with 'def', followed by the function name, parameters in parentheses, and a colon. The body is indented."
+        explanation: "Python functions are defined with 'def', followed by the function name, parameters in parentheses, and a colon. The body is indented.",
+        reviewLessons: ["py-09", "py-10", "py-11"]
       },
       {
         id: "ut-py-q5",
@@ -8745,7 +9022,8 @@ const UNIT_TESTS = [
           "'Hello - World'"
         ],
         correct: 1,
-        explanation: "The \\n escape sequence creates a newline in Python strings, making text appear on different lines."
+        explanation: "The \\n escape sequence creates a newline in Python strings, making text appear on different lines.",
+        reviewLessons: ["py-03"]
       },
       {
         id: "ut-py-q6",
@@ -8758,7 +9036,8 @@ const UNIT_TESTS = [
           "Prints both 'Hot' and 'Cold'"
         ],
         correct: 2,
-        explanation: "The if/else statement executes different code based on whether the condition is true or false."
+        explanation: "The if/else statement executes different code based on whether the condition is true or false.",
+        reviewLessons: ["py-07"]
       },
       {
         id: "ut-py-q7",
@@ -8771,7 +9050,8 @@ const UNIT_TESTS = [
           "math->sqrt()"
         ],
         correct: 1,
-        explanation: "Use 'from module import function' to import a specific function from a module, then use it directly without the module prefix."
+        explanation: "Use 'from module import function' to import a specific function from a module, then use it directly without the module prefix.",
+        reviewLessons: ["py-12"]
       },
       {
         id: "ut-py-q8",
@@ -8784,7 +9064,8 @@ const UNIT_TESTS = [
           "Strings are always enclosed in double quotes; lists use square brackets"
         ],
         correct: 1,
-        explanation: "Strings cannot be modified after creation, while lists can have elements added, removed, or changed. Both use quotes differently: strings in quotes, lists with []."
+        explanation: "Strings cannot be modified after creation, while lists can have elements added, removed, or changed. Both use quotes differently: strings in quotes, lists with [].",
+        reviewLessons: ["py-03", "py-13"]
       },
       {
         id: "ut-py-q9",
@@ -8797,7 +9078,8 @@ const UNIT_TESTS = [
           "Error: cannot modify list"
         ],
         correct: 1,
-        explanation: "Lists are mutable, so you can change elements by index. my_list[0] = 10 replaces the first element (index 0) with 10."
+        explanation: "Lists are mutable, so you can change elements by index. my_list[0] = 10 replaces the first element (index 0) with 10.",
+        reviewLessons: ["py-13"]
       },
       {
         id: "ut-py-q10",
@@ -8810,7 +9092,44 @@ const UNIT_TESTS = [
           "Use it as a number in calculations"
         ],
         correct: 0,
-        explanation: "Objects created from classes have methods and attributes you can use. PrimeHub objects provide access to the robot's hardware like lights, speaker, and buttons."
+        explanation: "Objects created from classes have methods and attributes you can use. PrimeHub objects provide access to the robot's hardware like lights, speaker, and buttons.",
+        reviewLessons: ["py-13", "py-14"]
+      },
+      {
+        id: "ut-py-q11",
+        type: "code",
+        text: "Write code that creates a variable called speed set to 250, then prints it.",
+        expectedOutput: "250",
+        placeholder: "# Write your code here\n",
+        explanation: "Use the = operator to assign a value to a variable, then use print() to display it. Example: x = 5 then print(x)",
+        reviewLessons: ["py-02"]
+      },
+      {
+        id: "ut-py-q12",
+        type: "code",
+        text: "Write a for loop using range() that prints each number from 1 to 3, one per line. Your output should be:\n1\n2\n3",
+        expectedOutput: "1\n2\n3",
+        placeholder: "# Write your for loop here\n",
+        explanation: "Use range(1, 4) to get numbers 1, 2, 3. Inside the loop, print each number.",
+        reviewLessons: ["py-08"]
+      },
+      {
+        id: "ut-py-q13",
+        type: "code",
+        text: "Define a function called greet that takes a name parameter and returns 'Hello, ' + name. Then print the result of calling greet('Robot').",
+        expectedOutput: "Hello, Robot",
+        placeholder: "# Define your function here\n",
+        explanation: "Use def to define the function, return to send back the result, then call it and print the returned value.",
+        reviewLessons: ["py-09", "py-10", "py-11"]
+      },
+      {
+        id: "ut-py-q14",
+        type: "code",
+        text: "Write code that sets battery = 15, then uses an if/else to print 'Low battery' if battery is less than 20, or 'Battery OK' otherwise.",
+        expectedOutput: "Low battery",
+        placeholder: "# Write your if/else here\n",
+        explanation: "Use if battery < 20: to check the condition, then print the right message in each branch.",
+        reviewLessons: ["py-07"]
       }
     ]
   },
@@ -9966,43 +10285,245 @@ const LessonViewer = {
 
   renderExample() {
     const example = this.currentLesson.example;
-    const highlightedCode = SyntaxHighlighter.highlight(example.code);
+    const annotations = example.annotations || [];
+    this._conceptIndex = 0;
+    this._conceptTotal = annotations.length;
+    const isSingle = annotations.length <= 1;
 
-    let annotationsHtml = '';
-    if (example.annotations && example.annotations.length > 0) {
-      annotationsHtml = '<div class="annotations">';
-      example.annotations.forEach((anno, idx) => {
-        annotationsHtml += `
-          <div class="annotation">
-            <span class="anno-number">${idx + 1}</span>
-            <p>${this.escapeHtml(anno.note)}</p>
-          </div>
-        `;
+    let html = '<div class="step-example">';
+    html += '<div class="step-badge">👀 See It In Action</div>';
+    html += '<h2>' + this.escapeHtml(example.title) + '</h2>';
+
+    if (annotations.length > 0) {
+      // Progress bar + counter (hidden when single concept)
+      const pct = Math.round(1 / annotations.length * 100);
+      html += '<div class="concept-progress-row' + (isSingle ? ' single-concept' : '') + '">';
+      html += '<div class="concept-progress-track"><div class="concept-progress-fill" id="concept-progress-fill" style="width:' + pct + '%"></div></div>';
+      html += '<span class="concept-counter-label" id="concept-counter">1 / ' + annotations.length + '</span>';
+      html += '</div>';
+
+      // Dot indicators (hidden when single concept)
+      html += '<div class="concept-dots' + (isSingle ? ' single-concept' : '') + '" id="concept-dots">';
+      annotations.forEach((_, i) => {
+        html += '<button class="concept-dot-btn' + (i === 0 ? ' active' : '') + '" onclick="LessonViewer.goToConcept(' + i + ')" title="Concept ' + (i+1) + '"></button>';
       });
-      annotationsHtml += '</div>';
+      html += '</div>';
+
+      // Single card container — content is swapped on navigation
+      html += '<div class="concept-card-wrap" id="concept-card-wrap">';
+      html += this._buildConceptCard(annotations, 0, example.code);
+      html += '</div>';
+
+      // Navigation buttons (hidden when single concept)
+      html += '<div class="concept-nav' + (isSingle ? ' single-concept' : '') + '">';
+      html += '<button class="btn-concept-prev" id="btn-concept-prev" onclick="LessonViewer.prevConcept()" disabled>← Back</button>';
+      html += '<button class="btn-concept-next" id="btn-concept-next" onclick="LessonViewer.nextConcept()">Next Concept →</button>';
+      html += '</div>';
+
+      // Full code toggle — single merged button
+      html += '<div class="full-code-toggle">';
+      html += '<button class="btn-full-code" id="btn-full-code" onclick="LessonViewer.toggleFullCode()">View Complete Program</button>';
+      html += '<div class="full-code-panel hidden" id="full-code-panel">';
+      html += '<div class="code-container" style="margin-top:0;">';
+      html += '<div class="code-header"><span>Python</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>';
+      html += '<pre class="code-block"><code>' + SyntaxHighlighter.highlight(example.code) + '</code></pre>';
+      if (example.output) {
+        html += '<div class="output-block">Output:<br><pre>' + this.escapeHtml(example.output) + '</pre></div>';
+      }
+      html += '</div></div>';
+      html += '</div>';
+
+    } else {
+      // No annotations — show full code directly
+      html += '<p>' + this.escapeHtml(example.description) + '</p>';
+      html += '<div class="code-container">';
+      html += '<div class="code-header"><span>Python</span><button class="btn-copy" onclick="copyCode(this)">Copy</button></div>';
+      html += '<pre class="code-block"><code>' + SyntaxHighlighter.highlight(example.code) + '</code></pre>';
+      if (example.output) {
+        html += '<div class="output-block">Output:<br><pre>' + this.escapeHtml(example.output) + '</pre></div>';
+      }
+      html += '</div>';
     }
 
-    let outputHtml = '';
-    if (example.output) {
-      outputHtml = `<div class="output-block">▶ Output:<br><pre>${this.escapeHtml(example.output)}</pre></div>`;
+    html += '</div>';
+    return html;
+  },
+
+  // Extract the relevant code lines for a concept (the annotated line + any indented continuation)
+  _getConceptCode(codeStr, lineNum) {
+    const lines = codeStr.split('\n');
+    const idx = (lineNum || 1) - 1;
+    if (idx < 0 || idx >= lines.length) return lines[0] || '';
+    const result = [lines[idx]];
+    for (let i = idx + 1; i < lines.length; i++) {
+      if (lines[i].match(/^\s+/) && lines[i].trim() !== '') {
+        result.push(lines[i]);
+      } else {
+        break;
+      }
+    }
+    return result.join('\n');
+  },
+
+  // Build the HTML for a single interactive concept card
+  _buildConceptCard(annotations, idx, codeStr) {
+    const anno = annotations[idx];
+    const total = annotations.length;
+    const snippet = this._getConceptCode(codeStr, anno.line);
+    const highlighted = SyntaxHighlighter.highlight(snippet);
+    const conceptTitle = anno.conceptTitle || '';
+    const tryPrompt = anno.tryPrompt || '';
+
+    let html = '<div class="concept-card-inner">';
+
+    // Step label pill
+    if (total > 1) {
+      html += '<div class="concept-step-label">Concept ' + (idx + 1) + ' of ' + total + '</div>';
     }
 
-    return `
-      <div class="step-example">
-        <div class="step-badge">👀 See It</div>
-        <h2>${this.escapeHtml(example.title)}</h2>
-        <p>${this.escapeHtml(example.description)}</p>
-        <div class="code-container">
-          <div class="code-header">
-            <span>Python</span>
-            <button class="btn-copy" onclick="copyCode(this)">📋 Copy</button>
-          </div>
-          <pre class="code-block"><code>${highlightedCode}</code></pre>
-          ${annotationsHtml}
-        </div>
-        ${outputHtml}
-      </div>
-    `;
+    // Concept title — what you're learning
+    if (conceptTitle) {
+      html += '<div class="concept-title">' + this.escapeHtml(conceptTitle) + '</div>';
+    }
+
+    // Explanation
+    html += '<div class="concept-explanation-text">' + this.escapeHtml(anno.note) + '</div>';
+
+    // Code snippet
+    html += '<div class="concept-code-snippet">';
+    html += '<div class="concept-code-label">Python</div>';
+    html += '<pre class="concept-code-block"><code>' + highlighted + '</code></pre>';
+    html += '</div>';
+
+    // Run button row
+    html += '<div class="concept-run-row">';
+    html += '<button class="btn-concept-run" id="btn-concept-run" onclick="LessonViewer.runConceptCode(' + idx + ')">▶ Run This</button>';
+    html += '</div>';
+
+    // Output area (hidden until run)
+    html += '<div id="concept-output-area"></div>';
+
+    // "Try changing this" prompt
+    if (tryPrompt) {
+      html += '<div class="concept-try-prompt">';
+      html += '<span class="try-icon">💡</span>';
+      html += '<span>Try it: ' + this.escapeHtml(tryPrompt) + '</span>';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  },
+
+  // Run the code snippet for the current concept through PyRunner
+  async runConceptCode(idx) {
+    const example = this.currentLesson && this.currentLesson.example;
+    if (!example) return;
+    const annotations = example.annotations || [];
+    const anno = annotations[idx];
+    if (!anno) return;
+
+    const btn = document.getElementById('btn-concept-run');
+    const outputArea = document.getElementById('concept-output-area');
+    if (!btn || !outputArea) return;
+
+    // Get the code to run — use the full program code up through this concept's lines
+    // so that earlier variable definitions are available
+    const codeLines = example.code.split('\n');
+    const snippet = this._getConceptCode(example.code, anno.line);
+    const snippetLines = snippet.split('\n');
+    const lastLineIdx = (anno.line || 1) - 1 + snippetLines.length;
+    // Run everything from line 1 up through this concept's last line
+    const codeToRun = codeLines.slice(0, lastLineIdx).join('\n');
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Loading...';
+
+    try {
+      await PyRunner.init();
+      btn.textContent = '⏳ Running...';
+      const result = await PyRunner.run(codeToRun);
+
+      let outHtml = '';
+      if (result.error) {
+        outHtml = '<div class="concept-output has-error"><pre>' + this.escapeHtml(result.error) + '</pre></div>';
+      } else {
+        const output = (result.output || '').trim();
+        outHtml = '<div class="concept-output"><pre>' + (output ? this.escapeHtml(output) : '(no output)') + '</pre></div>';
+      }
+      outputArea.innerHTML = outHtml;
+    } catch (e) {
+      outputArea.innerHTML = '<div class="concept-output has-error"><pre>' + this.escapeHtml(e.message) + '</pre></div>';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '▶ Run This';
+    }
+  },
+
+  goToConcept(idx) {
+    const annotations = this.currentLesson && this.currentLesson.example && this.currentLesson.example.annotations;
+    if (!annotations) return;
+    const total = annotations.length;
+    if (idx < 0 || idx >= total) return;
+    this._conceptIndex = idx;
+
+    // Swap card content (triggers CSS animation via DOM replacement)
+    const wrap = document.getElementById('concept-card-wrap');
+    if (wrap) {
+      wrap.innerHTML = this._buildConceptCard(annotations, idx, this.currentLesson.example.code);
+    }
+
+    // Update progress fill
+    const fill = document.getElementById('concept-progress-fill');
+    if (fill) fill.style.width = Math.round((idx + 1) / total * 100) + '%';
+
+    // Update counter
+    const counter = document.getElementById('concept-counter');
+    if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+
+    // Update dots
+    document.querySelectorAll('.concept-dot-btn').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+
+    // Update nav buttons
+    const prevBtn = document.getElementById('btn-concept-prev');
+    const nextBtn = document.getElementById('btn-concept-next');
+    if (prevBtn) prevBtn.disabled = idx === 0;
+    if (nextBtn) {
+      const isLast = idx === total - 1;
+      nextBtn.textContent = isLast ? 'View Complete Program →' : 'Next Concept →';
+      nextBtn.classList.toggle('is-last', isLast);
+    }
+  },
+
+  nextConcept() {
+    const annotations = this.currentLesson && this.currentLesson.example && this.currentLesson.example.annotations;
+    if (!annotations) return;
+    if (this._conceptIndex >= annotations.length - 1) {
+      // Last concept — reveal full code panel
+      const panel = document.getElementById('full-code-panel');
+      const btn = document.getElementById('btn-full-code');
+      if (panel && panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        if (btn) btn.textContent = 'Hide Complete Program';
+        setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+      }
+    } else {
+      this.goToConcept(this._conceptIndex + 1);
+    }
+  },
+
+  prevConcept() {
+    this.goToConcept(this._conceptIndex - 1);
+  },
+
+  toggleFullCode() {
+    const panel = document.getElementById('full-code-panel');
+    const btn = document.getElementById('btn-full-code');
+    if (!panel) return;
+    const hidden = panel.classList.toggle('hidden');
+    if (btn) btn.textContent = hidden ? 'View Complete Program' : 'Hide Complete Program';
   },
 
   renderExercise() {
@@ -10489,15 +11010,33 @@ const UnitTestViewer = {
       html += '<div class="ut-question" data-qid="' + q.id + '">';
       html += '<div class="q-number">Question ' + (qIdx + 1) + ' of ' + test.questions.length + '</div>';
       html += '<div class="q-text">' + this.escapeHtml(q.text) + '</div>';
-      html += '<div class="quiz-options">';
-      q.options.forEach((opt, optIdx) => {
-        html += '<label class="quiz-option">';
-        html += '<input type="radio" name="ut-q-' + qIdx + '" value="' + optIdx + '">';
-        html += '<span class="option-letter">' + letters[optIdx] + '</span>';
-        html += '<span class="option-text">' + this.escapeHtml(opt) + '</span>';
-        html += '</label>';
-      });
-      html += '</div>';
+
+      if (q.type === 'code') {
+        // Code-writing question
+        html += '<div class="ut-code-block">';
+        html += '<textarea id="ut-code-' + qIdx + '" class="code-input" rows="5"';
+        html += ' placeholder="' + this.escapeHtml(q.placeholder || '# Write your code here\n') + '"';
+        html += ' autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="none">';
+        html += '</textarea>';
+        html += '<button onclick="UnitTestViewer.testCode(' + qIdx + ')" class="btn-run" id="ut-run-btn-' + qIdx + '" style="margin-top:0.5rem;">▶ Test My Code</button>';
+        html += '<div id="ut-code-output-' + qIdx + '" class="run-output hidden">';
+        html += '<div class="run-output-header"><span>Output</span><button class="btn-clear-output" onclick="document.getElementById(\'ut-code-output-' + qIdx + '\').classList.add(\'hidden\')">✕</button></div>';
+        html += '<pre id="ut-code-pre-' + qIdx + '" style="padding:0.75rem 1rem;margin:0;font-size:0.85rem;"></pre>';
+        html += '</div>';
+        html += '</div>';
+      } else {
+        // Multiple choice question
+        html += '<div class="quiz-options">';
+        q.options.forEach((opt, optIdx) => {
+          html += '<label class="quiz-option">';
+          html += '<input type="radio" name="ut-q-' + qIdx + '" value="' + optIdx + '">';
+          html += '<span class="option-letter">' + letters[optIdx] + '</span>';
+          html += '<span class="option-text">' + this.escapeHtml(opt) + '</span>';
+          html += '</label>';
+        });
+        html += '</div>';
+      }
+
       html += '<div class="question-feedback hidden" style="margin-top:0.75rem;padding:0.75rem 1rem;border-radius:var(--radius-md);font-size:0.9rem;"></div>';
       html += '</div>';
     });
@@ -10511,7 +11050,11 @@ const UnitTestViewer = {
       html += '<div class="dev-panel" style="margin-top:1.5rem;padding:1rem;background:rgba(139,92,246,0.1);border:1px dashed #8B5CF6;border-radius:8px;">';
       html += '<div style="font-size:0.8rem;color:#8B5CF6;font-weight:600;margin-bottom:0.5rem;">DEVELOPER REVIEW — Answer Key</div>';
       test.questions.forEach((q, qi) => {
-        html += '<p style="color:#C4B5FD;font-size:0.9rem;margin-bottom:0.25rem;">Q' + (qi+1) + ': <strong>' + this.escapeHtml(q.options[q.correct]) + '</strong>';
+        if (q.type === 'code') {
+          html += '<p style="color:#C4B5FD;font-size:0.9rem;margin-bottom:0.25rem;">Q' + (qi+1) + ' [code]: Expected output: <strong>"' + this.escapeHtml(q.expectedOutput) + '"</strong>';
+        } else {
+          html += '<p style="color:#C4B5FD;font-size:0.9rem;margin-bottom:0.25rem;">Q' + (qi+1) + ': <strong>' + this.escapeHtml(q.options[q.correct]) + '</strong>';
+        }
         if (q.explanation) html += ' <span style="color:#94A3B8;font-size:0.8rem;"> — ' + this.escapeHtml(q.explanation) + '</span>';
         html += '</p>';
       });
@@ -10522,7 +11065,7 @@ const UnitTestViewer = {
     html += '</div>';
     container.innerHTML = html;
 
-    // Attach click handlers
+    // Attach click handlers for multiple choice
     document.querySelectorAll('.quiz-option').forEach(label => {
       label.addEventListener('click', function() {
         const radio = this.querySelector('input[type="radio"]');
@@ -10534,59 +11077,164 @@ const UnitTestViewer = {
       });
     });
 
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  },
-
-  submit() {
-    const test = this.currentTest;
-    if (!test) return;
-
-    let correctCount = 0;
-    let unanswered = false;
-
+    // Attach live normalizeQuotes to all code textareas
     test.questions.forEach((q, qIdx) => {
-      const selected = document.querySelector('input[name="ut-q-' + qIdx + '"]:checked');
-      const userAnswer = selected ? parseInt(selected.value) : -1;
-
-      if (userAnswer === -1) {
-        unanswered = true;
-        return;
-      }
-
-      const isCorrect = userAnswer === q.correct;
-      if (isCorrect) correctCount++;
-
-      // Highlight options
-      const optionEls = document.querySelectorAll('[data-qid="' + q.id + '"] .quiz-option');
-      optionEls.forEach((el, idx) => {
-        el.style.pointerEvents = 'none';
-        if (idx === userAnswer && isCorrect) el.classList.add('correct');
-        else if (idx === userAnswer && !isCorrect) el.classList.add('incorrect');
-        else if (idx === q.correct && !isCorrect) el.classList.add('correct');
-      });
-
-      // Show feedback
-      const feedbackDiv = document.querySelector('[data-qid="' + q.id + '"] .question-feedback');
-      if (feedbackDiv) {
-        feedbackDiv.textContent = isCorrect
-          ? '✓ Correct! ' + q.explanation
-          : '✗ Incorrect. ' + q.explanation;
-        feedbackDiv.className = 'question-feedback ' + (isCorrect ? 'correct' : 'incorrect');
-        feedbackDiv.classList.remove('hidden');
+      if (q.type === 'code') {
+        const ta = document.getElementById('ut-code-' + qIdx);
+        if (ta) {
+          ta.addEventListener('input', function() {
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            const normalized = normalizeQuotes(this.value);
+            if (normalized !== this.value) {
+              this.value = normalized;
+              try { this.setSelectionRange(start, end); } catch(e) {}
+            }
+          });
+        }
       }
     });
 
-    if (unanswered) {
-      Toast.show('Please answer all questions before submitting.', 'warning');
-      return;
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  },
+
+  async testCode(qIdx) {
+    const test = this.currentTest;
+    if (!test) return;
+    const q = test.questions[qIdx];
+    if (!q || q.type !== 'code') return;
+
+    const ta = document.getElementById('ut-code-' + qIdx);
+    const outputDiv = document.getElementById('ut-code-output-' + qIdx);
+    const outputPre = document.getElementById('ut-code-pre-' + qIdx);
+    const btn = document.getElementById('ut-run-btn-' + qIdx);
+    if (!ta || !outputDiv || !outputPre) return;
+
+    const code = normalizeQuotes(ta.value.trim());
+    if (!code) { Toast.show('Write some code first!', 'warning'); return; }
+
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Running...'; }
+    try {
+      await PyRunner.init();
+      const result = await PyRunner.run(code);
+      outputPre.textContent = result.output;
+      outputPre.style.color = result.error ? 'var(--color-error)' : 'var(--color-text-primary)';
+      outputDiv.classList.remove('hidden');
+    } catch(e) {
+      outputPre.textContent = '❌ ' + e.message;
+      outputPre.style.color = 'var(--color-error)';
+      outputDiv.classList.remove('hidden');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '▶ Test My Code'; }
+    }
+  },
+
+  async submit() {
+    const test = this.currentTest;
+    if (!test) return;
+
+    // Check nothing is unanswered before running code
+    for (let qIdx = 0; qIdx < test.questions.length; qIdx++) {
+      const q = test.questions[qIdx];
+      if (q.type === 'code') {
+        const ta = document.getElementById('ut-code-' + qIdx);
+        if (!ta || !ta.value.trim()) {
+          Toast.show('Please write code for question ' + (qIdx + 1) + ' before submitting.', 'warning');
+          document.querySelector('[data-qid="' + q.id + '"]').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+      } else {
+        const selected = document.querySelector('input[name="ut-q-' + qIdx + '"]:checked');
+        if (!selected) {
+          Toast.show('Please answer question ' + (qIdx + 1) + ' before submitting.', 'warning');
+          return;
+        }
+      }
     }
 
-    // Disable submit button
+    // Disable submit button and show loading
     const submitBtn = document.querySelector('#ut-result')?.previousElementSibling;
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '⏳ Grading...'; }
+
+    // Load Python for code questions if needed
+    const hasCodeQuestions = test.questions.some(q => q.type === 'code');
+    if (hasCodeQuestions) {
+      try {
+        await PyRunner.init();
+      } catch(e) {
+        Toast.show('Could not load Python engine. Check your connection and try again.', 'error');
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Unit Test'; }
+        return;
+      }
+    }
+
+    let correctCount = 0;
+
+    for (let qIdx = 0; qIdx < test.questions.length; qIdx++) {
+      const q = test.questions[qIdx];
+      const feedbackDiv = document.querySelector('[data-qid="' + q.id + '"] .question-feedback');
+
+      if (q.type === 'code') {
+        const ta = document.getElementById('ut-code-' + qIdx);
+        const code = normalizeQuotes(ta.value.trim());
+        let isCorrect = false;
+
+        try {
+          const result = await PyRunner.run(code);
+          if (!result.error) {
+            const actual = result.output.trim().replace(/\r\n/g, '\n');
+            const expected = q.expectedOutput.trim();
+            isCorrect = actual === expected;
+          }
+        } catch(e) { isCorrect = false; }
+
+        if (isCorrect) correctCount++;
+        else wrongQuestions.push(qIdx);
+
+        // Lock textarea
+        ta.disabled = true;
+        const runBtn = document.getElementById('ut-run-btn-' + qIdx);
+        if (runBtn) runBtn.disabled = true;
+
+        if (feedbackDiv) {
+          feedbackDiv.textContent = isCorrect
+            ? '✓ Correct! ' + q.explanation
+            : '✗ Incorrect. Expected output: "' + q.expectedOutput + '". ' + q.explanation;
+          feedbackDiv.className = 'question-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+          feedbackDiv.classList.remove('hidden');
+        }
+
+      } else {
+        const selected = document.querySelector('input[name="ut-q-' + qIdx + '"]:checked');
+        const userAnswer = parseInt(selected.value);
+        const isCorrect = userAnswer === q.correct;
+        if (isCorrect) correctCount++;
+        else wrongQuestions.push(qIdx);
+
+        // Highlight options
+        const optionEls = document.querySelectorAll('[data-qid="' + q.id + '"] .quiz-option');
+        optionEls.forEach((el, idx) => {
+          el.style.pointerEvents = 'none';
+          if (idx === userAnswer && isCorrect) el.classList.add('correct');
+          else if (idx === userAnswer && !isCorrect) el.classList.add('incorrect');
+          else if (idx === q.correct && !isCorrect) el.classList.add('correct');
+        });
+
+        if (feedbackDiv) {
+          feedbackDiv.textContent = isCorrect
+            ? '✓ Correct! ' + q.explanation
+            : '✗ Incorrect. ' + q.explanation;
+          feedbackDiv.className = 'question-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+          feedbackDiv.classList.remove('hidden');
+        }
+      }
+    }
+
     if (submitBtn) submitBtn.style.display = 'none';
 
     const score = Math.round((correctCount / test.questions.length) * 100);
     const passed = score >= test.passingScore;
+    const wrongQuestions = [];
 
     // Record attempt
     Progress.recordUnitTestAttempt(test.id, score, passed);
@@ -10601,12 +11249,53 @@ const UnitTestViewer = {
           '</div>';
         Toast.show('Unit test passed! 🎉', 'success');
       } else {
+        // Build targeted lesson recommendations from wrong questions
+        const lessonTitles = {
+          'py-01': 'What is Code?',
+          'py-02': 'Variables — Storing Information',
+          'py-03': 'Numbers and Strings',
+          'py-04': 'Booleans',
+          'py-05': 'Comments',
+          'py-06': 'Indentation',
+          'py-07': 'if / else — Making Decisions',
+          'py-08': 'Loops — Repeating Actions',
+          'py-09': 'Functions — Reusable Code',
+          'py-10': 'Parameters — Giving Functions Information',
+          'py-11': 'Return Values — Getting Results Back',
+          'py-12': 'Imports — Using Other Code',
+          'py-13': 'Objects and Methods',
+          'py-14': 'Reading Code Line by Line'
+        };
+        const recommended = new Map();
+        wrongQuestions.forEach(qi => {
+          const q = test.questions[qi];
+          if (q && q.reviewLessons) {
+            q.reviewLessons.forEach(lid => {
+              if (!recommended.has(lid)) recommended.set(lid, lessonTitles[lid] || lid);
+            });
+          }
+        });
+
+        let reviewHtml = '';
+        if (recommended.size > 0) {
+          reviewHtml += '<div style="margin:1rem 0;padding:1rem;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-md);">';
+          reviewHtml += '<p style="font-weight:600;color:var(--color-text-primary);margin-bottom:0.6rem;">📚 Review these lessons before trying again:</p>';
+          reviewHtml += '<div style="display:flex;flex-direction:column;gap:0.4rem;">';
+          recommended.forEach((title, lid) => {
+            reviewHtml += '<button onclick="Router.navigate(\'#lesson/' + lid + '\')" style="text-align:left;background:rgba(255,255,255,0.05);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.6rem 0.9rem;cursor:pointer;color:var(--color-text-primary);font-size:0.9rem;transition:background 0.2s;" onmouseover="this.style.background=\'rgba(79,70,229,0.15)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.05)\'">';
+            reviewHtml += '→ ' + title;
+            reviewHtml += '</button>';
+          });
+          reviewHtml += '</div></div>';
+        }
+
         resultDiv.innerHTML = '<div class="ut-result fail">' +
           '<h3 style="color:var(--color-error);font-size:1.5rem;">Score: ' + score + '%</h3>' +
-          '<p style="color:var(--color-text-muted);margin:0.5rem 0 1rem;">You need ' + test.passingScore + '% to pass. You got ' + correctCount + '/' + test.questions.length + ' correct.</p>' +
-          '<button class="btn-submit" style="background:var(--color-warning);" onclick="UnitTestViewer.load(\'' + test.id + '\')">🔄 Try Again</button>' +
+          '<p style="color:var(--color-text-muted);margin:0.5rem 0 0.75rem;">You need ' + test.passingScore + '% to pass. You got ' + correctCount + '/' + test.questions.length + ' correct.</p>' +
+          reviewHtml +
+          '<button class="btn-submit" style="background:var(--color-warning);margin-top:0.75rem;" onclick="UnitTestViewer.load(\'' + test.id + '\')">🔄 Try Again</button>' +
           '</div>';
-        Toast.show('Not quite — review and try again!', 'error');
+        Toast.show('Not quite — review the suggested lessons and try again!', 'error');
       }
       resultDiv.classList.remove('hidden');
     }

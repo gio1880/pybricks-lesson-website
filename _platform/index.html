@@ -1222,6 +1222,42 @@
         let currentPath = null;
         let currentFilter = 'all';
 
+        function enableCodeTabIndentation(textarea) {
+            if (!textarea || textarea.dataset.tabIndentBound === '1') return;
+            textarea.dataset.tabIndentBound = '1';
+
+            textarea.addEventListener('keydown', function(e) {
+                if (e.key !== 'Tab') return;
+                e.preventDefault();
+
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                const value = this.value;
+
+                if (e.shiftKey) {
+                    const before = value.slice(Math.max(0, start - 4), start);
+                    if (start === end && before === '    ') {
+                        this.value = value.slice(0, start - 4) + value.slice(end);
+                        try { this.setSelectionRange(start - 4, start - 4); } catch (err) {}
+                    }
+                    return;
+                }
+
+                this.value = value.slice(0, start) + '    ' + value.slice(end);
+                const cursor = start + 4;
+                try { this.setSelectionRange(cursor, cursor); } catch (err) {}
+            });
+        }
+
+        function bindCodeTabIndentation() {
+            const selectors = [
+                'textarea[placeholder*="code"]',
+                'textarea[placeholder*="Python"]',
+                'textarea[placeholder*="answer here"]'
+            ];
+            document.querySelectorAll(selectors.join(',')).forEach(enableCodeTabIndentation);
+        }
+
         /* ========== ROUTING ========== */
         window.addEventListener('hashchange', handleRoute);
 
@@ -1267,6 +1303,7 @@
             }
 
             closeSidebarOnMobile();
+            bindCodeTabIndentation();
         }
 
         function hideAllPages() {

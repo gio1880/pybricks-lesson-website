@@ -1180,6 +1180,29 @@ for i in range(6):
             addConsoleOutput('Robot settings reset to defaults', 'info');
         }
 
+        const codeEditor = document.getElementById('codeEditor');
+        codeEditor.addEventListener('keydown', function(e) {
+            if (e.key !== 'Tab') return;
+            e.preventDefault();
+
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            const value = this.value;
+
+            if (e.shiftKey) {
+                const before = value.slice(Math.max(0, start - 4), start);
+                if (start === end && before === '    ') {
+                    this.value = value.slice(0, start - 4) + value.slice(end);
+                    try { this.setSelectionRange(start - 4, start - 4); } catch (err) {}
+                }
+                return;
+            }
+
+            this.value = value.slice(0, start) + '    ' + value.slice(end);
+            const cursor = start + 4;
+            try { this.setSelectionRange(cursor, cursor); } catch (err) {}
+        });
+
         // Event listeners
         document.getElementById('runBtn').addEventListener('click', runCode);
         document.getElementById('stopBtn').addEventListener('click', stopCode);

@@ -5267,7 +5267,7 @@ I am Alex`
         requireAll: true,
         patterns: ['robot_name = ', 'print(robot_name)'],
         successMessage: "Excellent! You created and used your first variable! 🎉",
-        errorMessage: "Not quite. Make sure you have both: robot_name = \"something\" AND print(robot_name) on separate lines."
+        errorMessage: "Not quite. Make sure you include both parts: a robot_name assignment and print(robot_name)."
       }
     },
 
@@ -9930,6 +9930,35 @@ function normalizeQuotes(str) {
     .replace(/\u2026/g, '...');                                  // ellipsis → three dots
 }
 
+// Make Tab insert indentation in code textareas instead of moving focus.
+function enableCodeTabIndentation(textarea) {
+  if (!textarea || textarea.dataset.tabIndentBound === '1') return;
+  textarea.dataset.tabIndentBound = '1';
+
+  textarea.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab') return;
+    e.preventDefault();
+
+    const start = this.selectionStart;
+    const end = this.selectionEnd;
+    const value = this.value;
+
+    // Shift+Tab removes one indentation level when cursor is right after 4 spaces.
+    if (e.shiftKey) {
+      const before = value.slice(Math.max(0, start - 4), start);
+      if (start === end && before === '    ') {
+        this.value = value.slice(0, start - 4) + value.slice(end);
+        try { this.setSelectionRange(start - 4, start - 4); } catch (err) {}
+      }
+      return;
+    }
+
+    this.value = value.slice(0, start) + '    ' + value.slice(end);
+    const cursor = start + 4;
+    try { this.setSelectionRange(cursor, cursor); } catch (err) {}
+  });
+}
+
 // ============================================================================
 // PYODIDE PYTHON RUNNER — runs real Python in the browser via WebAssembly
 // ============================================================================
@@ -10028,7 +10057,12 @@ function validateExercise(exercise, userAnswer) {
         return exercise.validation.patterns[checker](pattern => {
           const normAnswer = answer.replace(/\s+/g, ' ');
           const normPattern = normalizeQuotes(pattern).replace(/\s+/g, ' ');
-          return answer.includes(normPattern) || normAnswer.includes(normPattern);
+          const compactAnswer = answer.replace(/\s+/g, '');
+          const compactPattern = normalizeQuotes(pattern).replace(/\s+/g, '');
+          return answer.includes(pattern)
+            || answer.includes(normPattern)
+            || normAnswer.includes(normPattern)
+            || compactAnswer.includes(compactPattern);
         });
       }
       if (exercise.validation.type === 'regex') {
@@ -10231,6 +10265,7 @@ const LessonViewer = {
     // Live smart-quote normalization for code textarea (critical for iPad)
     const textarea = document.getElementById('exercise-input');
     if (textarea) {
+      enableCodeTabIndentation(textarea);
       textarea.addEventListener('input', function() {
         const start = this.selectionStart;
         const end = this.selectionEnd;
@@ -11082,6 +11117,7 @@ const UnitTestViewer = {
       if (q.type === 'code') {
         const ta = document.getElementById('ut-code-' + qIdx);
         if (ta) {
+          enableCodeTabIndentation(ta);
           ta.addEventListener('input', function() {
             const start = this.selectionStart;
             const end = this.selectionEnd;
@@ -11117,8 +11153,13 @@ const UnitTestViewer = {
     try {
       await PyRunner.init();
       const result = await PyRunner.run(code);
-      outputPre.textContent = result.output;
-      outputPre.style.color = result.error ? 'var(--color-error)' : 'var(--color-text-primary)';
+      if (result.error) {
+        outputPre.textContent = result.error;
+        outputPre.style.color = 'var(--color-error)';
+      } else {
+        outputPre.textContent = result.output || '(no output)';
+        outputPre.style.color = 'var(--color-text-primary)';
+      }
       outputDiv.classList.remove('hidden');
     } catch(e) {
       outputPre.textContent = '❌ ' + e.message;
@@ -11169,6 +11210,7 @@ const UnitTestViewer = {
     }
 
     let correctCount = 0;
+    const wrongQuestions = [];
 
     for (let qIdx = 0; qIdx < test.questions.length; qIdx++) {
       const q = test.questions[qIdx];
@@ -11234,7 +11276,6 @@ const UnitTestViewer = {
 
     const score = Math.round((correctCount / test.questions.length) * 100);
     const passed = score >= test.passingScore;
-    const wrongQuestions = [];
 
     // Record attempt
     Progress.recordUnitTestAttempt(test.id, score, passed);

@@ -8971,7 +8971,8 @@ const UNIT_TESTS = [
       },
       {
         id: "ut-py-q2",
-        text: "What will this code print? x = 5; y = 10; print(x + y)",
+        text: "What will this code print?",
+        codeSnippet: "x = 5\ny = 10\nprint(x + y)",
         type: "multiple-choice",
         options: [
           "5 + 10",
@@ -9027,7 +9028,8 @@ const UNIT_TESTS = [
       },
       {
         id: "ut-py-q6",
-        text: "What will this code do? if temperature > 70: print('Hot') else: print('Cold')",
+        text: "What will this code do?",
+        codeSnippet: "if temperature > 70:\n    print('Hot')\nelse:\n    print('Cold')",
         type: "multiple-choice",
         options: [
           "Always prints 'Hot'",
@@ -9069,7 +9071,8 @@ const UNIT_TESTS = [
       },
       {
         id: "ut-py-q9",
-        text: "What does the following code print? my_list = [1, 2, 3]; my_list[0] = 10; print(my_list)",
+        text: "What does the following code print?",
+        codeSnippet: "my_list = [1, 2, 3]\nmy_list[0] = 10\nprint(my_list)",
         type: "multiple-choice",
         options: [
           "[1, 2, 3]",
@@ -9083,7 +9086,8 @@ const UNIT_TESTS = [
       },
       {
         id: "ut-py-q10",
-        text: "A robot program imports the PrimeHub class and creates an instance: hub = PrimeHub(). What can you do with the 'hub' object?",
+        text: "A robot program imports the PrimeHub class and creates an instance. What can you do with the 'hub' object?",
+        codeSnippet: "from pybricks.hubs import PrimeHub\nhub = PrimeHub()",
         type: "multiple-choice",
         options: [
           "Call methods like hub.light.on() or access hub.speaker",
@@ -9221,7 +9225,8 @@ const UNIT_TESTS = [
       },
       {
         id: "ut-pb-q7",
-        text: "What is the purpose of the settings object in Pybricks (e.g., hub.settings)?",
+        text: "What is the purpose of the settings object in Pybricks?",
+        codeSnippet: "hub.settings(...)",
         type: "multiple-choice",
         options: [
           "To configure robot parameters like wheel circumference and axle track",
@@ -9309,7 +9314,8 @@ const UNIT_TESTS = [
       },
       {
         id: "ut-me-q5",
-        text: "A robot program specifies: robot.straight(1000). If the wheel circumference is 220 mm, how many complete wheel rotations occur?",
+        text: "A robot program specifies this movement command. If the wheel circumference is 220 mm, how many complete wheel rotations occur?",
+        codeSnippet: "robot.straight(1000)",
         type: "multiple-choice",
         options: [
           "Less than 1 rotation",
@@ -9447,6 +9453,7 @@ const UNIT_TESTS = [
       {
         id: "ut-fs-q3",
         text: "How do you import the hub and motors from setup.py in your run file?",
+        codeSnippet: "# In your run file\nfrom setup import ...",
         type: "multiple-choice",
         options: [
           "import setup",
@@ -11046,9 +11053,22 @@ const UnitTestViewer = {
       html += '<div class="q-number">Question ' + (qIdx + 1) + ' of ' + test.questions.length + '</div>';
       html += '<div class="q-text">' + this.escapeHtml(q.text) + '</div>';
 
+      if (q.codeSnippet) {
+        html += '<div class="concept-code-snippet" style="margin-top:0.75rem;">';
+        html += '<div class="concept-code-label">Python</div>';
+        html += '<pre class="concept-code-block" style="margin:0;"><code>' + this.escapeHtml(q.codeSnippet) + '</code></pre>';
+        html += '</div>';
+      }
+
       if (q.type === 'code') {
         // Code-writing question
         html += '<div class="ut-code-block">';
+        if (q.expectedOutput) {
+          html += '<div style="margin:0.75rem 0;padding:0.6rem 0.85rem;border:1px solid var(--color-border);border-radius:var(--radius-md);background:rgba(16,185,129,0.08);">';
+          html += '<div style="font-size:0.75rem;font-weight:700;letter-spacing:0.02em;color:var(--color-success);text-transform:uppercase;margin-bottom:0.3rem;">Expected Output</div>';
+          html += '<pre style="margin:0;font-size:0.9rem;white-space:pre-wrap;">' + this.escapeHtml(q.expectedOutput) + '</pre>';
+          html += '</div>';
+        }
         html += '<textarea id="ut-code-' + qIdx + '" class="code-input" rows="5"';
         html += ' placeholder="' + this.escapeHtml(q.placeholder || '# Write your code here\n') + '"';
         html += ' autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="none">';

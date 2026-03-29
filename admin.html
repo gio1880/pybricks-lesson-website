@@ -288,6 +288,129 @@
       display: none !important;
     }
 
+    /* Activity Feed Styles */
+    .activity-feed {
+      max-height: 400px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .activity-feed::-webkit-scrollbar {
+      width: 6px;
+    }
+    .activity-feed::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 3px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--color-dark-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      transition: border-color 0.2s;
+    }
+
+    .activity-item:hover {
+      border-color: var(--color-primary);
+    }
+
+    .activity-item.new-item {
+      animation: activityPulse 0.6s ease-out;
+    }
+
+    @keyframes activityPulse {
+      0% { background: rgba(79, 70, 229, 0.15); transform: translateX(-4px); }
+      100% { background: var(--color-dark-bg); transform: translateX(0); }
+    }
+
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .activity-icon.login { background: rgba(79, 70, 229, 0.2); }
+    .activity-icon.lesson { background: rgba(16, 185, 129, 0.2); }
+    .activity-icon.quiz { background: rgba(6, 182, 212, 0.2); }
+
+    .activity-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .activity-details .activity-text {
+      font-size: 0.9rem;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+    }
+
+    .activity-details .activity-text strong {
+      color: var(--color-primary);
+    }
+
+    .activity-details .activity-time {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .activity-header h2 {
+      margin-bottom: 0 !important;
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+    }
+
+    .activity-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--color-success);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-success);
+      animation: livePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
     .spinner {
       display: inline-block;
       width: 16px;
@@ -462,6 +585,20 @@
         </div>
       </div>
 
+      <!-- Activity Feed Section -->
+      <div class="section">
+        <div class="activity-header">
+          <h2>Activity Feed</h2>
+          <div class="activity-controls">
+            <span class="live-badge"><span class="live-dot"></span> Live</span>
+            <button class="btn btn-small btn-secondary" onclick="loadActivity()">Refresh</button>
+          </div>
+        </div>
+        <div id="activityFeed" class="activity-feed">
+          <p style="color: var(--color-text-muted); text-align: center; padding: 2rem;">Loading activity...</p>
+        </div>
+      </div>
+
       <!-- Add Student Section -->
       <div class="section">
         <h2>Add Students</h2>
@@ -618,6 +755,8 @@
           document.getElementById('loginSection').classList.add('hidden');
           showAdminPanel();
           await loadStudents();
+          loadTickets();
+          startActivityPolling();
         } else {
           showError('loginError', result.error || 'Login failed');
         }
@@ -629,6 +768,7 @@
 
     async function logout() {
       try {
+        stopActivityPolling();
         await fetch(`${API_BASE}/logout`, { method: 'POST', credentials: 'same-origin' });
         currentUser = null;
         document.getElementById('adminSection').classList.add('hidden');
@@ -1180,12 +1320,116 @@
       }
     }
 
+    // ============================================
+    // ACTIVITY FEED
+    // ============================================
+
+    let lastActivityIds = new Set();
+    let activityInterval = null;
+
+    async function loadActivity() {
+      try {
+        const response = await fetch(`${API_BASE}/admin/activity?limit=50`, { credentials: 'same-origin' });
+        if (!response.ok) return;
+        const result = await response.json();
+        if (!result.success) return;
+        displayActivity(result.data || []);
+      } catch (err) {
+        console.error('Load activity error:', err);
+      }
+    }
+
+    function displayActivity(events) {
+      const container = document.getElementById('activityFeed');
+      if (!container) return;
+
+      if (events.length === 0) {
+        container.innerHTML = '<p style="color: var(--color-text-muted); text-align: center; padding: 2rem;">No activity yet. Events will appear here when students log in or complete lessons.</p>';
+        return;
+      }
+
+      const newIds = new Set(events.map(e => e.id));
+      let html = '';
+
+      events.forEach(event => {
+        const isNew = lastActivityIds.size > 0 && !lastActivityIds.has(event.id);
+        const iconClass = event.type === 'login' ? 'login' : event.type === 'quiz_passed' ? 'quiz' : 'lesson';
+        const icon = event.type === 'login' ? '🔑' : event.type === 'quiz_passed' ? '🏆' : '✅';
+        const timeAgo = getTimeAgo(new Date(event.timestamp));
+
+        let actionText = '';
+        if (event.type === 'login') {
+          actionText = 'logged in';
+        } else if (event.type === 'lesson_complete') {
+          const lessonName = formatLessonId(event.details);
+          actionText = lessonName;
+        } else if (event.type === 'quiz_passed') {
+          const lessonName = formatLessonId(event.details);
+          actionText = lessonName;
+        } else {
+          actionText = event.details || event.type;
+        }
+
+        html += '<div class="activity-item' + (isNew ? ' new-item' : '') + '">';
+        html += '<div class="activity-icon ' + iconClass + '">' + icon + '</div>';
+        html += '<div class="activity-details">';
+        html += '<div class="activity-text"><strong>' + escapeHtml(event.studentName) + '</strong> ' + escapeHtml(actionText) + '</div>';
+        html += '<div class="activity-time">' + timeAgo + '</div>';
+        html += '</div></div>';
+      });
+
+      container.innerHTML = html;
+      lastActivityIds = newIds;
+    }
+
+    function formatLessonId(details) {
+      if (!details) return '';
+      // "Completed py-05" → "completed Lesson 5"
+      // "Passed quiz for py-08" → "passed the quiz for Lesson 8"
+      return details
+        .replace(/Completed (py-(\d+))/, (_, id, num) => 'completed Lesson ' + parseInt(num))
+        .replace(/Passed quiz for (py-(\d+))/, (_, id, num) => 'passed the quiz for Lesson ' + parseInt(num));
+    }
+
+    function getTimeAgo(date) {
+      const now = new Date();
+      const diffMs = now - date;
+      const diffSec = Math.floor(diffMs / 1000);
+      const diffMin = Math.floor(diffSec / 60);
+      const diffHr = Math.floor(diffMin / 60);
+      const diffDay = Math.floor(diffHr / 24);
+
+      if (diffSec < 30) return 'Just now';
+      if (diffSec < 60) return diffSec + 's ago';
+      if (diffMin < 60) return diffMin + 'm ago';
+      if (diffHr < 24) return diffHr + 'h ago';
+      if (diffDay === 1) return 'Yesterday';
+      return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function startActivityPolling() {
+      if (activityInterval) clearInterval(activityInterval);
+      loadActivity();
+      // Auto-refresh every 15 seconds
+      activityInterval = setInterval(loadActivity, 15000);
+    }
+
+    function stopActivityPolling() {
+      if (activityInterval) {
+        clearInterval(activityInterval);
+        activityInterval = null;
+      }
+    }
+
     // Initialize on page load
     init();
 
-    // Also load tickets when admin dashboard loads
+    // Also load tickets and start activity feed when admin dashboard loads
     setTimeout(() => {
-      if (currentUser) loadTickets();
+      if (currentUser) {
+        loadTickets();
+        startActivityPolling();
+      }
     }, 1500);
   </script>
 </html>

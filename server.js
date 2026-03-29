@@ -68,10 +68,13 @@ const PORT = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'pylearn-dev-secret-key-change-in-prod';
 
 // Data directory and file paths
-const DATA_DIR = path.join(__dirname, 'data');
+// DATA_DIR env var points to a Render Disk (persistent storage) in production.
+// Falls back to local ./data folder for development.
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
 const STUDENTS_FILE = path.join(DATA_DIR, 'students.json');
 const PROGRESS_FILE = path.join(DATA_DIR, 'progress.json');
 const TICKETS_FILE = path.join(DATA_DIR, 'tickets.json');
+const ACTIVITY_FILE = path.join(DATA_DIR, 'activity.json');
 
 // Write lock for preventing race conditions
 let writeLocks = {};
@@ -123,6 +126,11 @@ function initializeDataFiles() {
   // Initialize tickets.json as empty array
   if (!fs.existsSync(TICKETS_FILE)) {
     fs.writeFileSync(TICKETS_FILE, JSON.stringify([], null, 2));
+  }
+
+  // Initialize activity.json as empty array
+  if (!fs.existsSync(ACTIVITY_FILE)) {
+    fs.writeFileSync(ACTIVITY_FILE, JSON.stringify([], null, 2));
   }
 }
 
@@ -192,6 +200,49 @@ async function writeProgress(progress) {
   } finally {
     releaseLock('progress');
   }
+}
+
+/**
+ * Read activity log from JSON file
+ */
+function readActivity() {
+  try {
+    const data = fs.readFileSync(ACTIVITY_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (err) {
+    console.error('Error reading activity file:', err);
+    return [];
+  }
+}
+
+/**
+ * Write activity log to JSON file
+ */
+async function writeActivity(activity) {
+  await acquireLock('activity');
+  try {
+    fs.writeFileSync(ACTIVITY_FILE, JSON.stringify(activity, null, 2));
+  } finally {
+    releaseLock('activity');
+  }
+}
+
+/**
+ * Log an activity event (keeps most recent 200 events)
+ */
+async function logActivity(type, studentName, studentUsername, details) {
+  const activity = readActivity();
+  activity.unshift({
+    id: Date.now() + '-' + Math.random().toString(36).substr(2, 6),
+    type,
+    studentName,
+    studentUsername,
+    details,
+    timestamp: new Date().toISOString()
+  });
+  // Keep only the most recent 200 events
+  if (activity.length > 200) activity.length = 200;
+  await writeActivity(activity);
 }
 
 /**
@@ -331,6 +382,9 @@ app.post('/api/login', async (req, res) => {
       studentProgress.lastLogin = new Date().toISOString();
       progress[student.id] = studentProgress;
       await writeProgress(progress);
+
+      // Log activity
+      logActivity('login', student.name, student.username, 'Logged in').catch(err => console.error('Activity log error:', err));
     }
 
     res.json({
@@ -411,6 +465,25 @@ app.post('/api/progress', requireAuth, async (req, res) => {
     const { lessonProgress, totalTime, fllResults } = req.body;
     const progress = readProgress();
     const studentProgress = getOrCreateProgress(req.session.user.id);
+
+    // Detect newly completed lessons for activity log
+    if (lessonProgress) {
+      const oldProgress = studentProgress.lessonProgress || {};
+      for (const [lessonId, data] of Object.entries(lessonProgress)) {
+        const wasCompleted = oldProgress[lessonId] && oldProgress[lessonId].completed;
+        const nowCompleted = data && data.completed;
+        if (nowCompleted && !wasCompleted) {
+          logActivity('lesson_complete', req.session.user.name, req.session.user.username, `Completed ${lessonId}`)
+            .catch(err => console.error('Activity log error:', err));
+        }
+        const wasQuizPassed = oldProgress[lessonId] && oldProgress[lessonId].quizPassed;
+        const nowQuizPassed = data && data.quizPassed;
+        if (nowQuizPassed && !wasQuizPassed) {
+          logActivity('quiz_passed', req.session.user.name, req.session.user.username, `Passed quiz for ${lessonId}`)
+            .catch(err => console.error('Activity log error:', err));
+        }
+      }
+    }
 
     // Merge lesson progress
     if (lessonProgress) {
@@ -882,6 +955,21 @@ app.post('/api/admin/tickets/:id/status', requireAuth, requireTeacher, async (re
 });
 
 // ============================================
+
+/**
+ * GET /api/admin/activity
+ * Get recent activity feed (teacher only)
+ */
+app.get('/api/admin/activity', requireAuth, requireTeacher, (req, res) => {
+  try {
+    const activity = readActivity();
+    const limit = parseInt(req.query.limit) || 50;
+    res.json({ success: true, data: activity.slice(0, limit) });
+  } catch (err) {
+    console.error('Get activity error:', err);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
 
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'admin.html'));

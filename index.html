@@ -4154,84 +4154,6 @@
       border: 2px solid var(--color-error);
     }
 
-    .ut-docs-sheet {
-      margin: 1rem 0 1.5rem;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(140deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
-      overflow: hidden;
-    }
-    .ut-docs-summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 0.9rem 1rem;
-      font-weight: 700;
-      color: var(--color-secondary);
-      border-bottom: 1px solid var(--color-border);
-      user-select: none;
-    }
-    .ut-docs-summary::-webkit-details-marker {
-      display: none;
-    }
-    .ut-docs-summary::before {
-      content: '▸';
-      display: inline-block;
-      margin-right: 0.5rem;
-      transition: transform 0.2s ease;
-    }
-    .ut-docs-sheet[open] .ut-docs-summary::before {
-      transform: rotate(90deg);
-    }
-    .ut-docs-body {
-      padding: 0.9rem 1rem 1rem;
-      max-height: 340px;
-      overflow: auto;
-    }
-    .ut-docs-intro {
-      margin: 0 0 0.75rem;
-      color: var(--color-text-muted);
-      font-size: 0.88rem;
-    }
-    .ut-docs-section {
-      margin-bottom: 0.75rem;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: var(--radius-md);
-      background: rgba(15, 23, 42, 0.55);
-      padding: 0.65rem 0.75rem;
-    }
-    .ut-docs-section h4 {
-      margin: 0 0 0.45rem;
-      font-size: 0.92rem;
-      color: var(--color-secondary);
-    }
-    .ut-docs-item {
-      margin-bottom: 0.45rem;
-    }
-    .ut-docs-item:last-child {
-      margin-bottom: 0;
-    }
-    .ut-docs-item-label {
-      font-size: 0.82rem;
-      color: var(--color-text-muted);
-      margin-bottom: 0.2rem;
-      font-weight: 600;
-    }
-    .ut-docs-item pre {
-      margin: 0;
-      padding: 0.55rem 0.65rem;
-      border-radius: var(--radius-sm);
-      background: rgba(2, 6, 23, 0.9);
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      font-size: 0.8rem;
-      white-space: pre-wrap;
-      color: #E2E8F0;
-    }
-    .ut-docs-note {
-      margin-top: 0.2rem;
-      font-size: 0.78rem;
-      color: #93C5FD;
-    }
-
     /* ===== CERTIFICATE STYLES ===== */
     .cert-grid {
       display: grid;
@@ -10973,6 +10895,90 @@ const RefPanel = {
 };
 
 // ============================================================================
+// UNIT TEST REFERENCE PANEL — slide-in docs for unit tests
+// ============================================================================
+
+const UnitTestRefPanel = {
+  isOpen: false,
+  btnEl: null,
+  panelEl: null,
+
+  init() {
+    if (this.btnEl) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'ref-toggle-btn';
+    btn.id = 'ut-ref-toggle-btn';
+    btn.textContent = 'Unit Docs';
+    btn.onclick = () => this.toggle();
+    btn.style.display = 'none';
+    document.body.appendChild(btn);
+    this.btnEl = btn;
+
+    const panel = document.createElement('div');
+    panel.className = 'ref-panel';
+    panel.id = 'ut-ref-panel';
+    panel.innerHTML = '<div class="ref-panel-header"><h3>Unit Test Documentation</h3><p>Quick reference while taking the test</p><button class="ref-close-btn" onclick="UnitTestRefPanel.toggle()">✕</button></div><div class="ref-panel-body" id="ut-ref-panel-body"></div>';
+    document.body.appendChild(panel);
+    this.panelEl = panel;
+  },
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+    if (this.btnEl) this.btnEl.classList.toggle('panel-open', this.isOpen);
+    if (this.panelEl) this.panelEl.classList.toggle('open', this.isOpen);
+  },
+
+  close() {
+    this.isOpen = false;
+    if (this.btnEl) this.btnEl.classList.remove('panel-open');
+    if (this.panelEl) this.panelEl.classList.remove('open');
+  },
+
+  show(test) {
+    if (!this.btnEl) this.init();
+    if (this.btnEl) this.btnEl.style.display = '';
+    this.updateContent(test);
+  },
+
+  hide() {
+    if (this.btnEl) this.btnEl.style.display = 'none';
+    this.close();
+  },
+
+  updateContent(test) {
+    const body = document.getElementById('ut-ref-panel-body');
+    if (!body) return;
+
+    const sections = UnitTestViewer.buildDocumentationSections(test);
+    if (!sections.length) {
+      body.innerHTML = '<p style="color:var(--color-text-muted);font-size:0.85rem;">No reference notes were found for this unit yet.</p>';
+      return;
+    }
+
+    let html = '<p style="margin:0 0 0.75rem;color:var(--color-text-muted);font-size:0.85rem;">Use this documentation sheet during the test. Content matches the existing unit reference notes.</p>';
+    sections.forEach(sec => {
+      html += '<div class="ref-section">';
+      html += '<div class="ref-section-title">' + UnitTestViewer.escapeHtml(sec.section) + '</div>';
+      sec.items.forEach(item => {
+        html += '<div class="ref-item">';
+        html += '<div class="ref-item-label">' + UnitTestViewer.escapeHtml(item.label || '') + '</div>';
+        if (item.code) {
+          html += '<div class="ref-item-code"><pre style="margin:0;white-space:pre-wrap;">' + UnitTestViewer.escapeHtml(item.code) + '</pre></div>';
+        }
+        if (item.note) {
+          html += '<div class="ref-item-note">' + UnitTestViewer.escapeHtml(item.note) + '</div>';
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+
+    body.innerHTML = html;
+  }
+};
+
+// ============================================================================
 // LESSON CARDS RENDERER - Renders lesson cards for category pages
 // ============================================================================
 
@@ -12238,39 +12244,6 @@ const UnitTestViewer = {
     return Array.from(merged.entries()).map(([section, items]) => ({ section, items }));
   },
 
-  renderDocumentationSheet(test) {
-    const sections = this.buildDocumentationSections(test);
-    if (sections.length === 0) {
-      return '<details class="ut-docs-sheet" open>' +
-        '<summary class="ut-docs-summary">📘 Unit Test Documentation Sheet</summary>' +
-        '<div class="ut-docs-body"><p class="ut-docs-intro">No reference notes were found for this unit yet.</p></div>' +
-        '</details>';
-    }
-
-    let html = '<details class="ut-docs-sheet" open>';
-    html += '<summary class="ut-docs-summary">📘 Unit Test Documentation Sheet</summary>';
-    html += '<div class="ut-docs-body">';
-    html += '<p class="ut-docs-intro">Use this sheet while testing. It includes key syntax and patterns from the lessons in this unit.</p>';
-
-    sections.forEach(section => {
-      html += '<div class="ut-docs-section">';
-      html += '<h4>' + this.escapeHtml(section.section) + '</h4>';
-
-      section.items.forEach(item => {
-        html += '<div class="ut-docs-item">';
-        if (item.label) html += '<div class="ut-docs-item-label">' + this.escapeHtml(item.label) + '</div>';
-        if (item.code) html += '<pre>' + this.escapeHtml(item.code) + '</pre>';
-        if (item.note) html += '<div class="ut-docs-note">' + this.escapeHtml(item.note) + '</div>';
-        html += '</div>';
-      });
-
-      html += '</div>';
-    });
-
-    html += '</div></details>';
-    return html;
-  },
-
   getTestByCategory(category) {
     return UNIT_TESTS.find(t => t.category === category);
   },
@@ -12321,8 +12294,6 @@ const UnitTestViewer = {
     html += '<h1>📝 ' + this.escapeHtml(test.title) + '</h1>';
     html += '<p style="color:var(--color-text-muted);">Answer all questions. You need ' + test.passingScore + '% to pass. You can retry as many times as needed.</p>';
     html += '</div>';
-
-    html += this.renderDocumentationSheet(test);
 
     // Progress bar
     const completedLessons = test.requiredLessons.filter(l => Progress.isCompleted(l)).length;
@@ -12439,6 +12410,7 @@ const UnitTestViewer = {
     });
 
     container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    UnitTestRefPanel.show(test);
   },
 
   async testCode(qIdx) {
@@ -12719,6 +12691,11 @@ const Router = {
     // Hide reference panel when navigating away from a lesson
     if (pageId !== 'page-lesson') {
       RefPanel.hide();
+    }
+
+    // Hide unit-test reference panel when navigating away from unit tests
+    if (pageId !== 'page-unit-test') {
+      UnitTestRefPanel.hide();
     }
 
     // Show target page

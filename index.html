@@ -4154,6 +4154,84 @@
       border: 2px solid var(--color-error);
     }
 
+    .ut-docs-sheet {
+      margin: 1rem 0 1.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(140deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      overflow: hidden;
+    }
+    .ut-docs-summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.9rem 1rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      border-bottom: 1px solid var(--color-border);
+      user-select: none;
+    }
+    .ut-docs-summary::-webkit-details-marker {
+      display: none;
+    }
+    .ut-docs-summary::before {
+      content: '▸';
+      display: inline-block;
+      margin-right: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+    .ut-docs-sheet[open] .ut-docs-summary::before {
+      transform: rotate(90deg);
+    }
+    .ut-docs-body {
+      padding: 0.9rem 1rem 1rem;
+      max-height: 340px;
+      overflow: auto;
+    }
+    .ut-docs-intro {
+      margin: 0 0 0.75rem;
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+    }
+    .ut-docs-section {
+      margin-bottom: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.55);
+      padding: 0.65rem 0.75rem;
+    }
+    .ut-docs-section h4 {
+      margin: 0 0 0.45rem;
+      font-size: 0.92rem;
+      color: var(--color-secondary);
+    }
+    .ut-docs-item {
+      margin-bottom: 0.45rem;
+    }
+    .ut-docs-item:last-child {
+      margin-bottom: 0;
+    }
+    .ut-docs-item-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+    .ut-docs-item pre {
+      margin: 0;
+      padding: 0.55rem 0.65rem;
+      border-radius: var(--radius-sm);
+      background: rgba(2, 6, 23, 0.9);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+      color: #E2E8F0;
+    }
+    .ut-docs-note {
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      color: #93C5FD;
+    }
+
     /* ===== CERTIFICATE STYLES ===== */
     .cert-grid {
       display: grid;
@@ -10998,6 +11076,8 @@ const LessonViewer = {
   currentStep: 0,
   steps: [],          // built dynamically per lesson
   exerciseAttempts: 0,
+  exerciseCompleted: false,
+  quizPassed: false,
   quizAnswers: {},
   labIndex: 0,        // current challenge in Practice Lab
   labCompleted: [],    // which challenges have been passed
@@ -11019,6 +11099,8 @@ const LessonViewer = {
     this.currentLesson = lesson;
     this.currentStep = 0;
     this.exerciseAttempts = 0;
+    this.exerciseCompleted = Progress.isCompleted(lessonId);
+    this.quizPassed = Progress.isQuizPassed(lessonId);
     this.quizAnswers = {};
     this.labIndex = 0;
     this.labCompleted = [];
@@ -11065,6 +11147,16 @@ const LessonViewer = {
 
   goToStep(stepIndex) {
     if (stepIndex >= 0 && stepIndex < this.steps.length) {
+      if (stepIndex > this.currentStep) {
+        // Only allow moving one step forward at a time and only when current step is complete.
+        if (stepIndex > this.currentStep + 1) {
+          Toast.show('Use Next to move step-by-step through the lesson.', 'warning');
+          return;
+        }
+        if (!this.canAdvanceFromCurrentStep()) {
+          return;
+        }
+      }
       this.currentStep = stepIndex;
       this.renderStep(stepIndex);
     }
@@ -11819,6 +11911,7 @@ const LessonViewer = {
       : '✗ Not quite right. Try again!';
 
     if (isCorrect) {
+      this.exerciseCompleted = true;
       feedbackDiv.innerHTML = '<strong>' + this.escapeHtml(successMsg) + '</strong>';
       feedbackDiv.className = 'feedback success';
       feedbackDiv.classList.remove('hidden');
@@ -11837,6 +11930,7 @@ const LessonViewer = {
         this.nextStep();
       }, 1500);
     } else {
+      this.exerciseCompleted = false;
       feedbackDiv.innerHTML = this.escapeHtml(errorMsg);
       feedbackDiv.className = 'feedback error';
       feedbackDiv.classList.remove('hidden');
@@ -11952,6 +12046,7 @@ const LessonViewer = {
     const resultDiv = document.getElementById('quiz-result');
     if (resultDiv) {
       if (allCorrect) {
+        this.quizPassed = true;
         resultDiv.innerHTML = `
           <h3 style="color:var(--color-success)">🎉 Perfect Score!</h3>
           <p style="color:var(--color-text-muted);margin:0.5rem 0 1rem;">All answers correct — great work!</p>
@@ -11966,6 +12061,7 @@ const LessonViewer = {
           if (b.textContent.includes('Submit')) b.style.display = 'none';
         });
       } else {
+        this.quizPassed = false;
         const correctCount = quiz.questions.filter((q, i) => {
           const sel = document.querySelector(`input[name="quiz-${i}"]:checked`);
           return sel && parseInt(sel.value) === q.correct;
@@ -12021,6 +12117,10 @@ const LessonViewer = {
   },
 
   nextStep() {
+    if (!this.canAdvanceFromCurrentStep()) {
+      return;
+    }
+
     if (this.currentStep < this.steps.length - 1) {
       this.currentStep++;
       this.renderStep(this.currentStep);
@@ -12060,9 +12160,43 @@ const LessonViewer = {
     }
 
     if (btnNext) {
+      const currentStepType = this.steps[this.currentStep];
       const isLastStep = this.currentStep === this.steps.length - 1;
       btnNext.textContent = isLastStep ? 'Finish' : 'Next →';
+
+      const mustSolveExercise = currentStepType === 'exercise' && !this.exerciseCompleted;
+      const mustPassQuiz = currentStepType === 'quiz' && !this.quizPassed;
+      const blocked = !this.canBypassLessonLocks() && (mustSolveExercise || mustPassQuiz);
+
+      btnNext.disabled = blocked;
+      if (mustSolveExercise) {
+        btnNext.title = 'Check your exercise answer to continue.';
+      } else if (mustPassQuiz) {
+        btnNext.title = 'Pass the quiz to complete this lesson.';
+      } else {
+        btnNext.title = '';
+      }
     }
+  },
+
+  canBypassLessonLocks() {
+    return !!(Auth.currentUser && Auth.currentUser.role === 'developer');
+  },
+
+  canAdvanceFromCurrentStep() {
+    if (this.canBypassLessonLocks()) return true;
+
+    const step = this.steps[this.currentStep];
+    if (step === 'exercise' && !this.exerciseCompleted) {
+      Toast.show('Complete the exercise first before moving on.', 'warning');
+      return false;
+    }
+    if (step === 'quiz' && !this.quizPassed) {
+      Toast.show('Pass the quiz to complete this lesson.', 'warning');
+      return false;
+    }
+
+    return true;
   },
 
   escapeHtml(text) {
@@ -12079,6 +12213,63 @@ const LessonViewer = {
 const UnitTestViewer = {
   currentTest: null,
   answers: {},
+
+  buildDocumentationSections(test) {
+    if (!test || !Array.isArray(test.requiredLessons)) return [];
+
+    const merged = new Map();
+
+    test.requiredLessons.forEach(lessonId => {
+      const sections = RefPanel.data[lessonId] || [];
+      sections.forEach(section => {
+        const sectionKey = section.section || 'General';
+        if (!merged.has(sectionKey)) merged.set(sectionKey, []);
+        const items = merged.get(sectionKey);
+
+        (section.items || []).forEach(item => {
+          const dedupeKey = [item.label || '', item.code || '', item.note || ''].join('||');
+          if (!items.some(existing => ([existing.label || '', existing.code || '', existing.note || ''].join('||')) === dedupeKey)) {
+            items.push(item);
+          }
+        });
+      });
+    });
+
+    return Array.from(merged.entries()).map(([section, items]) => ({ section, items }));
+  },
+
+  renderDocumentationSheet(test) {
+    const sections = this.buildDocumentationSections(test);
+    if (sections.length === 0) {
+      return '<details class="ut-docs-sheet" open>' +
+        '<summary class="ut-docs-summary">📘 Unit Test Documentation Sheet</summary>' +
+        '<div class="ut-docs-body"><p class="ut-docs-intro">No reference notes were found for this unit yet.</p></div>' +
+        '</details>';
+    }
+
+    let html = '<details class="ut-docs-sheet" open>';
+    html += '<summary class="ut-docs-summary">📘 Unit Test Documentation Sheet</summary>';
+    html += '<div class="ut-docs-body">';
+    html += '<p class="ut-docs-intro">Use this sheet while testing. It includes key syntax and patterns from the lessons in this unit.</p>';
+
+    sections.forEach(section => {
+      html += '<div class="ut-docs-section">';
+      html += '<h4>' + this.escapeHtml(section.section) + '</h4>';
+
+      section.items.forEach(item => {
+        html += '<div class="ut-docs-item">';
+        if (item.label) html += '<div class="ut-docs-item-label">' + this.escapeHtml(item.label) + '</div>';
+        if (item.code) html += '<pre>' + this.escapeHtml(item.code) + '</pre>';
+        if (item.note) html += '<div class="ut-docs-note">' + this.escapeHtml(item.note) + '</div>';
+        html += '</div>';
+      });
+
+      html += '</div>';
+    });
+
+    html += '</div></details>';
+    return html;
+  },
 
   getTestByCategory(category) {
     return UNIT_TESTS.find(t => t.category === category);
@@ -12130,6 +12321,8 @@ const UnitTestViewer = {
     html += '<h1>📝 ' + this.escapeHtml(test.title) + '</h1>';
     html += '<p style="color:var(--color-text-muted);">Answer all questions. You need ' + test.passingScore + '% to pass. You can retry as many times as needed.</p>';
     html += '</div>';
+
+    html += this.renderDocumentationSheet(test);
 
     // Progress bar
     const completedLessons = test.requiredLessons.filter(l => Progress.isCompleted(l)).length;

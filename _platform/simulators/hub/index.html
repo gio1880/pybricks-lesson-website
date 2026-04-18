@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPIKE Prime Hub Simulator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --bg-main: #f7f9fc;
+            --bg-surface: #ffffff;
+            --bg-surface-2: #f0f4fa;
+            --text-main: #0f172a;
+            --text-soft: #334155;
+            --text-muted: #64748b;
+            --brand-primary: #2563eb;
+            --brand-secondary: #0d9488;
+            --border: #d6e0ee;
+            --code-bg: #eef4ff;
+            --code-fg: #1e3a8a;
+            --radius-organic: 1.2rem 1.65rem 1.1rem 1.8rem;
+        }
+
+        body[data-theme="dark"] {
+            --bg-main: #050706;
+            --bg-surface: #0b120e;
+            --bg-surface-2: #101a14;
+            --text-main: #e7f9ef;
+            --text-soft: #c6e8d1;
+            --text-muted: #8ab79a;
+            --brand-primary: #00ff41;
+            --brand-secondary: #00c853;
+            --border: #1f3b2b;
+            --code-bg: #07110c;
+            --code-fg: #5dff86;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -424,7 +455,7 @@
         }
 
         .console-output.success {
-            color: #86EFAC;
+            color: #5DFF86;
         }
 
         .console-output.info {
@@ -479,6 +510,239 @@
                 font-size: 0.8rem;
             }
         }
+
+        /* Premium + spacious overrides */
+        body {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            line-height: 1.65;
+            background:
+                radial-gradient(circle at 10% 9%, rgba(37, 99, 235, 0.12), transparent 30%),
+                radial-gradient(circle at 88% 6%, rgba(13, 148, 136, 0.1), transparent 28%),
+                linear-gradient(145deg, #f8fbff 0%, #edf4fc 52%, #f7f9fc 100%);
+            padding: 2.2rem;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            color: var(--text-main);
+        }
+
+        body[data-theme="dark"] {
+            background:
+                linear-gradient(145deg, #040705 0%, #09110d 52%, #060b08 100%);
+        }
+
+        .header {
+            max-width: 1360px;
+            margin: 0 auto 2.4rem;
+            padding: 1.3rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.95rem 0.95rem 1.3rem 1.3rem;
+            background: linear-gradient(170deg, var(--bg-surface), var(--bg-surface-2));
+            box-shadow: 0 14px 32px rgba(5, 10, 18, 0.2);
+        }
+
+        .header-title h1 {
+            font-family: 'Space Grotesk', 'Manrope', sans-serif;
+            color: var(--brand-primary);
+            letter-spacing: 0.015em;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #d9b46a, #bd8d43);
+            color: #102030;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-link {
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface-2));
+            color: var(--brand-primary);
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-link:hover {
+            border-color: var(--brand-primary);
+            background: linear-gradient(180deg, rgba(45, 72, 101, 0.88), rgba(32, 56, 81, 0.9));
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1360px;
+            margin: 0 auto;
+            grid-template-columns: minmax(420px, 0.95fr) minmax(520px, 1.05fr);
+            gap: 2.2rem;
+            align-items: start;
+        }
+
+        .hub-section,
+        .editor-card,
+        .console-panel,
+        .output-card,
+        .examples-card {
+            background: linear-gradient(170deg, var(--bg-surface), var(--bg-surface-2));
+            border-color: var(--border);
+            box-shadow: 0 14px 30px rgba(5, 10, 18, 0.45);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hub-section {
+            padding: 3.2rem 2.3rem;
+            border-radius: var(--radius-organic);
+        }
+
+        .editor-card,
+        .console-panel,
+        .output-card,
+        .examples-card {
+            border-radius: var(--radius-organic);
+            padding: 1.65rem;
+        }
+
+        .editor-panel {
+            gap: 1.3rem;
+        }
+
+        .code-editor,
+        .console {
+            border-radius: 0.85rem;
+            background: linear-gradient(180deg, var(--code-bg), var(--code-bg));
+            border-color: var(--border);
+            color: var(--code-fg);
+        }
+
+        .btn,
+        .run-btn,
+        .reset-btn,
+        .clear-btn {
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-primary,
+        .run-btn {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: #0f1d2e;
+        }
+
+        body[data-theme="dark"] .btn-primary,
+        body[data-theme="dark"] .run-btn {
+            color: #04100a;
+            box-shadow: 0 7px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover,
+        .run-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(217, 180, 106, 0.28);
+        }
+
+        .btn-secondary,
+        .reset-btn,
+        .clear-btn {
+            background: linear-gradient(135deg, var(--brand-secondary), #0f766e);
+            color: #07131f;
+        }
+
+        .theme-toggle {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface-2));
+            color: var(--brand-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .hub-device {
+            box-shadow: 0 24px 52px rgba(0, 0, 0, 0.45);
+        }
+
+        @media (max-width: 1366px) {
+            body {
+                padding: 1.4rem;
+            }
+
+            .container {
+                gap: 1.5rem;
+                grid-template-columns: minmax(360px, 0.9fr) minmax(460px, 1.1fr);
+            }
+
+            .hub-section {
+                padding: 2.5rem 1.7rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .hub-panel {
+                order: 2;
+            }
+
+            .editor-panel {
+                order: 1;
+            }
+
+            .hub-section {
+                max-width: 680px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0.8rem;
+            }
+
+            .header {
+                margin-bottom: 1.2rem;
+                padding: 1rem;
+            }
+
+            .hub-section {
+                padding: 2rem 1.1rem;
+            }
+
+            .editor-card,
+            .console-panel,
+            .output-card,
+            .examples-card {
+                padding: 1.05rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+                align-items: stretch;
+            }
+
+            .hub-panel {
+                order: 1;
+            }
+
+            .editor-panel {
+                order: 2;
+            }
+
+            .hub-section {
+                max-width: 100%;
+                height: 100%;
+            }
+
+            .hub-device {
+                width: 250px;
+                height: 290px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -490,6 +754,7 @@
         </div>
         <div class="header-nav">
             <a href="../../" class="btn-link">← Back to Platform</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light or dark theme">◐</button>
         </div>
     </div>
 
@@ -555,6 +820,30 @@ hub.light_matrix.show("HAPPY")</textarea>
     </div>
 
     <script>
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') return saved;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) toggle.textContent = theme === 'dark' ? '☀' : '☾';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(getPreferredTheme());
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    const current = document.body.getAttribute('data-theme') || 'light';
+                    applyTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
+        });
+
         // ============================================================================
         // SPIKE Prime Hub Simulator
         // ============================================================================

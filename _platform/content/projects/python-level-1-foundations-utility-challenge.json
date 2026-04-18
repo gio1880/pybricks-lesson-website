@@ -1,0 +1,103 @@
+﻿{
+    "id":  "python-level-1-foundations-utility-challenge",
+    "title":  "Python Level 1 Foundations Utility Challenge",
+    "description":  "Build a practical command-line utility that tracks robot setup, config, and simple mission metrics.",
+    "path":  "python-micropython",
+    "level":  "level-1",
+    "difficulty":  "beginner",
+    "duration":  "1 week",
+    "learningObjectives":  [
+                               "Integrate module concepts into a real utility",
+                               "Design readable, testable Python code",
+                               "Validate behavior across multiple cases",
+                               "Document decisions and improvements"
+                           ],
+    "phases":  [
+                   {
+                       "id":  "phase-1",
+                       "title":  "Planning",
+                       "duration":  "1-2 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-1-1",
+                                         "title":  "Define utility goals",
+                                         "deliverable":  "Goals and requirements checklist"
+                                     },
+                                     {
+                                         "id":  "task-1-2",
+                                         "title":  "Design flow",
+                                         "deliverable":  "Pseudo-flow and test plan"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "phase-2",
+                       "title":  "Build",
+                       "duration":  "2-4 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-2-1",
+                                         "title":  "Implement core logic",
+                                         "deliverable":  "Working utility"
+                                     },
+                                     {
+                                         "id":  "task-2-2",
+                                         "title":  "Add validation",
+                                         "deliverable":  "Reliable handling for expected inputs"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "phase-3",
+                       "title":  "Test and Improve",
+                       "duration":  "1-2 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-3-1",
+                                         "title":  "Run test cases",
+                                         "deliverable":  "Test log and outputs"
+                                     },
+                                     {
+                                         "id":  "task-3-2",
+                                         "title":  "Refine reliability",
+                                         "deliverable":  "Improved consistency"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "phase-4",
+                       "title":  "Document and Demo",
+                       "duration":  "1 day",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-4-1",
+                                         "title":  "Write usage notes",
+                                         "deliverable":  "Short readme and reflection"
+                                     },
+                                     {
+                                         "id":  "task-4-2",
+                                         "title":  "Demo utility",
+                                         "deliverable":  "Instructor or peer walkthrough"
+                                     }
+                                 ]
+                   }
+               ],
+    "successCriteria":  [
+                            {
+                                "criterion":  "Utility Value",
+                                "description":  "Project solves a practical robotics workflow need"
+                            },
+                            {
+                                "criterion":  "Code Quality",
+                                "description":  "Readable and maintainable Python structure"
+                            },
+                            {
+                                "criterion":  "Reliability",
+                                "description":  "Behavior verified with multiple test cases"
+                            },
+                            {
+                                "criterion":  "Communication",
+                                "description":  "Clear demonstration and documentation"
+                            }
+                        ]
+}

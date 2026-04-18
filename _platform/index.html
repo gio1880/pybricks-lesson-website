@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STEM Learning Platform - Internal Preview</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
         /* ========== CSS Custom Properties / Theme ========== */
         :root {
             --color-bg-primary: #0f172a;
@@ -819,8 +821,941 @@
             color: var(--color-bg-primary);
         }
 
+        /* ========== Premium Theme Overrides ========== */
+        :root {
+            --color-bg-primary: #f7f9fc;
+            --color-bg-secondary: #ffffff;
+            --color-bg-tertiary: #f0f4fa;
+            --color-text-primary: #0f172a;
+            --color-text-secondary: #334155;
+            --color-text-muted: #64748b;
+            --color-primary: #2563eb;
+            --color-primary-hover: #1d4ed8;
+            --color-secondary: #0d9488;
+            --color-secondary-hover: #0f766e;
+            --color-border: #d6e0ee;
+            --color-border-light: #e2e8f4;
+            --radius-sm: 0.65rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.4rem;
+            --radius-organic: 1.25rem 1.75rem 1.15rem 1.85rem;
+            --shadow-sm: 0 2px 10px rgba(5, 10, 18, 0.35);
+            --shadow-md: 0 12px 28px rgba(5, 10, 18, 0.45);
+            --shadow-lg: 0 22px 44px rgba(5, 10, 18, 0.52);
+        }
+
+        body[data-theme="dark"] {
+            --color-bg-primary: #050706;
+            --color-bg-secondary: #0b120e;
+            --color-bg-tertiary: #101a14;
+            --color-text-primary: #e7f9ef;
+            --color-text-secondary: #c6e8d1;
+            --color-text-muted: #8ab79a;
+            --color-primary: #00ff41;
+            --color-primary-hover: #5dff86;
+            --color-secondary: #00c853;
+            --color-secondary-hover: #2ee06f;
+            --color-border: #1f3b2b;
+            --color-border-light: #29583e;
+        }
+
+        html, body {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            letter-spacing: 0.01em;
+            background:
+                radial-gradient(circle at 12% 15%, rgba(37, 99, 235, 0.11), transparent 28%),
+                radial-gradient(circle at 88% 8%, rgba(13, 148, 136, 0.1), transparent 24%),
+                linear-gradient(145deg, #f8fbff 0%, #edf4fc 52%, #f7f9fc 100%);
+            background-attachment: fixed;
+        }
+
+        body[data-theme="dark"] {
+            background:
+                linear-gradient(145deg, #040705 0%, #09110d 52%, #060b08 100%);
+            background-attachment: fixed;
+        }
+
+        body {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .dev-banner {
+            background: linear-gradient(96deg, #4d1e0c, #6f3311 40%, #4b1b09);
+            border-bottom: 1px solid rgba(217, 180, 106, 0.5);
+            color: #ffe7c0;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        body[data-theme="light"] .dev-banner {
+            background: linear-gradient(96deg, #fef2f2, #fde7e7 40%, #fee2e2);
+            border-bottom: 1px solid rgba(185, 28, 28, 0.25);
+            color: #9f1239;
+            text-shadow: none;
+        }
+
+        .top-bar,
+        .sidebar,
+        .card,
+        .status-section,
+        .lesson-section,
+        .assessment-question,
+        .stat-card,
+        .project-brief,
+        .checklist-item,
+        .tree-label {
+            background: linear-gradient(170deg, rgba(21, 38, 58, 0.92), rgba(14, 28, 44, 0.9));
+            border-color: rgba(78, 122, 163, 0.48);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(8px);
+        }
+
+        body[data-theme="light"] .top-bar,
+        body[data-theme="light"] .sidebar,
+        body[data-theme="light"] .card,
+        body[data-theme="light"] .status-section,
+        body[data-theme="light"] .lesson-section,
+        body[data-theme="light"] .assessment-question,
+        body[data-theme="light"] .stat-card,
+        body[data-theme="light"] .project-brief,
+        body[data-theme="light"] .checklist-item,
+        body[data-theme="light"] .tree-label {
+            background: linear-gradient(170deg, rgba(255, 255, 255, 0.96), rgba(245, 249, 255, 0.95));
+            border-color: rgba(148, 163, 184, 0.28);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.08);
+        }
+
+        .top-bar {
+            border-bottom-color: rgba(113, 157, 196, 0.28);
+            border-radius: 0 0 1.25rem 1.25rem;
+        }
+
+        .main-container {
+            gap: 0.6rem;
+            position: relative;
+        }
+
+        .content {
+            max-width: 1320px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.3rem 2.1rem 3rem;
+        }
+
+        .grid {
+            gap: 1.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .card,
+        .status-section,
+        .lesson-section,
+        .assessment-question,
+        .project-brief,
+        .stat-card {
+            padding: 1.8rem;
+        }
+
+        .card-description,
+        p {
+            line-height: 1.72;
+        }
+
+        .dashboard-grid {
+            gap: 1.35rem;
+        }
+
+        @media (max-width: 1366px) {
+            .content {
+                max-width: 1160px;
+                padding: 1.9rem 1.4rem 2.4rem;
+            }
+
+            .grid-cols-3 {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            .top-bar {
+                padding: 1.1rem 1.4rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                gap: 0;
+            }
+
+            .sidebar {
+                width: 232px;
+                padding: 1rem;
+            }
+
+            .content {
+                max-width: 100%;
+                padding: 1.5rem 1rem 2rem;
+            }
+
+            .grid-cols-2 {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            }
+
+            .grid-cols-3 {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            }
+
+            .card,
+            .status-section,
+            .lesson-section,
+            .assessment-question,
+            .project-brief,
+            .stat-card {
+                padding: 1.4rem;
+            }
+        }
+
+        .platform-name,
+        h1,
+        h2,
+        h3,
+        .lesson-section-title,
+        .card-title {
+            font-family: 'Space Grotesk', 'Manrope', sans-serif;
+            letter-spacing: 0.015em;
+        }
+
+        .platform-name {
+            color: #7aa2ff;
+        }
+
+        body[data-theme="dark"] .platform-name {
+            color: #00ff41;
+        }
+
+        body[data-theme="light"] .platform-name {
+            color: #1d4ed8;
+        }
+
+        .platform-subtitle {
+            color: #a4b9cf;
+            font-weight: 600;
+        }
+
+        .sidebar {
+            border-right: 1px solid rgba(113, 157, 196, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            z-index: 120;
+            width: 270px;
+            box-shadow: 0 18px 36px rgba(5, 10, 18, 0.5);
+            border-radius: 0 1.2rem 1.2rem 0;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-108%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar-header,
+        .nav-section-title {
+            color: #9ab2c8;
+        }
+
+        body[data-theme="light"] .sidebar-header,
+        body[data-theme="light"] .nav-section-title {
+            color: #475569;
+        }
+
+        .nav-item {
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            border-color: rgba(121, 170, 214, 0.3);
+            background: linear-gradient(180deg, rgba(39, 64, 91, 0.86), rgba(28, 50, 74, 0.82));
+            color: #c6f6e8;
+            transform: translateX(3px);
+        }
+
+        .nav-item.active {
+            color: #0e1a29;
+            background: linear-gradient(135deg, #8ee8ca, #7aa2ff);
+            border-color: rgba(168, 240, 216, 0.65);
+            box-shadow: inset 0 0 0 1px rgba(223, 255, 245, 0.4);
+        }
+
+        body[data-theme="dark"] .nav-item.active {
+            color: #04100a;
+            background: linear-gradient(135deg, #5dff86, #00c853);
+            border-color: rgba(93, 255, 134, 0.5);
+            box-shadow: inset 0 0 0 1px rgba(220, 255, 236, 0.25);
+        }
+
+        body[data-theme="light"] .nav-item.active {
+            color: #0b1220;
+            background: linear-gradient(135deg, #9ec3ff, #82e8d1);
+            border-color: rgba(147, 197, 253, 0.55);
+        }
+
+        .back-link,
+        .btn,
+        .filter-btn {
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .sidebar-toggle {
+            display: inline-flex !important;
+            position: static;
+            width: 2.35rem;
+            height: 2.35rem;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(114, 160, 202, 0.4);
+            border-radius: 999px;
+            font-size: 1.1rem;
+            color: #d3deff;
+            background: linear-gradient(180deg, rgba(33, 58, 84, 0.82), rgba(24, 44, 66, 0.9));
+            cursor: pointer;
+            transition: 180ms ease;
+        }
+
+        .sidebar-toggle:hover {
+            border-color: rgba(96, 165, 250, 0.65);
+            color: #b9ceff;
+            transform: translateY(-1px);
+        }
+
+        body[data-theme="light"] .sidebar-toggle {
+            background: linear-gradient(180deg, #ffffff, #f1f6ff);
+            border-color: rgba(148, 163, 184, 0.4);
+            color: #1d4ed8;
+        }
+
+        body[data-theme="light"] .sidebar-toggle:hover {
+            border-color: rgba(37, 99, 235, 0.45);
+            color: #1e40af;
+        }
+
+        .back-link {
+            background: linear-gradient(135deg, rgba(44, 74, 106, 0.85), rgba(33, 58, 83, 0.9));
+            border-color: rgba(114, 160, 202, 0.4);
+        }
+
+        .back-link:hover {
+            color: #bdd0ff;
+            border-color: rgba(122, 162, 255, 0.55);
+            transform: translateY(-1px);
+        }
+
+        body[data-theme="light"] .back-link {
+            color: #1d4ed8;
+            background: linear-gradient(135deg, #ffffff, #f1f6ff);
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+
+        body[data-theme="light"] .back-link:hover {
+            color: #0f172a;
+            border-color: rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-primary,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #60a5fa, #2dd4bf);
+            color: #0f1d2e;
+            border-color: rgba(147, 197, 253, 0.66);
+            box-shadow: 0 10px 24px rgba(96, 165, 250, 0.28);
+        }
+
+        body[data-theme="dark"] .btn-primary,
+        body[data-theme="dark"] .filter-btn.active {
+            background: linear-gradient(135deg, #00ff41, #00c853);
+            color: #04100a;
+            border-color: rgba(93, 255, 134, 0.5);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn-primary:hover,
+        .filter-btn.active:hover {
+            background: linear-gradient(135deg, #93c5fd, #5eead4);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: #07131f;
+        }
+
+        .btn-outline,
+        .filter-btn {
+            background: linear-gradient(180deg, rgba(33, 58, 84, 0.78), rgba(24, 44, 66, 0.86));
+            border-color: rgba(114, 160, 202, 0.36);
+            color: #c9d9ea;
+        }
+
+        .btn-outline:hover,
+        .filter-btn:hover {
+            border-color: rgba(56, 211, 159, 0.55);
+            color: #b1f0dc;
+        }
+
+        .status-badge {
+            background: linear-gradient(135deg, #93c5fd, #2dd4bf);
+            color: #162334;
+            box-shadow: 0 10px 22px rgba(96, 165, 250, 0.34);
+        }
+
+        body[data-theme="dark"] .status-badge {
+            background: linear-gradient(135deg, #5dff86, #00c853);
+            color: #04100a;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        body[data-theme="light"] .status-badge {
+            color: #0f172a;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.16);
+        }
+
+        .progress-bar {
+            height: 0.6rem;
+            background: rgba(44, 67, 92, 0.85);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #60a5fa 0%, #93c5fd 32%, #2dd4bf 100%);
+        }
+
+        body[data-theme="dark"] .progress-fill {
+            background: linear-gradient(90deg, #00c853 0%, #00ff41 45%, #5dff86 100%);
+        }
+
+        .badge-primary {
+            background: rgba(56, 211, 159, 0.17);
+            color: #c6f6e8;
+            border-color: rgba(56, 211, 159, 0.46);
+        }
+
+        .badge-secondary,
+        .badge-success {
+            background: rgba(229, 154, 90, 0.15);
+            color: #ffd7bb;
+            border-color: rgba(229, 154, 90, 0.42);
+        }
+
+        .code-block,
+        textarea {
+            background: linear-gradient(180deg, #0c1724, #0a1520);
+            border-color: rgba(92, 128, 164, 0.5);
+            color: #93c5fd;
+        }
+
+        body[data-theme="light"] .code-block,
+        body[data-theme="light"] textarea {
+            background: linear-gradient(180deg, #eef4ff, #e7f0ff);
+            border-color: rgba(148, 163, 184, 0.42);
+            color: #1e3a8a;
+        }
+
+        .activity-item {
+            border-left-color: #60a5fa;
+            background: linear-gradient(180deg, rgba(36, 57, 81, 0.86), rgba(29, 47, 68, 0.82));
+        }
+
+        body[data-theme="light"] .activity-item {
+            border-left-color: #2563eb;
+            background: linear-gradient(180deg, rgba(239, 246, 255, 0.95), rgba(232, 242, 255, 0.92));
+        }
+
+        .card,
+        .stat-card,
+        .lesson-section,
+        .assessment-question,
+        .project-brief,
+        .status-section {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-organic);
+        }
+
+        .tree-label,
+        .checklist-item,
+        .code-block,
+        textarea,
+        .status-badge {
+            border-radius: 1rem 1.3rem 0.95rem 1.25rem;
+        }
+
+        .card::after,
+        .stat-card::after,
+        .lesson-section::after,
+        .assessment-question::after,
+        .project-brief::after,
+        .status-section::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.75), transparent);
+            opacity: 0.85;
+        }
+
+        .card:hover,
+        .stat-card:hover,
+        .lesson-section:hover,
+        .assessment-question:hover,
+        .project-brief:hover,
+        .status-section:hover {
+            border-color: rgba(96, 165, 250, 0.48);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .theme-toggle {
+            width: 2.35rem;
+            height: 2.35rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(114, 160, 202, 0.4);
+            background: linear-gradient(180deg, rgba(33, 58, 84, 0.82), rgba(24, 44, 66, 0.9));
+            color: #d3deff;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: 180ms ease;
+        }
+
+        body[data-theme="dark"] .theme-toggle {
+            border-color: rgba(93, 255, 134, 0.38);
+            color: #5dff86;
+            background: linear-gradient(180deg, rgba(11, 20, 15, 0.9), rgba(8, 15, 11, 0.95));
+        }
+
+        .theme-toggle:hover {
+            border-color: rgba(96, 165, 250, 0.6);
+            color: #b9ceff;
+            transform: translateY(-1px);
+        }
+
+        body[data-theme="light"] .theme-toggle {
+            background: linear-gradient(180deg, #ffffff, #f1f6ff);
+            border-color: rgba(148, 163, 184, 0.4);
+            color: #1d4ed8;
+        }
+
+        body[data-theme="light"] .theme-toggle:hover {
+            border-color: rgba(37, 99, 235, 0.45);
+            color: #1e40af;
+        }
+
+        .home-entry {
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .home-hero {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-organic);
+            padding: 1.5rem;
+            background: linear-gradient(165deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .home-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .home-heading {
+            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            margin-bottom: 0.7rem;
+            line-height: 1.15;
+        }
+
+        .home-sub {
+            max-width: 72ch;
+            margin-bottom: 1rem;
+        }
+
+        .home-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-bottom: 1rem;
+        }
+
+        .home-action {
+            text-decoration: none;
+            padding: 0.65rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-border);
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            color: var(--color-text-primary);
+            background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+            transition: all var(--transition-fast);
+        }
+
+        .home-action:hover {
+            transform: translateY(-1px);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .home-action.primary {
+            color: #0b110d;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-color: transparent;
+        }
+
+        .home-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.7rem;
+        }
+
+        .home-metric {
+            padding: 0.8rem 0.95rem;
+            border-radius: 0.9rem;
+            border: 1px solid var(--color-border);
+            background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .home-metric-value {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        .home-metric-label {
+            display: block;
+            margin-top: 0.4rem;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--color-text-muted);
+            font-weight: 700;
+        }
+
+        .home-columns {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .home-column-card {
+            border: 1px solid var(--color-border);
+            border-radius: 1.1rem;
+            padding: 1.2rem;
+            background: linear-gradient(170deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .home-column-card h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .home-step-list {
+            margin-left: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .home-step-list li + li {
+            margin-top: 0.4rem;
+        }
+
+        .home-quick-links {
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .home-quick-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 0.85rem;
+            padding: 0.7rem 0.8rem;
+            font-size: 0.9rem;
+            background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .home-quick-link:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .home-featured-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.8rem;
+        }
+
+        .home-inline-link {
+            color: var(--color-primary);
+            font-size: 0.84rem;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .home-inline-link:hover {
+            text-decoration: underline;
+        }
+
+        body[data-theme="dark"] .home-hero,
+        body[data-theme="dark"] .home-column-card,
+        body[data-theme="dark"] .home-metric,
+        body[data-theme="dark"] .home-quick-link {
+            background: linear-gradient(165deg, #070b08, #0a100c);
+            border-color: #184529;
+        }
+
+        body[data-theme="dark"] .home-kicker,
+        body[data-theme="dark"] .home-metric-label {
+            color: #d7ffe2;
+        }
+
+        body[data-theme="dark"] .home-heading,
+        body[data-theme="dark"] .home-column-card h3,
+        body[data-theme="dark"] .home-featured-head h2 {
+            color: #ffffff;
+        }
+
+        body[data-theme="dark"] .home-sub,
+        body[data-theme="dark"] .home-step-list,
+        body[data-theme="dark"] .home-quick-link {
+            color: #eafff0;
+        }
+
+        body[data-theme="dark"] .home-action,
+        body[data-theme="dark"] .home-inline-link,
+        body[data-theme="dark"] .home-metric-value {
+            color: #00ff41;
+        }
+
+        body[data-theme="dark"] .home-action.primary {
+            color: #000000;
+            background: linear-gradient(135deg, #00ff41, #00c853);
+        }
+
+        .curriculum-flow {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .curriculum-level {
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            padding: 1rem;
+            background: linear-gradient(170deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .curriculum-level h3 {
+            margin-bottom: 0.9rem;
+        }
+
+        .curriculum-module {
+            border: 1px solid var(--color-border);
+            border-radius: 0.85rem;
+            padding: 0.9rem;
+            background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .curriculum-module + .curriculum-module {
+            margin-top: 0.8rem;
+        }
+
+        .curriculum-module-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .curriculum-module-title {
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .curriculum-next {
+            font-size: 0.88rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.65rem;
+        }
+
+        .curriculum-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .curriculum-chip {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            font-weight: 700;
+            border-radius: 999px;
+            padding: 0.26rem 0.58rem;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .lesson-progress-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .lesson-step-card {
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            background: linear-gradient(170deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+        }
+
+        .lesson-step-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.11em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.55rem;
+            font-weight: 700;
+        }
+
+        .lesson-step-title {
+            margin-bottom: 0.8rem;
+        }
+
+        .lesson-step-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .lesson-aside-card {
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            padding: 0.95rem;
+            background: linear-gradient(170deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+            margin-bottom: 0.9rem;
+        }
+
+        body[data-theme="dark"] .curriculum-level,
+        body[data-theme="dark"] .curriculum-module,
+        body[data-theme="dark"] .lesson-step-card,
+        body[data-theme="dark"] .lesson-aside-card {
+            border-color: #184529;
+            background: linear-gradient(165deg, #070b08, #0a100c);
+        }
+
+        @keyframes premiumReveal {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.992);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .page.active .status-section,
+        .page.active .card,
+        .page.active .stat-card,
+        .page.active .lesson-section,
+        .page.active .assessment-question,
+        .page.active .project-brief,
+        .page.active .filter-btn {
+            animation: premiumReveal 520ms ease both;
+        }
+
+        .page.active .card:nth-of-type(2),
+        .page.active .stat-card:nth-of-type(2),
+        .page.active .filter-btn:nth-of-type(2) {
+            animation-delay: 60ms;
+        }
+
+        .page.active .card:nth-of-type(3),
+        .page.active .stat-card:nth-of-type(3),
+        .page.active .filter-btn:nth-of-type(3) {
+            animation-delay: 120ms;
+        }
+
+        .page.active .card:nth-of-type(4),
+        .page.active .filter-btn:nth-of-type(4) {
+            animation-delay: 180ms;
+        }
+
+        ::-webkit-scrollbar {
+            width: 11px;
+            height: 11px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 20, 32, 0.72);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3f668e, #2f4f71);
+            border-radius: 999px;
+            border: 2px solid rgba(10, 20, 32, 0.72);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #507da9, #3f678f);
+        }
+
         /* ========== Responsive Design ========== */
         @media (max-width: 768px) {
+            .home-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .home-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-progress-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 1.2rem 1rem 2rem;
+            }
+
+            .card,
+            .status-section,
+            .lesson-section,
+            .assessment-question,
+            .project-brief,
+            .stat-card {
+                padding: 1.2rem;
+            }
+
             .main-container {
                 flex-direction: column;
             }
@@ -840,11 +1775,7 @@
             }
 
             .sidebar-toggle {
-                display: block;
-            }
-
-            .content {
-                padding: var(--spacing-lg);
+                display: inline-flex !important;
             }
 
             .grid-cols-2,
@@ -869,6 +1800,20 @@
                 font-size: 1.25rem;
             }
         }
+
+        @media (max-width: 820px) and (orientation: landscape) {
+            .top-bar {
+                flex-direction: row;
+            }
+
+            .content {
+                padding: 1rem 0.9rem 1.4rem;
+            }
+
+            .grid {
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -885,6 +1830,7 @@
         </div>
         <div class="top-bar-actions">
             <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light or dark theme">◐</button>
             <a href="../index.html" class="back-link">← Back to PyLearn</a>
         </div>
     </div>
@@ -892,7 +1838,7 @@
     <!-- Main Layout -->
     <div class="main-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar collapsed" id="sidebar">
             <div class="sidebar-header">Navigation</div>
 
             <div class="nav-section expanded" id="mainNav">
@@ -945,29 +1891,64 @@
 
             <!-- ========== HOME PAGE ========== -->
             <div id="page-home" class="page active">
-                <h1>Welcome to the STEM Learning Platform</h1>
-                <p>A comprehensive curriculum for robotics, coding, and engineering design. This internal preview showcases the platform structure and learning pathways.</p>
+                <div class="home-entry">
+                    <section class="home-hero">
+                        <span class="home-kicker">Platform Entry</span>
+                        <h1 class="home-heading">Build Robots. Think in Code. Ship Real Projects.</h1>
+                        <p class="home-sub">Start from foundations, move through Python and FTC Java, and finish with portfolio-ready engineering work. This preview is your mission control for curriculum navigation and simulator access.</p>
 
-                <div class="status-section">
-                    <div class="status-badge">Platform Status: Development Preview</div>
-                    <p>This is an internal development version. Features are subject to change. Student data is not persisted.</p>
-                </div>
+                        <div class="home-actions">
+                            <a class="home-action primary" href="#/paths">Enter Learning Paths</a>
+                            <a class="home-action" href="simulators/index.html">Open Simulators</a>
+                            <a class="home-action" href="#/dashboard">View Dashboard</a>
+                        </div>
 
-                <h2>Featured Learning Paths</h2>
-                <div class="grid grid-cols-3" id="homePaths">
-                    <!-- Populated dynamically -->
-                </div>
+                        <div class="home-metrics">
+                            <div class="home-metric">
+                                <span class="home-metric-value" id="homeMetricPaths">0</span>
+                                <span class="home-metric-label">Learning Paths</span>
+                            </div>
+                            <div class="home-metric">
+                                <span class="home-metric-value" id="homeMetricLessons">0</span>
+                                <span class="home-metric-label">Total Lessons</span>
+                            </div>
+                            <div class="home-metric">
+                                <span class="home-metric-value" id="homeMetricFeatured">0</span>
+                                <span class="home-metric-label">Featured Paths</span>
+                            </div>
+                        </div>
+                    </section>
 
-                <div class="status-section">
-                    <h3>Platform Features</h3>
-                    <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary);">
-                        <li>10 comprehensive learning paths covering robotics, coding, and engineering</li>
-                        <li>Structured curriculum: Levels → Modules → Lessons</li>
-                        <li>Interactive lesson content with code examples and quizzes</li>
-                        <li>Project-based challenges and assessments</li>
-                        <li>Progress tracking and student dashboards</li>
-                        <li>Dark-themed, responsive design</li>
-                    </ul>
+                    <div class="home-columns">
+                        <section class="home-column-card">
+                            <h3>Start In 3 Steps</h3>
+                            <ol class="home-step-list">
+                                <li>Choose your path by experience level and target competition.</li>
+                                <li>Complete one module and its end-of-module project.</li>
+                                <li>Validate with simulator practice before hardware build sessions.</li>
+                            </ol>
+                        </section>
+
+                        <section class="home-column-card">
+                            <h3>Quick Access</h3>
+                            <div class="home-quick-links">
+                                <a class="home-quick-link" href="#/path/python-micropython"><span>Python &amp; MicroPython Track</span><span>→</span></a>
+                                <a class="home-quick-link" href="#/path/ftc-java"><span>FTC Java Track</span><span>→</span></a>
+                                <a class="home-quick-link" href="simulators/hub/index.html"><span>Hub Simulator</span><span>→</span></a>
+                                <a class="home-quick-link" href="simulators/robot/index.html"><span>Robot Simulator</span><span>→</span></a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <section>
+                        <div class="home-featured-head">
+                            <h2>Featured Learning Paths</h2>
+                            <a class="home-inline-link" href="#/paths">View full catalog →</a>
+                        </div>
+                        <div class="grid grid-cols-3" id="homePaths">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </section>
                 </div>
             </div>
 
@@ -1222,6 +2203,34 @@
         let currentPath = null;
         let currentFilter = 'all';
 
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') return saved;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.textContent = theme === 'dark' ? '☀' : '☾';
+                toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+                toggle.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            }
+        }
+
+        function initTheme() {
+            applyTheme(getPreferredTheme());
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    const current = document.body.getAttribute('data-theme') || 'light';
+                    applyTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
+        }
+
         function enableCodeTabIndentation(textarea) {
             if (!textarea || textarea.dataset.tabIndentBound === '1') return;
             textarea.dataset.tabIndentBound = '1';
@@ -1302,8 +2311,26 @@
                 currentPage = 'home';
             }
 
+            updateNavActiveFromRoute(parts);
             closeSidebarOnMobile();
             bindCodeTabIndentation();
+        }
+
+        function updateNavActiveFromRoute(parts) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+            let selector = 'a[href="#/"]';
+
+            if (parts[0] === 'paths') selector = 'a[href="#/paths"]';
+            else if (parts[0] === 'dashboard') selector = 'a[href="#/dashboard"]';
+            else if (parts[0] === 'admin') selector = 'a[href="#/admin"]';
+            else if (parts[0] === 'path' && parts[1]) selector = `a[href="#/path/${parts[1]}"]`;
+            else if ((parts[0] === 'lesson' || parts[0] === 'challenge' || parts[0] === 'assessment') && parts[1]) {
+                selector = `a[href="#/path/${parts[1]}"]`;
+            }
+
+            const target = document.querySelector(selector) || document.querySelector('a[href="#/paths"]') || document.querySelector('a[href="#/"]');
+            if (target) target.classList.add('active');
         }
 
         function hideAllPages() {
@@ -1352,6 +2379,18 @@
 
         /* ========== HOME PAGE: Featured Paths ========== */
         function populateHomePaths() {
+            const totalPaths = learningPaths.length;
+            const totalLessons = learningPaths.reduce((sum, path) => sum + (path.lessons || 0), 0);
+            const featuredPaths = Math.min(6, totalPaths);
+
+            const pathsEl = document.getElementById('homeMetricPaths');
+            const lessonsEl = document.getElementById('homeMetricLessons');
+            const featuredEl = document.getElementById('homeMetricFeatured');
+
+            if (pathsEl) pathsEl.textContent = `${totalPaths}`;
+            if (lessonsEl) lessonsEl.textContent = `${totalLessons}`;
+            if (featuredEl) featuredEl.textContent = `${featuredPaths}`;
+
             const container = document.getElementById('homePaths');
             container.innerHTML = learningPaths.slice(0, 6).map(path =>
                 createPathCard(path)
@@ -1424,16 +2463,160 @@
             `;
         }
 
+        function lessonProgressKey(pathId, levelId, moduleId, lessonId) {
+            return `${pathId}::${levelId}::${moduleId}::${lessonId}`;
+        }
+
+        function getProgressStore() {
+            try {
+                const parsed = JSON.parse(localStorage.getItem('platformProgressV2') || '{}');
+                if (parsed && typeof parsed === 'object') return parsed;
+            } catch (err) {
+                // Fallback below
+            }
+            return { lessons: {} };
+        }
+
+        function saveProgressStore(store) {
+            localStorage.setItem('platformProgressV2', JSON.stringify(store));
+        }
+
+        function getLessonProgress(pathId, levelId, moduleId, lessonId) {
+            const store = getProgressStore();
+            const key = lessonProgressKey(pathId, levelId, moduleId, lessonId);
+            return store.lessons && store.lessons[key]
+                ? store.lessons[key]
+                : { step: 0, completed: false };
+        }
+
+        function updateLessonProgress(pathId, levelId, moduleId, lessonId, patch) {
+            const store = getProgressStore();
+            const key = lessonProgressKey(pathId, levelId, moduleId, lessonId);
+            if (!store.lessons) store.lessons = {};
+            const current = store.lessons[key] || { step: 0, completed: false };
+            store.lessons[key] = { ...current, ...patch };
+            saveProgressStore(store);
+        }
+
+        function getPathLevels(path) {
+            if (Array.isArray(path.levels) && path.levels.length > 0) return path.levels;
+
+            const fallbackLessons = Math.min(6, Math.max(3, Math.ceil((path.lessons || 6) / 5)));
+            const lessons = Array.from({ length: fallbackLessons }, (_, idx) => ({
+                id: `lesson-${idx + 1}`,
+                title: `Lesson ${idx + 1}: Core Concept ${idx + 1}`
+            }));
+
+            return [
+                {
+                    id: 'level-1',
+                    title: 'Level 1: Foundations',
+                    modules: [
+                        {
+                            id: 'module-1',
+                            title: 'Module 1: Getting Started',
+                            lessons
+                        }
+                    ]
+                }
+            ];
+        }
+
+        function flattenPathLessons(pathId, levels) {
+            const sequence = [];
+            levels.forEach(level => {
+                (level.modules || []).forEach(module => {
+                    (module.lessons || []).forEach(lesson => {
+                        sequence.push({ pathId, level, module, lesson });
+                    });
+                });
+            });
+            return sequence;
+        }
+
+        function getNextLessonForModule(pathId, level, module) {
+            const lessons = module.lessons || [];
+            const completedCount = lessons.filter(lesson => {
+                const state = getLessonProgress(pathId, level.id, module.id, lesson.id);
+                return Boolean(state.completed);
+            }).length;
+
+            const nextLesson = lessons.find(lesson => {
+                const state = getLessonProgress(pathId, level.id, module.id, lesson.id);
+                return !state.completed;
+            }) || null;
+
+            return {
+                completedCount,
+                total: lessons.length,
+                nextLesson,
+                done: completedCount === lessons.length && lessons.length > 0
+            };
+        }
+
+        function completeCurrentLessonStep(pathId, levelId, moduleId, lessonId, totalSteps) {
+            const current = getLessonProgress(pathId, levelId, moduleId, lessonId);
+            if (current.step < totalSteps - 1) {
+                updateLessonProgress(pathId, levelId, moduleId, lessonId, { step: current.step + 1 });
+            } else {
+                updateLessonProgress(pathId, levelId, moduleId, lessonId, { step: totalSteps - 1, completed: true });
+            }
+            handleRoute();
+        }
+
+        function goToLessonStep(pathId, levelId, moduleId, lessonId, stepIndex, totalSteps) {
+            const clamped = Math.max(0, Math.min(stepIndex, totalSteps - 1));
+            updateLessonProgress(pathId, levelId, moduleId, lessonId, { step: clamped });
+            handleRoute();
+        }
+
         /* ========== PATH OVERVIEW PAGE ========== */
         function showPathOverview(pathId) {
             const path = learningPaths.find(p => p.id === pathId);
             if (!path) return;
+
+            const levels = getPathLevels(path);
 
             const difficultyColor = {
                 'Beginner': 'badge-success',
                 'Intermediate': 'badge-secondary',
                 'Advanced': 'badge-primary'
             };
+
+            const curriculumHtml = levels.map(level => {
+                const modulesHtml = (level.modules || []).map(module => {
+                    const status = getNextLessonForModule(path.id, level, module);
+                    const actionHref = status.nextLesson
+                        ? `#/lesson/${path.id}/${level.id}/${module.id}/${status.nextLesson.id}`
+                        : ((module.lessons && module.lessons[0])
+                            ? `#/lesson/${path.id}/${level.id}/${module.id}/${module.lessons[0].id}`
+                            : '#');
+
+                    return `
+                        <div class="curriculum-module">
+                            <div class="curriculum-module-head">
+                                <span class="curriculum-module-title">${module.title}</span>
+                                <span class="curriculum-chip">${status.completedCount}/${status.total} Completed</span>
+                            </div>
+                            <div class="curriculum-next">
+                                ${status.done
+                                    ? 'Module complete. You can review any lesson.'
+                                    : `Next lesson: ${status.nextLesson ? status.nextLesson.title : 'Not available yet'}`}
+                            </div>
+                            <div class="curriculum-actions">
+                                <a class="btn btn-primary" href="${actionHref}">${status.done ? 'Review Module' : 'Continue Module'}</a>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="curriculum-level">
+                        <h3>${level.title}</h3>
+                        ${modulesHtml || '<p style="color: var(--color-text-muted);">No modules yet.</p>'}
+                    </div>
+                `;
+            }).join('');
 
             let html = `
                 <div style="margin-bottom: var(--spacing-xl);">
@@ -1454,18 +2637,11 @@
                     </div>
                 </div>
 
-                <h2>Curriculum Structure</h2>
+                <h2>Guided Curriculum Structure</h2>
                 <div class="status-section">
-                    <p style="margin-bottom: var(--spacing-lg);">This learning path is organized into levels, modules, and lessons for progressive learning.</p>
-                    <div class="tree-item">
-                        <button class="tree-toggle" onclick="toggleTree(this)">▼</button>
-                        <label class="tree-label" style="cursor: default; margin-bottom: var(--spacing-md);">
-                            <span class="tree-label-text">${path.title}</span>
-                            <span class="tree-label-level">${path.lessons} Lessons</span>
-                        </label>
-                        <div class="tree-content">
-                            ${generateTreeHierarchy(path)}
-                        </div>
+                    <p style="margin-bottom: var(--spacing-lg);">You will progress module-by-module. Each module only surfaces the next lesson to complete.</p>
+                    <div class="curriculum-flow">
+                        ${curriculumHtml}
                     </div>
                 </div>
 
@@ -1530,104 +2706,109 @@
             const path = learningPaths.find(p => p.id === pathId);
             if (!path) return;
 
+            const levels = getPathLevels(path);
+            const sequence = flattenPathLessons(path.id, levels);
+            const currentEntry = sequence.find(item =>
+                item.level.id === levelId && item.module.id === moduleId && item.lesson.id === lessonId
+            ) || sequence[0];
+
+            if (!currentEntry) {
+                document.getElementById('lessonContent').innerHTML = '<p>Lesson not found.</p>';
+                return;
+            }
+
+            const safePathId = currentEntry.pathId;
+            const safeLevelId = currentEntry.level.id;
+            const safeModuleId = currentEntry.module.id;
+            const safeLessonId = currentEntry.lesson.id;
+
+            const steps = [
+                {
+                    title: 'Lesson Overview',
+                    content: '<p>This lesson is delivered in guided steps. Complete each section to unlock the next one.</p>'
+                },
+                {
+                    title: 'Learning Objectives',
+                    content: '<ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary);"><li>Understand the target concept for this lesson.</li><li>Apply the concept in an example.</li><li>Demonstrate understanding with a short response.</li></ul>'
+                },
+                {
+                    title: 'Concept Explanation',
+                    content: '<p>Instructional explanation for this topic appears here, with key terms and why they matter in robotics and coding.</p><div class="code-block">print("Step-by-step learning builds mastery")</div>'
+                },
+                {
+                    title: 'Worked Example',
+                    content: '<p>Study this example before moving to your own response:</p><div class="code-block">def run_demo(value):\n    return value * 2\n\nprint(run_demo(4))</div>'
+                },
+                {
+                    title: 'Practice Checkpoint',
+                    content: '<p>Write your answer before continuing:</p><textarea placeholder="# Write your code or answer here..."></textarea>'
+                },
+                {
+                    title: 'Quick Quiz',
+                    content: '<div class="quiz-question"><p><strong>Question:</strong> What unlocks the next section in this lesson?</p><label class="quiz-option"><input type="radio" name="lesson-q1"><span>Completing the current section</span></label><label class="quiz-option"><input type="radio" name="lesson-q1"><span>Skipping directly to the final quiz</span></label><label class="quiz-option"><input type="radio" name="lesson-q1"><span>Reloading the page</span></label></div>'
+                }
+            ];
+
+            const progress = getLessonProgress(safePathId, safeLevelId, safeModuleId, safeLessonId);
+            const currentStep = Math.max(0, Math.min(progress.step || 0, steps.length - 1));
+            const stepPercent = Math.round(((currentStep + 1) / steps.length) * 100);
+            const current = steps[currentStep];
+
+            const currentIndex = sequence.findIndex(item =>
+                item.level.id === safeLevelId && item.module.id === safeModuleId && item.lesson.id === safeLessonId
+            );
+            const nextEntry = currentIndex >= 0 ? sequence[currentIndex + 1] : null;
+
+            const nextLessonHref = nextEntry
+                ? `#/lesson/${nextEntry.pathId}/${nextEntry.level.id}/${nextEntry.module.id}/${nextEntry.lesson.id}`
+                : `#/path/${pathId}`;
+
+            const nextLessonLabel = nextEntry
+                ? `Next Lesson: ${nextEntry.lesson.title}`
+                : 'Return to Path Overview';
+
             const html = `
                 <div class="breadcrumb">
                     <a href="#/" class="breadcrumb-item">Home</a>
                     <span class="breadcrumb-separator">/</span>
                     <a href="#/paths" class="breadcrumb-item">Paths</a>
                     <span class="breadcrumb-separator">/</span>
-                    <a href="#/path/${pathId}" class="breadcrumb-item">${path.title}</a>
+                    <a href="#/path/${safePathId}" class="breadcrumb-item">${path.title}</a>
                     <span class="breadcrumb-separator">/</span>
-                    <span class="breadcrumb-item active">${lessonId}</span>
+                    <span class="breadcrumb-item active">${currentEntry.lesson.title}</span>
                 </div>
 
-                <h1>${path.title} - Lesson</h1>
+                <h1>${path.title}: ${currentEntry.lesson.title}</h1>
 
-                <div style="display: flex; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
-                    <div style="flex: 1;">
-                        <div class="lesson-section">
-                            <div class="lesson-section-title">📚 Lesson Overview</div>
-                            <p>This is a lesson template showing the structure for teaching content. Each lesson includes multiple sections to support different learning styles.</p>
-                        </div>
+                <div class="lesson-progress-shell">
+                    <div class="lesson-step-card">
+                        <div class="lesson-step-meta">Step ${currentStep + 1} of ${steps.length}</div>
+                        <h2 class="lesson-step-title">${current.title}</h2>
+                        ${current.content}
 
-                        <div class="lesson-section">
-                            <div class="lesson-section-title">🎯 Learning Objectives</div>
-                            <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary);">
-                                <li>Understand core concepts related to this topic</li>
-                                <li>Apply knowledge in practical scenarios</li>
-                                <li>Complete hands-on exercises</li>
-                                <li>Demonstrate mastery through assessment</li>
-                            </ul>
-                        </div>
-
-                        <div class="lesson-section">
-                            <div class="lesson-section-title">💡 Explanation</div>
-                            <p>This section contains detailed explanations of the core concepts. Instructional content, diagrams, and examples would appear here to help students understand the material.</p>
-                            <div class="code-block">print("Hello, STEM Learning Platform!")</div>
-                            <p>The above is an example of instructional content that might appear in a lesson.</p>
-                        </div>
-
-                        <div class="lesson-section">
-                            <div class="lesson-section-title">🔍 Example</div>
-                            <p>Worked examples demonstrate how to apply concepts in practice:</p>
-                            <div class="code-block">def greet(name):
-    return f"Hello, {name}!"
-
-result = greet("Student")
-print(result)</div>
-                        </div>
-
-                        <div class="lesson-section">
-                            <div class="lesson-section-title">✏️ Exercise</div>
-                            <p>Complete the following exercise to practice what you've learned:</p>
-                            <p><strong>Task:</strong> Write your solution below and click Submit when ready.</p>
-                            <textarea placeholder="# Write your code or answer here..."></textarea>
-                            <button class="btn btn-secondary" style="margin-top: var(--spacing-md);">Submit Exercise</button>
-                        </div>
-
-                        <div class="lesson-section">
-                            <div class="lesson-section-title">❓ Quick Quiz</div>
-                            <div class="quiz-question">
-                                <p><strong>Question 1:</strong> What is the primary goal of this lesson?</p>
-                                <label class="quiz-option">
-                                    <input type="radio" name="q1">
-                                    <span>To introduce core concepts</span>
-                                </label>
-                                <label class="quiz-option">
-                                    <input type="radio" name="q1">
-                                    <span>To test your knowledge</span>
-                                </label>
-                                <label class="quiz-option">
-                                    <input type="radio" name="q1">
-                                    <span>To demonstrate practical application</span>
-                                </label>
-                            </div>
-                            <button class="btn btn-primary" style="margin-top: var(--spacing-md);">Check Answers</button>
+                        <div class="lesson-step-actions">
+                            <button class="btn btn-outline" ${currentStep === 0 ? 'disabled' : ''} onclick="goToLessonStep('${safePathId}', '${safeLevelId}', '${safeModuleId}', '${safeLessonId}', ${currentStep - 1}, ${steps.length})">← Previous Step</button>
+                            <button class="btn btn-primary" onclick="completeCurrentLessonStep('${safePathId}', '${safeLevelId}', '${safeModuleId}', '${safeLessonId}', ${steps.length})">
+                                ${progress.completed ? 'Lesson Completed' : (currentStep === steps.length - 1 ? 'Finish Lesson' : 'Mark Complete & Next Step')}
+                            </button>
                         </div>
                     </div>
 
-                    <aside style="width: 280px;">
-                        <div class="status-section">
-                            <div class="stat-label">Progress</div>
+                    <aside>
+                        <div class="lesson-aside-card">
+                            <div class="stat-label">Section Progress</div>
                             <div class="progress-bar" style="margin-bottom: var(--spacing-md);">
-                                <div class="progress-fill" style="width: 35%;"></div>
+                                <div class="progress-fill" style="width: ${stepPercent}%;"></div>
                             </div>
-                            <p style="font-size: 0.875rem; margin: 0; color: var(--color-text-muted);">35% Complete</p>
+                            <p style="font-size: 0.875rem; margin: 0; color: var(--color-text-muted);">${stepPercent}% complete</p>
                         </div>
 
-                        <div class="status-section">
-                            <h3 style="margin-top: 0;">Navigation</h3>
-                            <button class="btn btn-outline" style="width: 100%; margin-bottom: var(--spacing-md);" onclick="alert('Previous lesson')">← Previous Lesson</button>
-                            <button class="btn btn-primary" style="width: 100%;" onclick="alert('Next lesson')">Next Lesson →</button>
-                        </div>
-
-                        <div class="status-section">
-                            <h3 style="margin-top: 0;">Resources</h3>
-                            <ul style="list-style: disc; margin-left: var(--spacing-lg); color: var(--color-text-secondary); font-size: 0.875rem;">
-                                <li><a href="#" style="color: var(--color-primary);">Download Slides</a></li>
-                                <li><a href="#" style="color: var(--color-primary);">View Documentation</a></li>
-                                <li><a href="#" style="color: var(--color-primary);">Related Links</a></li>
-                            </ul>
+                        <div class="lesson-aside-card">
+                            <h3 style="margin-top: 0;">Lesson Sequence</h3>
+                            <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">You can only move to the next lesson after finishing all steps in this one.</p>
+                            <a class="btn ${progress.completed ? 'btn-primary' : 'btn-outline'}" style="width: 100%; text-align: center; justify-content: center;" href="${progress.completed ? nextLessonHref : '#'}">
+                                ${progress.completed ? nextLessonLabel : 'Finish all steps to unlock'}
+                            </a>
                         </div>
                     </aside>
                 </div>
@@ -1780,6 +2961,7 @@ print(result)</div>
 
         /* ========== INITIALIZATION ========== */
         document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
             populateSidebarPaths();
             populateHomePaths();
             handleRoute();
@@ -1787,8 +2969,8 @@ print(result)</div>
 
         // Handle window resize for responsive sidebar
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                document.getElementById('sidebar').classList.remove('collapsed');
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.add('collapsed');
             }
         });
     </script>

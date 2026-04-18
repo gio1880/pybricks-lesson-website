@@ -1,0 +1,604 @@
+﻿{
+    "id":  "conditionals",
+    "title":  "Conditionals",
+    "path":  "python-micropython",
+    "level":  "level-2",
+    "module":  "mod-2-1",
+    "order":  1,
+    "lessons":  [
+                    {
+                        "id":  "lesson-2-1-1",
+                        "title":  "If Statements",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding If Statements",
+                                        "content":  "This lesson builds practical skill in If Statements within the module \u0027Conditionals\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "If Statements Example",
+                                        "code":  "# If Statements\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: If Statements",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# If Statements\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# If Statements\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-2-1-2",
+                        "title":  "If-Else Conditions",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding If-Else Conditions",
+                                        "content":  "This lesson builds practical skill in If-Else Conditions within the module \u0027Conditionals\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "If-Else Conditions Example",
+                                        "code":  "# If-Else Conditions\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: If-Else Conditions",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# If-Else Conditions\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# If-Else Conditions\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-2-1-3",
+                        "title":  "Elif and Multiple Conditions",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding Elif and Multiple Conditions",
+                                        "content":  "This lesson builds practical skill in Elif and Multiple Conditions within the module \u0027Conditionals\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Elif and Multiple Conditions Example",
+                                        "code":  "# Elif and Multiple Conditions\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Elif and Multiple Conditions",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# Elif and Multiple Conditions\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# Elif and Multiple Conditions\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-2-1-4",
+                        "title":  "Nested Conditionals",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding Nested Conditionals",
+                                        "content":  "This lesson builds practical skill in Nested Conditionals within the module \u0027Conditionals\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Nested Conditionals Example",
+                                        "code":  "# Nested Conditionals\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Nested Conditionals",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# Nested Conditionals\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# Nested Conditionals\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "checkpoint-2-1",
+                        "title":  "Conditionals Test",
+                        "type":  "assessment",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Conditionals Test",
+                                        "content":  "This lesson builds practical skill in Conditionals Test within the module \u0027Conditionals\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Conditionals Test Example",
+                                        "code":  "# Conditionals Test\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Conditionals Test",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# Conditionals Test\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# Conditionals Test\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "project-2-1",
+                        "title":  "Safety Decision Engine",
+                        "type":  "project",
+                        "duration":  60,
+                        "explain":  {
+                                        "title":  "Project Brief: Safety Decision Engine",
+                                        "content":  "This module-end project applies concepts from \u0027Conditionals\u0027 to a useful robot utility students can run, test, and iterate.",
+                                        "keyPoints":  [
+                                                          "Build practical utility, not just syntax drills",
+                                                          "Use clear variable names and modular logic",
+                                                          "Validate expected output with test cases",
+                                                          "Reflect on reliability improvements"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Starter Utility Pattern",
+                                        "code":  "# Safety Decision Engine\r\nbattery_level = 82\r\ntarget_distance_cm = 35\r\npath_clear = True\r\n\r\nif path_clear and battery_level \u003e 40:\r\n    print(f\"Run mission to {target_distance_cm}cm\")\r\nelse:\r\n    print(\"Hold and recheck\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Define measurable runtime state"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Use boolean logic for go or hold decisions"
+                                                            },
+                                                            {
+                                                                "line":  6,
+                                                                "note":  "Emit clear operational output"
+                                                            }
+                                                        ],
+                                        "output":  "Run mission to 35cm"
+                                    },
+                        "exercise":  {
+                                         "title":  "Build and Demonstrate",
+                                         "instructions":  "1. Build the full utility for this module topic.\n2. Include at least one function and one validation check.\n3. Run three test cases and log outputs.\n4. Add one improvement for readability or reliability.\n5. Submit code and short reflection.",
+                                         "type":  "code",
+                                         "initialCode":  "# Safety Decision Engine\r\nbattery_level = 82\r\ntarget_distance_cm = 35\r\npath_clear = True\r\n\r\nif path_clear and battery_level \u003e 40:\r\n    print(f\"Run mission to {target_distance_cm}cm\")\r\nelse:\r\n    print(\"Hold and recheck\")",
+                                         "solution":  "# Safety Decision Engine\r\nbattery_level = 82\r\ntarget_distance_cm = 35\r\npath_clear = True\r\n\r\nif path_clear and battery_level \u003e 40:\r\n    print(f\"Run mission to {target_distance_cm}cm\")\r\nelse:\r\n    print(\"Hold and recheck\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Run mission",
+                                                                             "Hold"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the primary goal of this project lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Create a useful module-level coding utility",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax with no application",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip testing and iteration",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write code without output checks",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What makes a student project more reliable?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Multiple test cases and explicit validation",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "One single run only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Removing checks to save time",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoded behavior with no review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    }
+                ]
+}

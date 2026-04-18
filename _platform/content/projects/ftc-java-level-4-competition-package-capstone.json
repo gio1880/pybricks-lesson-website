@@ -1,0 +1,103 @@
+﻿{
+    "id":  "ftc-java-level-4-competition-package-capstone",
+    "title":  "FTC Java Level 4 Competition Package Capstone",
+    "description":  "Produce a match-ready package with teleop and autonomous programs plus tuning notes and reliability evidence.",
+    "path":  "ftc-java",
+    "level":  "level-4",
+    "difficulty":  "advanced",
+    "duration":  "2-3 weeks",
+    "learningObjectives":  [
+                               "Implement production-style teleop architecture",
+                               "Design robust autonomous routines",
+                               "Track reliability metrics across repeated runs",
+                               "Document engineering decisions for team handoff"
+                           ],
+    "phases":  [
+                   {
+                       "id":  "phase-1",
+                       "title":  "Planning and Design",
+                       "duration":  "2-3 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-1-1",
+                                         "title":  "Define requirements",
+                                         "deliverable":  "Requirements checklist and success metrics"
+                                     },
+                                     {
+                                         "id":  "task-1-2",
+                                         "title":  "Design approach",
+                                         "deliverable":  "Architecture sketch and component plan"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "phase-2",
+                       "title":  "Implementation",
+                       "duration":  "3-5 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-2-1",
+                                         "title":  "Build core functionality",
+                                         "deliverable":  "Working first version"
+                                     },
+                                     {
+                                         "id":  "task-2-2",
+                                         "title":  "Add validation and safeguards",
+                                         "deliverable":  "Reliable behavior across test cases"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "phase-3",
+                       "title":  "Testing and Optimization",
+                       "duration":  "2-3 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-3-1",
+                                         "title":  "Run repeated tests",
+                                         "deliverable":  "Test log with pass/fail outcomes"
+                                     },
+                                     {
+                                         "id":  "task-3-2",
+                                         "title":  "Tune for consistency",
+                                         "deliverable":  "Improved reliability and performance"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "phase-4",
+                       "title":  "Documentation and Demo",
+                       "duration":  "1-2 days",
+                       "tasks":  [
+                                     {
+                                         "id":  "task-4-1",
+                                         "title":  "Document implementation",
+                                         "deliverable":  "Concise technical notes and usage guide"
+                                     },
+                                     {
+                                         "id":  "task-4-2",
+                                         "title":  "Present and reflect",
+                                         "deliverable":  "Demo plus reflection on next improvements"
+                                     }
+                                 ]
+                   }
+               ],
+    "successCriteria":  [
+                            {
+                                "criterion":  "Functional Completion",
+                                "description":  "Project runs as designed for its level"
+                            },
+                            {
+                                "criterion":  "Code Quality",
+                                "description":  "Readable, organized, and maintainable implementation"
+                            },
+                            {
+                                "criterion":  "Reliability",
+                                "description":  "Consistent results across repeated tests"
+                            },
+                            {
+                                "criterion":  "Communication",
+                                "description":  "Clear documentation and demonstration"
+                            }
+                        ]
+}

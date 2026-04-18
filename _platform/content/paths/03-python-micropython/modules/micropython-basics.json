@@ -1,0 +1,505 @@
+﻿{
+    "id":  "micropython-basics",
+    "title":  "MicroPython Basics",
+    "path":  "python-micropython",
+    "level":  "level-4",
+    "module":  "mod-4-1",
+    "order":  1,
+    "lessons":  [
+                    {
+                        "id":  "lesson-4-1-1",
+                        "title":  "What is MicroPython?",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding What is MicroPython?",
+                                        "content":  "This lesson builds practical skill in What is MicroPython? within the module \u0027MicroPython Basics\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "What is MicroPython? Example",
+                                        "code":  "# What is MicroPython?\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: What is MicroPython?",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# What is MicroPython?\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# What is MicroPython?\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-4-1-2",
+                        "title":  "Setting Up MicroPython",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding Setting Up MicroPython",
+                                        "content":  "This lesson builds practical skill in Setting Up MicroPython within the module \u0027MicroPython Basics\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Setting Up MicroPython Example",
+                                        "code":  "# Setting Up MicroPython\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Setting Up MicroPython",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# Setting Up MicroPython\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# Setting Up MicroPython\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-4-1-3",
+                        "title":  "Your First MicroPython Program",
+                        "type":  "lesson",
+                        "duration":  20,
+                        "explain":  {
+                                        "title":  "Understanding Your First MicroPython Program",
+                                        "content":  "This lesson builds practical skill in Your First MicroPython Program within the module \u0027MicroPython Basics\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Your First MicroPython Program Example",
+                                        "code":  "# Your First MicroPython Program\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Your First MicroPython Program",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# Your First MicroPython Program\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# Your First MicroPython Program\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "checkpoint-4-1",
+                        "title":  "MicroPython Setup",
+                        "type":  "assessment",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding MicroPython Setup",
+                                        "content":  "This lesson builds practical skill in MicroPython Setup within the module \u0027MicroPython Basics\u0027. Students connect the concept to robotics scenarios, practice with code, and verify understanding through quick checks.",
+                                        "keyPoints":  [
+                                                          "Connect concept to real robot behavior",
+                                                          "Use readable, testable code patterns",
+                                                          "Check expected behavior with simple validation",
+                                                          "Prepare for the next lesson in the sequence"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "MicroPython Setup Example",
+                                        "code":  "# MicroPython Setup\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Initialize key control variables"
+                                                            },
+                                                            {
+                                                                "line":  4,
+                                                                "note":  "Apply logic to decide robot behavior"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Output state for debugging and verification"
+                                                            }
+                                                        ],
+                                        "output":  "Robot power: 75%"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: MicroPython Setup",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Change one condition or value and predict output.\n3. Run the code and compare expected vs actual output.\n4. Add one improvement for readability.",
+                                         "type":  "code",
+                                         "initialCode":  "# MicroPython Setup\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "solution":  "# MicroPython Setup\npower_level = 75\nis_ready = True\n\nif is_ready:\n    print(f\"Robot power: {power_level}%\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Robot power",
+                                                                             "75"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the main purpose of this lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Apply a programming concept in robot context",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Avoid testing code",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip validation steps",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "Which habit improves reliability in robot programs?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Validate output after each change",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write everything in one long block",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Remove debug output too early",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Ignore edge cases",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "project-4-1",
+                        "title":  "Hub Diagnostic Script",
+                        "type":  "project",
+                        "duration":  60,
+                        "explain":  {
+                                        "title":  "Project Brief: Hub Diagnostic Script",
+                                        "content":  "This module-end project applies concepts from \u0027MicroPython Basics\u0027 to a useful robot utility students can run, test, and iterate.",
+                                        "keyPoints":  [
+                                                          "Build practical utility, not just syntax drills",
+                                                          "Use clear variable names and modular logic",
+                                                          "Validate expected output with test cases",
+                                                          "Reflect on reliability improvements"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Starter Utility Pattern",
+                                        "code":  "# Hub Diagnostic Script\r\nbattery_level = 82\r\ntarget_distance_cm = 35\r\npath_clear = True\r\n\r\nif path_clear and battery_level \u003e 40:\r\n    print(f\"Run mission to {target_distance_cm}cm\")\r\nelse:\r\n    print(\"Hold and recheck\")",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  2,
+                                                                "note":  "Define measurable runtime state"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Use boolean logic for go or hold decisions"
+                                                            },
+                                                            {
+                                                                "line":  6,
+                                                                "note":  "Emit clear operational output"
+                                                            }
+                                                        ],
+                                        "output":  "Run mission to 35cm"
+                                    },
+                        "exercise":  {
+                                         "title":  "Build and Demonstrate",
+                                         "instructions":  "1. Build the full utility for this module topic.\n2. Include at least one function and one validation check.\n3. Run three test cases and log outputs.\n4. Add one improvement for readability or reliability.\n5. Submit code and short reflection.",
+                                         "type":  "code",
+                                         "initialCode":  "# Hub Diagnostic Script\r\nbattery_level = 82\r\ntarget_distance_cm = 35\r\npath_clear = True\r\n\r\nif path_clear and battery_level \u003e 40:\r\n    print(f\"Run mission to {target_distance_cm}cm\")\r\nelse:\r\n    print(\"Hold and recheck\")",
+                                         "solution":  "# Hub Diagnostic Script\r\nbattery_level = 82\r\ntarget_distance_cm = 35\r\npath_clear = True\r\n\r\nif path_clear and battery_level \u003e 40:\r\n    print(f\"Run mission to {target_distance_cm}cm\")\r\nelse:\r\n    print(\"Hold and recheck\")",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Run mission",
+                                                                             "Hold"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "What is the primary goal of this project lesson?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Create a useful module-level coding utility",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Memorize syntax with no application",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skip testing and iteration",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Write code without output checks",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What makes a student project more reliable?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Multiple test cases and explicit validation",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "One single run only",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Removing checks to save time",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoded behavior with no review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    }
+                ]
+}

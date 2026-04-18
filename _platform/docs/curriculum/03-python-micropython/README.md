@@ -1,253 +1,167 @@
-# Python & MicroPython - Curriculum Plan
+# Python & MicroPython - Curriculum Plan (Project-Integrated)
 
 ## Path Overview
 
-**Path ID**: python-micropython
-**Difficulty**: Beginner to Intermediate
-**Duration**: 10-12 weeks
-**Category**: Programming
-**Target Audience**: Ages 12+, requires Block Coding
+**Path ID**: python-micropython  
+**Difficulty**: Beginner to Intermediate  
+**Duration**: 10-12 weeks  
+**Category**: Programming  
+**Target Audience**: Ages 12+, students coming from Block Coding
 
 ## Description
 
-Python & MicroPython is a comprehensive programming path that bridges visual block programming and professional software development. Students learn Python fundamentals including variables, functions, data structures, and object-oriented concepts. The path culminates with MicroPython for direct hardware control on robot platforms.
+Python & MicroPython is designed as a build-focused progression:
+1. Learn core Python concepts.
+2. Apply them immediately in module-end utility projects.
+3. Integrate skills through level-end projects.
+4. Transition to MicroPython hardware control with confidence.
+
+This project cadence gives students regular, practical outputs instead of only checkpoint quizzes.
 
 By completing this path, students can:
-- Write Python programs using proper syntax and style
-- Use variables, functions, and data structures effectively
-- Understand control flow and program logic
-- Program hardware directly using MicroPython
-- Debug and optimize Python code
+- Write readable and testable Python code
+- Use control flow, functions, and data structures effectively
+- Build utility scripts with real robotics relevance
+- Program and test MicroPython behavior on robot hardware
+- Debug and improve reliability through repeated iteration
 
 ## Prerequisites
 
-- Block Coding (understanding of logic and sequences)
-- Basic math and algebra skills
+- Block Coding (logic and sequencing)
+- Basic arithmetic and algebra
 
 ## Level Structure
 
 ### Level 1: Python Fundamentals (Weeks 1-3)
-Core Python syntax and concepts.
 
 **Modules:**
-- Getting Started with Python (setup, first program, REPL)
-- Variables and Data Types (int, float, string, bool)
-- Basic Operations (math, string, comparisons, logic)
+- Getting Started with Python
+- Variables and Data Types
+- Basic Operations
 
-**Assessment**: Variables and data types checkpoint quiz
+**Module Projects:**
+- Robot Status Console
+- Robot Config Validator
+- Mission Score Calculator
+
+**Level Project:** Python Level 1 Foundations Utility Challenge
 
 ### Level 2: Control Flow (Weeks 4-5)
-Making decisions and repeating actions.
 
 **Modules:**
-- Conditionals (if, elif, else, nested conditions)
-- Loops (while, for, range, break, continue)
+- Conditionals
+- Loops
 
-**Assessment**: Control flow programming challenges
+**Module Projects:**
+- Safety Decision Engine
+- Autonomous Retry Controller
 
-**Project**: Text-based adventure game
+**Level Project:** Python Level 2 Control Flow Challenge
 
 ### Level 3: Functions and Data Structures (Weeks 6-8)
-Organizing code and managing data.
 
 **Modules:**
-- Functions (definition, parameters, return, scope)
-- Lists and Collections (lists, tuples, dicts)
+- Functions
+- Lists and Collections
 
-**Assessment**: Function and data structure challenges
+**Module Projects:**
+- Robot Utilities Library
+- Sensor Log Analyzer
 
-**Project**: Data analysis program with functions
+**Level Project:** Python Level 3 Functions and Data Challenge
 
 ### Level 4: MicroPython and Hardware (Weeks 9-10)
-Programming actual robot hardware.
 
 **Modules:**
-- MicroPython Basics (installation, differences from Python)
-- Motor and Sensor Control (hardware interaction, calibration)
+- MicroPython Basics
+- Motor and Sensor Control
 
-**Capstone**: Fully autonomous robot program
+**Module Projects:**
+- Hub Diagnostic Script
+- Line Follow and Stop Utility
 
-## Sample Lesson Titles
+**Level Project:** Python Level 4 MicroPython Hardware Capstone
 
-**Level 1:**
-- Python Setup and Installation
-- Your First Python Program
-- Using the Interactive Shell
-- What Are Variables?
-- Numbers: Integers and Floats
-- Strings and Text
-- Working with Booleans
-- Math Operations and Expressions
-- String Operations and Concatenation
+## Project Cadence and Pacing
 
-**Level 2:**
-- If Statements
-- If-Else Conditions
-- Elif and Multiple Conditions
-- While Loops
-- For Loops and Ranges
-- Break and Continue
-- Nested Loops and Conditions
+- Every module ends with a project lesson.
+- Python module projects are scoped to approximately 60 minutes.
+- Every level ends with an integration project.
+- Level integration projects are scoped to 1-2 weeks.
 
-**Level 3:**
-- Function Basics
-- Parameters and Arguments
-- Return Values and Exit Points
-- Variable Scope
-- Lists and Indexing
-- List Methods and Operations
-- Tuples and Dictionaries
-- Iterating Collections
-
-**Level 4:**
-- What is MicroPython?
-- Setting Up MicroPython
-- Your First MicroPython Program
-- Controlling Motors
-- Reading Sensors
-- Sensor Calibration
-- Advanced Motor Control
-- Creating Reusable Robot Functions
+This cadence ensures frequent practice, visible progress, and strong transfer to real robotics tasks.
 
 ## Key Concepts
 
-### Python Fundamentals
-- Variables and assignment
-- Data types (int, float, str, bool, list, dict, tuple)
-- Operators (arithmetic, comparison, logical)
-- String formatting and manipulation
-- Type conversion
+### Python Core
+- Variables and data types
+- Arithmetic, comparison, and logical operators
+- Conditionals and loops
+- Functions and modular design
+- Lists, dictionaries, and collection iteration
 
-### Control Flow
-- Conditional execution (if/elif/else)
-- Loops (for, while)
-- Loop control (break, continue)
-- Nested structures
-- Boolean logic
+### Reliability and Utility Design
+- Input checks and guard conditions
+- Meaningful output and logging
+- Basic test case design
+- Iterative improvement and refactoring
 
-### Functions and Code Organization
-- Function definition and calling
-- Parameters and arguments
-- Return values
-- Scope and namespaces
-- Documentation and comments
-
-### Data Structures
-- Lists and list methods
-- Dictionaries and key-value pairs
-- Tuples for immutable sequences
-- Iterating over collections
-- List comprehensions
-
-### MicroPython Specific
-- EV3 hardware control
-- Motor commands and parameters
+### MicroPython Hardware Integration
+- Device setup and initialization patterns
+- Motor control routines
 - Sensor reading and interpretation
-- Calibration and tuning
-- Error handling on hardware
+- Practical control loops and safety checks
 
 ## Assessment Strategy
 
 **Formative:**
-- Checkpoint quizzes after each level
-- Coding challenges with auto-grading
-- Code review and feedback
-- Peer programming
+- Lesson quizzes and short coding tasks
+- Module-end project check-ins
+- Code review and debugging reflections
 
 **Summative:**
-- Unit assessments
-- Programming projects
-- Final capstone project
-- Code quality and documentation
+- Level integration projects
+- MicroPython hardware capstone
+- Documentation and demonstration quality
 
 ## Resources Needed
 
 ### Equipment
 - Computers for Python development
-- EV3 or compatible robot for MicroPython
-- USB cables and charging stations
-- Sensors and motors for experiments
+- EV3 or compatible robot for MicroPython activities
+- USB cables, chargers, and sensor kits
 
 ### Software
-- Python 3.8+ (for development)
-- Code editor (VS Code, PyCharm, etc.)
-- MicroPython for EV3
-- Pybricks library (optional, recommended)
+- Python 3.8+
+- VS Code or equivalent editor
+- MicroPython runtime for target hardware
+- Optional: Pybricks tools for extended robotics workflows
 
 ### Documentation
-- Official Python documentation
-- Pybricks documentation
-- LEGO MicroPython guides
-- Online Python tutorials
+- Official Python docs
+- Pybricks and MicroPython references
+- Classroom robotics setup guides
 
-## Status: Not Started
+## Status
 
-### Content Development Checklist
-- [ ] Detailed level plans
-- [ ] Lesson content (40+ lessons estimated)
-- [ ] Code examples (50+ tested examples)
-- [ ] Assessments and quizzes
-- [ ] Projects and rubrics
-- [ ] Peer review
-- [ ] Classroom testing
+- Module-end project cadence enabled across all Python modules
+- Level-end Python integration projects added
+- Ongoing: deepen topic-specific examples and rubrics
 
-### Estimated Effort: 80-100 hours
+### Estimated Effort
+- Full classroom hardening and rubric depth: 80-100 hours
 
-## Writing Guidelines
+## Instructional Notes
 
-### Code Examples
-- Use Python 3 syntax
-- Include explanatory comments
-- Show input and output
-- Test all code before publishing
-- Use meaningful variable names
-
-### Progression
-- Start with print() and basic operations
-- Gradually introduce complexity
-- Connect to robotics applications
-- Build toward autonomous programs
-
-### Hands-On Practice
-- Provide interactive exercises
-- Include challenge problems
-- Encourage experimentation
-- Support debugging process
-
-## Connection to Other Paths
-
-**Prerequisites:**
-- Block Coding (visual programming foundations)
-- Robotics Foundations (robot concepts)
-
-**Natural Progression:**
-- Pybricks for FLL (competition-focused)
-- FTC Java (if interested in advanced competitions)
-
-**Complementary:**
-- Robotics Engineering (for mechanical context)
-- Simulation Lab (for virtual practice)
+- Keep explanations short and concrete for early learners.
+- Tie each coding concept to a tangible robot use case.
+- Require at least three test cases for module projects.
+- Include brief reflection prompts after each project to build engineering thinking.
 
 ---
-
-## Development Notes
 
 **Target Completion**: Q2 2026
 
-**Key Challenges:**
-- Python syntax can seem intimidating after blocks
-- Bridging gap between visual and text programming
-- MicroPython has some differences from standard Python
-- Ensuring hardware examples work reliably
-
-**Success Factors:**
-- Excellent progression from simple to complex
-- Lots of hands-on practice
-- Clear error messages and debugging guidance
-- Connection to real robot control
-
----
-
-Last Updated: March 25, 2026
+Last Updated: April 9, 2026
 
 For content guidelines, see `../../CONTENT-GUIDE.md`

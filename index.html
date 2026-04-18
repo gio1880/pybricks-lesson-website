@@ -2954,8 +2954,254 @@
       color: #A8FF78;
     }
 
-    .step-explain, .step-example, .step-exercise, .step-quiz {
+    .step-explain, .step-example, .step-exercise, .step-quiz, .step-lab {
       animation: fadeIn 0.3s ease;
+    }
+
+    /* ============================================
+       PRACTICE LAB — Multi-challenge step
+       ============================================ */
+    .lab-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    .lab-progress {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .lab-progress-track {
+      width: 120px;
+      height: 5px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lab-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+    .lab-progress-label {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .lab-challenge {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      animation: conceptAppear 0.3s ease both;
+    }
+
+    .lab-challenge-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--color-secondary);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.6rem;
+    }
+
+    .lab-challenge-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin: 0 0 0.25rem 0;
+    }
+
+    .lab-challenge-desc {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    .lab-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .lab-feedback {
+      margin-top: 0.6rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      animation: conceptAppear 0.25s ease both;
+    }
+    .lab-feedback.correct {
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      color: var(--color-success);
+    }
+    .lab-feedback.incorrect {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .lab-complete-banner {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: var(--radius-lg);
+      margin-top: 1rem;
+      animation: conceptAppear 0.3s ease both;
+    }
+    .lab-complete-banner h3 {
+      color: var(--color-success);
+      margin: 0 0 0.3rem 0;
+    }
+
+    .lab-nav {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    /* ============================================
+       REFERENCE PANEL — Slide-in cheat sheet
+       ============================================ */
+    .ref-toggle-btn {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      background: linear-gradient(180deg, var(--color-primary), #6366f1);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
+      padding: 0.75rem 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s;
+      box-shadow: -2px 0 12px rgba(0,0,0,0.3);
+    }
+    .ref-toggle-btn:hover {
+      padding-right: 0.6rem;
+      box-shadow: -4px 0 20px rgba(79, 70, 229, 0.4);
+    }
+    .ref-toggle-btn.panel-open {
+      right: 320px;
+    }
+
+    .ref-panel {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 320px;
+      height: 100vh;
+      background: var(--color-surface);
+      border-left: 1px solid var(--color-border);
+      z-index: 999;
+      overflow-y: auto;
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -4px 0 24px rgba(0,0,0,0.4);
+    }
+    .ref-panel.open {
+      right: 0;
+    }
+
+    .ref-panel-header {
+      position: sticky;
+      top: 0;
+      background: var(--color-surface);
+      padding: 1rem 1.1rem 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1;
+    }
+    .ref-panel-header h3 {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--color-text-primary);
+    }
+    .ref-panel-header p {
+      margin: 0.2rem 0 0;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+    .ref-close-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+    .ref-close-btn:hover { color: var(--color-text-primary); }
+
+    .ref-panel-body {
+      padding: 0.75rem 1.1rem 2rem;
+    }
+
+    .ref-section {
+      margin-bottom: 1rem;
+    }
+    .ref-section-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin: 0 0 0.4rem 0;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(79,70,229,0.15);
+    }
+    .ref-item {
+      margin-bottom: 0.5rem;
+    }
+    .ref-item-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 0.15rem;
+    }
+    .ref-item-code {
+      background: rgba(6, 8, 15, 0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm, 4px);
+      padding: 0.35rem 0.55rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+      overflow-x: auto;
+    }
+    .ref-item-note {
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      margin-top: 0.15rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .ref-panel { width: 280px; right: -280px; }
+      .ref-toggle-btn.panel-open { right: 280px; }
     }
 
     .mc-options, .quiz-options {
@@ -5302,6 +5548,53 @@ I am Alex`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Variable Practice Lab",
+      challenges: [
+        {
+          title: "Create and Print a Variable",
+          instructions: "Create a variable called color and set it to \"blue\". Then print it.",
+          type: "code",
+          starterCode: "# Create a variable called color\n# Print it\n",
+          expectedOutput: "blue",
+          hint: "color = \"blue\" on the first line, then print(color) on the next.",
+          validation: { successMessage: "Nice! You created and printed a variable.", errorMessage: "Make sure you set color = \"blue\" and then print(color)." }
+        },
+        {
+          title: "Multiple Variables",
+          instructions: "Create two variables: team_name set to \"Robo Stars\" and team_size set to 5. Print both on separate lines.",
+          type: "code",
+          starterCode: "# Create team_name\n# Create team_size\n# Print both\n",
+          expectedOutput: "Robo Stars\n5",
+          hint: "team_name = \"Robo Stars\" and team_size = 5, then print each one.",
+          validation: { successMessage: "Great! You used two different types of variables.", errorMessage: "Check that team_name is \"Robo Stars\" and team_size is 5, then print both." }
+        },
+        {
+          title: "Update a Variable",
+          instructions: "Create a variable score set to 10. Print it. Then change score to 25 and print it again. Your output should show 10, then 25.",
+          type: "code",
+          starterCode: "# Create score\n# Print it\n# Change score\n# Print it again\n",
+          expectedOutput: "10\n25",
+          hint: "Set score = 10, print(score), then score = 25, print(score). Variables can be overwritten!",
+          validation: { successMessage: "You updated a variable! The old value is replaced.", errorMessage: "Set score = 10, print it, then set score = 25 and print it again." }
+        },
+        {
+          title: "Robot Profile",
+          instructions: "Build a robot profile! Create variables: robot_name (any text), robot_speed (any number), and robot_ready (True or False). Print all three, then print a sentence like: \"Robot [name] is ready!\" using the robot_name variable.",
+          type: "code",
+          starterCode: "# Create your robot profile\n",
+          validation: {
+            type: "contains",
+            requireAll: true,
+            patterns: ["robot_name", "robot_speed", "robot_ready", "print("],
+            successMessage: "Awesome! You built a complete robot profile with variables!",
+            errorMessage: "Make sure you create all three variables (robot_name, robot_speed, robot_ready) and print them."
+          },
+          hint: "Create three variables with =, then use print() for each. For the sentence, try: print(\"Robot\", robot_name, \"is ready!\")"
+        }
+      ]
     }
   },
 
@@ -5406,6 +5699,48 @@ Speed is 400 millimeters per second`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Numbers & Strings Lab",
+      challenges: [
+        {
+          title: "Do Some Math",
+          instructions: "Create two variables: a set to 15 and b set to 4. Print a + b, then print a * b on a new line.",
+          type: "code",
+          starterCode: "a = 15\nb = 4\n# Print a + b\n# Print a * b\n",
+          expectedOutput: "19\n60",
+          hint: "print(a + b) on one line, print(a * b) on the next.",
+          validation: { successMessage: "Math with variables — you've got it!", errorMessage: "Print a + b and a * b on separate lines." }
+        },
+        {
+          title: "Combine Strings",
+          instructions: "Create first_name = \"Robo\" and last_name = \"Star\". Print them combined with a space: \"Robo Star\".",
+          type: "code",
+          starterCode: "first_name = \"Robo\"\nlast_name = \"Star\"\n# Print them together with a space\n",
+          expectedOutput: "Robo Star",
+          hint: "Use print(first_name, last_name) — commas add spaces automatically.",
+          validation: { successMessage: "String combination works!", errorMessage: "Use print(first_name, last_name) to combine with a space." }
+        },
+        {
+          title: "Mix Types in Print",
+          instructions: "Create distance = 500 (integer) and unit = \"mm\" (string). Print: \"Distance: 500 mm\" using the variables.",
+          type: "code",
+          starterCode: "distance = 500\nunit = \"mm\"\n# Print: Distance: 500 mm\n",
+          expectedOutput: "Distance: 500 mm",
+          hint: "print(\"Distance:\", distance, unit)",
+          validation: { successMessage: "You mixed numbers and strings perfectly!", errorMessage: "Try: print(\"Distance:\", distance, unit)" }
+        },
+        {
+          title: "Robot Speedometer",
+          instructions: "Create variables: speed = 400, distance = 1200, and robot = \"Explorer\". Calculate time = distance / speed (this will be a float). Print the robot name, then print \"Speed:\" with the speed, then print \"Time:\" with the time.",
+          type: "code",
+          starterCode: "# Create your variables\n# Calculate time\n# Print everything\n",
+          expectedOutput: "Explorer\nSpeed: 400\nTime: 3.0",
+          hint: "time = distance / speed gives 3.0 (float). Print each on its own line: print(robot), print(\"Speed:\", speed), print(\"Time:\", time)",
+          validation: { successMessage: "You used ints, floats, and strings together!", errorMessage: "Make sure time = 1200 / 400 and print all three lines." }
+        }
+      ]
     }
   },
 
@@ -5506,6 +5841,48 @@ False`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Booleans Practice Lab",
+      challenges: [
+        {
+          title: "True or False Variables",
+          instructions: "Create a variable called is_sunny set to True. Create another called is_raining set to False. Print both.",
+          type: "code",
+          starterCode: "# Create is_sunny\n# Create is_raining\n# Print both\n",
+          expectedOutput: "True\nFalse",
+          hint: "is_sunny = True (capital T!), is_raining = False (capital F!)",
+          validation: { successMessage: "You created boolean variables!", errorMessage: "Remember: True and False must start with capital letters." }
+        },
+        {
+          title: "Comparison Operators",
+          instructions: "Print the result of each comparison: 100 > 50, 10 == 20, 5 != 5, 30 <= 30. Each on its own line.",
+          type: "code",
+          starterCode: "# Print four comparisons\n",
+          expectedOutput: "True\nFalse\nFalse\nTrue",
+          hint: "print(100 > 50), print(10 == 20), print(5 != 5), print(30 <= 30)",
+          validation: { successMessage: "You know your comparison operators!", errorMessage: "Print each comparison on its own line." }
+        },
+        {
+          title: "Store a Comparison",
+          instructions: "Create battery = 75. Create a boolean variable called needs_charge that stores whether battery < 20. Print needs_charge.",
+          type: "code",
+          starterCode: "battery = 75\n# Create needs_charge\n# Print it\n",
+          expectedOutput: "False",
+          hint: "needs_charge = battery < 20 stores the result of the comparison. Then print(needs_charge).",
+          validation: { successMessage: "You stored a comparison result in a variable!", errorMessage: "Set needs_charge = battery < 20, then print it." }
+        },
+        {
+          title: "Robot Status Check",
+          instructions: "Create: speed = 350, battery = 80, has_obstacle = False. Print whether speed > 300, whether battery >= 50, and print has_obstacle. Your output should be three lines: True, True, False.",
+          type: "code",
+          starterCode: "speed = 350\nbattery = 80\nhas_obstacle = False\n# Print three checks\n",
+          expectedOutput: "True\nTrue\nFalse",
+          hint: "print(speed > 300), print(battery >= 50), print(has_obstacle)",
+          validation: { successMessage: "You can check robot status with booleans!", errorMessage: "Print each comparison or variable on its own line." }
+        }
+      ]
     }
   },
 
@@ -5708,6 +6085,48 @@ print("Wrong indentation")`,
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Indentation Practice Lab",
+      challenges: [
+        {
+          title: "Indent It Right",
+          instructions: "Write an if statement: if True: and then print(\"Inside the block\") indented with 4 spaces. Then print(\"Outside\") with no indentation.",
+          type: "code",
+          starterCode: "# Write an if True: block\n",
+          expectedOutput: "Inside the block\nOutside",
+          hint: "if True: on one line, then 4 spaces before print(\"Inside the block\"), then print(\"Outside\") at the left edge.",
+          validation: { successMessage: "Perfect indentation!", errorMessage: "Make sure the first print is indented 4 spaces inside the if, and the second is not indented." }
+        },
+        {
+          title: "Two Lines Inside",
+          instructions: "Write if True: with TWO indented print statements inside: print(\"Line 1\") and print(\"Line 2\"). Then print(\"Done\") outside the block.",
+          type: "code",
+          starterCode: "# if block with two lines inside\n",
+          expectedOutput: "Line 1\nLine 2\nDone",
+          hint: "Both print lines inside the if need the same 4-space indentation. \"Done\" goes at the left edge.",
+          validation: { successMessage: "Multiple lines in one block — you've got it!", errorMessage: "Both lines inside the if need 4 spaces. 'Done' should have no spaces." }
+        },
+        {
+          title: "What's Inside, What's Outside?",
+          instructions: "This code has an if block. Which lines are INSIDE the block?\n\nif True:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")\n\nHow many lines are inside the if block?",
+          type: "multiple-choice",
+          options: ["1 line", "2 lines", "3 lines", "0 lines"],
+          correct: 1,
+          hint: "Count only the indented lines after if True:",
+          validation: { successMessage: "Right — A and B are indented, so they're inside. C is outside.", errorMessage: "Lines A and B are indented (inside). Line C is at the left edge (outside)." }
+        },
+        {
+          title: "Fix the Broken Code",
+          instructions: "This code has an indentation error. Fix it so it prints \"Ready\" and \"Go!\" inside the if block, and \"Done\" outside.\n\nWrite the corrected version:",
+          type: "code",
+          starterCode: "if True:\nprint(\"Ready\")\n    print(\"Go!\")\n    print(\"Done\")\n",
+          expectedOutput: "Ready\nGo!\nDone",
+          hint: "\"Ready\" and \"Go!\" need 4 spaces (inside the if). \"Done\" needs 0 spaces (outside the if).",
+          validation: { successMessage: "You fixed the indentation bug!", errorMessage: "\"Ready\" and \"Go!\" should have 4 spaces. \"Done\" should have no spaces." }
+        }
+      ]
     }
   },
 
@@ -5816,6 +6235,48 @@ Different distance`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "if/else Practice Lab",
+      challenges: [
+        {
+          title: "Basic Temperature Check",
+          instructions: "Set a variable temperature to 110. Write an if/else that prints \"Too hot!\" if temperature is greater than 100, or \"OK\" otherwise.",
+          type: "code",
+          starterCode: "temperature = 110\n# Write your if/else below\n",
+          expectedOutput: "Too hot!",
+          hint: "Use if temperature > 100: then print(\"Too hot!\"), else: print(\"OK\"). Don't forget the colons and indentation!",
+          validation: { successMessage: "Nice! You wrote your first if/else check.", errorMessage: "Make sure temperature = 110, and your if checks temperature > 100. Print exactly \"Too hot!\" or \"OK\"." }
+        },
+        {
+          title: "Robot Battery Check",
+          instructions: "A robot's battery is 35%. Set battery = 35. Write an if/else: if battery is less than 50, print \"Charge needed\". Otherwise, print \"Battery good\".",
+          type: "code",
+          starterCode: "battery = 35\n# Write your if/else below\n",
+          expectedOutput: "Charge needed",
+          hint: "if battery < 50: then print the charge message, else: print the good message.",
+          validation: { successMessage: "Great! You used a different comparison operator (<).", errorMessage: "Check that you're comparing battery < 50 and printing exactly \"Charge needed\" or \"Battery good\"." }
+        },
+        {
+          title: "Two Decisions",
+          instructions: "Create two variables: speed = 400 and distance = 200. Write TWO separate if/else blocks:\n1) If speed > 300, print \"Fast\", else print \"Slow\"\n2) If distance == 500, print \"Target reached\", else print \"Keep going\"",
+          type: "code",
+          starterCode: "speed = 400\ndistance = 200\n# First if/else for speed\n\n# Second if/else for distance\n",
+          expectedOutput: "Fast\nKeep going",
+          hint: "Write two separate if/else blocks, one after the other. First checks speed > 300, second checks distance == 500 (double equals!).",
+          validation: { successMessage: "Excellent! You wrote two independent decisions in one program.", errorMessage: "You need two if/else blocks. First checks speed > 300, second checks distance == 500." }
+        },
+        {
+          title: "Grade Calculator",
+          instructions: "Set score = 85. Write an if/else that prints \"Pass\" if score is greater than or equal to 70, otherwise prints \"Fail\". Then on a new line, print \"Your score:\" followed by the score variable.",
+          type: "code",
+          starterCode: "score = 85\n# Write your if/else\n# Then print the score\n",
+          expectedOutput: "Pass\nYour score: 85",
+          hint: "Use >= for \"greater than or equal to\". After the if/else, add print(\"Your score:\", score) with no indentation (it runs regardless of the condition).",
+          validation: { successMessage: "Awesome! You combined if/else with variable printing.", errorMessage: "Make sure you use >= for the comparison and print(\"Your score:\", score) after the if/else block (not indented)." }
+        }
+      ]
     }
   },
 
@@ -5930,6 +6391,48 @@ Count is 2`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Loops Practice Lab",
+      challenges: [
+        {
+          title: "Count to 5",
+          instructions: "Write a for loop that prints the numbers 1 through 5, each on its own line.",
+          type: "code",
+          starterCode: "# Write a for loop that prints 1 to 5\n",
+          expectedOutput: "1\n2\n3\n4\n5",
+          hint: "Use for i in range(1, 6): and then print(i) indented inside the loop.",
+          validation: { successMessage: "Nice! You created a for loop with a custom range.", errorMessage: "Use range(1, 6) to get 1 through 5. Remember, range stops BEFORE the second number." }
+        },
+        {
+          title: "Repeat a Message",
+          instructions: "Write a for loop that prints \"Go Robot!\" exactly 4 times.",
+          type: "code",
+          starterCode: "# Print \"Go Robot!\" four times\n",
+          expectedOutput: "Go Robot!\nGo Robot!\nGo Robot!\nGo Robot!",
+          hint: "for i in range(4): then print(\"Go Robot!\") indented inside.",
+          validation: { successMessage: "Great! You used a loop to repeat an action.", errorMessage: "Use range(4) and print exactly \"Go Robot!\" inside the loop." }
+        },
+        {
+          title: "While Loop Countdown",
+          instructions: "Create a variable count = 3. Write a while loop that prints the count, then subtracts 1, and stops when count reaches 0. After the loop, print \"Liftoff!\"",
+          type: "code",
+          starterCode: "count = 3\n# Write your while loop\n\n# Print Liftoff! after the loop\n",
+          expectedOutput: "3\n2\n1\nLiftoff!",
+          hint: "while count > 0: print(count), then count = count - 1. After the loop (no indent), print(\"Liftoff!\")",
+          validation: { successMessage: "Excellent! You combined a while loop with a countdown.", errorMessage: "Make sure count starts at 3, the loop runs while count > 0, and you print Liftoff! after the loop ends." }
+        },
+        {
+          title: "Times Table",
+          instructions: "Write a for loop that prints the first 5 multiples of 3, each on its own line. Output should be:\n3\n6\n9\n12\n15",
+          type: "code",
+          starterCode: "# Print multiples of 3\n",
+          expectedOutput: "3\n6\n9\n12\n15",
+          hint: "Use for i in range(1, 6): and print(i * 3). Or use range(3, 16, 3) to step by 3.",
+          validation: { successMessage: "Awesome! You used math inside a loop to generate a pattern.", errorMessage: "Each line should be a multiple of 3: 3, 6, 9, 12, 15. Try print(i * 3) with range(1, 6)." }
+        }
+      ]
     }
   },
 
@@ -6040,6 +6543,48 @@ Great job!`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Functions Practice Lab",
+      challenges: [
+        {
+          title: "Define and Call",
+          instructions: "Define a function called say_hello that prints \"Hello!\". Then call it once.",
+          type: "code",
+          starterCode: "# Define the function\n\n# Call it\n",
+          expectedOutput: "Hello!",
+          hint: "def say_hello(): then print(\"Hello!\") indented. Below that (not indented), write say_hello()",
+          validation: { successMessage: "Nice! You defined and called your first function.", errorMessage: "Make sure you use def say_hello(): with a colon, indent the print inside, and call say_hello() below." }
+        },
+        {
+          title: "Multi-Line Function",
+          instructions: "Define a function called robot_startup that prints three lines:\n\"Booting up...\"\n\"Sensors ready\"\n\"Let's go!\"\nThen call it once.",
+          type: "code",
+          starterCode: "# Define robot_startup\n\n# Call it\n",
+          expectedOutput: "Booting up...\nSensors ready\nLet's go!",
+          hint: "All three print statements should be indented inside the function. Call the function once after defining it.",
+          validation: { successMessage: "Great! Your function has multiple steps inside it.", errorMessage: "All three prints must be indented inside def robot_startup(): and called once below." }
+        },
+        {
+          title: "Reuse It",
+          instructions: "Define a function called cheer that prints \"Go team!\". Call it exactly 3 times so the output shows the message three times.",
+          type: "code",
+          starterCode: "# Define cheer\n\n# Call it 3 times\n",
+          expectedOutput: "Go team!\nGo team!\nGo team!",
+          hint: "Define the function once, then write cheer() three separate times.",
+          validation: { successMessage: "Excellent! Functions let you reuse code without rewriting it.", errorMessage: "Define cheer once with def cheer(): and print(\"Go team!\") inside. Then call cheer() three times." }
+        },
+        {
+          title: "Two Functions",
+          instructions: "Define two functions:\n1) start_motor that prints \"Motor started\"\n2) stop_motor that prints \"Motor stopped\"\nCall start_motor, then stop_motor.",
+          type: "code",
+          starterCode: "# Define start_motor\n\n# Define stop_motor\n\n# Call both\n",
+          expectedOutput: "Motor started\nMotor stopped",
+          hint: "Define both functions first (each with def and indented print), then call them in order at the bottom.",
+          validation: { successMessage: "Awesome! You organized code into multiple reusable functions.", errorMessage: "Define both functions with def, then call start_motor() first and stop_motor() second." }
+        }
+      ]
     }
   },
 
@@ -6149,6 +6694,48 @@ Moving at 400 speed in backward direction`
         }
       ],
       passingScore: 100
+    },
+
+    lab: {
+      title: "Parameters Practice Lab",
+      challenges: [
+        {
+          title: "One Parameter",
+          instructions: "Define a function called greet that takes a name parameter and prints \"Hello, \" followed by the name. Call it with \"Alex\".",
+          type: "code",
+          starterCode: "# Define greet with a name parameter\n\n# Call it\n",
+          expectedOutput: "Hello, Alex",
+          hint: "def greet(name): then print(\"Hello,\", name). Call with greet(\"Alex\").",
+          validation: { successMessage: "Nice! Your function adapts to whatever name you give it.", errorMessage: "Make sure def greet(name): is correct, and inside you print(\"Hello,\", name). Call with greet(\"Alex\")." }
+        },
+        {
+          title: "Different Inputs",
+          instructions: "Define a function called announce that takes a message parameter and prints it. Call it three times with different messages:\n\"Race starting!\"\n\"Halfway there!\"\n\"Race complete!\"",
+          type: "code",
+          starterCode: "# Define announce\n\n# Call it 3 times with different messages\n",
+          expectedOutput: "Race starting!\nHalfway there!\nRace complete!",
+          hint: "def announce(message): then print(message). Call announce(\"Race starting!\"), announce(\"Halfway there!\"), announce(\"Race complete!\").",
+          validation: { successMessage: "Great! Same function, three different outputs.", errorMessage: "Define announce(message) and call it three times with the exact strings shown." }
+        },
+        {
+          title: "Two Parameters",
+          instructions: "Define a function called move_robot that takes speed and direction parameters. It should print \"Moving\" followed by direction, then \"at speed\" followed by speed. Call it with 300 and \"forward\".",
+          type: "code",
+          starterCode: "# Define move_robot with two parameters\n\n# Call it\n",
+          expectedOutput: "Moving forward at speed 300",
+          hint: "def move_robot(speed, direction): then print(\"Moving\", direction, \"at speed\", speed). Call with move_robot(300, \"forward\").",
+          validation: { successMessage: "Excellent! You used multiple parameters in one function.", errorMessage: "Make sure the function takes (speed, direction) and prints them in the right order." }
+        },
+        {
+          title: "Robot Command Center",
+          instructions: "Build a mini command center! Define a function called command that takes action and times parameters. It should use a for loop to print the action that many times. Call command(\"Beep!\", 3) then call command(\"Move!\", 2).",
+          type: "code",
+          starterCode: "# Define command with action and times parameters\n\n# Call it twice\n",
+          expectedOutput: "Beep!\nBeep!\nBeep!\nMove!\nMove!",
+          hint: "def command(action, times): then for i in range(times): print(action). This combines loops with parameters!",
+          validation: { successMessage: "Awesome! You combined parameters with loops — that's real programming.", errorMessage: "The function should loop 'times' number of times, printing 'action' each time. Call it twice as instructed." }
+        }
+      ]
     }
   },
 
@@ -10088,6 +10675,226 @@ function validateExercise(exercise, userAnswer) {
 }
 
 // ============================================================================
+// REFERENCE PANEL — Slide-in cheat sheet for Python concepts
+// ============================================================================
+
+const RefPanel = {
+  isOpen: false,
+  btnEl: null,
+  panelEl: null,
+
+  // Reference data keyed by lesson ID — cumulative (each lesson includes its own + all prior)
+  data: {
+    'py-01': [
+      { section: 'Output', items: [
+        { label: 'Print to screen', code: 'print("Hello!")', note: 'Displays text to the screen' }
+      ]}
+    ],
+    'py-02': [
+      { section: 'Output', items: [
+        { label: 'Print to screen', code: 'print("Hello!")' }
+      ]},
+      { section: 'Variables', items: [
+        { label: 'Create a variable', code: 'name = "Alex"\nage = 12', note: 'Use = to store a value' },
+        { label: 'Use a variable', code: 'print(name)', note: 'Use the variable name to get the value' },
+        { label: 'Update a variable', code: 'score = 10\nscore = 25', note: 'New value replaces the old one' }
+      ]}
+    ],
+    'py-03': [
+      { section: 'Output', items: [
+        { label: 'Print to screen', code: 'print("Hello!")' }
+      ]},
+      { section: 'Variables', items: [
+        { label: 'Create a variable', code: 'name = "Alex"' }
+      ]},
+      { section: 'Data Types', items: [
+        { label: 'Integer (whole number)', code: 'speed = 400' },
+        { label: 'Float (decimal)', code: 'distance = 56.5' },
+        { label: 'String (text)', code: 'message = "Hello"', note: 'Text goes inside quotes' },
+        { label: 'Mix types in print', code: 'print("Speed is", speed)' }
+      ]}
+    ],
+    'py-04': [
+      { section: 'Output', items: [{ label: 'Print', code: 'print("text")' }] },
+      { section: 'Variables', items: [{ label: 'Create', code: 'x = value' }] },
+      { section: 'Data Types', items: [
+        { label: 'int / float / str', code: '42  |  3.14  |  "text"' }
+      ]},
+      { section: 'Booleans', items: [
+        { label: 'True and False', code: 'is_ready = True\nhas_obstacle = False', note: 'Capital T and F!' },
+        { label: 'Comparisons', code: '5 > 3   → True\n10 == 5 → False', note: '>, <, ==, !=, >=, <=' }
+      ]}
+    ],
+    'py-05': [
+      { section: 'Output', items: [{ label: 'Print', code: 'print("text")' }] },
+      { section: 'Variables', items: [{ label: 'Create', code: 'x = value' }] },
+      { section: 'Data Types', items: [{ label: 'int / float / str / bool', code: '42 | 3.14 | "text" | True' }] },
+      { section: 'Comments', items: [
+        { label: 'Full-line comment', code: '# This is a comment' },
+        { label: 'Inline comment', code: 'speed = 400  # in mm/s' }
+      ]}
+    ],
+    'py-06': [
+      { section: 'Basics', items: [
+        { label: 'Print / Variables / Types', code: 'print("hi")  |  x = 5  |  "text"' }
+      ]},
+      { section: 'Comments', items: [{ label: 'Comment', code: '# ignored by Python' }] },
+      { section: 'Indentation', items: [
+        { label: '4 spaces = inside a block', code: 'if True:\n    print("inside")\nprint("outside")' },
+        { label: 'Rule', code: '', note: 'Same indent = same block. Wrong indent = error!' }
+      ]}
+    ],
+    'py-07': [
+      { section: 'Basics', items: [
+        { label: 'Print / Variables / Types', code: 'print()  |  x = 5  |  "text"  |  True' }
+      ]},
+      { section: 'Indentation', items: [{ label: '4 spaces inside blocks', code: 'if True:\n    code here' }] },
+      { section: 'if / else', items: [
+        { label: 'if statement', code: 'if speed > 300:\n    print("Fast!")' },
+        { label: 'if / else', code: 'if x > 10:\n    print("big")\nelse:\n    print("small")' },
+        { label: 'Comparisons', code: '>  <  ==  !=  >=  <=' }
+      ]}
+    ],
+    'py-08': [
+      { section: 'Basics', items: [{ label: 'Variables / Types / if-else', code: 'x = 5  |  if x > 3: ...' }] },
+      { section: 'Loops', items: [
+        { label: 'for loop', code: 'for i in range(5):\n    print(i)', note: 'Prints 0, 1, 2, 3, 4' },
+        { label: 'Custom range', code: 'for i in range(1, 6):\n    print(i)', note: 'Prints 1 through 5' },
+        { label: 'while loop', code: 'count = 0\nwhile count < 3:\n    print(count)\n    count = count + 1' }
+      ]}
+    ],
+    'py-09': [
+      { section: 'Basics', items: [{ label: 'Variables / if-else / Loops', code: 'x = 5 | if/else | for/while' }] },
+      { section: 'Functions', items: [
+        { label: 'Define a function', code: 'def greet():\n    print("Hello!")' },
+        { label: 'Call a function', code: 'greet()', note: 'Runs the code inside the function' },
+        { label: 'Call multiple times', code: 'greet()\ngreet()\ngreet()', note: 'Reuse it!' }
+      ]}
+    ],
+    'py-10': [
+      { section: 'Basics', items: [{ label: 'Variables / if-else / Loops / Functions', code: 'def name(): ...' }] },
+      { section: 'Parameters', items: [
+        { label: 'One parameter', code: 'def drive(distance):\n    print(distance)' },
+        { label: 'Two parameters', code: 'def move(speed, dir):\n    print(speed, dir)' },
+        { label: 'Call with values', code: 'drive(500)\nmove(300, "forward")' }
+      ]}
+    ],
+    'py-11': [
+      { section: 'Functions & Params', items: [
+        { label: 'Define / Call / Params', code: 'def fn(x): ...\nfn(5)' }
+      ]},
+      { section: 'Return Values', items: [
+        { label: 'Return a value', code: 'def add(a, b):\n    return a + b' },
+        { label: 'Store the result', code: 'result = add(10, 5)\nprint(result)', note: 'result is now 15' }
+      ]}
+    ],
+    'py-12': [
+      { section: 'Functions / Return', items: [{ label: 'def / return / call', code: 'def fn(): return val' }] },
+      { section: 'Imports', items: [
+        { label: 'Import a class', code: 'from pybricks.hubs import PrimeHub' },
+        { label: 'Import multiple', code: 'from pybricks.parameters import Port, Direction' },
+        { label: 'Use after import', code: 'hub = PrimeHub()' }
+      ]}
+    ],
+    'py-13': [
+      { section: 'Imports', items: [{ label: 'from X import Y', code: 'from pybricks.hubs import PrimeHub' }] },
+      { section: 'Objects & Methods', items: [
+        { label: 'Create an object', code: 'hub = PrimeHub()' },
+        { label: 'Call a method', code: 'hub.imu.reset_heading(0)', note: 'object.method()' },
+        { label: 'Method with params', code: 'motor.run_time(500, 1000)' }
+      ]}
+    ],
+    'py-14': [
+      { section: 'Quick Reference', items: [
+        { label: 'Variables', code: 'x = value' },
+        { label: 'if / else', code: 'if cond:\n    ...\nelse:\n    ...' },
+        { label: 'Loops', code: 'for i in range(n): ...' },
+        { label: 'Functions', code: 'def fn(param):\n    return val' },
+        { label: 'Objects', code: 'obj = Class()\nobj.method()' }
+      ]}
+    ]
+  },
+
+  // Inject the panel HTML into the page
+  init() {
+    // Only show on lesson pages
+    if (this.btnEl) return; // already initialized
+
+    const btn = document.createElement('button');
+    btn.className = 'ref-toggle-btn';
+    btn.id = 'ref-toggle-btn';
+    btn.textContent = 'Reference';
+    btn.onclick = () => this.toggle();
+    document.body.appendChild(btn);
+    this.btnEl = btn;
+
+    const panel = document.createElement('div');
+    panel.className = 'ref-panel';
+    panel.id = 'ref-panel';
+    panel.innerHTML = '<div class="ref-panel-header"><h3>Python Reference</h3><p>Quick reference for concepts you\'ve learned</p><button class="ref-close-btn" onclick="RefPanel.toggle()">✕</button></div><div class="ref-panel-body" id="ref-panel-body"></div>';
+    document.body.appendChild(panel);
+    this.panelEl = panel;
+  },
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+    if (this.btnEl) this.btnEl.classList.toggle('panel-open', this.isOpen);
+    if (this.panelEl) this.panelEl.classList.toggle('open', this.isOpen);
+  },
+
+  close() {
+    this.isOpen = false;
+    if (this.btnEl) this.btnEl.classList.remove('panel-open');
+    if (this.panelEl) this.panelEl.classList.remove('open');
+  },
+
+  // Show the reference panel tab (called when entering a lesson)
+  show(lessonId) {
+    if (!this.btnEl) this.init();
+    this.btnEl.style.display = '';
+    this.updateContent(lessonId);
+  },
+
+  // Hide the panel tab (called when leaving a lesson)
+  hide() {
+    if (this.btnEl) this.btnEl.style.display = 'none';
+    this.close();
+  },
+
+  // Update the panel body content for the given lesson
+  updateContent(lessonId) {
+    const body = document.getElementById('ref-panel-body');
+    if (!body) return;
+
+    const sections = this.data[lessonId];
+    if (!sections) {
+      body.innerHTML = '<p style="color:var(--color-text-muted);font-size:0.85rem;">No reference data for this lesson yet.</p>';
+      return;
+    }
+
+    let html = '';
+    sections.forEach(sec => {
+      html += '<div class="ref-section">';
+      html += '<div class="ref-section-title">' + sec.section + '</div>';
+      sec.items.forEach(item => {
+        html += '<div class="ref-item">';
+        html += '<div class="ref-item-label">' + item.label + '</div>';
+        if (item.code) {
+          html += '<div class="ref-item-code"><pre style="margin:0;white-space:pre-wrap;">' + item.code.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre></div>';
+        }
+        if (item.note) {
+          html += '<div class="ref-item-note">' + item.note + '</div>';
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+
+    body.innerHTML = html;
+  }
+};
+
+// ============================================================================
 // LESSON CARDS RENDERER - Renders lesson cards for category pages
 // ============================================================================
 
@@ -10189,9 +10996,11 @@ const LessonCards = {
 const LessonViewer = {
   currentLesson: null,
   currentStep: 0,
-  steps: ['explain', 'example', 'exercise', 'quiz'],
+  steps: [],          // built dynamically per lesson
   exerciseAttempts: 0,
   quizAnswers: {},
+  labIndex: 0,        // current challenge in Practice Lab
+  labCompleted: [],    // which challenges have been passed
 
   load(lessonId) {
     const lesson = LessonRegistry.getById(lessonId);
@@ -10211,19 +11020,33 @@ const LessonViewer = {
     this.currentStep = 0;
     this.exerciseAttempts = 0;
     this.quizAnswers = {};
+    this.labIndex = 0;
+    this.labCompleted = [];
+
+    // Build steps dynamically — include 'lab' only if lesson has lab challenges
+    this.steps = ['explain', 'example', 'exercise'];
+    if (lesson.lab && lesson.lab.challenges && lesson.lab.challenges.length > 0) {
+      this.steps.push('lab');
+    }
+    this.steps.push('quiz');
 
     const container = document.getElementById('lesson-container');
     if (!container) return;
+
+    // Build progress dots dynamically
+    const stepIcons = { explain: '📖', example: '👀', exercise: '✏️', lab: '🔬', quiz: '🧠' };
+    const stepTitles = { explain: 'Learn', example: 'See It', exercise: 'Practice', lab: 'Lab', quiz: 'Quiz' };
+    let dotsHtml = '';
+    this.steps.forEach((s, i) => {
+      dotsHtml += '<button class="dot' + (i === 0 ? ' active' : '') + '" onclick="LessonViewer.goToStep(' + i + ')" title="' + stepTitles[s] + '">' + stepIcons[s] + '</button>';
+    });
 
     container.innerHTML = `
       <div class="lesson-header">
         <h1>${this.escapeHtml(lesson.title)}</h1>
         <div class="step-indicator">
           <div class="progress-dots">
-            <button class="dot active" onclick="LessonViewer.goToStep(0)" title="Learn">📖</button>
-            <button class="dot" onclick="LessonViewer.goToStep(1)" title="See It">👀</button>
-            <button class="dot" onclick="LessonViewer.goToStep(2)" title="Practice">✏️</button>
-            <button class="dot" onclick="LessonViewer.goToStep(3)" title="Quiz">🧠</button>
+            ${dotsHtml}
           </div>
         </div>
       </div>
@@ -10235,6 +11058,9 @@ const LessonViewer = {
     `;
 
     this.renderStep(0);
+
+    // Show reference panel for this lesson
+    RefPanel.show(lessonId);
   },
 
   goToStep(stepIndex) {
@@ -10258,6 +11084,8 @@ const LessonViewer = {
       html = this.renderExample();
     } else if (step === 'exercise' && this.currentLesson.exercise) {
       html = this.renderExercise();
+    } else if (step === 'lab' && this.currentLesson.lab) {
+      html = this.renderLab();
     } else if (step === 'quiz' && this.currentLesson.quiz) {
       html = this.renderQuiz();
     }
@@ -10285,6 +11113,22 @@ const LessonViewer = {
       });
       // Focus the textarea so students can start typing right away on desktop
       if (!('ontouchstart' in window)) textarea.focus();
+    }
+
+    // Lab textarea initialization
+    const labTextarea = document.getElementById('lab-code-input');
+    if (labTextarea) {
+      enableCodeTabIndentation(labTextarea);
+      labTextarea.addEventListener('input', function() {
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        const normalized = normalizeQuotes(this.value);
+        if (normalized !== this.value) {
+          this.value = normalized;
+          try { this.setSelectionRange(start, end); } catch(e) {}
+        }
+      });
+      if (!('ontouchstart' in window)) labTextarea.focus();
     }
 
     // Scroll content into view
@@ -10486,14 +11330,9 @@ const LessonViewer = {
       btn.textContent = '⏳ Running...';
       const result = await PyRunner.run(codeToRun);
 
-      let outHtml = '';
-      if (result.error) {
-        outHtml = '<div class="concept-output has-error"><pre>' + this.escapeHtml(result.error) + '</pre></div>';
-      } else {
-        const output = (result.output || '').trim();
-        outHtml = '<div class="concept-output"><pre>' + (output ? this.escapeHtml(output) : '(no output)') + '</pre></div>';
-      }
-      outputArea.innerHTML = outHtml;
+      const output = (result.output || '').trim();
+      const outClass = result.error ? 'concept-output has-error' : 'concept-output';
+      outputArea.innerHTML = '<div class="' + outClass + '"><pre>' + (output ? this.escapeHtml(output) : '(no output)') + '</pre></div>';
     } catch (e) {
       outputArea.innerHTML = '<div class="concept-output has-error"><pre>' + this.escapeHtml(e.message) + '</pre></div>';
     } finally {
@@ -10568,6 +11407,261 @@ const LessonViewer = {
     if (btn) btn.textContent = hidden ? 'View Complete Program' : 'Hide Complete Program';
   },
 
+  // ===================== PRACTICE LAB =====================
+
+  renderLab() {
+    const lab = this.currentLesson.lab;
+    if (!lab || !lab.challenges || lab.challenges.length === 0) return '';
+    const challenges = lab.challenges;
+    const idx = this.labIndex;
+    const total = challenges.length;
+    const ch = challenges[idx];
+    const pct = Math.round((this.labCompleted.length) / total * 100);
+
+    let html = '<div class="step-lab">';
+    html += '<div class="step-badge">🔬 Practice Lab</div>';
+
+    // Header with progress
+    html += '<div class="lab-header">';
+    html += '<h2>' + this.escapeHtml(lab.title || 'Practice Lab') + '</h2>';
+    html += '<div class="lab-progress">';
+    html += '<div class="lab-progress-track"><div class="lab-progress-fill" id="lab-progress-fill" style="width:' + pct + '%"></div></div>';
+    html += '<span class="lab-progress-label">' + this.labCompleted.length + '/' + total + '</span>';
+    html += '</div>';
+    html += '</div>';
+
+    // Current challenge card
+    html += '<div class="lab-challenge" id="lab-challenge-card">';
+    html += this._buildLabChallenge(ch, idx, total);
+    html += '</div>';
+
+    // Navigation between challenges
+    html += '<div class="lab-nav">';
+    if (total > 1) {
+      html += '<button class="btn-concept-prev" id="lab-prev-btn" onclick="LessonViewer.goToLabChallenge(' + (idx - 1) + ')"' + (idx === 0 ? ' disabled' : '') + '>← Previous</button>';
+    }
+    const allDone = this.labCompleted.length >= total;
+    if (idx < total - 1) {
+      html += '<button class="btn-concept-next" id="lab-next-btn" onclick="LessonViewer.goToLabChallenge(' + (idx + 1) + ')">Next Challenge →</button>';
+    } else if (allDone) {
+      html += '<button class="btn-concept-next is-last" onclick="LessonViewer.nextStep()">Continue to Quiz →</button>';
+    }
+    html += '</div>';
+
+    // Completion banner
+    if (allDone) {
+      html += '<div class="lab-complete-banner">';
+      html += '<h3>All Challenges Complete!</h3>';
+      html += '<p style="color:var(--color-text-muted);margin:0;">Great work — you\'re ready for the quiz.</p>';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  },
+
+  _buildLabChallenge(ch, idx, total) {
+    const diffLabels = ['Guided', 'Practice', 'Apply', 'Challenge'];
+    const diffLabel = diffLabels[idx] || ('Challenge ' + (idx + 1));
+    const isDone = this.labCompleted.includes(idx);
+
+    let html = '';
+    html += '<div class="lab-challenge-badge">' + (isDone ? '✓ ' : '') + diffLabel + ' (' + (idx + 1) + '/' + total + ')</div>';
+    html += '<div class="lab-challenge-title">' + this.escapeHtml(ch.title) + '</div>';
+    html += '<div class="lab-challenge-desc">' + this.escapeHtml(ch.instructions) + '</div>';
+
+    if (ch.type === 'code') {
+      const starterCode = ch.starterCode || '';
+      html += '<textarea id="lab-code-input" class="code-input" rows="6" placeholder="Type your code here..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="text">' + this.escapeHtml(starterCode) + '</textarea>';
+      html += '<div id="lab-run-output" class="run-output hidden"><div class="run-output-header"><span>Output</span><button class="btn-clear-output" onclick="document.getElementById(\'lab-run-output\').classList.add(\'hidden\')">✕</button></div><pre id="lab-run-output-text"></pre></div>';
+      html += '<div id="lab-feedback" style="display:none;"></div>';
+      html += '<div class="lab-actions">';
+      html += '<button onclick="LessonViewer.runLabCode()" class="btn-run" id="lab-run-btn">▶ Run Code</button>';
+      html += '<button onclick="LessonViewer.checkLabChallenge()" class="btn-check">✓ Check Answer</button>';
+      if (ch.hint) {
+        html += '<button onclick="LessonViewer.showLabHint()" class="btn-hint">💡 Hint</button>';
+      }
+      html += '</div>';
+      if (ch.hint) {
+        html += '<div id="lab-hint-box" class="hint-box hidden">💡 ' + this.escapeHtml(ch.hint) + '</div>';
+      }
+    } else if (ch.type === 'multiple-choice') {
+      const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+      html += '<div class="mc-options">';
+      ch.options.forEach((opt, optIdx) => {
+        html += '<label class="mc-option">';
+        html += '<input type="radio" name="lab-choice" value="' + optIdx + '">';
+        html += '<span class="option-letter">' + letters[optIdx] + '</span>';
+        html += '<span class="option-text">' + this.escapeHtml(opt) + '</span>';
+        html += '</label>';
+      });
+      html += '</div>';
+      html += '<div id="lab-feedback" style="display:none;"></div>';
+      html += '<div class="lab-actions">';
+      html += '<button onclick="LessonViewer.checkLabChallenge()" class="btn-check">✓ Check Answer</button>';
+      if (ch.hint) {
+        html += '<button onclick="LessonViewer.showLabHint()" class="btn-hint">💡 Hint</button>';
+      }
+      html += '</div>';
+      if (ch.hint) {
+        html += '<div id="lab-hint-box" class="hint-box hidden">💡 ' + this.escapeHtml(ch.hint) + '</div>';
+      }
+    }
+
+    return html;
+  },
+
+  goToLabChallenge(idx) {
+    const lab = this.currentLesson && this.currentLesson.lab;
+    if (!lab) return;
+    const total = lab.challenges.length;
+    if (idx < 0 || idx >= total) return;
+    this.labIndex = idx;
+
+    // Re-render the whole lab step to swap challenge + update progress
+    const contentDiv = document.getElementById('lesson-content');
+    if (contentDiv) {
+      contentDiv.innerHTML = this.renderLab();
+      this.initOptionClicks();
+      // Re-init lab textarea
+      const labTa = document.getElementById('lab-code-input');
+      if (labTa) {
+        enableCodeTabIndentation(labTa);
+        labTa.addEventListener('input', function() {
+          const start = this.selectionStart;
+          const end = this.selectionEnd;
+          const normalized = normalizeQuotes(this.value);
+          if (normalized !== this.value) {
+            this.value = normalized;
+            try { this.setSelectionRange(start, end); } catch(e) {}
+          }
+        });
+        if (!('ontouchstart' in window)) labTa.focus();
+      }
+    }
+  },
+
+  async runLabCode() {
+    const ta = document.getElementById('lab-code-input');
+    const outputDiv = document.getElementById('lab-run-output');
+    const outputPre = document.getElementById('lab-run-output-text');
+    const btn = document.getElementById('lab-run-btn');
+    if (!ta || !outputDiv || !outputPre) return;
+
+    const code = normalizeQuotes(ta.value.trim());
+    if (!code) { Toast.show('Write some code first!', 'warning'); return; }
+
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Running...'; }
+    try {
+      await PyRunner.init();
+      const result = await PyRunner.run(code);
+      outputPre.textContent = result.output || '(no output)';
+      outputPre.style.color = result.error ? 'var(--color-error)' : 'var(--color-text-primary)';
+      outputDiv.classList.remove('hidden');
+    } catch(e) {
+      outputPre.textContent = e.message;
+      outputPre.style.color = 'var(--color-error)';
+      outputDiv.classList.remove('hidden');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '▶ Run Code'; }
+    }
+  },
+
+  async checkLabChallenge() {
+    const lab = this.currentLesson && this.currentLesson.lab;
+    if (!lab) return;
+    const ch = lab.challenges[this.labIndex];
+    if (!ch) return;
+
+    const feedbackDiv = document.getElementById('lab-feedback');
+    if (!feedbackDiv) return;
+
+    let isCorrect = false;
+
+    if (ch.type === 'code') {
+      const ta = document.getElementById('lab-code-input');
+      if (!ta) return;
+      const code = normalizeQuotes(ta.value.trim());
+      if (!code) { Toast.show('Write some code first!', 'warning'); return; }
+
+      if (ch.expectedOutput !== undefined) {
+        // Run code and compare output
+        try {
+          await PyRunner.init();
+          const result = await PyRunner.run(code);
+          if (!result.error) {
+            const actual = result.output.trim().replace(/\r\n/g, '\n');
+            const expected = ch.expectedOutput.trim();
+            isCorrect = actual === expected;
+          }
+        } catch(e) { isCorrect = false; }
+      } else if (ch.validation) {
+        // Pattern-based validation (same as exercise)
+        isCorrect = validateExercise(ch, code);
+      }
+
+      // Show output if not already visible
+      const outputDiv = document.getElementById('lab-run-output');
+      const outputPre = document.getElementById('lab-run-output-text');
+      if (outputDiv && outputPre && outputDiv.classList.contains('hidden')) {
+        try {
+          await PyRunner.init();
+          const result = await PyRunner.run(code);
+          outputPre.textContent = result.output || '(no output)';
+          outputPre.style.color = result.error ? 'var(--color-error)' : 'var(--color-text-primary)';
+          outputDiv.classList.remove('hidden');
+        } catch(e) {}
+      }
+
+    } else if (ch.type === 'multiple-choice') {
+      const selected = document.querySelector('input[name="lab-choice"]:checked');
+      if (!selected) { Toast.show('Select an answer first!', 'warning'); return; }
+      isCorrect = parseInt(selected.value) === ch.correct;
+    }
+
+    feedbackDiv.style.display = 'block';
+    if (isCorrect) {
+      const successMsg = (ch.validation && ch.validation.successMessage) || 'Correct! Well done.';
+      feedbackDiv.className = 'lab-feedback correct';
+      feedbackDiv.textContent = '✓ ' + successMsg;
+      // Mark challenge as completed
+      if (!this.labCompleted.includes(this.labIndex)) {
+        this.labCompleted.push(this.labIndex);
+      }
+      // Update progress bar
+      const lab = this.currentLesson.lab;
+      const total = lab.challenges.length;
+      const fill = document.getElementById('lab-progress-fill');
+      if (fill) fill.style.width = Math.round(this.labCompleted.length / total * 100) + '%';
+      // Update counter
+      const label = document.querySelector('.lab-progress-label');
+      if (label) label.textContent = this.labCompleted.length + '/' + total;
+
+      // After a moment, auto-advance if there's a next challenge
+      if (this.labIndex < total - 1) {
+        setTimeout(() => {
+          this.goToLabChallenge(this.labIndex + 1);
+        }, 1200);
+      } else {
+        // All done — re-render to show completion banner
+        setTimeout(() => {
+          this.goToLabChallenge(this.labIndex);
+        }, 800);
+      }
+    } else {
+      const errorMsg = (ch.validation && ch.validation.errorMessage) || 'Not quite. Try again!';
+      feedbackDiv.className = 'lab-feedback incorrect';
+      feedbackDiv.textContent = '✗ ' + errorMsg;
+    }
+  },
+
+  showLabHint() {
+    const hintBox = document.getElementById('lab-hint-box');
+    if (hintBox) hintBox.classList.toggle('hidden');
+  },
+
+  // ===================== END PRACTICE LAB =====================
+
   renderExercise() {
     const exercise = this.currentLesson.exercise;
     let html = '<div class="step-exercise">';
@@ -10578,7 +11672,7 @@ const LessonViewer = {
     if (exercise.type === 'code' || exercise.type === 'fill-blank') {
       const starterCode = exercise.starterCode || '';
       html += '<div class="exercise-area">';
-      html += '<textarea id="exercise-input" class="code-input" rows="8" placeholder="Type your code here..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="none">' + this.escapeHtml(starterCode) + '</textarea>';
+      html += '<textarea id="exercise-input" class="code-input" rows="8" placeholder="Type your code here..." autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="text">' + this.escapeHtml(starterCode) + '</textarea>';
       html += '<div id="run-output" class="run-output hidden"><div class="run-output-header"><span>▶ Output</span><button class="btn-clear-output" onclick="document.getElementById(\'run-output\').classList.add(\'hidden\')">✕</button></div><pre id="run-output-text"></pre></div>';
       html += '<div id="exercise-feedback" class="feedback hidden"></div>';
       html += '<div class="exercise-actions">';
@@ -11071,7 +12165,7 @@ const UnitTestViewer = {
         }
         html += '<textarea id="ut-code-' + qIdx + '" class="code-input" rows="5"';
         html += ' placeholder="' + this.escapeHtml(q.placeholder || '# Write your code here\n') + '"';
-        html += ' autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="none">';
+        html += ' autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" data-gramm="false" inputmode="text">';
         html += '</textarea>';
         html += '<button onclick="UnitTestViewer.testCode(' + qIdx + ')" class="btn-run" id="ut-run-btn-' + qIdx + '" style="margin-top:0.5rem;">▶ Test My Code</button>';
         html += '<div id="ut-code-output-' + qIdx + '" class="run-output hidden">';
@@ -11173,13 +12267,8 @@ const UnitTestViewer = {
     try {
       await PyRunner.init();
       const result = await PyRunner.run(code);
-      if (result.error) {
-        outputPre.textContent = result.error;
-        outputPre.style.color = 'var(--color-error)';
-      } else {
-        outputPre.textContent = result.output || '(no output)';
-        outputPre.style.color = 'var(--color-text-primary)';
-      }
+      outputPre.textContent = result.output || '(no output)';
+      outputPre.style.color = result.error ? 'var(--color-error)' : 'var(--color-text-primary)';
       outputDiv.classList.remove('hidden');
     } catch(e) {
       outputPre.textContent = '❌ ' + e.message;
@@ -11433,6 +12522,11 @@ const Router = {
     document.querySelectorAll('[id^="page-"]').forEach(section => {
       section.style.display = 'none';
     });
+
+    // Hide reference panel when navigating away from a lesson
+    if (pageId !== 'page-lesson') {
+      RefPanel.hide();
+    }
 
     // Show target page
     const targetPage = document.getElementById(pageId);

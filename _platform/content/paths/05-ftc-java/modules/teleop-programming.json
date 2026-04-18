@@ -1,0 +1,605 @@
+﻿{
+    "id":  "teleop-programming",
+    "title":  "Teleop Architecture",
+    "path":  "ftc-java",
+    "level":  "level-4",
+    "module":  "mod-4-1",
+    "order":  1,
+    "description":  "Driver control systems and subsystem coordination",
+    "lessons":  [
+                    {
+                        "id":  "lesson-4-1-1",
+                        "title":  "Gamepad Mapping and Input Layers",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Gamepad Mapping and Input Layers",
+                                        "content":  "This lesson develops practical skill in Gamepad Mapping and Input Layers within \u0027Teleop Architecture\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Gamepad Mapping and Input Layers Example",
+                                        "code":  "// Gamepad Mapping and Input Layers\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "status: running"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Gamepad Mapping and Input Layers",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Gamepad Mapping and Input Layers\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "solution":  "// Gamepad Mapping and Input Layers\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "status",
+                                                                             "running"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-4-1-2",
+                        "title":  "Drive Control Tank and Mecanum",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Drive Control Tank and Mecanum",
+                                        "content":  "This lesson develops practical skill in Drive Control Tank and Mecanum within \u0027Teleop Architecture\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Drive Control Tank and Mecanum Example",
+                                        "code":  "// Drive Control Tank and Mecanum\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "status: running"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Drive Control Tank and Mecanum",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Drive Control Tank and Mecanum\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "solution":  "// Drive Control Tank and Mecanum\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "status",
+                                                                             "running"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-4-1-3",
+                        "title":  "Multi Subsystem Coordination",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Multi Subsystem Coordination",
+                                        "content":  "This lesson develops practical skill in Multi Subsystem Coordination within \u0027Teleop Architecture\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Multi Subsystem Coordination Example",
+                                        "code":  "// Multi Subsystem Coordination\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "status: running"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Multi Subsystem Coordination",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Multi Subsystem Coordination\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "solution":  "// Multi Subsystem Coordination\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "status",
+                                                                             "running"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-4-1-4",
+                        "title":  "Driver Feedback and Safety Controls",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Driver Feedback and Safety Controls",
+                                        "content":  "This lesson develops practical skill in Driver Feedback and Safety Controls within \u0027Teleop Architecture\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Driver Feedback and Safety Controls Example",
+                                        "code":  "// Driver Feedback and Safety Controls\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "status: running"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Driver Feedback and Safety Controls",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Driver Feedback and Safety Controls\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "solution":  "// Driver Feedback and Safety Controls\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "status",
+                                                                             "running"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "checkpoint-4-1",
+                        "title":  "Teleop Quality Check",
+                        "type":  "assessment",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Teleop Quality Check",
+                                        "content":  "This lesson develops practical skill in Teleop Quality Check within \u0027Teleop Architecture\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Teleop Quality Check Example",
+                                        "code":  "// Teleop Quality Check\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "status: running"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Teleop Quality Check",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Teleop Quality Check\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "solution":  "// Teleop Quality Check\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "status",
+                                                                             "running"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "project-4-1",
+                        "title":  "Competition Teleop Program",
+                        "type":  "project",
+                        "duration":  90,
+                        "explain":  {
+                                        "title":  "Understanding Competition Teleop Program",
+                                        "content":  "This lesson develops practical skill in Competition Teleop Program within \u0027Teleop Architecture\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Competition Teleop Program Example",
+                                        "code":  "// Competition Teleop Program\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "status: running"
+                                    },
+                        "exercise":  {
+                                         "title":  "Build Project: Competition Teleop Program",
+                                         "instructions":  "1. Implement the full project in Java using module concepts.\n2. Include robust structure (classes/methods) and telemetry or output checks.\n3. Run and record at least three test scenarios.\n4. Add one fallback or recovery behavior.\n5. Package for team review.",
+                                         "type":  "code",
+                                         "initialCode":  "// Competition Teleop Program\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "solution":  "// Competition Teleop Program\r\n@TeleOp(name = \"HealthCheck\")\r\npublic class HealthCheckOpMode extends LinearOpMode {\r\n    @Override\r\n    public void runOpMode() {\r\n        waitForStart();\r\n        telemetry.addData(\"status\", \"running\");\r\n        telemetry.update();\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "status",
+                                                                             "running"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    }
+                ]
+}

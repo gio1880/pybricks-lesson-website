@@ -1,180 +1,163 @@
-# FTC Java - Curriculum Plan
+# FTC Java - Curriculum Plan (Java First)
 
 ## Path Overview
 
-**Path ID**: ftc-java
-**Difficulty**: Intermediate to Advanced
-**Duration**: 14-18 weeks
-**Category**: Competition
-**Target Audience**: Ages 14+, strong Java/Python background recommended
+**Path ID**: ftc-java  
+**Difficulty**: Intermediate to Advanced  
+**Duration**: 14-18 weeks  
+**Category**: Competition  
+**Target Audience**: Ages 14+, students with Python foundations
 
 ## Description
 
-FTC Java provides comprehensive training for FIRST Tech Challenge programming. This path covers the full spectrum from FTC Blocks (visual) through OnBot Java to professional Android Studio development. Students learn Java, the FTC SDK, and develop both teleop and autonomous programs for advanced competition play.
+FTC Java now follows a **Java-first progression**:
+1. Build strong standard Java software skills.
+2. Transition those skills into FTC SDK development.
+3. Deliver competition-ready teleop and autonomous systems.
+
+This structure reduces early FTC SDK overload and improves long-term code quality, debugging confidence, and reliability during matches.
 
 By completing this path, students can:
-- Understand Java programming language
-- Use FTC Blocks effectively
-- Program in OnBot Java
-- Develop in Android Studio
-- Create competition-ready teleop and autonomous programs
-- Understand advanced robotics software architecture
+- Write maintainable Java programs with clear structure
+- Model robotics systems using object-oriented design
+- Use FTC SDK patterns safely and effectively
+- Build robust teleop and autonomous programs
+- Package and document competition-ready software
 
 ## Prerequisites
 
-- Python & MicroPython (programming fundamentals)
-- Strong algebra and logical thinking
-- Familiarity with robotics concepts
+- Python and MicroPython fundamentals
+- Algebra and logical reasoning
+- Basic robotics system awareness
 
 ## Level Structure
 
-### Level 1: FTC Fundamentals (Weeks 1-3)
-FTC ecosystem and initial programming approaches.
+### Level 1: Java Core Foundations (Weeks 1-3)
+Language essentials before robotics SDKs.
 
 **Modules:**
-- FTC Overview (competition, hardware stack, SDK)
-- FTC Blocks (introduction, first program)
+- Java Setup and Syntax
+- Control Flow and Methods
 
-**Assessment**: FTC Blocks program completion
+**Level Project:** Java CLI Challenge
 
-### Level 2: Java Basics for FTC (Weeks 4-6)
-Java language fundamentals in FTC context.
-
-**Modules:**
-- Java Fundamentals (syntax, variables, control flow)
-- Object-Oriented Programming (classes, inheritance, interfaces)
-
-**Assessment**: Java programming challenges
-
-**Project**: Text-based robot simulator
-
-### Level 3: OnBot Java and Android Studio (Weeks 7-9)
-Professional development environments.
+### Level 2: Java Core for Robotics Software (Weeks 4-6)
+OOP, collections, and reliability patterns for robot software.
 
 **Modules:**
-- OnBot Java (web-based development, FTC hardware abstraction)
-- Android Studio (setup, project structure, deployment)
+- Object-Oriented Java
+- Collections, Exceptions, and State
 
-**Assessment**: Program in both environments
+**Level Project:** Software Architecture Challenge
 
-**Project**: Full robot program in both environments
-
-### Level 4: Teleop and Autonomous (Weeks 10-11)
-Competition-ready robot programs.
+### Level 3: FTC SDK Transition (Weeks 7-9)
+Apply Java software skills in FTC development workflows.
 
 **Modules:**
-- Teleop Programming (gamepad input, mecanum drive, subsystems)
-- Autonomous Programming (vision, IMU, complex routines)
+- FTC SDK Fundamentals
+- OnBot Java and Android Studio Workflow
 
-**Capstone**: Complete teleop and autonomous program for FTC game
+**Level Project:** SDK Integration Challenge
+
+### Level 4: Competition Programming (Weeks 10-14)
+Match-ready teleop and autonomous systems.
+
+**Modules:**
+- Teleop Architecture
+- Autonomous Architecture
+
+**Level Project:** Competition Package Capstone
+
+## Project Cadence (Built for Practice and Utility)
+
+- Every module ends with a project lesson.
+- Every level ends with an integration project.
+- Module projects are scoped for approximately 90 minutes (about two class blocks).
+- Level integration projects run 1-3 weeks depending on complexity.
+
+This ensures students repeatedly build useful artifacts, not just complete quizzes.
 
 ## Key Topics
 
-### Java Language
-- Variables and data types
-- Control flow (if/else, loops)
-- Methods and functions
-- Classes and objects
-- Inheritance and interfaces
-- Exception handling
-- Collections (ArrayList, HashMap)
+### Java Core
+- Program structure and syntax
+- Variables, conditionals, loops
+- Methods and decomposition
+- Classes, interfaces, and encapsulation
+- Collections and exception handling
+- State modeling and reliability patterns
 
-### FTC Framework
-- RobotController application
-- Hardware interfaces
-- Motor/servo control
-- Sensor reading
-- Telemetry and debug output
-- Linear vs. iterative OpModes
+### FTC Development
+- OpMode lifecycle
+- HardwareMap and initialization
+- Telemetry and diagnostics
+- OnBot Java workflow
+- Android Studio project workflow
+- Team coding and version-control habits
 
-### Robot Programming
-- Motor control strategies
-- Sensor fusion
-- PID control loops
-- Vision processing basics
-- State machines
-- Multi-threaded programming
-
-### Competition Strategies
-- Gamepad programming
-- Autonomous routine planning
-- Path optimization
-- Reliability vs. complexity
-- Team communication during matches
+### Competition Systems
+- Teleop input architecture
+- Drive and subsystem coordination
+- Autonomous routine structure
+- Recovery logic and consistency tuning
+- Testing strategy and reliability metrics
 
 ## Assessment Strategy
 
 **Formative:**
-- Code exercises with validation
-- Programming challenges
-- Design reviews
-- Code reviews with peers
+- Guided coding exercises
+- Module-end project reviews
+- Debugging checkpoints
+- Peer code walkthroughs
 
 **Summative:**
-- Unit assessments
-- Program projects
-- Complete teleop/autonomous program
-- Competition simulation
+- Level integration projects
+- Teleop and autonomous package evaluation
+- Reliability demonstration logs
+- Final capstone demonstration
 
 ## Resources Needed
 
 ### Equipment
-- REV Robotics Control System
-- Motors, servos, and sensors
-- Gamepad controllers
-- Competition field elements
-- Computers for development
+- REV Control Hub and Expansion Hub (as needed)
+- Motors, servos, and core sensors
+- Driver station phones/controllers
+- Practice field elements
 
 ### Software
 - Java Development Kit (JDK)
 - Android Studio
 - FTC SDK
-- Git for version control
-- Robot Controller APK
+- OnBot Java environment
+- Git for team collaboration
 
 ### Documentation
-- FTC documentation
-- Android developer guides
-- Java language documentation
-- Team resources and samples
+- FTC SDK documentation
+- Java language references
+- Team architecture and coding standards
+- Match-specific game manuals
 
-## Status: Not Started
+## Status
 
-### Content Development Checklist
-- [ ] FTC overview documentation
-- [ ] Lesson content (45+ lessons)
-- [ ] Java fundamentals coverage
-- [ ] FTC SDK tutorials
-- [ ] Code examples (60+ tested)
-- [ ] Android Studio guides
-- [ ] Assessments and projects
-- [ ] Competition scenarios
+- Path structure updated to Java-first sequence
+- Module-end project cadence enabled
+- Level-end project framework in place
+- Ongoing: deepen lesson-specific examples and rubrics
 
-### Estimated Effort: 120-150 hours
+### Estimated Effort
+- Full content refinement and classroom hardening: 120-150 hours
 
-## Writing Challenges
+## Instructional Notes
 
-This is an advanced path requiring:
-- Deep Java language knowledge
-- FTC SDK expertise
-- Android development background
-- Competition experience
-- Ability to write for diverse skill levels
-
-## Instructional Approach
-
-- Start with FTC Blocks (visual) before Java (text)
-- Use OnBot Java as bridge to Android Studio
-- Provide extensive code examples
-- Emphasize patterns and best practices
-- Include competition-realistic challenges
+- Keep Java examples platform-agnostic in Levels 1-2.
+- Introduce FTC SDK only after students show Java fluency.
+- Emphasize reliability: validation, fallback behavior, and repeated testing.
+- Require short project reflections to reinforce engineering reasoning.
 
 ---
 
 **Target Completion**: Q3 2026
 
----
-
-Last Updated: March 25, 2026
+Last Updated: April 9, 2026
 
 For content guidelines, see `../../CONTENT-GUIDE.md`

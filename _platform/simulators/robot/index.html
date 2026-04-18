@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPIKE Prime Robot Simulator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --bg-main: #f7f9fc;
+            --bg-surface: #ffffff;
+            --bg-surface-2: #f0f4fa;
+            --text-main: #0f172a;
+            --text-soft: #334155;
+            --text-muted: #64748b;
+            --brand-primary: #2563eb;
+            --brand-secondary: #0d9488;
+            --border: #d6e0ee;
+            --code-bg: #eef4ff;
+            --code-fg: #1e3a8a;
+            --radius-organic: 1.2rem 1.65rem 1.1rem 1.8rem;
+        }
+
+        body[data-theme="dark"] {
+            --bg-main: #050706;
+            --bg-surface: #0b120e;
+            --bg-surface-2: #101a14;
+            --text-main: #e7f9ef;
+            --text-soft: #c6e8d1;
+            --text-muted: #8ab79a;
+            --brand-primary: #00ff41;
+            --brand-secondary: #00c853;
+            --border: #1f3b2b;
+            --code-bg: #07110c;
+            --code-fg: #5dff86;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -355,6 +386,256 @@
         .control-buttons button {
             flex: 1;
         }
+
+        /* Premium + spacious overrides */
+        body {
+            font-family: 'Manrope', 'Segoe UI', sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.12), transparent 30%),
+                radial-gradient(circle at 88% 8%, rgba(13, 148, 136, 0.1), transparent 28%),
+                linear-gradient(145deg, #f8fbff 0%, #edf4fc 52%, #f7f9fc 100%);
+            letter-spacing: 0.01em;
+            line-height: 1.65;
+            min-height: 100dvh;
+            height: auto;
+            overflow: auto;
+            color: var(--text-main);
+        }
+
+        body[data-theme="dark"] {
+            background:
+                linear-gradient(145deg, #040705 0%, #09110d 52%, #060b08 100%);
+        }
+
+        .container {
+            min-height: 100dvh;
+            height: auto;
+        }
+
+        header {
+            margin: 1rem 1rem 0;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0.95rem 0.95rem 1.3rem 1.3rem;
+            border: 1px solid rgba(78, 122, 163, 0.4);
+            background: linear-gradient(170deg, rgba(21, 38, 58, 0.92), rgba(14, 28, 44, 0.9));
+            box-shadow: 0 14px 32px rgba(5, 10, 18, 0.45);
+        }
+
+        .header-title h1 {
+            font-family: 'Space Grotesk', 'Manrope', sans-serif;
+            font-size: 1.45rem;
+            color: var(--brand-primary);
+            letter-spacing: 0.015em;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #d9b46a, #bd8d43);
+            color: #102030;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .back-link {
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface-2));
+            color: var(--brand-primary);
+            padding: 0.5rem 0.95rem;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+        }
+
+        .back-link:hover {
+            border-color: var(--brand-primary);
+            transform: translateY(-1px);
+        }
+
+        .main-content {
+            gap: 1.2rem;
+            padding: 1.2rem;
+            overflow: visible;
+        }
+
+        .canvas-container,
+        .info-panel,
+        .section {
+            background: linear-gradient(170deg, var(--bg-surface), var(--bg-surface-2));
+            border-color: var(--border);
+            border-radius: var(--radius-organic);
+            box-shadow: 0 12px 30px rgba(5, 10, 18, 0.42);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-container {
+            padding: 1.4rem;
+        }
+
+        canvas {
+            border-color: rgba(78, 122, 163, 0.5);
+            border-radius: 0.72rem;
+        }
+
+        .right-panel {
+            width: clamp(320px, 28vw, 380px);
+            gap: 1.15rem;
+            padding-right: 0.2rem;
+        }
+
+        .section {
+            padding: 1.2rem;
+        }
+
+        .section-title {
+            color: var(--brand-primary);
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        .info-label,
+        .setting-label {
+            color: var(--text-muted);
+        }
+
+        .info-value {
+            color: var(--brand-primary);
+        }
+
+        textarea,
+        select,
+        .console,
+        .setting-input {
+            background: linear-gradient(180deg, var(--code-bg), var(--code-bg));
+            border-color: var(--border);
+            border-radius: 0.7rem;
+            color: var(--code-fg);
+        }
+
+        button,
+        .settings-toggle {
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: #0f1d2e;
+        }
+
+        body[data-theme="dark"] .btn-primary {
+            color: #04100a;
+            box-shadow: 0 7px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #93c5fd, #5eead4);
+            box-shadow: 0 10px 24px rgba(96, 165, 250, 0.3);
+        }
+
+        .btn-secondary,
+        .settings-toggle {
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface-2));
+            border: 1px solid var(--border);
+            color: var(--text-soft);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--brand-secondary), #0f766e);
+            color: #07131f;
+        }
+
+        .theme-toggle {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface-2));
+            color: var(--brand-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 0.6rem;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #d67768, #b24e45);
+        }
+
+        @media (max-width: 1180px) {
+            .right-panel {
+                width: 340px;
+            }
+        }
+
+        @media (max-width: 1366px) {
+            header {
+                margin: 0.8rem 0.8rem 0;
+                padding: 1rem 1.1rem;
+            }
+
+            .main-content {
+                gap: 0.95rem;
+                padding: 0.9rem;
+            }
+
+            .section,
+            .info-panel {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .right-panel {
+                width: 100%;
+                max-height: 42dvh;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.9rem;
+            }
+
+            .section {
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                margin: 0.7rem 0.7rem 0;
+                padding: 0.9rem;
+            }
+
+            .main-content {
+                padding: 0.7rem;
+                gap: 0.85rem;
+            }
+
+            .right-panel {
+                width: 100%;
+                max-height: 46vh;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .main-content {
+                flex-direction: row;
+            }
+
+            .right-panel {
+                width: 340px;
+                max-height: none;
+                display: flex;
+                grid-template-columns: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -364,7 +645,10 @@
                 <h1>SPIKE Prime Robot Simulator</h1>
                 <span class="badge">Dev Preview</span>
             </div>
-            <a href="../index.html" class="back-link">← Back to Simulators</a>
+            <div style="display:flex; align-items:center;">
+                <a href="../index.html" class="back-link">← Back to Simulators</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light or dark theme">◐</button>
+            </div>
         </header>
 
         <div class="main-content">
@@ -1233,6 +1517,30 @@ for i in range(6):
             initializeSimulator();
             addConsoleOutput('SPIKE Prime Robot Simulator initialized', 'success');
             addConsoleOutput('Select an example or write your own code', 'info');
+        });
+
+        function getPreferredTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light' || saved === 'dark') return saved;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) toggle.textContent = theme === 'dark' ? '☀' : '☾';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(getPreferredTheme());
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    const current = document.body.getAttribute('data-theme') || 'light';
+                    applyTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
         });
     </script>
 </body>

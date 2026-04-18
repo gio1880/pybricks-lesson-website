@@ -1,0 +1,605 @@
+﻿{
+    "id":  "ftc-overview",
+    "title":  "Java Setup and Syntax",
+    "path":  "ftc-java",
+    "level":  "level-1",
+    "module":  "mod-1-1",
+    "order":  1,
+    "description":  "Set up Java and learn the structure of runnable programs",
+    "lessons":  [
+                    {
+                        "id":  "lesson-1-1-1",
+                        "title":  "Installing JDK and Running Java",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Installing JDK and Running Java",
+                                        "content":  "This lesson develops practical skill in Installing JDK and Running Java within \u0027Java Setup and Syntax\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Installing JDK and Running Java Example",
+                                        "code":  "// Installing JDK and Running Java\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "Mission score: 42"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Installing JDK and Running Java",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Installing JDK and Running Java\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "solution":  "// Installing JDK and Running Java\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Mission score",
+                                                                             "42"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-1-1-2",
+                        "title":  "Java Program Structure and main",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Java Program Structure and main",
+                                        "content":  "This lesson develops practical skill in Java Program Structure and main within \u0027Java Setup and Syntax\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Java Program Structure and main Example",
+                                        "code":  "// Java Program Structure and main\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "Mission score: 42"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Java Program Structure and main",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Java Program Structure and main\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "solution":  "// Java Program Structure and main\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Mission score",
+                                                                             "42"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-1-1-3",
+                        "title":  "Variables and Primitive Types",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Variables and Primitive Types",
+                                        "content":  "This lesson develops practical skill in Variables and Primitive Types within \u0027Java Setup and Syntax\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Variables and Primitive Types Example",
+                                        "code":  "// Variables and Primitive Types\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "Mission score: 42"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Variables and Primitive Types",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Variables and Primitive Types\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "solution":  "// Variables and Primitive Types\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Mission score",
+                                                                             "42"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "lesson-1-1-4",
+                        "title":  "Input, Output, and Debug Prints",
+                        "type":  "lesson",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Input, Output, and Debug Prints",
+                                        "content":  "This lesson develops practical skill in Input, Output, and Debug Prints within \u0027Java Setup and Syntax\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Input, Output, and Debug Prints Example",
+                                        "code":  "// Input, Output, and Debug Prints\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "Mission score: 42"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Input, Output, and Debug Prints",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Input, Output, and Debug Prints\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "solution":  "// Input, Output, and Debug Prints\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Mission score",
+                                                                             "42"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "checkpoint-1-1",
+                        "title":  "Java Foundations Check",
+                        "type":  "assessment",
+                        "duration":  25,
+                        "explain":  {
+                                        "title":  "Understanding Java Foundations Check",
+                                        "content":  "This lesson develops practical skill in Java Foundations Check within \u0027Java Setup and Syntax\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Java Foundations Check Example",
+                                        "code":  "// Java Foundations Check\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "Mission score: 42"
+                                    },
+                        "exercise":  {
+                                         "title":  "Practice: Java Foundations Check",
+                                         "instructions":  "1. Recreate the example logic with your own variable names.\n2. Modify one condition or value and predict output.\n3. Run and compare expected vs actual behavior.\n4. Add one readability or reliability improvement.",
+                                         "type":  "code",
+                                         "initialCode":  "// Java Foundations Check\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "solution":  "// Java Foundations Check\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Mission score",
+                                                                             "42"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    },
+                    {
+                        "id":  "project-1-1",
+                        "title":  "Robot Status Console",
+                        "type":  "project",
+                        "duration":  90,
+                        "explain":  {
+                                        "title":  "Understanding Robot Status Console",
+                                        "content":  "This lesson develops practical skill in Robot Status Console within \u0027Java Setup and Syntax\u0027. Students apply Java-first thinking, then connect it to robotics execution and reliability.",
+                                        "keyPoints":  [
+                                                          "Apply core Java concepts before FTC-specific abstractions",
+                                                          "Use clear code structure and naming",
+                                                          "Validate behavior through output or telemetry",
+                                                          "Build toward competition-ready reliability"
+                                                      ]
+                                    },
+                        "example":  {
+                                        "title":  "Robot Status Console Example",
+                                        "code":  "// Robot Status Console\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                        "annotations":  [
+                                                            {
+                                                                "line":  3,
+                                                                "note":  "Define core runtime structure"
+                                                            },
+                                                            {
+                                                                "line":  5,
+                                                                "note":  "Initialize key values for control logic"
+                                                            },
+                                                            {
+                                                                "line":  7,
+                                                                "note":  "Report state for verification"
+                                                            }
+                                                        ],
+                                        "output":  "Mission score: 42"
+                                    },
+                        "exercise":  {
+                                         "title":  "Build Project: Robot Status Console",
+                                         "instructions":  "1. Implement the full project in Java using module concepts.\n2. Include robust structure (classes/methods) and telemetry or output checks.\n3. Run and record at least three test scenarios.\n4. Add one fallback or recovery behavior.\n5. Package for team review.",
+                                         "type":  "code",
+                                         "initialCode":  "// Robot Status Console\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "solution":  "// Robot Status Console\r\npublic class LessonSnippet {\r\n    public static void main(String[] args) {\r\n        int missionScore = 42;\r\n        boolean ready = true;\r\n        if (ready) {\r\n            System.out.println(\"Mission score: \" + missionScore);\r\n        }\r\n    }\r\n}",
+                                         "validation":  {
+                                                            "type":  "output_contains",
+                                                            "contains":  [
+                                                                             "Mission score",
+                                                                             "42"
+                                                                         ]
+                                                        }
+                                     },
+                        "quiz":  {
+                                     "questions":  [
+                                                       {
+                                                           "id":  "q1",
+                                                           "question":  "Why do we front-load standard Java before deeper FTC SDK work?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "To build stronger software foundations and reduce SDK confusion",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because FTC does not use Java",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "To avoid writing projects",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Because testing is optional",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       },
+                                                       {
+                                                           "id":  "q2",
+                                                           "question":  "What improves reliability in competition code?",
+                                                           "type":  "multiple-choice",
+                                                           "options":  [
+                                                                           {
+                                                                               "text":  "Clear structure plus validation and fallback behavior",
+                                                                               "correct":  true
+                                                                           },
+                                                                           {
+                                                                               "text":  "Long single-method programs",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Skipping telemetry",
+                                                                               "correct":  false
+                                                                           },
+                                                                           {
+                                                                               "text":  "Hardcoding all values without review",
+                                                                               "correct":  false
+                                                                           }
+                                                                       ]
+                                                       }
+                                                   ]
+                                 }
+                    }
+                ]
+}
